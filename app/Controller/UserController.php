@@ -6,15 +6,16 @@ use \W\Controller\Controller;
 
 class UserController extends Controller {
 
-	/**
+	/** ***********************************************************************
 	 * Signup Page
+	 *
 	 * This function will contain all the signup methods that can be called
-	 */
+	 *********************************************************************** */
 	public function signup() {
 		$this->show('user/signup');
 
 		// This empties the alerts that are stored in Session
-		//unset($_SESSION['flash']);
+		unset($_SESSION['flash']);
 
 		// First, we check to see if $_POST is filled
 		if (!empty($_POST)) {
@@ -74,7 +75,7 @@ class UserController extends Controller {
 						$this->redirectToRoute('user_login');
 					} else {
 						// If there is an error, display a message:
-						//$this->flash('I\'m afraid your signup wasn\'t a success. Try again, please.', 'danger');
+						$this->flash('I\'m afraid your signup wasn\'t a success. Try again, please.', 'danger');
 						print_r($errorList);
 					}
 				}
@@ -83,10 +84,26 @@ class UserController extends Controller {
 	} // public function signup() end
 
 
-
+	/** ***********************************************************************
+	 * Login Page
+	 *
+	 * This function will contain all the login methods that can be called
+	 *********************************************************************** */
 	public function login() {
+		unset($_SESSION['flash']);
 
 		$this->show('user/login');
 	}
+
+
+
+	/** ***********************************************************************
+	 * Login Post Page
+	 *
+	 * This function will contain all the login post methods that can be called
+	 *********************************************************************** */
+	 public function loginPost() {
+
+	 }
 
 }
