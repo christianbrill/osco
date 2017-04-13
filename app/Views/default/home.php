@@ -7,7 +7,7 @@
 			<a href="#">
 				<div>
 					<h1><?= $story['sto_title'] ?></h1>
-					<p><?= \Controller\DefaultController::getShort($game['sto_content'])?></p>
+					<p><?= \Controller\DefaultController::getShortDescription($story['sto_content'])?></p>
 				</div>
 			</a>
 		</article>
@@ -15,6 +15,6 @@
 
 	<button id="refreshStories">Refresh Stories</button>
 
-	<a href="<?= $this->url('user_signup') ?>"></a>
+	<a href="<?= $this->url('user_signup') ?>">Sign up is here</a>
 	</section>
 <?php $this->stop('main_content') ?>
