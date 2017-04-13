@@ -4,6 +4,10 @@
 	color:#7F7E7A;
 }
 
+body{
+	margin: 0px;
+}
+
 h1{
 	color:#00C3B6;
 	margin: 10px 10px;
@@ -27,6 +31,7 @@ h4{
 p{
 	margin: 5px 10px;
 }
+
 header{
 
 	nav{
@@ -67,6 +72,8 @@ header{
 		ul{
 			display:flex;
 			justify-content: space-around;
+
+			list-style:none;
 
 			a{
 				margin:0px 8px;
