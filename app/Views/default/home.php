@@ -1,4 +1,4 @@
-<?php $this->layout('layout', ['title' => 'Home']) ?>
+<?php $this->layout('layout', ['title' => 'Home', 'currentPage' => 'home']) ?>
 
 <?php $this->start('main_content') ?>
 	<section>
