@@ -1,7 +1,7 @@
 <?php
 namespace Model;
 
-class StoryModel extends \W\Model\Model {
+class ContentModel extends \W\Model\Model {
 
 	public function __construct(){
 		parent::__construct();

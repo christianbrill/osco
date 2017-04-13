@@ -78,9 +78,15 @@ class UserController extends Controller {
 						print_r($errorList);
 					}
 				}
-
 			} // if (empty($errorList)) end
 		} // if (!empty($_POST)) end
 	} // public function signup() end
+
+
+
+	public function login() {
+
+		$this->show('user/login');
+	}
 
 }
