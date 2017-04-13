@@ -11,6 +11,10 @@ class UserController extends Controller {
 	 * This function will contain all the signup methods that can be called
 	 */
 	public function signup() {
+		$this->show('user/signup');
+		
+		// This empties the alters that are stored in Session
+		unset($_SESSION['flash']);
 
 		// First, we check to see if $_POST is filled
 		if (!empty($_POST)) {
@@ -71,7 +75,6 @@ class UserController extends Controller {
 					}
 				}
 
-				$this->show('user/signup');
 
 			} // if (empty($errorList)) end
 
