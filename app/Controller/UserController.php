@@ -7,7 +7,7 @@ use \W\Controller\Controller;
 class UserController extends Controller {
 
 	/** ***********************************************************************
-	 * Signup Page
+	 * Signup
 	 *
 	 * This function will contain all the signup methods that can be called
 	 *********************************************************************** */
@@ -85,7 +85,7 @@ class UserController extends Controller {
 
 
 	/** ***********************************************************************
-	 * Login Page
+	 * Login
 	 *
 	 * This function will contain all the login methods that can be called
 	 *********************************************************************** */
@@ -104,6 +104,59 @@ class UserController extends Controller {
 	 *********************************************************************** */
 	 public function loginPost() {
 
+	 }
+
+
+
+	 /** ***********************************************************************
+ 	 * Forgot Password
+ 	 *
+ 	 * This function will contain all the forgot password methods that can be called
+ 	 *********************************************************************** */
+	 public function forgot() {
+
+		 // When the form has been sent
+		 if (!empty($_POST)) {
+
+			 // We need to retrieve the information in POST
+			 $email = isset($_POST['email']) ? trim(strip_tags($_POST['email'])) : '';
+
+			 // Now we again create the familiar errorList variable containing an empty array
+			 $errorList = array();
+
+			 // User Data Validation
+			 // ===================================================
+			 if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
+				 $errorList[] = 'Your email address is incorrect.';
+			 }
+
+			 // If all the given data is correct, do the following
+			 if (empty($errorList)) {
+				 // We first instantiate a new model
+				 $model = new \W\Model\UsersModel();
+
+				 // Then we call the method which returns the user data for a given email
+				 $userData = $model->getUserByUsernameOrEmail($email);
+
+				 // If no account exists
+				 if ($userData === false) {
+					 $this->flash('Email not valid.', 'danger');
+				 } else {
+					 // Now we generate the token of 32 characters
+					 $token = md5(\W\Security\StringUtils::randomString(128));
+
+					 // Then the token is added to the database
+					 $model->update(array(
+						'usr_token' => $token,
+						'usr_token_created' => date('Y-m-d H:i:s')), $userData['id'];
+					 );
+
+					 // Now we can create the email which will contain the link to reset the password
+					 $htmlContent = 'You have requested to reset your password. Please follow the link below to change your password: <a href="' . $this->generateUrl('user_reset', array('token' => $token), true) . '">' . $this->generateUrl('user_reset', array('token' => $token), true) . '</a>';
+				 }
+
+			 }
+		 } // if (!empty($_POST)) end
 	 }
 
 }
