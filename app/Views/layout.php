@@ -15,26 +15,30 @@
 <body>
 	<header>
 		<nav>
-			<h1>OSCo</h1>
-			<ul>
-				<a href="">
-					<li>Stories</li>
+			<h1>
+				<a href="<?= $this->url("content_home") ?>">
+					<span class="glyphicon glyphicon-home" aria-hidden="true"></span>
 				</a>
-				<a href="">
-					<li>Blog</li>
-				</a>
-				<a href="">
-					<li>Support</li>
-				</a>
-				<a href="">
-					<li>About OSCo</li>
-				</a>
-				<a href="">
-					<li>Log In</li>
-				</a>
-				<a href="<?= $this->url("user_signup") ?>">
-					<li>Sign Up</li>
-				</a>
+			</h1>
+			<ul class="nav nav-pills">
+				<li role="presentation">
+					<a href="">Stories</a>
+				</li>
+				<li role="presentation">
+					<a href="">Blog</a>
+				</li>
+				<li role="presentation">
+					<a href="">Support</a>
+				</li>
+				<li role="presentation">
+					<a href="">About OSCo</a>
+				</li>
+				<li role="presentation">
+					<a href="">Log In</a>
+				</li>
+				<li<?php if($currentPage == 'signup'): ?> class="active"<?php endif; ?> role="presentation">
+					<a href="<?= $this->url("user_signup") ?>">Sign Up</a>
+				</li>
 			</ul>
 			<!--<i class='fa fa-search fa-lg' aria-hidden='true'></i>-->
 			<form action="" method="get">
@@ -43,7 +47,7 @@
 		</nav>
 	</header>
 
-	<section id="main">
+	<section id="main" class="container">
 		<?= $this->section('main_content') ?>
 	</section>
 

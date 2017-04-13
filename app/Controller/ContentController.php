@@ -3,18 +3,18 @@
 namespace Controller;
 
 use \W\Controller\Controller;
-use \Model\StoryModel;
+use \Model\ContentModel;
 
-class DefaultController extends Controller {
+class ContentController extends Controller {
 
 ////////////HOME
 	public function home() {
 
-		$storyModel = new \Model\StoryModel();
+		$storyModel = new \Model\ContentModel();
 		$generateStories = $storyModel->getLimitedStories();
 		shuffle($generateStories);
 
-		$this->show('default/home', ['randomStories' => $generateStories]);
+		$this->show('content/home', ['randomStories' => $generateStories]);
 	}
 
 
