@@ -3,11 +3,11 @@
 <?php $this->start('main_content') ?>
 	<section>
 	<?php foreach($randomStories as $story) : ?>
-		<article>
+		<article class="homeStory">
 			<a href="#">
 				<div>
 					<h1><?= $story['sto_title'] ?></h1>
-					<p><?= \Controller\DefaultController::getShortDescription($story['sto_content'])?></p>
+					<p><?= \Controller\ContentController::getShortDescription($story['sto_content'])?></p>
 				</div>
 			</a>
 		</article>
@@ -18,3 +18,4 @@
 	<a href="<?= $this->url('user_signup') ?>">Sign up is here</a>
 	</section>
 <?php $this->stop('main_content') ?>
+<script type="text/javascript" src="assets/js/home.js"></script>
