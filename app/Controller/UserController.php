@@ -12,12 +12,15 @@ class UserController extends Controller {
 	 */
 	public function signup() {
 		$this->show('user/signup');
-		
-		// This empties the alters that are stored in Session
-		unset($_SESSION['flash']);
+
+		// This empties the alerts that are stored in Session
+		//unset($_SESSION['flash']);
 
 		// First, we check to see if $_POST is filled
 		if (!empty($_POST)) {
+
+			debug($_POST);
+
 			// We need to recover the user data from the input fields (email and two passwords)
 			$email = isset($_POST['email']) ? trim(strip_tags($_POST['email'])) : '';
 			$passwordOne = isset($_POST['passwordOne']) ? trim(strip_tags($_POST['passwordOne'])) : '';
@@ -71,17 +74,12 @@ class UserController extends Controller {
 						$this->redirectToRoute('user_login');
 					} else {
 						// If there is an error, display a message:
-						$this->flash('I\'m afraid your signup wasn\'t a success. Try again, please.', 'danger');
+						//$this->flash('I\'m afraid your signup wasn\'t a success. Try again, please.', 'danger');
+						print_r($errorList);
 					}
 				}
 
-
 			} // if (empty($errorList)) end
-
-
-
-
-
 		} // if (!empty($_POST)) end
 	} // public function signup() end
 
