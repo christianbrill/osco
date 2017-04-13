@@ -3,15 +3,26 @@
 namespace Controller;
 
 use \W\Controller\Controller;
+use \Model\StoryModel;
 
-class DefaultController extends Controller
-{
+class DefaultController extends Controller {
 
-	/**
-	 * Page d'accueil par défaut
-	 */
+////////////HOME
 	public function home() {
-		$this->show('default/home');
+
+		$storyModel = new \Model\StoryModel();
+		$generateStories = $storyModel->getLimitedStories();
+		shuffle($generateStories);
+
+		$this->show('default/home', ['randomStories' => $generateStories]);
 	}
 
+
+	public function getShortDescription($content) {
+
+        if (strlen($content) > 50) {
+            return substr($content, 0, 50).'...';
+        }
+        return $content;
+    }
 }
