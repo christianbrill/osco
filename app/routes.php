@@ -5,5 +5,5 @@
 		['GET', '/', 'Default#home', 'default_home'],
 
 		// osco.dev/user/signup/
-		['GET', 'user/signup/', 'User#signup', 'user_signup'],
+		['GET|POST', '/signup/', 'User#signup', 'user_signup'],
 	);
