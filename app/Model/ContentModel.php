@@ -32,6 +32,7 @@ class ContentModel extends \W\Model\Model {
 				OR sto_content LIKE :search
 				OR sto_tags LIKE :search
 				OR usr_username LIKE :search
+			ORDER BY sto_inserted DESC
 		';
 		
 		$sth = $this->dbh->prepare($sql);

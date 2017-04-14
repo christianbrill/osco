@@ -9,8 +9,10 @@
 	</div>
 
 	<div class="container">
-		<div>
-			<p>Filter</p>
+		<div class="filterBox">
+			Sort by 
+			<button class="filterToggleButton" style="display: none">Recent</button>
+			<button class="filterToggleButton">Oldest</button>
 		</div>
 	<?php foreach ($searchResults as $searchInput) : ?>
 		<div>
