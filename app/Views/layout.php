@@ -28,9 +28,6 @@
 					<a href="">Blog</a>
 				</li>
 
-				<li<?php if($currentPage == 'support'): ?> class="active"<?php endif; ?> role="presentation">
-					<a href="">Support</a>
-
 				<li<?php if($currentPage == 'needhelp'): ?> class="active"<?php endif; ?> role="presentation">
 					<a href="">Need Help?</a>
 				</li>
@@ -76,8 +73,13 @@
 		</div>
 	</footer>
 
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>	
+<<<<<<< HEAD
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script type="text/javascript" src="assets/js/script.js"></script>
+=======
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script type="text/javascript" src="<?= $this->assetUrl('js/script.js') ?>"></script>
+>>>>>>> a9e419d14d38591c14009f5602d5cfcdd80022a2
 
 </body>
 </html>
