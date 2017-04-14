@@ -20,8 +20,8 @@ class ContentController extends Controller {
 //Get only the first 80 characters of the story's description
 	public function getShortDescription($content) {
 
-        if (strlen($content) > 80) {
-            return substr($content, 0, 80).'...';
+        if (strlen($content) > 120) {
+            return substr($content, 0, 120).'...';
         }
         return $content;
     }
@@ -29,8 +29,8 @@ class ContentController extends Controller {
 //Get only the first 30 characters of the story's title
     public function getShortTitle($title) {
 
-        if (strlen($title) > 30) {
-            return substr($title, 0, 30).'...';
+        if (strlen($title) > 50) {
+            return substr($title, 0, 50).'...';
         }
         return $title;
 }
