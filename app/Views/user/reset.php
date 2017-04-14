@@ -5,9 +5,17 @@
 <?php if ($displayForm) : ?>
 <form action="" method="post">
     <fieldset>
-        <input type="password" class="form-control" name="passwordOne" value="" placeholder="Provide new password" /><br />
-        <input type="password" class="form-control" name="passwordTwo" value="" placeholder="Confirm your password" /><br />
-        <input type="submit" class="btn btn-success btn-block" value="Change my password" />
+        <div class="form-group">
+            <input type="password" class="form-control" name="passwordOne" value="" placeholder="Provide new password" />
+        </div>
+
+        <div class="form-group">
+            <input type="password" class="form-control" name="passwordTwo" value="" placeholder="Confirm your password" />
+        </div>
+
+        <div class="form-group">
+            <input type="submit" class="btn btn-success btn-block" value="Change my password" />
+        </div>
     </fieldset>
 </form>
 <?php endif; ?>

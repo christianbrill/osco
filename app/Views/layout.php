@@ -21,20 +21,20 @@
 				</a>
 			</h1>
 			<ul class="nav nav-pills">
-				<li role="presentation">
+				<li<?php if($currentPage == 'home'): ?> class="active"<?php endif; ?> role="presentation">
 					<a href="">Stories</a>
 				</li>
-				<li role="presentation">
+				<li<?php if($currentPage == 'blog'): ?> class="active"<?php endif; ?> role="presentation">
 					<a href="">Blog</a>
 				</li>
-				<li role="presentation">
+				<li<?php if($currentPage == 'support'): ?> class="active"<?php endif; ?> role="presentation">
 					<a href="">Support</a>
 				</li>
-				<li role="presentation">
+				<li<?php if($currentPage == 'about'): ?> class="active"<?php endif; ?> role="presentation">
 					<a href="">About OSCo</a>
 				</li>
-				<li role="presentation">
-					<a href="">Log In</a>
+				<li<?php if($currentPage == 'login'): ?> class="active"<?php endif; ?> role="presentation">
+					<a href="<?= $this->url("user_login") ?>">Log In</a>
 				</li>
 				<li<?php if($currentPage == 'signup'): ?> class="active"<?php endif; ?> role="presentation">
 					<a href="<?= $this->url("user_signup") ?>">Sign Up</a>
@@ -70,6 +70,6 @@
 	</footer>
 
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-	
+
 </body>
 </html>

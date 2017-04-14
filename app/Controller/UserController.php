@@ -25,11 +25,13 @@ class UserController extends Controller {
 			$email = isset($_POST['email']) ? trim(strip_tags($_POST['email'])) : '';
 			$passwordOne = isset($_POST['passwordOne']) ? trim(strip_tags($_POST['passwordOne'])) : '';
 			$passwordTwo = isset($_POST['passwordTwo']) ? trim(strip_tags($_POST['passwordTwo'])) : '';
+			$country = isset($_POST['country']) ? trim(strip_tags($_POST['country'])) : '';
 
 			// Now we create an "errorList" variable, which will contain potential errors during the signup process and show them to us
 			$errorList = array();
 
-			// User Data Validation (if there is an error, it will be added to errorList and displayed later)
+			// User Data Validation (if there is an error, it will
+			// be added to errorList and displayed later)
 			// ==============================================
 			// There needs to be a valid email address
 			if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
@@ -44,6 +46,11 @@ class UserController extends Controller {
 			// Password One and Password Two need to be the same
 			if ($passwordOne != $passwordTwo) {
 				$errorList[] = 'Your passwords do not match.';
+			}
+
+			// "Country" needs to be filled
+			if (empty($country)) {
+				$errorList[] = 'Please provide a country.';
 			}
 
 			// If all data is right, do this:

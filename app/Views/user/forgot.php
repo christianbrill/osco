@@ -6,7 +6,7 @@
 <form action="" method="post">
     <fieldset>
         <div class="form-group">
-            <input type="email" class="form-control" name="email" value="" placeholder="Enter your email address" /><br />
+            <input type="email" class="form-control" name="email" value="" placeholder="Enter your email address" />
         </div>
 
         <div class="form-group">
