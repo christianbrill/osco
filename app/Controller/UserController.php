@@ -81,13 +81,11 @@ class UserController extends Controller {
 					} else {
 						// If there is an error, display a message:
 						$this->flash('I\'m afraid your signup wasn\'t a success. Try again, please.', 'danger');
-						//print_r($errorList);
 					}
 				}
 			} // if (empty($errorList)) end
 		} else {
 			$this->flash('Please fill in the form.', 'danger');
-			echo 'POST is empty.';
 		}
 
 		$this->show('user/signup');
@@ -224,10 +222,6 @@ class UserController extends Controller {
  	 ************************************************************************ */
 	 public function reset($token) {
 
-		 $this->show('user/reset', array(
-			 'displayForm' => $displayForm
-		 ));
-
 		 // First off, we will have to instantiate the model we created
 		 $model = new \Model\UserModel();
 		 $userId = $model->getIdByToken($token);
@@ -288,6 +282,10 @@ class UserController extends Controller {
 				 $this->flash(join('<br>', $errorList), 'danger');
 			 }
 		 } // if (!empty($_POST)) end
+
+		 $this->show('user/reset', array(
+			 'displayForm' => $displayForm
+		 ));
 	 }
 
 
@@ -305,5 +303,16 @@ class UserController extends Controller {
 
 		 // Then we redirect the user back to home
 		 $this->redirectToRoute('content_home');
+	 }
+
+
+
+	 /** ***********************************************************************
+ 	 * Profile
+	 *
+ 	 ************************************************************************ */
+	 public function profile() {
+
+		 $this->show('user/profile');
 	 }
 }
