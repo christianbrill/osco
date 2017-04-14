@@ -21,4 +21,7 @@
 
 		// osco.dev/logout/
 		['GET', '/logout/', 'User#logout', 'user_logout'],
+
+		// osco.dev/about
+		['GET|POST', '/about/', 'About#about', 'about_about'],
 	);
