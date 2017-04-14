@@ -1,6 +1,8 @@
 <?php $this->layout('layout', ['title' => 'Home', 'currentPage' => 'home']) ?>
 
 <?php $this->start('main_content') ?>
+	<?php debug($w_user); ?>
+
 	<section id="ajaxHomeStories">
 	<?php foreach($randomStories as $story) : ?>
 		<article >
@@ -12,9 +14,7 @@
 			</a>
 		</article>
 	<?php endforeach; ?>
-
-		<button id="refreshStories">Refresh Stories</button>
-
 	</section>
+	<button id="refreshStories">Refresh Stories</button>
 
 <?php $this->stop('main_content') ?>
