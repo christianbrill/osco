@@ -21,4 +21,7 @@
 
 		// osco.dev/logout/
 		['GET', '/logout/', 'User#logout', 'user_logout'],
+
+		// osco.dev/profile/
+		['GET', '/profile/', 'User#profile', 'user_profile'],
 	);

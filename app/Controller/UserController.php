@@ -11,15 +11,13 @@ class UserController extends Controller {
 	 *
 	 *********************************************************************** */
 	public function signup() {
-		$this->show('user/signup');
-
 		// This empties the alerts that are stored in Session
-		unset($_SESSION['flash']);
+		//unset($_SESSION['flash']);
 
 		// First, we check to see if $_POST is filled
 		if (!empty($_POST)) {
 
-			debug($_POST);
+			print_r($_POST);
 
 			// We need to recover the user data from the input fields (email and two passwords)
 			$email = isset($_POST['email']) ? trim(strip_tags($_POST['email'])) : '';
@@ -62,14 +60,15 @@ class UserController extends Controller {
 					$this->flash('I\'m sorry, but this email address already exists.', 'danger');
 				} else {
 					// If the email doesn't already exist in the database, continue on with the encryption of the password by using the mthod "hashPassword" which already exists in Framework W
-					$authentificationModel = new \W\Security\authentificationModel();
+					$authentificationModel = new \W\Security\AuthentificationModel();
 					$hashedPassword = $authentificationModel->hashPassword($passwordOne);
 
 					// Then we can insert the user data in the database
 					$insertUserData = $userModel->insert(array(
 						'usr_email' => $email,
 						'usr_password' => $hashedPassword,
-						'usr_role' => 'user'
+						'usr_role' => 'user',
+						'usr_country' => $country
 					));
 
 					// If the signup was successful, we will redirect the user to the login page
@@ -82,11 +81,16 @@ class UserController extends Controller {
 					} else {
 						// If there is an error, display a message:
 						$this->flash('I\'m afraid your signup wasn\'t a success. Try again, please.', 'danger');
-						print_r($errorList);
+						//print_r($errorList);
 					}
 				}
 			} // if (empty($errorList)) end
-		} // if (!empty($_POST)) end
+		} else {
+			$this->flash('Please fill in the form.', 'danger');
+			echo 'POST is empty.';
+		}
+
+		$this->show('user/signup');
 	} // public function signup() end
 
 
@@ -107,8 +111,6 @@ class UserController extends Controller {
 	 *
 	 *********************************************************************** */
 	 public function loginPost() {
-
-		$this->show('user/login');
 
 		// We first retrieve the data from POST again
 		$email = isset($_POST['email']) ? trim(strip_tags($_POST['email'])) : '';
@@ -150,6 +152,8 @@ class UserController extends Controller {
 		} else {
 			 $this->flash(join('<br>', $errorList), 'danger');
 	 	}
+
+		$this->show('user/login');
 	}
 
 
@@ -159,8 +163,6 @@ class UserController extends Controller {
  	 *
  	 ************************************************************************ */
 	 public function forgot() {
-
-		 $this->show('user/forgot');
 
 		 // When the form has been sent
 		 if (!empty($_POST)) {
