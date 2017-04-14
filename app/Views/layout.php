@@ -35,12 +35,29 @@
 				<li<?php if($currentPage == 'about'): ?> class="active"<?php endif; ?> role="presentation">
 					<a href="">About OSCo</a>
 				</li>
-				<li<?php if($currentPage == 'login'): ?> class="active"<?php endif; ?> role="presentation">
-					<a href="<?= $this->url("user_login") ?>">Log In</a>
-				</li>
+
 				<li<?php if($currentPage == 'signup'): ?> class="active"<?php endif; ?> role="presentation">
 					<a href="<?= $this->url("user_signup") ?>">Sign Up</a>
 				</li>
+
+				<?php if (empty($w_user)) : ?>
+
+					<li<?php if($currentPage == 'login'): ?> class="active"<?php endif; ?> role="presentation">
+						<a href="<?= $this->url("user_login") ?>">Log In</a>
+					</li>
+
+				<?php else : ?>
+
+					<li<?php if($currentPage == 'profile'): ?> class="active"<?php endif; ?> role="presentation">
+						<a href="<?= $this->url("user_profile") ?>">Profile</a>
+					</li>
+
+					<li role="presentation">
+						<a href="<?= $this->url("user_logout") ?>">Logout</a>
+					</li>
+
+				<?php endif; ?>
+
 			</ul>
 			<form action="<?= $this->url("content_search") ?>" method="get">
 				<input type="text" name="searchInput" placeholder="Search">
@@ -51,7 +68,14 @@
 		</nav>
 	</header>
 
+
 	<section id="main" class="container">
+		<?php if (isset($w_flash_message) && !empty($w_flash_message->message)): ?>
+			<div class="alert alert-<?= $w_flash_message->level ?>" role="alert">
+				<?= $w_flash_message->message ?>
+			</div>
+		<?php endif; ?>
+
 		<?= $this->section('main_content') ?>
 	</section>
 
@@ -59,10 +83,11 @@
 		<div id="footerContent">
 			<div>
 				<h4><a href="">About</a></h4>
-				<p>OSCo is blubb.</p>
+				<p>OSCo is life.</p>
 				<h4>Disclaimer</h4>
 				<p>Blubb</p>
-				<h4>&copy; Copyright</h4>
+				<p>MyModel ist ein Kopf für dich zum Schminken und Frisieren.</p>
+				<h4>&copy; Copyright 2017 <?php if (date('Y') > 2017) {echo '- '.date('Y');} ?></h4>
 			</div>
 			<div>
 				<h4><a href="">Contact</a></h4>

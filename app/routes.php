@@ -22,6 +22,11 @@
 		// osco.dev/logout/
 		['GET', '/logout/', 'User#logout', 'user_logout'],
 
+
 		// osco.dev/about
 		['GET|POST', '/about/', 'About#about', 'about_about'],
+
+		// osco.dev/profile/
+		['GET', '/profile/', 'User#profile', 'user_profile'],
+
 	);
