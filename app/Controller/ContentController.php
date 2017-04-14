@@ -17,12 +17,21 @@ class ContentController extends Controller {
 		$this->show('content/home', ['randomStories' => $generateStories]);
 	}
 
-
+//Get only the first 80 characters of the story's description
 	public function getShortDescription($content) {
 
-        if (strlen($content) > 50) {
-            return substr($content, 0, 50).'...';
+        if (strlen($content) > 80) {
+            return substr($content, 0, 80).'...';
         }
         return $content;
+    }
+
+//Get only the first 30 characters of the story's description
+    public function getShortTitle($title) {
+
+        if (strlen($title) > 30) {
+            return substr($title, 0, 30).'...';
+        }
+        return $title;
     }
 }
