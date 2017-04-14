@@ -25,4 +25,20 @@ class ContentController extends Controller {
         }
         return $content;
     }
+
+
+    public function search(){
+		// Getting the information that was put in the <input> called 'searchInput' in layout.php
+		$searchInput = isset($_GET['searchInput']) ? trim(strip_tags($_GET['searchInput'])) : '';
+		
+    	$searchModel = new \Model\ContentModel();
+    	$searchResults = $searchModel->getSearchMatch($searchInput);
+    	$nbResults = count($searchResults);
+
+    	$this->show('content/search', [
+    		'searchInput' => $searchInput,
+    		'searchResults' => $searchResults,
+    		'nbResults' => $nbResults
+    	]);
+    }
 }
