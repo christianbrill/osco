@@ -31,10 +31,10 @@
 				<li<?php if($currentPage == 'support'): ?> class="active"<?php endif; ?> role="presentation">
 					<a href="">Support</a>
 
-				<li role="presentation">
+				<li<?php if($currentPage == 'needhelp'): ?> class="active"<?php endif; ?> role="presentation">
 					<a href="">Need Help?</a>
 				</li>
-				
+
 				<li<?php if($currentPage == 'about'): ?> class="active"<?php endif; ?> role="presentation">
 					<a href="">About OSCo</a>
 				</li>

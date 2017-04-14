@@ -108,7 +108,49 @@ class UserController extends Controller {
 	 *********************************************************************** */
 	 public function loginPost() {
 
-	 }
+		$this->show('user/login');
+
+		// We first retrieve the data from POST again
+		$email = isset($_POST['email']) ? trim(strip_tags($_POST['email'])) : '';
+		$password = isset($_POST['passwordOne']) ? trim(strip_tags($_POST['passwordOne'])) : '';
+
+		// Creation of errorList variable
+		$errorList = array();
+
+		// User Data Validation
+		// =========================================================
+		// Is email correct?
+		if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
+			$errorList[] = "Your email address is not valid.";
+		}
+
+		// Is password at least 8 characters?
+		if (strlen($password) < 8) {
+		 	$errorList[] = "Your password needs to be at least 8 characters long.";
+		}
+
+		// If everything is OK
+		if (empty($errorList)) {
+			 // We have to verify the user/password in the database
+			if ($userId > 0) {
+				$authentificationModel = new \W\Model\UsersModel();
+				$userInfos = $userModel->find($userId);
+
+				// Then we add the user to the session
+				$authentificationModel->logUserIn($userInfos);
+
+				// Then we display a success message
+				$this->flash($userInfos['usr_email'] . " was logged in successfully", 'success');
+
+				// Then the user is redirected to the home page
+				$this->redirectToRoute('content_home');
+			} else {
+				 $this->flash('Your email or password are incorrect.', 'danger');
+		 	}
+		} else {
+			 $this->flash(join('<br>', $errorList), 'danger');
+	 	}
+	}
 
 
 
@@ -238,7 +280,7 @@ class UserController extends Controller {
 				 $this->flash('Your password has been changed.', 'success');
 
 				 // Then we redirect the person back to the home page
-				 $this->redirectToRoute('default_home');
+				 $this->redirectToRoute('content_home');
 			 } else {
 				 // If the errorList array is not empty, display the error(s)
 				 $this->flash(join('<br>', $errorList), 'danger');
@@ -260,6 +302,6 @@ class UserController extends Controller {
 		 $authentificationModel->logUserOut();
 
 		 // Then we redirect the user back to home
-		 $this->redirectToRoute('default_home');
+		 $this->redirectToRoute('content_home');
 	 }
 }
