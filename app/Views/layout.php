@@ -27,9 +27,14 @@
 				<li<?php if($currentPage == 'blog'): ?> class="active"<?php endif; ?> role="presentation">
 					<a href="">Blog</a>
 				</li>
+
 				<li<?php if($currentPage == 'support'): ?> class="active"<?php endif; ?> role="presentation">
 					<a href="">Support</a>
+
+				<li role="presentation">
+					<a href="">Need Help?</a>
 				</li>
+				
 				<li<?php if($currentPage == 'about'): ?> class="active"<?php endif; ?> role="presentation">
 					<a href="">About OSCo</a>
 				</li>
@@ -40,9 +45,11 @@
 					<a href="<?= $this->url("user_signup") ?>">Sign Up</a>
 				</li>
 			</ul>
-			<!--<i class='fa fa-search fa-lg' aria-hidden='true'></i>-->
-			<form action="" method="get">
-			<input type="text" name="searchInput" placeholder="Search">
+			<form action="<?= $this->url("content_search") ?>" method="get">
+				<input type="text" name="searchInput" placeholder="Search">
+				<button type="submit" class="btn btn-sm">
+					<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+				</button>
 			</form>
 		</nav>
 	</header>

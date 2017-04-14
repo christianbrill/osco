@@ -10,6 +10,9 @@
 		// osco.dev/login/
 		['GET', '/login/', 'User#login', 'user_login'],
 
+		// osco.dev/searchResults/
+		['GET', '/search/', 'Content#search', 'content_search'],
+
 		// osco.dev/forgot_password/
 		['GET|POST', '/forgot_password/', 'User#forgot', 'user_forgot'],
 
@@ -18,5 +21,4 @@
 
 		// osco.dev/logout/
 		['GET', '/logout/', 'User#logout', 'user_logout'],
-
 	);
