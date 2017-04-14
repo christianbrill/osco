@@ -9,6 +9,7 @@
 
 		// osco.dev/login/
 		['GET', '/login/', 'User#login', 'user_login'],
+		['POST', '/login/', 'User#loginPost', 'user_loginpost'],
 
 		// osco.dev/searchResults/
 		['GET', '/search/', 'Content#search', 'content_search'],
