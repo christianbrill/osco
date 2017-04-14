@@ -21,4 +21,7 @@
 
 		// osco.dev/logout/
 		['GET', '/logout/', 'User#logout', 'user_logout'],
+
+		// ajax route
+		['GET', '/ajax/home/', 'Content#ajaxRefresh', 'content_ajaxRefresh'],
 	);

@@ -17,6 +17,13 @@ class ContentController extends Controller {
 		$this->show('content/home', ['randomStories' => $generateStories]);
 	}
 
+	public function ajaxRefresh(){
+		$storyModel = new \Model\ContentModel();
+		$refreshStories = $storyModel->getLimitedStories();
+
+		$this->showJson($refreshStories);
+	}
+
 //Get only the first 80 characters of the story's description
 	public function getShortDescription($content) {
 
