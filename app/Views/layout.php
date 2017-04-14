@@ -21,28 +21,35 @@
 				</a>
 			</h1>
 			<ul class="nav nav-pills">
-				<li role="presentation">
+				<li<?php if($currentPage == 'home'): ?> class="active"<?php endif; ?> role="presentation">
 					<a href="">Stories</a>
 				</li>
-				<li role="presentation">
+				<li<?php if($currentPage == 'blog'): ?> class="active"<?php endif; ?> role="presentation">
 					<a href="">Blog</a>
 				</li>
-				<li role="presentation">
+
+				<li<?php if($currentPage == 'support'): ?> class="active"<?php endif; ?> role="presentation">
 					<a href="">Support</a>
-				</li>
+
 				<li role="presentation">
+					<a href="">Need Help?</a>
+				</li>
+				
+				<li<?php if($currentPage == 'about'): ?> class="active"<?php endif; ?> role="presentation">
 					<a href="">About OSCo</a>
 				</li>
-				<li role="presentation">
-					<a href="">Log In</a>
+				<li<?php if($currentPage == 'login'): ?> class="active"<?php endif; ?> role="presentation">
+					<a href="<?= $this->url("user_login") ?>">Log In</a>
 				</li>
 				<li<?php if($currentPage == 'signup'): ?> class="active"<?php endif; ?> role="presentation">
 					<a href="<?= $this->url("user_signup") ?>">Sign Up</a>
 				</li>
 			</ul>
-			<!--<i class='fa fa-search fa-lg' aria-hidden='true'></i>-->
-			<form action="" method="get">
-			<input type="text" name="searchInput" placeholder="Search">
+			<form action="<?= $this->url("content_search") ?>" method="get">
+				<input type="text" name="searchInput" placeholder="Search">
+				<button type="submit" class="btn btn-sm">
+					<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+				</button>
 			</form>
 		</nav>
 	</header>
@@ -71,5 +78,6 @@
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>	
 	<script type="text/javascript" src="assets/js/script.js"></script>
+
 </body>
 </html>
