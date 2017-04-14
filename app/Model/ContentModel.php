@@ -23,7 +23,7 @@ class ContentModel extends \W\Model\Model {
 	
 	// VIEW: search
 	// START FUNCTIONS FOR search
-	public function getSearchMatch($searchWord){
+	public function getSearchMatch($searchWord, $sortingMethod='DESC'){
 		$sql = '
 			SELECT *
 			FROM stories
@@ -32,7 +32,8 @@ class ContentModel extends \W\Model\Model {
 				OR sto_content LIKE :search
 				OR sto_tags LIKE :search
 				OR usr_username LIKE :search
-			ORDER BY sto_inserted DESC
+
+			ORDER BY sto_inserted '.$sortingMethod.'
 		';
 		
 		$sth = $this->dbh->prepare($sql);

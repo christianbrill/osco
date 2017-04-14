@@ -38,9 +38,11 @@ class ContentController extends Controller {
     public function search(){
 		// Getting the information that was put in the <input> called 'searchInput' in layout.php
 		$searchInput = isset($_GET['searchInput']) ? trim(strip_tags($_GET['searchInput'])) : '';
+
+        $sortingOption = isset($_GET['order']) ? trim(strip_tags($_GET['order'])) : '';
 		
     	$searchModel = new \Model\ContentModel();
-    	$searchResults = $searchModel->getSearchMatch($searchInput);
+    	$searchResults = $searchModel->getSearchMatch($searchInput, $sortingOption);
     	$nbResults = count($searchResults);
 
     	$this->show('content/search', [
