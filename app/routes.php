@@ -12,4 +12,13 @@
 
 		// osco.dev/searchResults/
 		['GET', '/search/', 'Content#search', 'content_search'],
+
+		// osco.dev/forgot_password/
+		['GET|POST', '/forgot_password/', 'User#forgot', 'user_forgot'],
+
+		// osco.dev/reset_password/1234567876544321dfghte345
+		['GET|POST', '/reset_password/', 'User#reset', 'user_reset'],
+
+		// osco.dev/logout/
+		['GET', '/logout/', 'User#logout', 'user_logout'],
 	);
