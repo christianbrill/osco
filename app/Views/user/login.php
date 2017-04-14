@@ -3,7 +3,7 @@
 <?php $this->start('main_content') ?>
 <form action="" method="post">
     <div class="form-group">
-        <input type="email" class="form-control" name="email" value="" placeholder="Enter your email address" />/
+        <input type="email" class="form-control" name="email" value="" placeholder="Enter your email address" />
     </div>
 
     <div class="form-group">
