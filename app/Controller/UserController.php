@@ -11,15 +11,11 @@ class UserController extends Controller {
 	 *
 	 *********************************************************************** */
 	public function signup() {
-		$this->show('user/signup');
-
 		// This empties the alerts that are stored in Session
 		unset($_SESSION['flash']);
 
 		// First, we check to see if $_POST is filled
 		if (!empty($_POST)) {
-
-			debug($_POST);
 
 			// We need to recover the user data from the input fields (email and two passwords)
 			$email = isset($_POST['email']) ? trim(strip_tags($_POST['email'])) : '';
@@ -53,6 +49,8 @@ class UserController extends Controller {
 				$errorList[] = 'Please provide a country.';
 			}
 
+			$this->flash(join('<br>', $errorList), 'danger');
+
 			// If all data is right, do this:
 			if (empty($errorList)) {
 				// Now we test and see if the email address already exists by using a method that exists in UsersModel
@@ -62,15 +60,18 @@ class UserController extends Controller {
 					$this->flash('I\'m sorry, but this email address already exists.', 'danger');
 				} else {
 					// If the email doesn't already exist in the database, continue on with the encryption of the password by using the mthod "hashPassword" which already exists in Framework W
-					$authentificationModel = new \W\Security\authentificationModel();
+					$authentificationModel = new \W\Security\AuthentificationModel();
 					$hashedPassword = $authentificationModel->hashPassword($passwordOne);
 
 					// Then we can insert the user data in the database
 					$insertUserData = $userModel->insert(array(
 						'usr_email' => $email,
 						'usr_password' => $hashedPassword,
-						'usr_role' => 'user'
+						'usr_role' => 'user',
+						'usr_country' => $country,
 					));
+
+					debug($insertUserData);
 
 					// If the signup was successful, we will redirect the user to the login page
 					if (!empty($insertUserData)) {
@@ -82,11 +83,16 @@ class UserController extends Controller {
 					} else {
 						// If there is an error, display a message:
 						$this->flash('I\'m afraid your signup wasn\'t a success. Try again, please.', 'danger');
-						print_r($errorList);
 					}
 				}
-			} // if (empty($errorList)) end
+			}
 		} // if (!empty($_POST)) end
+
+		// List of countries which are displayed in the select in the signup
+		$countryList = ["Afghanistan", "Albania", "Algeria", "American Samoa", "Andorra", "Angola", "Anguilla", "Antarctica", "Antigua and Barbuda", "Argentina", "Armenia", "Aruba", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bermuda", "Bhutan", "Bolivia", "Bosnia and Herzegowina", "Botswana", "Bouvet Island", "Brazil", "British Indian Ocean Territory", "Brunei Darussalam", "Bulgaria", "Burkina Faso", "Burundi", "Cambodia", "Cameroon", "Canada", "Cape Verde", "Cayman Islands", "Central African Republic", "Chad", "Chile", "China", "Christmas Island", "Cocos (Keeling) Islands", "Colombia", "Comoros", "Congo", "Congo, the Democratic Republic of the", "Cook Islands", "Costa Rica", "Cote d'Ivoire", "Croatia (Hrvatska)", "Cuba", "Cyprus", "Czech Republic", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "East Timor", "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Ethiopia", "Falkland Islands (Malvinas)", "Faroe Islands", "Fiji", "Finland", "France", "France Metropolitan", "French Guiana", "French Polynesia", "French Southern Territories", "Gabon", "Gambia", "Georgia", "Germany", "Ghana", "Gibraltar", "Greece", "Greenland", "Grenada", "Guadeloupe", "Guam", "Guatemala", "Guinea", "Guinea-Bissau", "Guyana", "Haiti", "Heard and Mc Donald Islands", "Holy See (Vatican City State)", "Honduras", "Hong Kong", "Hungary", "Iceland", "India", "Indonesia", "Iran (Islamic Republic of)", "Iraq", "Ireland", "Israel", "Italy", "Jamaica", "Japan", "Jordan", "Kazakhstan", "Kenya", "Kiribati", "Korea, Democratic People's Republic of", "Korea, Republic of", "Kuwait", "Kyrgyzstan", "Lao, People's Democratic Republic", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libyan Arab Jamahiriya", "Liechtenstein", "Lithuania", "Luxembourg", "Macau", "Macedonia, The Former Yugoslav Republic of", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands", "Martinique", "Mauritania", "Mauritius", "Mayotte", "Mexico", "Micronesia, Federated States of", "Moldova, Republic of", "Monaco", "Mongolia", "Montserrat", "Morocco", "Mozambique", "Myanmar", "Namibia", "Nauru", "Nepal", "Netherlands", "Netherlands Antilles", "New Caledonia", "New Zealand", "Nicaragua", "Niger", "Nigeria", "Niue", "Norfolk Island", "Northern Mariana Islands", "Norway", "Oman", "Pakistan", "Palau", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Pitcairn", "Poland", "Portugal", "Puerto Rico", "Qatar", "Reunion", "Romania", "Russian Federation", "Rwanda", "Saint Kitts and Nevis", "Saint Lucia", "Saint Vincent and the Grenadines", "Samoa", "San Marino", "Sao Tome and Principe", "Saudi Arabia", "Senegal", "Seychelles", "Sierra Leone", "Singapore", "Slovakia (Slovak Republic)", "Slovenia", "Solomon Islands", "Somalia", "South Africa", "South Georgia and the South Sandwich Islands", "Spain", "Sri Lanka", "St. Helena", "St. Pierre and Miquelon", "Sudan", "Suriname", "Svalbard and Jan Mayen Islands", "Swaziland", "Sweden", "Switzerland", "Syrian Arab Republic", "Taiwan, Province of China", "Tajikistan", "Tanzania, United Republic of", "Thailand", "Togo", "Tokelau", "Tonga", "Trinidad and Tobago", "Tunisia", "Turkey", "Turkmenistan", "Turks and Caicos Islands", "Tuvalu", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "United States", "United States Minor Outlying Islands", "Uruguay", "Uzbekistan", "Vanuatu", "Venezuela", "Vietnam", "Virgin Islands (British)", "Virgin Islands (U.S.)", "Wallis and Futuna Islands", "Western Sahara", "Yemen", "Yugoslavia", "Zambia", "Zimbabwe"];
+
+		$this->show('user/signup', array('countryList' => $countryList));
+
 	} // public function signup() end
 
 
@@ -107,8 +113,6 @@ class UserController extends Controller {
 	 *
 	 *********************************************************************** */
 	 public function loginPost() {
-
-		$this->show('user/login');
 
 		// We first retrieve the data from POST again
 		$email = isset($_POST['email']) ? trim(strip_tags($_POST['email'])) : '';
@@ -150,6 +154,8 @@ class UserController extends Controller {
 		} else {
 			 $this->flash(join('<br>', $errorList), 'danger');
 	 	}
+
+		$this->show('user/login');
 	}
 
 
@@ -159,8 +165,6 @@ class UserController extends Controller {
  	 *
  	 ************************************************************************ */
 	 public function forgot() {
-
-		 $this->show('user/forgot');
 
 		 // When the form has been sent
 		 if (!empty($_POST)) {
@@ -222,10 +226,6 @@ class UserController extends Controller {
  	 ************************************************************************ */
 	 public function reset($token) {
 
-		 $this->show('user/reset', array(
-			 'displayForm' => $displayForm
-		 ));
-
 		 // First off, we will have to instantiate the model we created
 		 $model = new \Model\UserModel();
 		 $userId = $model->getIdByToken($token);
@@ -286,6 +286,10 @@ class UserController extends Controller {
 				 $this->flash(join('<br>', $errorList), 'danger');
 			 }
 		 } // if (!empty($_POST)) end
+
+		 $this->show('user/reset', array(
+			 'displayForm' => $displayForm
+		 ));
 	 }
 
 
@@ -303,5 +307,16 @@ class UserController extends Controller {
 
 		 // Then we redirect the user back to home
 		 $this->redirectToRoute('content_home');
+	 }
+
+
+
+	 /** ***********************************************************************
+ 	 * Profile
+	 *
+ 	 ************************************************************************ */
+	 public function profile() {
+
+		 $this->show('user/profile');
 	 }
 }

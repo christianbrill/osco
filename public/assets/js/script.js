@@ -7,11 +7,6 @@ $(document).ready(function(){
 		refreshStories();
 	});
 	
-	////////// START Filter toggle function to Recent
-	$(".filterToggleButton").click(function(e){
-		console.log('click');
-	});
-	////////// END Filter toggle function
 
 });//jQuery END
 
