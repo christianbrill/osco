@@ -121,18 +121,15 @@ header{
 	display:flex;
 	flex-direction:row;
 	flex-wrap:wrap;
-	justify-content:space-around;
-	margin:auto;
-	width:900px;
+	justify-content:flex-start;
+	//margin:auto;
+	width:70vw;
+
 	article{
 		display:inline-block;
 		overflow-wrap: break-word;		
 	}
-	button{
-		position:relative;
-		left:50%;
-		transform:translate(-50%);	
-	}
+
 	h1{
 		font-size:1.6em;
 	}
@@ -146,6 +143,7 @@ header{
 		box-shadow:none;
 		transition:0.5s;
 		padding:5px;
+		background-image:url("");
 		&:hover{
 			box-shadow:0 0 10px #e2e2e2;
 			transition: 0.5s;
@@ -156,6 +154,20 @@ header{
 
 }
 
+#needHelpBox{
+	position:absolute;
+	right:0;
+	top:100px;
+
+	width:250px;
+	height:250px;
+	margin-right:5vw;
+	background-color:#2c3e50;
+	text-align:center;
+	p{
+		color:white;
+	}
+}
 
 footer{
 	position: absolute;

@@ -11,11 +11,14 @@
 		['GET', '/login/', 'User#login', 'user_login'],
 		['POST', '/login/', 'User#loginPost', 'user_loginpost'],
 
-		// osco.dev/search/
-		['GET', '/search/', 'Content#search', 'content_search'],
-
 		// osco.dev/stories/
 		['GET', '/stories/', 'Content#stories', 'content_stories'],
+
+		// osco.dev/storydetails/
+		['GET', '/storydetails/', 'Content#storydetails', 'content_storydetails'],
+
+		// osco.dev/search/
+		['GET', '/search/', 'Content#search', 'content_search'],
 
 		// osco.dev/forgot_password/
 		['GET|POST', '/forgot/', 'User#forgot', 'user_forgot'],
@@ -30,7 +33,7 @@
 		['GET', '/ajax/home/', 'Content#ajaxRefresh', 'content_ajaxRefresh'],
 
 		// osco.dev/about
-		['GET|POST', '/about/', 'About#contactform', 'about_about'],
+		['GET|POST', '/about/', 'About#contactform', 'about_contactform'],
 
 		// osco.dev/profile/
 		['GET', '/profile/', 'User#profile', 'user_profile'],

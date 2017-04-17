@@ -54,7 +54,10 @@ class ContentController extends Controller {
             return substr($title, 0, 50).'...';
         }
         return $title;
-	}
+
+    }
+
+
 
 	/**
 	* Search Function
@@ -69,21 +72,21 @@ class ContentController extends Controller {
 
         // !!!!!!! NOT WORKING YET
         //PAGINATION START
-        /*if (isset($_GET['page'])) {
+        if (isset($_GET['page'])) {
             $pageNo = $_GET['page'];
         }
         else {
             $pageNo = 1;
         }
 
-        $pageOffset = ($pageNo-1) * 5;*/
+        $pageOffset = ($pageNo-1) * 5;
         //PAGINATION END
 
         // Creating a new Model in ContentModel
     	$searchModel = new \Model\ContentModel();
 
         // Gets all the search' results with two parameters the word input and the option chosen to sort (which is by default DESC)
-    	$searchResults = $searchModel->getSearchMatch($searchInput, $sortingOption);
+    	$searchResults = $searchModel->getSearchMatch($searchInput, $sortingOption, $pageOffset);
 
         //Gets the number of results with a count function
     	$nbResults = count($searchResults);
@@ -96,16 +99,27 @@ class ContentController extends Controller {
     	]);
     }
 
+
+    public function stories(){
+
+        //$tagsLine = getAllStories('sto_tags');
+        //$getEachTag = explode(", ", $tags);
+
+
+        $this->show('content/stories');
+    }
+
+    public function storydetails(){
+        $this->show('content/storydetails');
+    }
+
 	/**
 	* Need Help Function
 	*
 	*/
-	public function needhelp() {
+	public function needhelp(){
 
 		$this->show('content/needhelp');
 	}
-
-
-
 
 }

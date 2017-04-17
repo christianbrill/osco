@@ -22,8 +22,8 @@
 			</h1>
 
 			<ul class="nav nav-pills">
-				<li<?php if($currentPage == 'home'): ?> class="active"<?php endif; ?> role="presentation">
-					<a href="">Stories</a>
+				<li<?php if($currentPage == 'stories'): ?> class="active"<?php endif; ?> role="presentation">
+					<a href="<?= $this->url("content_stories") ?>">Stories</a>
 				</li>
 				
 				<li<?php if($currentPage == 'blog'): ?> class="active"<?php endif; ?> role="presentation">

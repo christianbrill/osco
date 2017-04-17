@@ -11,16 +11,22 @@ $(document).ready(function(){
 
 function refreshStories() {
 
-	var $story = $('#ajaxHomeStories');
+	var $story = $('#storyBox');
+	//var $storyArray = $.map($story, function(el) { return el });
 
 	$.ajax({  	
 		url: '/osco/public/ajax/home/',		
 }).done(function(response) {
 	console.log(response);
 	
+	//JSON.stringify(response);
+    //$story.empty().load("/osco/public/ajax/home/ #ajaxHomeStories");
 
-    $story.empty().append();
+		var parsed = JSON.parse(response);
+
+
+
+   		$story.empty().load('/osco/public/ajax/home/');
 
 	});
 }//refreshStories function end
-

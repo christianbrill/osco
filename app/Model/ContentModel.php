@@ -23,7 +23,7 @@ class ContentModel extends \W\Model\Model {
 	
 	// VIEW: search
 	// START FUNCTIONS FOR search
-	public function getSearchMatch($searchWord, $sortingMethod='DESC'){
+	public function getSearchMatch($searchWord, $sortingMethod='DESC', $pageOffset){
 		$sql = '
 			SELECT *
 			FROM stories
@@ -33,7 +33,8 @@ class ContentModel extends \W\Model\Model {
 				OR sto_tags LIKE :search
 				OR usr_username LIKE :search
 
-			ORDER BY sto_inserted '.$sortingMethod
+			ORDER BY sto_inserted '.$sortingMethod.'
+			LIMIT 5 OFFSET '.$pageOffset
 		;
 
 		
@@ -53,4 +54,29 @@ class ContentModel extends \W\Model\Model {
 	}
 
 	//END FUNCTIONS FOR searchResults
+
+	//VIEW: stories && storydetails
+	// START FUNCTIONS FOR all stories viewing and filtering
+	public function getAllStories(){
+		$sql = '
+			SELECT sto_title, sto_content, sto_tags, sto_thumbnail, sto_inserted
+			FROM stories
+		';
+
+		$sth = $this->dbh->prepare($sql);
+		$sth->execute();
+		return $sth->fetchAll();
+	}
+
+	public function getOneStory(){
+		$sql = '
+			SELECT sto_title, sto_content, sto_tags, sto_thumbnail, sto_inserted
+			FROM stories
+			WHERE sto_id = :id
+		';
+	}
+
+	
+
+	//END FUNCTIONS FOR stories && story details
 }
