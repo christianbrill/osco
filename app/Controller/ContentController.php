@@ -46,12 +46,31 @@ class ContentController extends Controller {
 		// Getting the information that was put in the <input> called 'searchInput' in layout.php
 		$searchInput = isset($_GET['searchInput']) ? trim(strip_tags($_GET['searchInput'])) : '';
 
+        // Getting the order information ASC or DESC(Default)
         $sortingOption = isset($_GET['order']) ? trim(strip_tags($_GET['order'])) : '';
+
+        // !!!!!!! NOT WORKING YET
+        //PAGINATION START
+        /*if (isset($_GET['page'])) {
+            $pageNo = $_GET['page'];
+        }
+        else {
+            $pageNo = 1;
+        }
+
+        $pageOffset = ($pageNo-1) * 5;*/
+        //PAGINATION END
 		
+        // Creating a new Model in ContentModel
     	$searchModel = new \Model\ContentModel();
+
+        // Gets all the search' results with two parameters the word input and the option chosen to sort (which is by default DESC)
     	$searchResults = $searchModel->getSearchMatch($searchInput, $sortingOption);
+
+        //Gets the number of results with a count function
     	$nbResults = count($searchResults);
 
+        // Deciding on the variables who are called in the view
     	$this->show('content/search', [
     		'searchInput' => $searchInput,
     		'searchResults' => $searchResults,
