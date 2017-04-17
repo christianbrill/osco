@@ -31,5 +31,7 @@
 
 		// osco.dev/profile/
 		['GET', '/profile/', 'User#profile', 'user_profile'],
- 
+
+ 		// osco.dev/needhelp/
+		['GET', '/needhelp/', 'Content#needhelp', 'content_needhelp'],
 	);
