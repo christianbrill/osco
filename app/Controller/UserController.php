@@ -101,7 +101,7 @@ class UserController extends Controller {
 	 *
 	 *********************************************************************** */
 	public function login() {
-		unset($_SESSION['flash']);
+		//unset($_SESSION['flash']);
 
 		$this->show('user/login');
 	}
@@ -169,6 +169,8 @@ class UserController extends Controller {
  	 ************************************************************************ */
 	 public function forgot() {
 
+		 $this->show('user/forgot');
+
 		 // When the form has been sent
 		 if (!empty($_POST)) {
 
@@ -180,11 +182,12 @@ class UserController extends Controller {
 
 			 // User Data Validation
 			 // ===================================================
+			 // Is email valid?
 			 if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
 				 $errorList[] = 'Your email address is incorrect.';
 			 }
 
-			 // If all the given data is correct, do the following
+			 // If the email is valid, do the following:
 			 if (empty($errorList)) {
 				 // We first instantiate a new model
 				 $model = new \W\Model\UsersModel();
@@ -207,8 +210,10 @@ class UserController extends Controller {
 					 // Now we can create the email which will contain the link to reset the password
 					 $htmlContent = 'You have requested to reset your password. Please follow the link below to change your password: <a href="' . $this->generateUrl('user_reset', array('token' => $token), true) . '">' . $this->generateUrl('user_reset', array('token' => $token), true) . '</a>';
 
+					 die(nl2br($htmlContent));
+
 					 // After this, we can send the email
-					 $isSent = \Helper\utils::sendEmail($userData['usr_email'], 'Change your password', nl2br($htmlContent));
+					 $isSent = \Helper\Tools::sendEmail($userData['usr_email'], 'Change your password', nl2br($htmlContent));
 
 					 if ($isSent) {
 						 $this->flash('An email with a link to reset your password has been sent.', 'success');
@@ -228,6 +233,10 @@ class UserController extends Controller {
  	 *
  	 ************************************************************************ */
 	 public function reset($token) {
+		 
+		 $this->show('user/reset', array(
+			 'displayForm' => $displayForm
+		 ));
 
 		 // First off, we will have to instantiate the model we created
 		 $model = new \Model\UserModel();
@@ -290,9 +299,6 @@ class UserController extends Controller {
 			 }
 		 } // if (!empty($_POST)) end
 
-		 $this->show('user/reset', array(
-			 'displayForm' => $displayForm
-		 ));
 	 }
 
 

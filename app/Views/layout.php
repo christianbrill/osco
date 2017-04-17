@@ -20,10 +20,12 @@
 					<span class="glyphicon glyphicon-home" aria-hidden="true"></span>
 				</a>
 			</h1>
+
 			<ul class="nav nav-pills">
 				<li<?php if($currentPage == 'home'): ?> class="active"<?php endif; ?> role="presentation">
 					<a href="">Stories</a>
 				</li>
+				
 				<li<?php if($currentPage == 'blog'): ?> class="active"<?php endif; ?> role="presentation">
 					<a href="">Blog</a>
 				</li>
@@ -40,12 +42,14 @@
 					<a href="<?= $this->url("user_signup") ?>">Sign Up</a>
 				</li>
 
+				<!-- If the user isn't logged in, the Login button will show up. -->
 				<?php if (empty($w_user)) : ?>
 
 					<li<?php if($currentPage == 'login'): ?> class="active"<?php endif; ?> role="presentation">
 						<a href="<?= $this->url("user_login") ?>">Log In</a>
 					</li>
 
+				<!-- If the user is logged in, the Profile and Logout links will show up. -->
 				<?php else : ?>
 
 					<li<?php if($currentPage == 'profile'): ?> class="active"<?php endif; ?> role="presentation">
@@ -59,6 +63,7 @@
 				<?php endif; ?>
 
 			</ul>
+
 			<form action="<?= $this->url("content_search") ?>" method="get">
 				<input type="text" name="searchInput" placeholder="Search">
 				<button type="submit" class="btn btn-sm">
@@ -68,7 +73,7 @@
 		</nav>
 	</header>
 
-
+	<!-- This section will make the flash alert messages show up on the home page. -->
 	<section id="main" class="container">
 		<?php if (isset($w_flash_message) && !empty($w_flash_message->message)): ?>
 			<div class="alert alert-<?= $w_flash_message->level ?>" role="alert">

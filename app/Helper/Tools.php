@@ -19,14 +19,14 @@ class Tools {
         //$mail->SMTPDebug = 3;                             // Enable verbose debug output
 
         $mail->isSMTP();                                    // Set mailer to use SMTP
-        $mail->Host = 'smtp.googlemail.com';                // Specify main and backup SMTP servers
+        $mail->Host = 'smtp.gmail.com';                // Specify main and backup SMTP servers
         $mail->SMTPAuth = true;                             // Enable SMTP authentication
-        $mail->Username = 'osco@gmail.com';                 // SMTP username
-        $mail->Password = file_get_contents('C:\xampp\htdocs\php12\inc\pwd.txt');                           // SMTP password
+        $mail->Username = 'osco.contact@gmail.com';         // SMTP username
+        $mail->Password = file_get_contents('C:\xampp\htdocs\osco\app\Helper\pwd.txt');          // SMTP password
         $mail->SMTPSecure = 'tls';                          // Enable TLS encryption, `ssl` also accepted
         $mail->Port = 587;                                  // TCP port to connect to
 
-        $mail->setFrom('osco@gmail.com', 'Ben');
+        $mail->setFrom('osco.contact@gmail.com', 'Osco');
         $mail->addAddress($to);                             // Add a recipient
 
         $mail->isHTML(true);                                // Set email format to HTML
@@ -36,7 +36,7 @@ class Tools {
         $mail->AltBody = $textContent;
 
         if(!$mail->send()) {
-            //echo 'Mailer Error: ' . $mail->ErrorInfo;
+            echo 'Mailer Error: ' . $mail->ErrorInfo;
             return false;
         }
         else {

@@ -12,7 +12,7 @@
     </div>
 
     <div class="form-group">
-        <a href="<?php $this->url('user_forgot'); ?>">Forgot your password?</a>
+        <a href="<?= $this->url('user_forgot'); ?>">Forgot your password?</a>
     </div>
 
     <div class="form-group">
