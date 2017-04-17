@@ -40,7 +40,7 @@ class ContentController extends Controller {
             return substr($title, 0, 50).'...';
         }
         return $title;
-}
+    }
 
     public function search(){
 		// Getting the information that was put in the <input> called 'searchInput' in layout.php
@@ -77,5 +77,13 @@ class ContentController extends Controller {
     		'nbResults' => $nbResults
     	]);
 
+    }
+
+    public function stories(){
+        $this->show('content/stories');
+    }
+
+    public function storydetails(){
+        $this->show('content/storydetails');
     }
 }
