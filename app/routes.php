@@ -30,7 +30,7 @@
 		['GET', '/ajax/home/', 'Content#ajaxRefresh', 'content_ajaxRefresh'],
 
 		// osco.dev/about
-		['GET|POST', '/about/', 'About#about', 'about_about'],
+		['GET|POST', '/about/', 'About#contactform', 'about_about'],
 
 		// osco.dev/profile/
 		['GET', '/profile/', 'User#profile', 'user_profile'],
