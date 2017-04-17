@@ -5,7 +5,12 @@
 	<div>
 	<?php if ($searchInput != '') : ?>
 		<?= $nbResults ?> Result(s) for "<?= $searchInput ?>"
-	<?php endif; ?>
+	<?php else : ?>
+	    <?php if ($pageNo>1) : ?>
+	   		<a href="?searchInput=<?= $searchInput ?>&page=<?= $pageNo-1 ?>&order=DESC" name="page" class="btn btn-xs btn-success">précédent</a>
+		<?php endif; ?>
+	    <a href="?searchInput=<?= $searchInput ?>&page=<?= $pageNo+1 ?>&order=DESC" name="page" class="btn btn-xs btn-success">suivant</a>
+  	<?php endif; ?>
 	</div>
 
 	<div class="container">
@@ -28,5 +33,6 @@
 		</div>
 	<?php endforeach; ?>
 	</div>
+
 	</section>
 <?php $this->stop('main_content') ?>

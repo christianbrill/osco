@@ -7,7 +7,6 @@ $(document).ready(function(){
 		refreshStories();
 	});
 	
-
 });//jQuery END
 
 function refreshStories() {

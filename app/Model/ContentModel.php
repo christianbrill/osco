@@ -33,8 +33,9 @@ class ContentModel extends \W\Model\Model {
 				OR sto_tags LIKE :search
 				OR usr_username LIKE :search
 
-			ORDER BY sto_inserted '.$sortingMethod.'
-		';
+			ORDER BY sto_inserted '.$sortingMethod
+		;
+
 		
 		$sth = $this->dbh->prepare($sql);
 		if($searchWord != ''){

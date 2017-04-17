@@ -11,8 +11,11 @@
 		['GET', '/login/', 'User#login', 'user_login'],
 		['POST', '/login/', 'User#loginPost', 'user_loginpost'],
 
-		// osco.dev/searchResults/
+		// osco.dev/search/
 		['GET', '/search/', 'Content#search', 'content_search'],
+
+		// osco.dev/stories/
+		['GET', '/stories/', 'Content#stories', 'content_stories'],
 
 		// osco.dev/forgot_password/
 		['GET|POST', '/forgot_password/', 'User#forgot', 'user_forgot'],
