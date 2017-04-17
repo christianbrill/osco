@@ -59,4 +59,12 @@ class ContentController extends Controller {
     	]);
 
     }
+
+    public function stories(){
+        $this->show('content/stories');
+    }
+
+    public function storydetails(){
+        $this->show('content/storiydetails');
+    }
 }

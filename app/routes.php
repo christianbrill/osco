@@ -11,6 +11,12 @@
 		['GET', '/login/', 'User#login', 'user_login'],
 		['POST', '/login/', 'User#loginPost', 'user_loginpost'],
 
+		// osco.dev/stories/
+		['GET', '/stories/', 'Content#stories', 'content_stories'],
+
+		// osco.dev/storydetails/
+		['GET', '/storydetails/', 'Content#storydetails', 'content_storydetails'],
+
 		// osco.dev/searchResults/
 		['GET', '/search/', 'Content#search', 'content_search'],
 
