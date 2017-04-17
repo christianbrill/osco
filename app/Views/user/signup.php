@@ -17,13 +17,13 @@
     </div>
 
     <div class="form-group">
-        <!-- <input type="text" class="form-control" name="country" value="" placeholder="Please enter you country"> -->
-        <select class="form-control" name="country">
+        <input type="text" class="form-control" name="country" value="" placeholder="Please enter you country">
+        <!-- <select class="form-control">
             <option value="">Please select your country</option>
-            <?php foreach($countryList as $countries) : ?>
-                <option value="" name=""><?= $countries ?></option>
-            <?php endforeach; ?>
-        </select>
+            < foreach($countryList as $countries) : ?>
+                <option value="" name="country">< $countries ?></option>
+            < endforeach; ?>
+        </select> -->
     </div>
 
     <div class="form-group">
