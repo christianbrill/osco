@@ -125,9 +125,8 @@ header{
 	margin:auto;
 	width:900px;
 	article{
-		overflow-wrap: break-word;
-		width:250px;
-		height: 250px;
+		display:inline-block;
+		overflow-wrap: break-word;		
 	}
 	button{
 		position:relative;
@@ -137,19 +136,37 @@ header{
 	h1{
 		font-size:1.6em;
 	}
-	div
+
+	a{
+		text-decoration: none;
+	}
+	div{
+		width:250px;
+		height:250px;
+		box-shadow:none;
+		transition:0.5s;
+		padding:5px;
+		&:hover{
+			box-shadow:0 0 10px #e2e2e2;
+			transition: 0.5s;
+			transform: scale(1.02);
+			
+		}
+	}
+
 }
 
 
 footer{
 	position: absolute;
 	bottom: 0px;
+	padding:30px;
 
+	height: 200px;
 	width:100%;
 	background-color: #113A52;
 
 	#footerContent{
-		margin:40px;
 		display:flex;
 		flex-direction: row;
 		justify-content: space-around;

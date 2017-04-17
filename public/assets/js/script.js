@@ -7,24 +7,21 @@ $(document).ready(function(){
 		refreshStories();
 	});
 	
-	////////// START Filter toggle function to Recent
-	$(".filterToggleButton").click(function(e){
-		console.log('click');
-	});
-	////////// END Filter toggle function
 
 });//jQuery END
 
 function refreshStories() {
-	var story = $('#ajaxHomeStories');
 
-	$.post({
-    	story:story,
-		url: 'index.php',
-		
+	var $story = $('#ajaxHomeStories');
+
+	$.ajax({  	
+		url: '/osco/public/ajax/home/',		
 }).done(function(response) {
 	console.log(response);
 	
 
+    $story.empty().append();
+
 	});
 }//refreshStories function end
+
