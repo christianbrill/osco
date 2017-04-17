@@ -2,15 +2,16 @@
 
 namespace Controller;
 use \W\Controller\Controller;
-use \Model\ContentModel;
+use PHPMailer();
 
-class AboutController extends Controller{
+/*class AboutController extends Controller{
 	public function contactform(){
 		$this->show('about/about');
+
 	}
 
 	
 }
 
-
+*/
 ?>
