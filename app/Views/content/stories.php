@@ -1,7 +1,7 @@
 <?php $this->layout('layout', ['title' => 'OSCo - Stories', 'currentPage' => 'stories']) ?>
 
 <?php $this->start('main_content') ?>
-	<section id="ajaxHomeStories">
+	<section>
 	<div>
 		<p>Filter Box (Tags)</p>
 		

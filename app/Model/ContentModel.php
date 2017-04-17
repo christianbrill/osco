@@ -23,7 +23,7 @@ class ContentModel extends \W\Model\Model {
 	
 	// VIEW: search
 	// START FUNCTIONS FOR search
-	public function getSearchMatch($searchWord, $sortingMethod='DESC'){
+	public function getSearchMatch($searchWord, $sortingMethod='DESC', $pageOffset){
 		$sql = '
 			SELECT *
 			FROM stories
@@ -33,7 +33,8 @@ class ContentModel extends \W\Model\Model {
 				OR sto_tags LIKE :search
 				OR usr_username LIKE :search
 
-			ORDER BY sto_inserted '.$sortingMethod
+			ORDER BY sto_inserted '.$sortingMethod.'
+			LIMIT 5 OFFSET '.$pageOffset
 		;
 
 		
@@ -74,6 +75,8 @@ class ContentModel extends \W\Model\Model {
 			WHERE sto_id = :id
 		';
 	}
+
+	
 
 	//END FUNCTIONS FOR stories && story details
 }
