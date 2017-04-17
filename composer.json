@@ -5,6 +5,8 @@
     "minimum-stability": "dev",
     "license": "MIT",
     "prefer-stable": true,
+    "phpmailer/phpmailer": "~5.2",
+    
     "authors": [
         {
             "name": "Axel Wargnier",
