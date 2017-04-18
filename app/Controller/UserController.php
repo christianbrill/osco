@@ -327,5 +327,6 @@ class UserController extends Controller {
 	 public function profile() {
 
 		 $this->show('user/profile');
+
 	 }
 }
