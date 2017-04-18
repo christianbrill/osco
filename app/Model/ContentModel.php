@@ -23,7 +23,7 @@ class ContentModel extends \W\Model\Model {
 	
 	// VIEW: search
 	// START FUNCTIONS FOR search
-	public function getSearchMatch($searchWord, $sortingMethod='DESC', $pageOffset){
+	public function getSearchMatch($searchWord, $sortingMethod='DESC', $pageOffset, $nbResultsPerPage){
 		$sql = '
 			SELECT *
 			FROM stories
@@ -34,8 +34,8 @@ class ContentModel extends \W\Model\Model {
 				OR usr_username LIKE :search
 
 			ORDER BY sto_inserted '.$sortingMethod.'
-			LIMIT 5 OFFSET '.$pageOffset
-		;
+			LIMIT '.pageOffset.','.$nbResultsPerPage.'
+		';
 
 		
 		$sth = $this->dbh->prepare($sql);
@@ -57,10 +57,13 @@ class ContentModel extends \W\Model\Model {
 
 	//VIEW: stories && storydetails
 	// START FUNCTIONS FOR all stories viewing and filtering
-	public function getAllStories(){
+	public function getStoriesList($pageOffset, $nbStoriesPerPage){
 		$sql = '
-			SELECT sto_title, sto_content, sto_tags, sto_thumbnail, sto_inserted
+			SELECT sto_id, sto_title, sto_content, sto_tags, sto_thumbnail, sto_inserted, users_usr_id
 			FROM stories
+			INNER JOIN users ON stories.users_usr_id = users.usr_id
+			ORDER BY sto_id DESC
+			LIMIT '.pageOffset.','.$nbStoriesPerPage.'
 		';
 
 		$sth = $this->dbh->prepare($sql);
@@ -68,12 +71,21 @@ class ContentModel extends \W\Model\Model {
 		return $sth->fetchAll();
 	}
 
-	public function getOneStory(){
+	public function getOneStory($id){
 		$sql = '
-			SELECT sto_title, sto_content, sto_tags, sto_thumbnail, sto_inserted
+			SELECT sto_title, sto_content, sto_tags, sto_thumbnail, sto_inserted, users_usr_id
 			FROM stories
+			INNER JOIN users ON stories.users_usr_id = users.usr_id
 			WHERE sto_id = :id
 		';
+
+		$sth = $this->dbh->prepare($sql);
+		$sth->bindValue(':id', $id, \PDO::PARAM_INT);
+
+		if ($sth->execute()){
+			return $sth->fetchAll();
+		}
+
 	}
 
 	
