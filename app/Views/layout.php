@@ -11,6 +11,7 @@
 
 	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 	<link rel="stylesheet" href="<?= $this->assetUrl('css/naomi.min.css') ?>">
+	<script src='https://www.google.com/recaptcha/api.js'></script>
 </head>
 <body>
 	<header>
