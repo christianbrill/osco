@@ -73,7 +73,7 @@ class ContentController extends Controller {
         // !!!!!!! NOT WORKING YET
         //PAGINATION START
         $page = 1;
-        $nbResultsPerPage = 2;
+        $nbResultsPerPage = 4;
         $pageOffset = 0;
 
         if(isset($_GET['page'])){
@@ -95,13 +95,13 @@ class ContentController extends Controller {
     	$this->show('content/search', [
     		'searchInput' => $searchInput,
     		'searchResults' => $searchResults,
-    		'nbResults' => $nbResults
+    		'nbResults' => $nbResults,
+            'page' => $page
     	]);
     }
 
 
     public function stories(){
-        $currentId = isset($_GET['id']) ? trim(strip_tags($_GET['id'])) : '';
 
         // !!!!!!! NOT WORKING YET
         //PAGINATION START
@@ -119,21 +119,24 @@ class ContentController extends Controller {
         $storiesModel = new \Model\ContentModel();
         $storiesList = $storiesModel->getStoriesList($pageOffset, $nbStoriesPerPage);
         $nbStories = count($storiesList);
-        $storyInfos = $storiesList->getOneStory($currentId);
 
-
-        //$tagsLine = getAllStories('sto_tags');
-        //$getEachTag = explode(", ", $tags);
+        // POUR BENJAMIN: LE PROBLÈME EST ICI
+        $tagsLine = $storiesModel->getTagString();
+        $getEachTag = explode(", ", $tagsLine);
 
 
         $this->show('content/stories', [
             'storiesList' => $storiesList,
-            'storyInfos' => $storyInfos,
-            'nbStories' => $nbStories
+            'nbStories' => $nbStories,
+            'page' => $page,
+            'getEachTag' => $getEachTag
         ]);
     }
 
     public function storydetails(){
+        $currentId = isset($_GET['id']) ? trim(strip_tags($_GET['id'])) : '';
+
+        $storyInfos = $storiesList->getOneStory($currentId);
         $this->show('content/storydetails');
     }
 

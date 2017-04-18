@@ -13,7 +13,7 @@
 		<?php
 		}
 			
-		if ($nbResults >= 2){
+		if ($nbResults >= 4){
 		?>
 			<a href="?searchInput=<?= $searchInput ?>&page=<?= $page+1 ?>&order=DESC" name="page" class="btn btn-xs btn-success">suivant</a>
 		<?php

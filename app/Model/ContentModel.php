@@ -34,7 +34,7 @@ class ContentModel extends \W\Model\Model {
 				OR usr_username LIKE :search
 
 			ORDER BY sto_inserted '.$sortingMethod.'
-			LIMIT '.pageOffset.','.$nbResultsPerPage.'
+			LIMIT '.$pageOffset.','.$nbResultsPerPage.'
 		';
 
 		
@@ -85,7 +85,18 @@ class ContentModel extends \W\Model\Model {
 		if ($sth->execute()){
 			return $sth->fetchAll();
 		}
+	}
 
+	public function getTagString(){
+		$sql = '
+			SELECT sto_tags
+			FROM stories
+		';
+
+		$sth = $this->dbh->prepare($sql);
+		if ($sth->execute()){
+			return $sth->fetchAll();
+		}
 	}
 
 	
