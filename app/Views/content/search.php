@@ -6,10 +6,20 @@
 	<?php if ($searchInput != '') : ?>
 		<?= $nbResults ?> Result(s) for "<?= $searchInput ?>"
 	<?php else : ?>
-	    <?php if ($pageNo>1) : ?>
-	   		<a href="?searchInput=<?= $searchInput ?>&page=<?= $pageNo-1 ?>&order=DESC" name="page" class="btn btn-xs btn-success">précédent</a>
-		<?php endif; ?>
-	    <a href="?searchInput=<?= $searchInput ?>&page=<?= $pageNo+1 ?>&order=DESC" name="page" class="btn btn-xs btn-success">suivant</a>
+		<div class="pagination">
+		<?php if ($page >= 2){
+		?>
+			<a href="?searchInput=<?= $searchInput ?>&page=<?= $page-1 ?>&order=DESC" name="page" class="btn btn-xs btn-success">précédant</a>
+		<?php
+		}
+			
+		if ($nbResults >= 4){
+		?>
+			<a href="?searchInput=<?= $searchInput ?>&page=<?= $page+1 ?>&order=DESC" name="page" class="btn btn-xs btn-success">suivant</a>
+		<?php
+		}
+		?>
+		</div>
   	<?php endif; ?>
 	</div>
 
