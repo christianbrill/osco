@@ -147,7 +147,7 @@ class UserController extends Controller {
 				$authentificationModel->logUserIn($userInfos);
 
 				// Then we display a success message
-				$this->flash($userInfos['usr_email'] . " was logged in successfully", 'success');
+				$this->flash($userInfos['usr_id'] . " was logged in successfully", 'success');
 
 				// Then the user is redirected to the home page
 				$this->redirectToRoute('content_home');
@@ -169,7 +169,8 @@ class UserController extends Controller {
  	 ************************************************************************ */
 	 public function forgot() {
 
-		 $this->show('user/forgot');
+		 debug($_POST);
+
 
 		 // When the form has been sent
 		 if (!empty($_POST)) {
@@ -205,7 +206,7 @@ class UserController extends Controller {
 					 // Then the token is added to the database
 					 $model->update(array(
 						'usr_token' => $token,
-						'usr_token_created' => date('Y-m-d H:i:s')), $userData['id']);
+						'usr_token_created' => date('Y-m-d H:i:s')), $userData['usr_id']);
 
 					 // Now we can create the email which will contain the link to reset the password
 					 $htmlContent = 'You have requested to reset your password. Please follow the link below to change your password: <a href="' . $this->generateUrl('user_reset', array('token' => $token), true) . '">' . $this->generateUrl('user_reset', array('token' => $token), true) . '</a>';
@@ -225,6 +226,9 @@ class UserController extends Controller {
 				 $this->flash(join('<br>', $errorList), 'danger');
 			 }
 		 } // if (!empty($_POST)) end
+
+		 $this->show('user/forgot');
+
 	 } // public function forgot end
 
 

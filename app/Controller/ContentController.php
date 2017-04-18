@@ -146,7 +146,7 @@ class ContentController extends Controller {
 	*/
 	public function needhelp(){
 
-		$this->allowTo('user');
+		//$this->allowTo('user');
 
 		$this->show('content/needhelp');
 	}

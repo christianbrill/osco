@@ -2,6 +2,8 @@
 
 <?php $this->start('main_content') ?>
 
+	<?= debug($w_user); ?>
+
 	<section id="ajaxHomeStories">
 	<?php foreach($randomStories as $story) : ?>
 		<article id="storyBox">
@@ -19,7 +21,7 @@
 	<!--Here starts the "Need Help" box -->
 
 	<section id="rightColumn">
-		<a href="#">		
+		<a href="#">
 			<div id="needHelpBox">
 				<h1>Need Help?</h1>
 				<p>OSCo has the contact information you need to get help. If you prefer, we also provide a form for you to get anonymous help-we handle the contact for you.
