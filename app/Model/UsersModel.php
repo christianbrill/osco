@@ -2,7 +2,12 @@
 
 namespace Model;
 
-class UserModel extends \W\Model\UsersModel {
+class UsersModel extends \W\Model\UsersModel {
+
+    public function __construct() {
+        parent::__construct();
+        $this->setPrimaryKey('id');
+    }
 
     /**
     * We will retrieve the ID from the table in the database for a given token

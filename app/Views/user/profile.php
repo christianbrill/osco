@@ -5,7 +5,7 @@
     <article>
         <section>
             <h3>Username:</h3>
-            <p></p>
+            <p><p>
         </section>
 
         <section>
@@ -14,9 +14,11 @@
         </section>
 
         <section>
-            <a href="#">
-                <p>Change your password</p>
-            </a>
+            <a href="#">Change your password</a>
+        </section>
+
+        <section>
+            <a href="#">Delete your account</a>
         </section>
     </article>
 
