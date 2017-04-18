@@ -63,7 +63,7 @@ class ContentModel extends \W\Model\Model {
 			FROM stories
 			INNER JOIN users ON stories.users_usr_id = users.usr_id
 			ORDER BY sto_id DESC
-			LIMIT '.pageOffset.','.$nbStoriesPerPage.'
+			LIMIT '.$pageOffset.','.$nbStoriesPerPage.'
 		';
 
 		$sth = $this->dbh->prepare($sql);
