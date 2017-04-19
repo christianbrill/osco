@@ -6,8 +6,29 @@ $(document).ready(function(){
 
 		refreshStories();
 	});
+
+	$(".menuIcon").click(function(e){
+		console.log("Show menu");
+		$("#mobileMenu").toggle();
+	});
 	
 });//jQuery END
+
+window.addEventListener("resize", function(){
+
+	if($(window).width() > 1000){
+		$("#desktopNavigation").show();
+		$("#mobileNavigation").hide();
+	}
+	else if($(window).width() < 1000 && $(window).width() > 700) {
+		$("#desktopNavigation").hide();
+		$("#mobileNavigation").show();
+	}
+	else {
+		$("#desktopNavigation").hide();
+		$("#mobileNavigation").show();
+	}
+})
 
 function refreshStories() {
 
