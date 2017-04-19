@@ -61,7 +61,9 @@ $(document).ready(function(){
 	* Show change password form on button push
 	*
 	*/
-	$('#hiddenForm')
+	$('#changePassword').click(function(){
+		$('.hiddenForm').show();
+	});
 });//jQuery END
 
 

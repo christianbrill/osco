@@ -35,11 +35,7 @@
 					<a href="<?= $this->url("content_contactform") ?>">About OSCo</a>
 				</li>
 
-				<li<?php if($currentPage == 'signup'): ?> class="active"<?php endif; ?> role="presentation">
-					<a href="<?= $this->url("user_signup") ?>">Sign Up</a>
-				</li>
-
-				<!-- If the user isn't logged in, the Login button will show up. -->
+				<!-- If the user is logged in, the Profile and Logout button will show up. -->
 				<?php if (!empty($w_user)) : ?>
 					<li<?php if($currentPage == 'profile'): ?> class="active"<?php endif; ?> role="presentation">
 						<a href="<?= $this->url("user_profile") ?>">Profile</a>
@@ -49,8 +45,13 @@
 						<a href="<?= $this->url("user_logout") ?>">Logout</a>
 					</li>
 
-				<!-- If the user is logged in, the Profile and Logout links will show up. -->
+				<!-- If the user isn't logged in, the Signup and Login links will show up. -->
 				<?php else : ?>
+
+					<li<?php if($currentPage == 'signup'): ?> class="active"<?php endif; ?> role="presentation">
+						<a href="<?= $this->url("user_signup") ?>">Sign Up</a>
+					</li>
+
 					<li<?php if($currentPage == 'login'): ?> class="active"<?php endif; ?> role="presentation">
 						<a href="<?= $this->url("user_login") ?>">Log In</a>
 					</li>
@@ -59,7 +60,7 @@
 		</nav>
 
 
-		<!-- ////////////////////////////////////////// -->
+		<!-- ////////////////////////////////////////// DESKTOP NAVIGATION-->
 		<nav id="desktopNavigation">
 			<h1>
 				<a href="<?= $this->url("content_home") ?>">
@@ -84,13 +85,8 @@
 					<a href="<?= $this->url("content_contactform") ?>">About OSCo</a>
 				</li>
 
-				<li<?php if($currentPage == 'signup'): ?> class="active"<?php endif; ?> role="presentation">
-					<a href="<?= $this->url("user_signup") ?>">Sign Up</a>
-				</li>
-
-				<!-- If the user isn't logged in, the Login button will show up. -->
+				<!-- If the user is logged in, the Profile and Logout button will show up. -->
 				<?php if (!empty($w_user)) : ?>
-
 					<li<?php if($currentPage == 'profile'): ?> class="active"<?php endif; ?> role="presentation">
 						<a href="<?= $this->url("user_profile") ?>">Profile</a>
 					</li>
@@ -99,14 +95,16 @@
 						<a href="<?= $this->url("user_logout") ?>">Logout</a>
 					</li>
 
-
-				<!-- If the user is logged in, the Profile and Logout links will show up. -->
+				<!-- If the user isn't logged in, the Signup and Login links will show up. -->
 				<?php else : ?>
+
+					<li<?php if($currentPage == 'signup'): ?> class="active"<?php endif; ?> role="presentation">
+						<a href="<?= $this->url("user_signup") ?>">Sign Up</a>
+					</li>
 
 					<li<?php if($currentPage == 'login'): ?> class="active"<?php endif; ?> role="presentation">
 						<a href="<?= $this->url("user_login") ?>">Log In</a>
 					</li>
-
 				<?php endif; ?>
 
 			</ul>
