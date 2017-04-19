@@ -2,7 +2,7 @@ $(document).ready(function(){
 	console.log('Loaded');
 
 	$("#refreshStories").click(function(e){
-		 e.preventDefault;
+		 e.preventDefault();
 
 		refreshStories();
 	});
@@ -11,73 +11,90 @@ $(document).ready(function(){
 		console.log("Show menu");
 		$("#mobileMenu").toggle();
 	});
-	
-});//jQuery END
-
-window.addEventListener("resize", function(){
-
-	if($(window).width() > 1000){
-		$("#desktopNavigation").show();
-		$("#mobileNavigation").hide();
-	}
-	else if($(window).width() < 1000 && $(window).width() > 700) {
-		$("#desktopNavigation").hide();
-		$("#mobileNavigation").show();
-	}
-	else {
-		$("#desktopNavigation").hide();
-		$("#mobileNavigation").show();
-	}
-})
 
 
+	/**
+	* Event Listener for burger menu
+	*
+	*/
+	window.addEventListener("resize", function(){
+
+		if($(window).width() > 1000){
+			$("#desktopNavigation").show();
+			$("#mobileNavigation").hide();
+		}
+		else if($(window).width() < 1000 && $(window).width() > 700) {
+			$("#desktopNavigation").hide();
+			$("#mobileNavigation").show();
+		}
+		else {
+			$("#desktopNavigation").hide();
+			$("#mobileNavigation").show();
+		}
+	});
+
+
+	/**
+	* Delete account on button push
+	*
+	*/
 	$('#deletebutton').click(function(e) {
 		e.preventDefault;
 
 		deleteAccount();
 	});
 
+
+	/**
+	* Change Username on submit
+	*
+	*/
+	$('#changeUsername').submit(function(e) {
+		e.preventDefault();
+
+		changeUsername();
+	});
+
 });//jQuery END
+
+
+/** ==============================================
+*
+* FUNCTIONS BELOW
+*
+* ============================================= */
 
 
 /**
 * Refresh Stories Function
 *
 */
-
 function refreshStories() {
 
-	//var $storyArray = $.map($story, function(el) { return el });
-
-
 	$.ajax({
-		url: '/osco/public/ajax/home/',
-		}).done(function(response) {
+		url: '/osco/public/ajax/home/'
+
+	}).done(function(response) {
 		console.log(response);
 
-		//JSON.stringify(response);
-	    //$story.empty().load("/osco/public/ajax/home/ #ajaxHomeStories");
+		var content = "";
 
-		var parsed = JSON.parse(response);
+		$.each(response, function(key, value){
+			content += "<article id='storyBox'>" +
+				"<a href=''>" +
+					"<div>"+
+						"<h1 id='title'>"+ value.sto_title +"</h1>"+
+						"<p>"+ value.sto_title +"</p>"+
+					"</div>"+
+				"</a>"+
+			"</article>";
+		});//end each
 
-   		$story.empty().load('/osco/public/ajax/home/');
+	$("#ajaxHomeStories").html(content);
 
-		//console.log(response);
+	});//end ajaxHomeStories
 
-		//var array = Array.from(response);
-		//console.log(array);
-		//JSON.stringify(response);
-	    //$story.empty().load("/osco/public/ajax/home/ #ajaxHomeStories");
-
-	   	$("#ajaxHomeStories").empty().load("/osco/public/ajax/home/ #storyBox");
-
-
-	   	//var info = '<?php foreach($randomStories as $story) : ?> <article id="storyBox"><a href="#"><div><h1 id="title"><?= \Controller\ContentController::getShortTitle($story["sto_title"]) ?></h1><p><?= \Controller\ContentController::getShortDescription($story["sto_content"])?></p></div></a></article><?php endforeach; ?>';
-
-	   	//$("#ajaxHomeStories").append(info);
-
-		});
-	}//refreshStories function end
+}//refreshStories function end
 
 
 /**
@@ -98,8 +115,27 @@ function deleteAccount() {
 			data: {'userEmail' : userEmail}
 		}).done(function(response) {
 			console.log(response);
-
 		});
 	}
+}
 
+
+/**
+* Change Username Function
+*
+*/
+function changeUsername() {
+
+	var email = $('#email').val();
+	var newUsername = $('#username').val();
+
+	$.ajax({
+		url: '/osco/app/Model/UsersModel.php',
+		data: {
+			'username' : newUsername,
+			'email' : email
+		}
+	}).done(function(response) {
+		alert('Your username has been changed successfully.');
+	});
 }
