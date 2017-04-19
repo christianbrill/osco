@@ -10,7 +10,6 @@
     	<p></p>
     </div>
 
-
     <?php if (!empty($w_user)): ?>
     	<h1>Do you know an organization which helps women in your country? Let us know by filling the form below.</h1>
     	<form class="form-group">

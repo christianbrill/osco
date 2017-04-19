@@ -27,7 +27,7 @@ class ContentModel extends \W\Model\Model {
 		$sql = '
 			SELECT *
 			FROM stories
-			INNER JOIN users ON stories.users_usr_id = users.usr_id
+			INNER JOIN users ON stories.users_id = users.id
 			WHERE sto_title LIKE :search
 				OR sto_content LIKE :search
 				OR sto_tags LIKE :search
@@ -59,9 +59,9 @@ class ContentModel extends \W\Model\Model {
 	// START FUNCTIONS FOR all stories viewing and filtering
 	public function getStoriesList($pageOffset, $nbStoriesPerPage){
 		$sql = '
-			SELECT sto_id, sto_title, sto_content, sto_tags, sto_thumbnail, sto_inserted, users_usr_id
+			SELECT sto_id, sto_title, sto_content, sto_tags, sto_thumbnail, sto_inserted, users_id
 			FROM stories
-			INNER JOIN users ON stories.users_usr_id = users.usr_id
+			LEFT OUTER JOIN users ON stories.users_id = users.id
 			ORDER BY sto_id DESC
 			LIMIT '.$pageOffset.','.$nbStoriesPerPage.'
 		';
@@ -73,9 +73,9 @@ class ContentModel extends \W\Model\Model {
 
 	public function getOneStory($id){
 		$sql = '
-			SELECT sto_title, sto_content, sto_tags, sto_thumbnail, sto_inserted, users_usr_id
+			SELECT sto_title, sto_content, sto_tags, sto_thumbnail, sto_inserted, users_id
 			FROM stories
-			INNER JOIN users ON stories.users_usr_id = users.usr_id
+			LEFT OUTER JOIN users ON stories.users_id = users.id
 			WHERE sto_id = :id
 		';
 
@@ -95,7 +95,36 @@ class ContentModel extends \W\Model\Model {
 
 		$sth = $this->dbh->prepare($sql);
 		if ($sth->execute()){
-			return $sth->fetchAll();
+			$getAllTagResults = $sth->fetchAll();
+
+			$str = '';
+			foreach($getAllTagResults as $tagLine) {
+				$str .= $tagLine['sto_tags'].',';
+			}
+
+			return $str;
+		}
+	}
+
+	public function getTagStringForStory($id){
+		$sql = '
+			SELECT sto_tags
+			FROM stories
+			WHERE sto_id = :id
+		';
+
+		$sth = $this->dbh->prepare($sql);
+		$sth->bindValue(':id', $id, \PDO::PARAM_INT);
+		
+		if ($sth->execute()){
+			$getAllTagResults = $sth->fetchAll();
+
+			$str = '';
+			foreach($getAllTagResults as $tagLine) {
+				$str .= $tagLine['sto_tags'].',';
+			}
+
+			return $str;
 		}
 	}
 
