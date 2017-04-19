@@ -39,6 +39,30 @@ class UsersModel extends \W\Model\UsersModel {
         }
 
         return false;
-
     }
+
+
+
+    public function updateUsername($newUsername) {
+
+        if(!empty($_POST['username'])) {
+
+            $newUsername = isset($_POST['username']) ? isset($_POST['username']) : '';
+            $email = isset($_POST['email']) ? isset($_POST['email']) : '';
+
+            $sqlRequest = '
+                UPDATE users
+                SET usr_username = :newUsername
+                WHERE usr_email = :email
+            ';
+
+            $stmt = $this->dbh->prepare($sqlRequest);
+            $stmt->bindValue(':newUsername', $newUsername);
+            $stmt->bindValue(':email', $email);
+
+            $stmt->execute();
+
+        }
+    }
+
 }

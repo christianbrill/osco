@@ -1,4 +1,4 @@
-$(document).ready(function(){	
+$(document).ready(function(){
 	console.log('Loaded');
 
 	$("#refreshStories").click(function(e){
@@ -11,8 +11,12 @@ $(document).ready(function(){
 		console.log("Show menu");
 		$("#mobileMenu").toggle();
 	});
-	
 
+
+	/**
+	* Event Listener for burger menu
+	*
+	*/
 	window.addEventListener("resize", function(){
 
 		if($(window).width() > 1000){
@@ -30,13 +34,35 @@ $(document).ready(function(){
 	});
 
 
+	/**
+	* Delete account on button push
+	*
+	*/
 	$('#deletebutton').click(function(e) {
 		e.preventDefault;
 
 		deleteAccount();
 	});
 
+
+	/**
+	* Change Username on submit
+	*
+	*/
+	$('#changeUsername').submit(function(e) {
+		e.preventDefault();
+
+		changeUsername();
+	});
+
 });//jQuery END
+
+
+/** ==============================================
+*
+* FUNCTIONS BELOW
+*
+* ============================================= */
 
 
 /**
@@ -65,10 +91,11 @@ function refreshStories() {
 		});//end each
 
 	$("#ajaxHomeStories").html(content);
-   	
+
 	});//end ajaxHomeStories
 
 }//refreshStories function end
+
 
 /**
 * Delete Account Function
@@ -88,8 +115,27 @@ function deleteAccount() {
 			data: {'userEmail' : userEmail}
 		}).done(function(response) {
 			console.log(response);
-
 		});
 	}
+}
 
+
+/**
+* Change Username Function
+*
+*/
+function changeUsername() {
+
+	var email = $('#email').val();
+	var newUsername = $('#username').val();
+
+	$.ajax({
+		url: '/osco/app/Model/UsersModel.php',
+		data: {
+			'username' : newUsername,
+			'email' : email
+		}
+	}).done(function(response) {
+		alert('Your username has been changed successfully.');
+	});
 }
