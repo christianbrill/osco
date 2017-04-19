@@ -3,11 +3,9 @@
 <?php $this->layout('layout', ['title' => 'About', 'currentPage' => 'about']) ?>
 
 <?php $this->start('main_content') ?>
-<div class="well"><h1>About Osco</h1><br>
-Osco is.......  <br>
-<br>
-<br>
-<br></div>
+<!--<div class="well">About Osco<br>
+
+</div>-->
 
     <form action="email.php" method="post">
         <div class="form-group">
@@ -29,8 +27,13 @@ Osco is.......  <br>
         <div class="form-group">
             <input type="submit" class="btn btn-success btn-block" value="Send message" />
         </div>
+        <div class="g-recaptcha" data-sitekey="6LemgR0UAAAAAEGCgaIlrKf1SLHNaQ2Y6zEPgv8u"></div>
     </form>
 
-
+<?php 
+  foreach ($_POST as $key => $value) {
+    echo '<p><strong>' . $key.':</strong> '.$value.'</p>';
+  }
+?>
 <?php $this->stop('main_content') ?>
 
