@@ -1,8 +1,8 @@
-$(document).ready(function(){
+$(document).ready(function(){	
 	console.log('Loaded');
 
 	$("#refreshStories").click(function(e){
-		 e.preventDefault;
+		 e.preventDefault();
 
 		refreshStories();
 	});
@@ -42,41 +42,32 @@ $(document).ready(function(){
 * Refresh Stories Function
 *
 */
-
 function refreshStories() {
 
-	//var $storyArray = $.map($story, function(el) { return el });
-
-
 	$.ajax({
-		url: '/osco/public/ajax/home/',
-		}).done(function(response) {
+		url: '/osco/public/ajax/home/'
+
+	}).done(function(response) {
 		console.log(response);
 
-		//JSON.stringify(response);
-	    //$story.empty().load("/osco/public/ajax/home/ #ajaxHomeStories");
+		var content = "";
 
-		var parsed = JSON.parse(response);
+		$.each(response, function(key, value){
+			content += "<article id='storyBox'>" +
+				"<a href=''>" +
+					"<div>"+
+						"<h1 id='title'>"+ value.sto_title +"</h1>"+
+						"<p>"+ value.sto_title +"</p>"+
+					"</div>"+
+				"</a>"+
+			"</article>";
+		});//end each
 
-   		$story.empty().load('/osco/public/ajax/home/');
+	$("#ajaxHomeStories").html(content);
+   	
+	});//end ajaxHomeStories
 
-		//console.log(response);
-
-		//var array = Array.from(response);
-		//console.log(array);
-		//JSON.stringify(response);
-	    //$story.empty().load("/osco/public/ajax/home/ #ajaxHomeStories");
-
-	   	$("#ajaxHomeStories").empty().load("/osco/public/ajax/home/ #storyBox");
-
-
-	   	//var info = '<?php foreach($randomStories as $story) : ?> <article id="storyBox"><a href="#"><div><h1 id="title"><?= \Controller\ContentController::getShortTitle($story["sto_title"]) ?></h1><p><?= \Controller\ContentController::getShortDescription($story["sto_content"])?></p></div></a></article><?php endforeach; ?>';
-
-	   	//$("#ajaxHomeStories").append(info);
-
-		});
-	}//refreshStories function end
-
+}//refreshStories function end
 
 /**
 * Delete Account Function

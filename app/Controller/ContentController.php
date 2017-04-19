@@ -41,6 +41,9 @@ class ContentController extends Controller {
 		$refreshStories = $storyModel->getLimitedStories();
 
 		$this->showJson($refreshStories);
+
+		debug($refreshStories);
+		exit;
 	}
 
 
