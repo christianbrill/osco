@@ -14,6 +14,7 @@ $darkblue: #113A52;
 $lightgrey:#eeeeee;
 $white: #FFFFFF;
 
+
 // TITLES AND PARAGRAPH STYLES
 h1{
 	color: $turquoise;
@@ -55,8 +56,12 @@ header{
 			padding: 10px;
 
 			border: 0px;
-			border-radius: 10px;
-			background-color:#EEEEEE;
+			border-bottom: 3px solid $turquoise;
+		}
+
+		.searchButton{
+			background-color: $turquoise;
+			border:0px;
 		}
 	}
 
@@ -103,15 +108,50 @@ ul{
 
 // MAIN, MAIN-CONTENT, FOOTER
 #main{
-	z-index:2000;
 	margin-top:5em;
 
-	display: flex;
-	flex-direction:column;
-	align-items:center;
-	justify-content:space-between;
-
 }
+
+.pagination{
+	margin: 2em 0;
+	a{
+		color:$darkblue;
+		border-bottom: 3px solid $darkblue;
+		text-transform: uppercase;
+	}
+
+	a:hover{
+		text-decoration: none;
+		color:$turquoise;
+		border-bottom: 3px solid $turquoise;
+	}
+}
+
+.tags{
+	margin: 2em 0;
+	float: right;
+}
+
+.tag{
+	margin:2px;
+	background-color:$turquoise;
+	border:1.5px solid $turquoise;
+	color:$white;
+}
+
+.tag:hover{
+	background-color:$lightgrey;
+	border:1.5px solid $lightgrey;
+	color:$turquoise;
+}
+
+.storiesList{
+
+	article{
+		margin:2em 0;
+	}
+}
+
 
 //VIEW: content/home
 #ajaxHomeStories{
@@ -193,26 +233,10 @@ footer{
 /* TABLET ------------------------------------------------------ */
 @media screen and (max-width: 1000px) and (min-width: 700px){
 	// HEADER, NAVIGATION, MENU
-	header{
-		form{
-			margin: 7px;
 
-			input{
-				height:30px;
-				padding: 10px;
-
-				border: 0px;
-				border-radius: 10px;
-				background-color:#EEEEEE;
-			}
-		}
-	}
 	//MAIN, MAIN-CONTENT, FOOTER
 
 	#main{
-	display: flex;
-	flex-direction:column;
-	align-items:center;
 
 	}
 
@@ -308,8 +332,7 @@ footer{
 				padding: 10px;
 
 				border: 0px;
-				border-radius: 10px;
-				background-color:#EEEEEE;
+				border-bottom: 3px solid $turquoise;
 			}
 		}
 
@@ -334,12 +357,21 @@ footer{
 				background-color:#EEEEEE;
 				border-bottom: 3px solid #00C3B6;
 			}
-
-			.button{
-				height:30px;
-			}
 		}
 	}
+
+	#main{
+		display:flex;
+		flex-direction: column;
+		align-items: center;
+
+		section{
+			margin:2em 0;
+			width:70%;
+		}
+
+	}
+
 
 	#ajaxHomeStories{
 	width:70vw;

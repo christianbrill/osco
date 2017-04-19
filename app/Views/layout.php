@@ -20,9 +20,6 @@
 			<h1><a href="<?= $this->url("content_home") ?>">OSCo</a></h1>
 			<form action="<?= $this->url("content_search") ?>" method="get">
 				<input type="text" name="searchInput" placeholder="Search">
-				<button type="submit" class="btn btn-sm">
-					<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-				</button>
 			</form>
 
 			<ul id="mobileMenu" class="nav nav-pills">
@@ -66,7 +63,7 @@
 		<nav id="desktopNavigation">
 			<h1>
 				<a href="<?= $this->url("content_home") ?>">
-					<span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+					<h1>OSCo</h1>
 				</a>
 			</h1>
 
@@ -116,9 +113,6 @@
 
 			<form action="<?= $this->url("content_search") ?>" method="get">
 				<input type="text" name="searchInput" placeholder="Search">
-				<button type="submit" class="btn btn-sm">
-					<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-				</button>
 			</form>
 		</nav>
 	</header>

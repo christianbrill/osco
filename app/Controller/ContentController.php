@@ -159,9 +159,15 @@ class ContentController extends Controller {
 
         $storyModel = new \Model\ContentModel();
         $storyInfos = $storyModel->getOneStory($id);
+        //debug($storyInfos);
+        
+        $tagsLine = $storyModel->getTagStringForStory($id);
+        $getEachTag = explode(",", $tagsLine);
+        //debug($getEachTag);
 
         $this->show('content/story', [
-                'storyInfos' => $storyInfos
+                'storyInfos' => $storyInfos,
+                'getEachTag' => $getEachTag
             ]);
     }
 
