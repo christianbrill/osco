@@ -23,7 +23,7 @@
 
         <!-- The following two are links to change your password and to delete your row (account) from the database -->
         <section>
-            <a href="#">Change your password</a>
+            <a href="<?= $this->url('user_forgot'); ?>">Change your password</a>
         </section>
 
         <section>

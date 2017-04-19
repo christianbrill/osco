@@ -181,9 +181,6 @@ class UserController extends Controller {
  	 ************************************************************************ */
 	 public function forgot() {
 
-		 debug($_POST);
-
-
 		 // When the form has been sent
 		 if (!empty($_POST)) {
 
@@ -218,12 +215,10 @@ class UserController extends Controller {
 					 // Then the token is added to the database
 					 $model->update(array(
 						'usr_token' => $token,
-						'usr_token_created' => date('Y-m-d H:i:s')), $userData['usr_id']);
+						'usr_token_created' => date('Y-m-d H:i:s')), $userData['id']);
 
 					 // Now we can create the email which will contain the link to reset the password
 					 $htmlContent = 'You have requested to reset your password. Please follow the link below to change your password: <a href="' . $this->generateUrl('user_reset', array('token' => $token), true) . '">' . $this->generateUrl('user_reset', array('token' => $token), true) . '</a>';
-
-					 die(nl2br($htmlContent));
 
 					 // After this, we can send the email
 					 $isSent = \Helper\Tools::sendEmail($userData['usr_email'], 'Change your password', nl2br($htmlContent));
@@ -250,9 +245,6 @@ class UserController extends Controller {
  	 ************************************************************************ */
 	 public function reset($token) {
 
-		 $this->show('user/reset', array(
-			 'displayForm' => $displayForm
-		 ));
 
 		 // First off, we will have to instantiate the model we created
 		 $model = new \Model\UsersModel();
@@ -315,6 +307,9 @@ class UserController extends Controller {
 			 }
 		 } // if (!empty($_POST)) end
 
+		 $this->show('user/reset', array(
+			 'displayForm' => $displayForm
+		 ));
 	 }
 
 
@@ -347,8 +342,8 @@ class UserController extends Controller {
 			 debug($_GET);
 
 			 // We assign the username value to the newUsername variable if it is set
-			 $newUsername = isset($_GET['username']) ? isset($_GET['username']) : '';
-		     $email = isset($_GET['email']) ? isset($_GET['email']) : '';
+			 $newUsername = isset($_GET['username']) ? trim($_GET['username']) : '';
+		     $email = isset($_GET['email']) ? trim(strip_tags($_GET['username'])) : '';
 
 			 $model->update(array(
 				 'usr_username' => $newUsername
