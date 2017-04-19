@@ -342,43 +342,21 @@ class UserController extends Controller {
  	 ************************************************************************ */
 	 public function profile() {
 
-		//  // If POST is not empty, then do the following:
-		//  if (!empty($_POST)) {
-		// 	 debug($_POST);
-		 //
-		// 	 // We assign the username value to the newUsername variable if it is set
-		// 	 $newUsername = isset($_POST['username']) ? isset($_POST['username']) : '';
-		 //
-		// 	 $errorList = array();
-		 //
-		// 	 // New Username Data Validation
-		// 	 // ==============================================
-		// 	 // If field is not filled
-		// 	 if (empty($newUsername)) {
-		// 		 $errorList[] = 'Please fill in the field.';
-		// 	 }
-		 //
-		// 	 // If new username is fewer than 2 characters
-		// 	 if ($newUsername < 2) {
-		// 		 $errorList[] = 'Your new username must be at least 2 characters long.';
-		// 	 }
-		 //
-		// 	 if (empty($errorList)) {
-		 //
-		// 		 $model->update(array(
-		// 			 'usr_username' => $newUsername
-		// 		 ), $w_user['id']);
-		 //
-		// 		 $this->redirectToRoute('user_profile');
-		 //
-		// 		 // If it was successful, we display a success message
-		// 		 $this->flash('Your username has been changed successfully.', 'success');
-		 //
-		// 	 } else {
-		// 		 // If errorList is not empty, display the error(s)
-		// 		 $this->flash(join('<br>', $errorList), 'danger');
-		// 	 }
-		//  }
+		 // If POST is not empty, then do the following:
+		 if (!empty($_GET)) {
+			 debug($_GET);
+
+			 // We assign the username value to the newUsername variable if it is set
+			 $newUsername = isset($_GET['username']) ? isset($_GET['username']) : '';
+		     $email = isset($_GET['email']) ? isset($_GET['email']) : '';
+
+			 $model->update(array(
+				 'usr_username' => $newUsername
+			 ), $email);
+
+			 // If the change was successful, we display a success message
+			 $this->flash('Your username has been changed successfully.', 'success');
+		 }
 
 		 $this->show('user/profile');
 

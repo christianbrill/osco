@@ -110,9 +110,11 @@ function deleteAccount() {
 		var userEmail = $('#email').val();
 
 		$.ajax({
-			type: 'POST',
+			type: 'GET',
 			url: '/osco/app/Model/UsersModel.php',
-			data: {'userEmail' : userEmail}
+			data: {
+				'userEmail' : userEmail
+			}
 		}).done(function(response) {
 			console.log(response);
 		});
@@ -126,16 +128,17 @@ function deleteAccount() {
 */
 function changeUsername() {
 
-	var email = $('#email').val();
 	var newUsername = $('#username').val();
+	var email = $('#email').val();
 
 	$.ajax({
-		url: '/osco/app/Model/UsersModel.php',
+		type: 'GET',
+		url: '/osco/app/Controller/UserController.php',
 		data: {
 			'username' : newUsername,
 			'email' : email
 		}
 	}).done(function(response) {
-		alert('Your username has been changed successfully.');
+		console.log(response);
 	});
 }
