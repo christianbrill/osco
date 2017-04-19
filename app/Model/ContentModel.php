@@ -99,6 +99,18 @@ class ContentModel extends \W\Model\Model {
 		}
 	}
 
+	public function getOrganization(){
+		$sql = '
+			SELECT *
+			FROM organizations
+		';
+
+		$sth = $this->dbh->prepare($sql);
+		if ($sth->execute()){
+			return $sth->fetchAll();
+		}
+	}
+
 	
 
 	//END FUNCTIONS FOR stories && story details

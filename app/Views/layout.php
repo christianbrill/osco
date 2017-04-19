@@ -12,6 +12,7 @@
 	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 	<link rel="stylesheet" href="<?= $this->assetUrl('css/naomi.min.css') ?>">
 	<script src='https://www.google.com/recaptcha/api.js'></script>
+
 </head>
 <body>
 	<header>
@@ -30,7 +31,7 @@
 					<a href="<?= $this->url("content_stories") ?>">Stories</a>
 				</li>
 
-				<li<?php if($currentPage == 'needhelp'): ?> class="active"<?php endif; ?> role="presentation">
+				<li <?php if($currentPage == 'needhelp'): ?> class="active"<?php endif; ?> role="presentation" id="needHelpNav">
 					<a href="<?v?>">Need Help?</a>
 				</li>
 

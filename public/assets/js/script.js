@@ -36,6 +36,11 @@ $(document).ready(function(){
 		deleteAccount();
 	});
 
+//This executes when the page "Need Help" is loaded
+	if (needGeoloc) {
+		geolocation();
+	}
+
 });//jQuery END
 
 
@@ -91,5 +96,47 @@ function deleteAccount() {
 
 		});
 	}
-
 }
+
+function geolocation () {
+
+	$.ajax({
+  		url: 'http://freegeoip.net/json/',
+  		dataType: 'jsonp'
+  
+  	}).done(function(response) {
+		//console.log(response);
+
+		$.ajax({
+			method:'POST',
+			url: '/osco/public/ajax/needhelp/',
+			data: {'country_name': response.country_name},
+			dataType: 'json'
+		}).done(function(response2){
+			//console.log(response2);
+
+			var content = "";
+
+			$.each(response2, function(object, valueObject){
+
+				var unique = valueObject.org_id > 0 && valueObject.org_id < 2;
+
+				if(unique){
+
+					if(response.country_name == valueObject.org_country){				
+						content += "<h1>"+valueObject.org_name+"</h1>"+
+	    				"<p>"+valueObject.org_address+"</p>"+
+	    				"<p>"+valueObject.org_description+"</p>";
+	    			}
+				}
+
+			});//end each
+
+			$("#organizationsDiv").html(content);
+
+		});
+
+
+	});//end ajax
+	
+}//end function geolocation
