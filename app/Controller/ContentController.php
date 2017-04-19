@@ -133,15 +133,14 @@ class ContentController extends Controller {
         }
         //PAGINATION END
 
-
         $storiesModel = new \Model\ContentModel();
         $storiesList = $storiesModel->getStoriesList($pageOffset, $nbStoriesPerPage);
         $nbStories = count($storiesList);
 
         // POUR BENJAMIN: LE PROBLÈME EST ICI
         $tagsLine = $storiesModel->getTagString();
-        $getEachTag = explode(", ", $tagsLine);
-
+        $getEachTag = explode(",", $tagsLine);
+        //debug($getEachTag);
 
         $this->show('content/stories', [
             'storiesList' => $storiesList,
@@ -156,11 +155,14 @@ class ContentController extends Controller {
 	* Story Detail
 	*
 	*/
-    public function storydetails(){
-        $currentId = isset($_GET['id']) ? trim(strip_tags($_GET['id'])) : '';
+    public function story($id){
 
-        $storyInfos = $storiesList->getOneStory($currentId);
-        $this->show('content/storydetails');
+        $storyModel = new \Model\ContentModel();
+        $storyInfos = $storyModel->getOneStory($id);
+
+        $this->show('content/story', [
+                'storyInfos' => $storyInfos
+            ]);
     }
 
 
