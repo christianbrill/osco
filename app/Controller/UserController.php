@@ -64,15 +64,15 @@ class UserController extends Controller {
 					$authentificationModel = new \W\Security\AuthentificationModel();
 					$hashedPassword = $authentificationModel->hashPassword($passwordOne);
 
-					function random_str($length, $keyspace = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ')
-					{
-					    $str = '';
-					    $max = mb_strlen($keyspace, '8bit') - 1;
-					    for ($i = 0; $i < $length; ++$i) {
-					        $str .= $keyspace[random_int(0, $max)];
-					    }
-					    return $str;
-					}
+					// function random_str($length, $keyspace = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ')
+					// {
+					//     $str = '';
+					//     $max = mb_strlen($keyspace, '8bit') - 1;
+					//     for ($i = 0; $i < $length; ++$i) {
+					//         $str .= $keyspace[random_int(0, $max)];
+					//     }
+					//     return $str;
+					// }
 
 					// Then we can insert the user data in the database
 					$insertUserData = $userModel->insert(array(
