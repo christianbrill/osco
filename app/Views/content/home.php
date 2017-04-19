@@ -4,7 +4,7 @@
 	<!--Here starts the "Need Help" box -->
 	
 	<section id="rightColumn">
-		<a href="#">		
+		<a href="<?= $this->url("content_needhelp")?>">		
 			<div id="needHelpBox">
 				<h1>Need Help?</h1>
 				<p>OSCo has the contact information you need to get help. If you prefer, we also provide a form for you to get anonymous help-we handle the contact for you.
@@ -19,7 +19,7 @@
 	<section id="ajaxHomeStories">
 	<?php foreach($randomStories as $story) : ?>
 		<article id="storyBox">
-			<a href="#">
+			<a href="">
 				<div>
 					<h1 id="title"><?= \Controller\ContentController::getShortTitle($story['sto_title']) ?></h1>
 					<p><?= \Controller\ContentController::getShortDescription($story['sto_content'])?></p>

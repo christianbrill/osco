@@ -31,7 +31,7 @@
 				</li>
 
 				<li<?php if($currentPage == 'needhelp'): ?> class="active"<?php endif; ?> role="presentation">
-					<a href="<?= $this->url("content_needhelp") ?>">Need Help?</a>
+					<a href="<?v?>">Need Help?</a>
 				</li>
 
 				<li<?php if($currentPage == 'about'): ?> class="active"<?php endif; ?> role="presentation">
