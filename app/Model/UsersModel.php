@@ -16,6 +16,7 @@ class UsersModel extends \W\Model\UsersModel {
     * @return boolean
     */
     public function getIdByToken($token) {
+
         $requestToGetToken = '
             SELECT id
             FROM users
@@ -39,6 +40,25 @@ class UsersModel extends \W\Model\UsersModel {
         }
 
         return false;
-
     }
+
+
+
+    public function deleteUserAccount() {
+
+        if (!empty($_GET)) {
+
+            $email = isset($_GET['userEmail']) ? isset($_GET['userEmail']) : '';
+
+            $sqlRequest = '
+                DELETE FROM users
+                WHERE usr_email = :email
+            ';
+
+            $stmt = $this->dbh->prepare($sqlRequest);
+            $stmt->bindValue(':email', $email);
+            $stmt->execute();
+        }
+    }
+
 }
