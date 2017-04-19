@@ -16,6 +16,8 @@
 	<button id="refreshStories">Refresh Stories</button>
 	<!--<span id="refreshStories" class="glyphicon glyphicon-refresh" aria-hidden="true"></span>-->
 
+	<?= debug($w_user); ?>
+
 	<section id="ajaxHomeStories">
 	<?php foreach($randomStories as $story) : ?>
 		<article id="storyBox">

@@ -2,6 +2,8 @@
 
 <?php $this->start('main_content') ?>
 
+    <?= debug($w_user); ?>
+
     <article>
         <p>Need Help TODO</p>
     </article>

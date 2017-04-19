@@ -10,7 +10,7 @@
 
         <section>
             <h3>Email Address:</h3>
-            <p></p>
+            <p id="email">quedarme@gmail.com</p>
         </section>
 
         <section>
@@ -18,7 +18,7 @@
         </section>
 
         <section>
-            <a href="#">Delete your account</a>
+            <a href="#" id="deletebutton">Delete your account</a>
         </section>
     </article>
 
