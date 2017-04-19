@@ -30,6 +30,7 @@ class ContentController extends Controller {
 		$this->show('content/home', ['randomStories' => $generateStories]);
 	}
 
+
 	/**
 	* ajaxRefresh
 	*
@@ -41,6 +42,7 @@ class ContentController extends Controller {
 
 		$this->showJson($refreshStories);
 	}
+
 
 	/**
 	* Get only the first 80 characters of the story's description
@@ -66,7 +68,6 @@ class ContentController extends Controller {
         return $title;
 
     }
-
 
 
 	/**
@@ -111,6 +112,10 @@ class ContentController extends Controller {
     }
 
 
+	/**
+	* All Stories
+	*
+	*/
     public function stories(){
 
         // !!!!!!! NOT WORKING YET
@@ -143,12 +148,18 @@ class ContentController extends Controller {
         ]);
     }
 
+
+	/**
+	* Story Detail
+	*
+	*/
     public function storydetails(){
         $currentId = isset($_GET['id']) ? trim(strip_tags($_GET['id'])) : '';
 
         $storyInfos = $storiesList->getOneStory($currentId);
         $this->show('content/storydetails');
     }
+
 
 	/**
 	* Need Help Function
