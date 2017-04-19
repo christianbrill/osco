@@ -29,7 +29,7 @@
 		// osco.dev/logout/
 		['GET', '/logout/', 'User#logout', 'user_logout'],
 
-		// ajax route
+		// ajax home route
 		['GET', '/ajax/home/', 'Content#ajaxRefresh', 'content_ajaxRefresh'],
 
 		// osco.dev/about
@@ -40,4 +40,7 @@
 
  		// osco.dev/needhelp/
 		['GET', '/needhelp/', 'Content#needhelp', 'content_needhelp'],
+
+		// ajax needhelp route
+		['POST', '/ajax/needhelp/', 'Content#ajaxNeedHelp', 'content_ajaxNeedHelp'],
 	);

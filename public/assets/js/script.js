@@ -44,6 +44,11 @@ $(document).ready(function(){
 		deleteAccount();
 	});
 
+//This executes when the page "Need Help" is loaded
+	if (needGeoloc) {
+		geolocation();
+	}
+
 
 	/**
 	* Change Username on submit
@@ -53,6 +58,16 @@ $(document).ready(function(){
 		e.preventDefault();
 
 		changeUsername();
+	});
+
+
+
+	/**
+	* Show change password form on button push
+	*
+	*/
+	$('#changePassword').click(function(){
+		$('.hiddenForm').show();
 	});
 
 });//jQuery END
@@ -110,9 +125,11 @@ function deleteAccount() {
 		var userEmail = $('#email').val();
 
 		$.ajax({
-			type: 'POST',
+			type: 'GET',
 			url: '/osco/app/Model/UsersModel.php',
-			data: {'userEmail' : userEmail}
+			data: {
+				'userEmail' : userEmail
+			}
 		}).done(function(response) {
 			console.log(response);
 		});
@@ -126,16 +143,60 @@ function deleteAccount() {
 */
 function changeUsername() {
 
-	var email = $('#email').val();
 	var newUsername = $('#username').val();
+	var email = $('#email').val();
 
 	$.ajax({
-		url: '/osco/app/Model/UsersModel.php',
+		type: 'GET',
+		url: '/osco/app/Controller/UserController.php',
 		data: {
 			'username' : newUsername,
 			'email' : email
 		}
 	}).done(function(response) {
-		alert('Your username has been changed successfully.');
+		console.log(response);
 	});
 }
+
+function geolocation () {
+
+	$.ajax({
+  		url: 'http://freegeoip.net/json/',
+  		dataType: 'jsonp'
+  
+  	}).done(function(response) {
+		//console.log(response);
+
+		$.ajax({
+			method:'POST',
+			url: '/osco/public/ajax/needhelp/',
+			data: {'country_name': response.country_name},
+			dataType: 'json'
+		}).done(function(response2){
+			//console.log(response2);
+
+			var content = "";
+
+			$.each(response2, function(object, valueObject){
+
+				var unique = valueObject.org_id > 0 && valueObject.org_id < 2;
+
+				if(unique){
+
+					if(response.country_name == valueObject.org_country){				
+						content += "<h1>"+valueObject.org_name+"</h1>"+
+	    				"<p>"+valueObject.org_address+"</p>"+
+	    				"<p>"+valueObject.org_description+"</p>";
+	    			}
+				}
+
+			});//end each
+
+			$("#organizationsDiv").html(content);
+
+		});
+
+
+	});//end ajax
+	
+}//end function geolocation

@@ -181,9 +181,6 @@ class UserController extends Controller {
  	 ************************************************************************ */
 	 public function forgot() {
 
-		 debug($_POST);
-
-
 		 // When the form has been sent
 		 if (!empty($_POST)) {
 
@@ -218,12 +215,10 @@ class UserController extends Controller {
 					 // Then the token is added to the database
 					 $model->update(array(
 						'usr_token' => $token,
-						'usr_token_created' => date('Y-m-d H:i:s')), $userData['usr_id']);
+						'usr_token_created' => date('Y-m-d H:i:s')), $userData['id']);
 
 					 // Now we can create the email which will contain the link to reset the password
 					 $htmlContent = 'You have requested to reset your password. Please follow the link below to change your password: <a href="' . $this->generateUrl('user_reset', array('token' => $token), true) . '">' . $this->generateUrl('user_reset', array('token' => $token), true) . '</a>';
-
-					 die(nl2br($htmlContent));
 
 					 // After this, we can send the email
 					 $isSent = \Helper\Tools::sendEmail($userData['usr_email'], 'Change your password', nl2br($htmlContent));
@@ -250,9 +245,6 @@ class UserController extends Controller {
  	 ************************************************************************ */
 	 public function reset($token) {
 
-		 $this->show('user/reset', array(
-			 'displayForm' => $displayForm
-		 ));
 
 		 // First off, we will have to instantiate the model we created
 		 $model = new \Model\UsersModel();
@@ -315,6 +307,9 @@ class UserController extends Controller {
 			 }
 		 } // if (!empty($_POST)) end
 
+		 $this->show('user/reset', array(
+			 'displayForm' => $displayForm
+		 ));
 	 }
 
 
@@ -342,43 +337,21 @@ class UserController extends Controller {
  	 ************************************************************************ */
 	 public function profile() {
 
-		//  // If POST is not empty, then do the following:
-		//  if (!empty($_POST)) {
-		// 	 debug($_POST);
-		 //
-		// 	 // We assign the username value to the newUsername variable if it is set
-		// 	 $newUsername = isset($_POST['username']) ? isset($_POST['username']) : '';
-		 //
-		// 	 $errorList = array();
-		 //
-		// 	 // New Username Data Validation
-		// 	 // ==============================================
-		// 	 // If field is not filled
-		// 	 if (empty($newUsername)) {
-		// 		 $errorList[] = 'Please fill in the field.';
-		// 	 }
-		 //
-		// 	 // If new username is fewer than 2 characters
-		// 	 if ($newUsername < 2) {
-		// 		 $errorList[] = 'Your new username must be at least 2 characters long.';
-		// 	 }
-		 //
-		// 	 if (empty($errorList)) {
-		 //
-		// 		 $model->update(array(
-		// 			 'usr_username' => $newUsername
-		// 		 ), $w_user['id']);
-		 //
-		// 		 $this->redirectToRoute('user_profile');
-		 //
-		// 		 // If it was successful, we display a success message
-		// 		 $this->flash('Your username has been changed successfully.', 'success');
-		 //
-		// 	 } else {
-		// 		 // If errorList is not empty, display the error(s)
-		// 		 $this->flash(join('<br>', $errorList), 'danger');
-		// 	 }
-		//  }
+		 // If POST is not empty, then do the following:
+		 if (!empty($_GET)) {
+			 debug($_GET);
+
+			 // We assign the username value to the newUsername variable if it is set
+			 $newUsername = isset($_GET['username']) ? trim($_GET['username']) : '';
+		     $email = isset($_GET['email']) ? trim(strip_tags($_GET['username'])) : '';
+
+			 $model->update(array(
+				 'usr_username' => $newUsername
+			 ), $email);
+
+			 // If the change was successful, we display a success message
+			 $this->flash('Your username has been changed successfully.', 'success');
+		 }
 
 		 $this->show('user/profile');
 

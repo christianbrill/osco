@@ -104,8 +104,6 @@ class ContentController extends Controller {
 
 		$this->showJson($refreshStories);
 
-		debug($refreshStories);
-		exit;
 	}
 
 
@@ -221,9 +219,15 @@ class ContentController extends Controller {
 
         $storyModel = new \Model\ContentModel();
         $storyInfos = $storyModel->getOneStory($id);
+        //debug($storyInfos);
+        
+        $tagsLine = $storyModel->getTagStringForStory($id);
+        $getEachTag = explode(",", $tagsLine);
+        //debug($getEachTag);
 
         $this->show('content/story', [
-                'storyInfos' => $storyInfos
+                'storyInfos' => $storyInfos,
+                'getEachTag' => $getEachTag
             ]);
     }
 
@@ -237,6 +241,15 @@ class ContentController extends Controller {
 		//$this->allowTo('user');
 
 		$this->show('content/needhelp');
+
+	}
+
+	public function ajaxNeedHelp(){
+
+		$storiesModel = new \Model\ContentModel();
+		$showOrganizations = $storiesModel->getOrganization();
+		$this->showJson($showOrganizations);
+
 	}
 
 }

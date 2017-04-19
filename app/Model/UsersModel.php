@@ -16,6 +16,7 @@ class UsersModel extends \W\Model\UsersModel {
     * @return boolean
     */
     public function getIdByToken($token) {
+
         $requestToGetToken = '
             SELECT id
             FROM users
@@ -43,25 +44,20 @@ class UsersModel extends \W\Model\UsersModel {
 
 
 
-    public function updateUsername($newUsername) {
+    public function deleteUserAccount() {
 
-        if(!empty($_POST['username'])) {
+        if (!empty($_GET)) {
 
-            $newUsername = isset($_POST['username']) ? isset($_POST['username']) : '';
-            $email = isset($_POST['email']) ? isset($_POST['email']) : '';
+            $email = isset($_GET['userEmail']) ? isset($_GET['userEmail']) : '';
 
             $sqlRequest = '
-                UPDATE users
-                SET usr_username = :newUsername
+                DELETE FROM users
                 WHERE usr_email = :email
             ';
 
             $stmt = $this->dbh->prepare($sqlRequest);
-            $stmt->bindValue(':newUsername', $newUsername);
             $stmt->bindValue(':email', $email);
-
             $stmt->execute();
-
         }
     }
 
