@@ -2,12 +2,18 @@
 
 <?php $this->layout('layout', ['title' => 'About', 'currentPage' => 'about']) ?>
 
+
+<?php 
+if(isset($_GET['result']) && $_GET['result'] == 'success') {
+      echo '<div class="success_msg" > Thank you for contacting us. We will get back to you soon. </div> ';
+} ?>
+
 <?php $this->start('main_content') ?>
 <!--<div class="well">About Osco<br>
 
 </div>-->
 
-    <form action="email.php" method="post">
+    <form name='email' action="email.php" method="post">
         <div class="form-group">
             <input type="email" class="form-control" name="contactEmail" value="" placeholder="Your email address" />
         </div>
