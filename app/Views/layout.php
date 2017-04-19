@@ -27,138 +27,138 @@
 
 			<ul id="mobileMenu" class="nav nav-pills">
 				<li<?php if($currentPage == 'stories'): ?> class="active"<?php endif; ?> role="presentation">
-					<a href="<?= $this->url("content_stories") ?>">Stories</a>
-				</li>
+				<a href="<?= $this->url("content_stories") ?>">Stories</a>
+			</li>
 
-				<li<?php if($currentPage == 'needhelp'): ?> class="active"<?php endif; ?> role="presentation">
-					<a href="<?v?>">Need Help?</a>
-				</li>
+			<li<?php if($currentPage == 'needhelp'): ?> class="active"<?php endif; ?> role="presentation">
+			<a href="<?v?>">Need Help?</a>
+		</li>
 
-				<li<?php if($currentPage == 'about'): ?> class="active"<?php endif; ?> role="presentation">
-					<a href="">About OSCo</a>
-				</li>
+		<li<?php if($currentPage == 'about'): ?> class="active"<?php endif; ?> role="presentation">
+		<a href="<?= $this->url("content_contactform") ?>">About OSCo</a>
+	</li>
 
-				<li<?php if($currentPage == 'signup'): ?> class="active"<?php endif; ?> role="presentation">
-					<a href="<?= $this->url("user_signup") ?>">Sign Up</a>
-				</li>
+	<li<?php if($currentPage == 'signup'): ?> class="active"<?php endif; ?> role="presentation">
+	<a href="<?= $this->url("user_signup") ?>">Sign Up</a>
+</li>
 
-				<!-- If the user isn't logged in, the Login button will show up. -->
-				<?php if (!empty($w_user)) : ?>
-					<li<?php if($currentPage == 'profile'): ?> class="active"<?php endif; ?> role="presentation">
-						<a href="<?= $this->url("user_profile") ?>">Profile</a>
-					</li>
+<!-- If the user isn't logged in, the Login button will show up. -->
+<?php if (!empty($w_user)) : ?>
+	<li<?php if($currentPage == 'profile'): ?> class="active"<?php endif; ?> role="presentation">
+	<a href="<?= $this->url("user_profile") ?>">Profile</a>
+</li>
 
-					<li role="presentation">
-						<a href="<?= $this->url("user_logout") ?>">Logout</a>
-					</li>
+<li role="presentation">
+	<a href="<?= $this->url("user_logout") ?>">Logout</a>
+</li>
 
-				<!-- If the user is logged in, the Profile and Logout links will show up. -->
-				<?php else : ?>
-					<li<?php if($currentPage == 'login'): ?> class="active"<?php endif; ?> role="presentation">
-						<a href="<?= $this->url("user_login") ?>">Log In</a>
-					</li>
-				<?php endif; ?>
-			</ul>
-		</nav>
+<!-- If the user is logged in, the Profile and Logout links will show up. -->
+<?php else : ?>
+	<li<?php if($currentPage == 'login'): ?> class="active"<?php endif; ?> role="presentation">
+	<a href="<?= $this->url("user_login") ?>">Log In</a>
+</li>
+<?php endif; ?>
+</ul>
+</nav>
 
 
-		<!-- ////////////////////////////////////////// -->
-		<nav id="desktopNavigation">
-			<h1>
-				<a href="<?= $this->url("content_home") ?>">
-					<span class="glyphicon glyphicon-home" aria-hidden="true"></span>
-				</a>
-			</h1>
+<!-- ////////////////////////////////////////// -->
+<nav id="desktopNavigation">
+	<h1>
+		<a href="<?= $this->url("content_home") ?>">
+			<span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+		</a>
+	</h1>
 
-			<ul id="desktopMenu" class="nav nav-pills">
-				<li<?php if($currentPage == 'stories'): ?> class="active"<?php endif; ?> role="presentation">
-					<a href="<?= $this->url("content_stories") ?>">Stories</a>
-				</li>
+	<ul id="desktopMenu" class="nav nav-pills">
+		<li<?php if($currentPage == 'stories'): ?> class="active"<?php endif; ?> role="presentation">
+		<a href="<?= $this->url("content_stories") ?>">Stories</a>
+	</li>
 
 				<!-- <li<php if($currentPage == 'blog'): ?> class="active"<php endif; ?> role="presentation">
 					<a href="">Blog</a>
 				</li> -->
 
 				<li<?php if($currentPage == 'needhelp'): ?> class="active"<?php endif; ?> role="presentation">
-					<a href="<?= $this->url("content_needhelp") ?>">Need Help?</a>
-				</li>
+				<a href="<?= $this->url("content_needhelp") ?>">Need Help?</a>
+			</li>
 
-				<li<?php if($currentPage == 'about'): ?> class="active"<?php endif; ?> role="presentation">
-					<a href="">About OSCo</a>
-				</li>
+			<li<?php if($currentPage == 'about'): ?> class="active"<?php endif; ?> role="presentation">
+			<a href="">About OSCo</a>
+		</li>
 
-				<li<?php if($currentPage == 'signup'): ?> class="active"<?php endif; ?> role="presentation">
-					<a href="<?= $this->url("user_signup") ?>">Sign Up</a>
-				</li>
+		<li<?php if($currentPage == 'signup'): ?> class="active"<?php endif; ?> role="presentation">
+		<a href="<?= $this->url("user_signup") ?>">Sign Up</a>
+	</li>
 
-				<!-- If the user isn't logged in, the Login button will show up. -->
-				<?php if (!empty($w_user)) : ?>
+	<!-- If the user isn't logged in, the Login button will show up. -->
+	<?php if (!empty($w_user)) : ?>
 
-					<li<?php if($currentPage == 'profile'): ?> class="active"<?php endif; ?> role="presentation">
-						<a href="<?= $this->url("user_profile") ?>">Profile</a>
-					</li>
+		<li<?php if($currentPage == 'profile'): ?> class="active"<?php endif; ?> role="presentation">
+		<a href="<?= $this->url("user_profile") ?>">Profile</a>
+	</li>
 
-					<li role="presentation">
-						<a href="<?= $this->url("user_logout") ?>">Logout</a>
-					</li>
+	<li role="presentation">
+		<a href="<?= $this->url("user_logout") ?>">Logout</a>
+	</li>
 
 
-				<!-- If the user is logged in, the Profile and Logout links will show up. -->
-				<?php else : ?>
+	<!-- If the user is logged in, the Profile and Logout links will show up. -->
+<?php else : ?>
 
-					<li<?php if($currentPage == 'login'): ?> class="active"<?php endif; ?> role="presentation">
-						<a href="<?= $this->url("user_login") ?>">Log In</a>
-					</li>
+	<li<?php if($currentPage == 'login'): ?> class="active"<?php endif; ?> role="presentation">
+	<a href="<?= $this->url("user_login") ?>">Log In</a>
+</li>
 
-				<?php endif; ?>
+<?php endif; ?>
 
-			</ul>
+</ul>
 
-			<form action="<?= $this->url("content_search") ?>" method="get">
-				<input type="text" name="searchInput" placeholder="Search">
-				<button type="submit" class="btn btn-sm">
-					<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-				</button>
-			</form>
-		</nav>
-	</header>
+<form action="<?= $this->url("content_search") ?>" method="get">
+	<input type="text" name="searchInput" placeholder="Search">
+	<button type="submit" class="btn btn-sm">
+		<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+	</button>
+</form>
+</nav>
+</header>
 
-	<!-- This section will make the flash alert messages show up on the home page. -->
-	<section id="main" class="container">
-		<?php if (isset($w_flash_message) && !empty($w_flash_message->message)): ?>
-			<div class="alert alert-<?= $w_flash_message->level ?>" role="alert">
-				<?= $w_flash_message->message ?>
-			</div>
-		<?php endif; ?>
-
-		<?= $this->section('main_content') ?>
-	</section>
-
-	<footer>
-		<div id="footerContent">
-			<div>
-				<h4><a href="">About</a></h4>
-				<p>OSCo is life.</p>
-				<h4>Disclaimer</h4>
-				<p>Blubb</p>
-				<p>MyModel ist ein Kopf für dich zum Schminken und Frisieren.</p>
-			</div>
-			<div>
-				<h4><a href="">Contact</a></h4>
-				<p>osco@contact.lu</p>
-				<p>Facebook</p>
-				<p>Twitter</p>
-			</div>
-			<div>
-			<h4>&copy; Copyright 2017 <?php if (date('Y') > 2017) {echo '- '.date('Y');} ?></h4>
-			</div>
+<!-- This section will make the flash alert messages show up on the home page. -->
+<section id="main" class="container">
+	<?php if (isset($w_flash_message) && !empty($w_flash_message->message)): ?>
+		<div class="alert alert-<?= $w_flash_message->level ?>" role="alert">
+			<?= $w_flash_message->message ?>
 		</div>
-	</footer>
+	<?php endif; ?>
+
+	<?= $this->section('main_content') ?>
+</section>
+
+<footer>
+	<div id="footerContent">
+		<div>
+			<h4><a href="">About</a></h4>
+			<p>OSCo is life.</p>
+			<h4>Disclaimer</h4>
+			<p>Blubb</p>
+			<p>MyModel ist ein Kopf für dich zum Schminken und Frisieren.</p>
+		</div>
+		<div>
+			<h4><a href="">Contact</a></h4>
+			<p>osco@contact.lu</p>
+			<p>Facebook</p>
+			<p>Twitter</p>
+		</div>
+		<div>
+			<h4>&copy; Copyright 2017 <?php if (date('Y') > 2017) {echo '- '.date('Y');} ?></h4>
+		</div>
+	</div>
+</footer>
 
 
 
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<script type="text/javascript" src="<?= $this->assetUrl('js/script.js') ?>"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript" src="<?= $this->assetUrl('js/script.js') ?>"></script>
 
 </body>
 </html>

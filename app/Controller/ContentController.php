@@ -15,6 +15,10 @@ class ContentController extends Controller {
     public function contactform(){
         unset($_SESSION['flash']);
 
+        foreach ($_POST as $key => $value) {
+        echo '<p><strong>' . $key.':</strong> '.$value.'</p>';
+      }
+
         if(!empty($_POST)) {
             $email = isset($_POST['contactEmail']) ? trim(strip_tags($_POST['contactEmail'])) : '';
 
@@ -62,7 +66,11 @@ class ContentController extends Controller {
                 $this->redirectToRoute('content_contactform');
             }*/
         }
+
+
         $this->show('content/about');
+      
+    
     }
 
 
