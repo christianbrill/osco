@@ -2,8 +2,6 @@
 
 <?php $this->start('main_content') ?>
 
-	<?= debug($w_user); ?>
-
 	<section id="ajaxHomeStories">
 	<?php foreach($randomStories as $story) : ?>
 		<article id="storyBox">

@@ -46,6 +46,10 @@
 				<!-- If the user isn't logged in, the Login button will show up. -->
 				<?php if (!empty($w_user)) : ?>
 
+					<li<?php if($currentPage == 'profile'): ?> class="active"<?php endif; ?> role="presentation">
+						<a href="<?= $this->url("user_profile") ?>">Profile</a>
+					</li>
+
 					<li role="presentation">
 						<a href="<?= $this->url("user_logout") ?>">Logout</a>
 					</li>
@@ -53,15 +57,10 @@
 
 				<!-- If the user is logged in, the Profile and Logout links will show up. -->
 				<?php else : ?>
-					
-					<li<?php if($currentPage == 'profile'): ?> class="active"<?php endif; ?> role="presentation">
-						<a href="<?= $this->url("user_profile") ?>">Profile</a>
-					</li>
 
 					<li<?php if($currentPage == 'login'): ?> class="active"<?php endif; ?> role="presentation">
 						<a href="<?= $this->url("user_login") ?>">Log In</a>
 					</li>
-
 
 				<?php endif; ?>
 
