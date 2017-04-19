@@ -55,6 +55,13 @@ $(document).ready(function(){
 		changeUsername();
 	});
 
+
+
+	/**
+	* Show change password form on button push
+	*
+	*/
+	$('#hiddenForm')
 });//jQuery END
 
 
