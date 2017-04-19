@@ -2,16 +2,15 @@
 
 <?php $this->start('main_content') ?>
 
-    <?= debug($w_user); ?>
 
     <h1>If you find yourself in a situation of violence, fear, psychological or financial abuse, these organizations in your country will help you:</h1>
 
     <div>
-    	<?php foreach ($variable as $key => $value): ?>
-    		<h1><?= ?></h1>
-    		<h2><?= ?></h2>
-    		<p><?= ?></p>
-    	<?php endforeach ?>
+    	<?php //foreach ($variable as $key => $value): ?>
+    		<h1></h1>
+    		<h2></h2>
+    		<p></p>
+    	<?php //endforeach ?>
     </div>
 
 
@@ -28,5 +27,9 @@
 	    	<textarea class="form-control" name="orginfo"></textarea><br>
    		</form>
     <?php endif ?>
+
+    <article>
+        <p>Need Help TODO</p>
+    </article>
 
 <?php $this->stop('main_content') ?>

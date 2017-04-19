@@ -4,7 +4,7 @@
 	<!--Here starts the "Need Help" box -->
 	
 	<section id="rightColumn">
-		<a href="#">		
+		<a href="<?= $this->url("content_needhelp")?>">		
 			<div id="needHelpBox">
 				<h1>Need Help?</h1>
 				<p>OSCo has the contact information you need to get help. If you prefer, we also provide a form for you to get anonymous help-we handle the contact for you.

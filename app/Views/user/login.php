@@ -2,8 +2,6 @@
 
 <?php $this->start('main_content') ?>
 
-<?= print_r($w_user); ?>
-
 <form action="" method="post">
     <div class="form-group">
         <input type="email" class="form-control" name="email" value="" placeholder="Enter your email address" />
