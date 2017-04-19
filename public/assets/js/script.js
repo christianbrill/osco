@@ -7,6 +7,29 @@ $(document).ready(function(){
 		refreshStories();
 	});
 
+	$(".menuIcon").click(function(e){
+		console.log("Show menu");
+		$("#mobileMenu").toggle();
+	});
+	
+});//jQuery END
+
+window.addEventListener("resize", function(){
+
+	if($(window).width() > 1000){
+		$("#desktopNavigation").show();
+		$("#mobileNavigation").hide();
+	}
+	else if($(window).width() < 1000 && $(window).width() > 700) {
+		$("#desktopNavigation").hide();
+		$("#mobileNavigation").show();
+	}
+	else {
+		$("#desktopNavigation").hide();
+		$("#mobileNavigation").show();
+	}
+})
+
 
 	$('#deletebutton').click(function(e) {
 		e.preventDefault;
@@ -21,6 +44,7 @@ $(document).ready(function(){
 * Refresh Stories Function
 *
 */
+
 function refreshStories() {
 
 	//var $storyArray = $.map($story, function(el) { return el });

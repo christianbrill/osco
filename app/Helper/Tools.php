@@ -3,6 +3,7 @@
 namespace Helper;
 
 use PHPMailer;
+require_once 'vendor/autoload.php';
 
 class Tools {
     /**
