@@ -344,6 +344,36 @@ class UserController extends Controller {
 
 
 	 /** ***********************************************************************
+ 	 * Delete Username
+	 *
+ 	 ************************************************************************ */
+	 public function changeUsername() {
+
+		 $this->allowTo('user');
+
+		 if (!empty($_POST)) {
+
+			 $newUsername = isset($_POST['username']) ? trim($_POST['username']) : '';
+			 $userId = $_SESSION['user']['id'];
+
+			 $model = new \Model\UsersModel();
+			 $updateUsername->update(array(
+				 'usr_username' => $newUsername,
+			 ), $userId);
+
+			 $this->flash('Your username was changed successfully.', 'success');
+		 } else {
+			 $this->flash('There was an error changing your username. Please try again.', 'danger');
+		 }
+
+		 $this->show('user/changeusername');
+
+	 }
+
+
+
+
+	 /** ***********************************************************************
  	 * Delete Account
 	 *
  	 ************************************************************************ */
@@ -353,7 +383,6 @@ class UserController extends Controller {
 
 		 // We access the id of the currently logged in user
 		 $userId = $_SESSION['user']['id'];
-		 //debug($userId);
 
 		 $usersModel = new \Model\UsersModel();
 		 $deleteUser = $usersModel->deleteUserAccount($userId);

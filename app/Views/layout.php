@@ -9,21 +9,22 @@
 	<!-- Optional theme -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
-	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 	<link rel="stylesheet" href="<?= $this->assetUrl('css/naomi.min.css') ?>">
+
+	<!-- Google Fonts -->
+	<link href="https://fonts.googleapis.com/css?family=Roboto|Alfa+Slab+One" rel="stylesheet">
+
+	<!-- recaptcha script tags -->
 	<script src='https://www.google.com/recaptcha/api.js'></script>
-<?php
- 
-// grab recaptcha library
-//require_once "../app/Helper/recaptchalib.php";
- 
-?>
 </head>
+
 <body>
 	<header>
 		<nav id="mobileNavigation">
 			<span class="menuIcon glyphicon glyphicon-align-justify" aria-hidden="true"></span>
+
 			<h1><a href="<?= $this->url("content_home") ?>">OSCo</a></h1>
+
 			<form action="<?= $this->url("content_search") ?>" method="get">
 				<input type="text" name="searchInput" placeholder="Search">
 			</form>
@@ -33,12 +34,16 @@
 					<a href="<?= $this->url("content_stories") ?>">Stories</a>
 				</li>
 
+				<li<?php if($currentPage == 'blog'): ?> class="active"<?php endif; ?> role="presentation">
+					<a href="">Blog</a>
+				</li>
+
 				<li<?php if($currentPage == 'needhelp'): ?> class="active"<?php endif; ?> role="presentation">
 					<a href="<?= $this->url("content_needhelp") ?>">Need Help?</a>
 				</li>
 
 				<li<?php if($currentPage == 'about'): ?> class="active"<?php endif; ?> role="presentation">
-					<a href="<?= $this->url("content_contactform") ?>">About OSCo</a>
+					<a href="<?= $this->url("content_contactform") ?>">About</a>
 				</li>
 
 				<!-- If the user is logged in, the Profile and Logout button will show up, as well as the "Add Story" option. -->
@@ -70,8 +75,11 @@
 		</nav>
 
 
-		<!-- ////////////////////////////////////////// DESKTOP NAVIGATION-->
+		<!-- =============================================================
+						DESKTOP NAVIGATION
+		============================================================== -->
 		<nav id="desktopNavigation">
+			
 			<h1>
 				<a href="<?= $this->url("content_home") ?>">
 					<h1>OSCo</h1>
@@ -83,16 +91,16 @@
 					<a href="<?= $this->url("content_stories") ?>">Stories</a>
 				</li>
 
-				<!-- <li<php if($currentPage == 'blog'): ?> class="active"<php endif; ?> role="presentation">
+				<li<?php if($currentPage == 'blog'): ?> class="active"<?php endif; ?> role="presentation">
 					<a href="">Blog</a>
-				</li> -->
+				</li>
 
 				<li<?php if($currentPage == 'needhelp'): ?> class="active"<?php endif; ?> role="presentation">
 					<a href="<?= $this->url("content_needhelp") ?>">Need Help?</a>
 				</li>
 
 				<li<?php if($currentPage == 'about'): ?> class="active"<?php endif; ?> role="presentation">
-					<a href="<?= $this->url("content_contactform") ?>">About OSCo</a>
+					<a href="<?= $this->url("content_contactform") ?>">About</a>
 				</li>
 
 				<!-- If the user is logged in, the Profile and Logout button will show up. -->
@@ -142,22 +150,23 @@
 
 	<footer>
 		<div id="footerContent">
-			<div>
-				<h4><a href="">About</a></h4>
-				<p>OSCo is life.</p>
-				<h4>Disclaimer</h4>
-				<p>Blubb</p>
-				<p>MyModel ist ein Kopf für dich zum Schminken und Frisieren.</p>
-			</div>
-			<div>
+			<section class="faq">
+				<h4><a href="">FAQs</a></h4>
+				<p>Who we are</p>
+				<p>User Information</p>
+			</section>
+
+			<section class="links">
 				<h4><a href="">Contact</a></h4>
 				<p>osco@contact.lu</p>
 				<p>Facebook</p>
 				<p>Twitter</p>
-			</div>
-			<div>
-			<h4>&copy; Copyright 2017 <?php if (date('Y') > 2017) {echo '- '.date('Y');} ?></h4>
-			</div>
+			</section>
+
+			<section class="copyright">
+				<h4>&copy; Copyright 2017 <?php if (date('Y') > 2017) {echo '- '.date('Y');} ?></h4>
+				<p>Disclaimer</p>
+			</section>
 		</div>
 	</footer>
 

@@ -1,27 +1,29 @@
-* {
-	box-sizing: border-box;
-
-	font-family: 'Roboto', sans-serif;
-	color:#7F7E7A;
-
-	list-style:none;
-}
-
-//VARIABLES
-//COLORS
+// Color Variables
 $turquoise: #00C3B6;
 $darkblue: #113A52;
-$lightgrey:#eeeeee;
+$lightgrey: #eeeeee;
 $white: #FFFFFF;
 
+// General
+* {
+	box-sizing: border-box;
+	color: #7F7E7A;
+	font-family: 'Roboto', sans-serif;
+	list-style: none;
+}
 
-// TITLES AND PARAGRAPH STYLES
+// Titles and paragraph styles
 h1 {
 	color: $turquoise;
 	margin:0px;
 }
 
-// HEADER AND MENU/NAVIGATION
+// Headlines and list item
+h1, li, li a {
+	font-family: 'Alfa Slab One', sans-serif;
+}
+
+// Header and navigation
 header {
 	z-index:3000;
 }
@@ -68,7 +70,8 @@ header {
 	.menuIcon {
 		margin:1em;
 	}
-}
+
+} // mobile navigation end
 
 
 ul {
@@ -93,7 +96,8 @@ ul {
 		background-color:$lightgrey;
 		border-bottom: 3px solid $turquoise;
 	}
-}
+} // ul end
+
 
 #mobileMenu {
 	display:none;
@@ -103,13 +107,12 @@ ul {
 
 	padding: 4em;
 	background-color: #FFFFFF;
-
 }
 
-// MAIN, MAIN-CONTENT, FOOTER
+
+// Main, main content, footer
 #main {
 	margin-top:5em;
-
 }
 
 .pagination {
