@@ -24,10 +24,22 @@ $(document).ready(function(){
 
 
 
+
+	function goBack() {
+	    window.history.back();
+	}
+
+
+
+
 	/**
 	* Event Listener for burger menu
 	*
 	*/
+	$(".menuIcon").click(function(e){
+		//console.log("Show menu or hide menu");
+		$("#mobileMenu").toggle();
+	});
 	window.addEventListener("resize", function(){
 
 		if($(window).width() > 1000){
