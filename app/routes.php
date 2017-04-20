@@ -24,7 +24,7 @@
 
 		// osco.dev/addstory/
 		['GET|POST', '/addstory/', 'Content#addstory', 'content_addstory'],
-		
+
 		/**
 		* Signup/Login Routes
 		*/
@@ -50,6 +50,9 @@
 
 		// osco.dev/deleteaccount/
 		['GET|POST', '/deleteaccount/', 'User#deleteAccount', 'user_deleteaccount'],
+
+		// osco.dev/changeusername/
+		['GET|POST', '/changeusername/', 'User#changeUsername', 'user_changeusername'],
 
 		/**
 		* Ajax Routes

@@ -41,11 +41,15 @@
         </section>
 
         <section>
-            <a id="confirmLink" href="" id="deletebutton">Delete your account</a>
+            <h2 id="confirmLink"><a href="#">Delete your account</a></h2>
 
             <form class="form-group" id="formToDeleteAccount" action="" method="post">
                 <label for="passwordToDeleteAccount">Please enter your password to delete your account</label>
-                <input class="form-control" type="password" name="passwordToDeleteAccount" value="">
+                <input class="form-control" type="password" name="passwordToDeleteAccount" value=""><br>
+
+                <button class="btn btn-block btn-success" type="button" name="button">
+                    <a style="color:white" id="confirmAnchor" href="">Delete it!</a>
+                </button>
             </form>
         </section>
     </article>

@@ -13,14 +13,14 @@ class ContentController extends Controller {
 
     protected $res;
 
-    
+
     /**
     * about/contactform function
     *
     */
     public function contactform() 
     {
-
+//trim and strip tags from form data
         if(!empty($_POST)) {
             $email = isset($_POST['contactEmail']) ? trim(strip_tags($_POST['contactEmail'])) : '';
 
@@ -29,9 +29,9 @@ class ContentController extends Controller {
             $lname = isset($_POST['contactLname']) ? trim(strip_tags($_POST['contactLname'])) : '';
 
             $message = isset($_POST['contactMessage']) ? trim(strip_tags($_POST['contactMessage'])) : '';
-
+//validating form data
             $errorList = array();
-            // Je valide les données
+           
             if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
                 $errorList[] = 'Please enter a valid email address!';
             }
@@ -44,7 +44,7 @@ class ContentController extends Controller {
             if (strlen($message) <= 10)  {
                 $errorList[] = 'Your message is too short, it must contain at least 10 characters!';
             }
-
+//setting vriables and urls for captcha
             $captcha = $_POST['g-recaptcha-response'];
 
             $googleURL = "https://www.google.com/recaptcha/api/siteverify";
@@ -57,9 +57,7 @@ class ContentController extends Controller {
 
             if (!empty($captcha) && json_decode($this->res[0])->success == "1") {
 
-        // If CAPTCHA is successfully completed...
-
-        // Paste mail function or whatever else you want to happen here!
+ // If CAPTCHA is successfully completed...
              if (empty($errorList)) {
                 $isSent=\Helper\Tools::sendEmail('osco.contact@gmail.com', 'The user with email address: '. $email. ' & First name: '. $fname. ' & Last name: '. $lname.' has sent the following message:', $message, $message );
 
@@ -82,9 +80,7 @@ class ContentController extends Controller {
         $this->flash(join('<br>', $errorList), 'danger');
 
     }   
-            /*if ($isSent){
-                $this->redirectToRoute('content_contactform');
-            }*/
+            
         }
         $this->show('content/about');
     }
