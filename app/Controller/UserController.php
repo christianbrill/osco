@@ -239,6 +239,7 @@ class UserController extends Controller {
 	 } // public function forgot end
 
 
+
 	 /** ***********************************************************************
  	 * Reset Password with token
  	 *
@@ -354,6 +355,5 @@ class UserController extends Controller {
 		 }
 
 		 $this->show('user/profile');
-
 	 }
 }

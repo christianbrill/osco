@@ -9,8 +9,9 @@ use \Model\ContentModel;
 
 class ContentController extends Controller {
 
-    /**about/contactform function
-
+    /**
+    * about/contactform function
+    *
     */
     public function contactform(){
         unset($_SESSION['flash']);
@@ -66,16 +67,8 @@ class ContentController extends Controller {
                 $this->redirectToRoute('content_contactform');
             }*/
         }
-
-
         $this->show('content/about');
-      
-    
     }
-
-
-
-
 
 
 
@@ -93,6 +86,7 @@ class ContentController extends Controller {
 	}
 
 
+
 	/**
 	* ajaxRefresh
 	*
@@ -103,8 +97,8 @@ class ContentController extends Controller {
 		$refreshStories = $storyModel->getLimitedStories();
 
 		$this->showJson($refreshStories);
-
 	}
+
 
 
 	/**
@@ -119,6 +113,8 @@ class ContentController extends Controller {
         return $content;
     }
 
+
+
 	/**
 	* Get only the first 30 characters of the story's title
 	*
@@ -129,8 +125,8 @@ class ContentController extends Controller {
             return substr($title, 0, 50).'...';
         }
         return $title;
-
     }
+
 
 
 	/**
@@ -139,40 +135,41 @@ class ContentController extends Controller {
 	*/
     public function search() {
 		// Getting the information that was put in the <input> called 'searchInput' in layout.php
-      $searchInput = isset($_GET['searchInput']) ? trim(strip_tags($_GET['searchInput'])) : '';
+        $searchInput = isset($_GET['searchInput']) ? trim(strip_tags($_GET['searchInput'])) : '';
 
         // Getting the order information ASC or DESC(Default)
-      $sortingOption = isset($_GET['order']) ? trim(strip_tags($_GET['order'])) : '';
+        $sortingOption = isset($_GET['order']) ? trim(strip_tags($_GET['order'])) : '';
 
         // !!!!!!! NOT WORKING YET
         //PAGINATION START
-      $page = 1;
-      $nbResultsPerPage = 4;
-      $pageOffset = 0;
+        $page = 1;
+        $nbResultsPerPage = 4;
+        $pageOffset = 0;
 
-      if(isset($_GET['page'])){
-        $page = intval($_GET['page']);
-        $pageOffset = ($page-1)*$nbStoriesPerPage;
-    }
+        if (isset($_GET['page'])) {
+            $page = intval($_GET['page']);
+            $pageOffset = ($page-1)*$nbStoriesPerPage;
+        }
         //PAGINATION END
 
         // Creating a new Model in ContentModel
-    $searchModel = new \Model\ContentModel();
+        $searchModel = new \Model\ContentModel();
 
         // Gets all the search' results with two parameters the word input and the option chosen to sort (which is by default DESC)
-    $searchResults = $searchModel->getSearchMatch($searchInput, $sortingOption, $pageOffset, $nbResultsPerPage);
+        $searchResults = $searchModel->getSearchMatch($searchInput, $sortingOption, $pageOffset, $nbResultsPerPage);
 
         //Gets the number of results with a count function
-    $nbResults = count($searchResults);
+        $nbResults = count($searchResults);
 
         // Deciding on the variables who are called in the view
-    $this->show('content/search', [
-      'searchInput' => $searchInput,
-      'searchResults' => $searchResults,
-      'nbResults' => $nbResults,
-      'page' => $page
-      ]);
-}
+        $this->show('content/search', [
+          'searchInput' => $searchInput,
+          'searchResults' => $searchResults,
+          'nbResults' => $nbResults,
+          'page' => $page
+        ]);
+    }
+
 
 
 	/**
@@ -211,6 +208,7 @@ class ContentController extends Controller {
     }
 
 
+
 	/**
 	* Story Detail
 	*
@@ -220,7 +218,7 @@ class ContentController extends Controller {
         $storyModel = new \Model\ContentModel();
         $storyInfos = $storyModel->getOneStory($id);
         //debug($storyInfos);
-        
+
         $tagsLine = $storyModel->getTagStringForStory($id);
         $getEachTag = explode(",", $tagsLine);
         //debug($getEachTag);
@@ -232,24 +230,27 @@ class ContentController extends Controller {
     }
 
 
+
 	/**
 	* Need Help Function
 	*
 	*/
 	public function needhelp(){
 
-		//$this->allowTo('user');
-
 		$this->show('content/needhelp');
-
 	}
 
+
+
+    /**
+	* ajaxNeedHelp Function
+	*
+	*/
 	public function ajaxNeedHelp(){
 
 		$storiesModel = new \Model\ContentModel();
 		$showOrganizations = $storiesModel->getOrganization();
 		$this->showJson($showOrganizations);
-
 	}
 
 }
