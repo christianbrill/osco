@@ -112,6 +112,7 @@ function refreshStories() {
 }//refreshStories function end
 
 
+
 /**
 * Delete Account Function
 *
@@ -137,6 +138,7 @@ function deleteAccount() {
 }
 
 
+
 /**
 * Change Username Function
 *
@@ -158,12 +160,18 @@ function changeUsername() {
 	});
 }
 
+
+
+/**
+* Geolocation Function
+*
+*/
 function geolocation () {
 
 	$.ajax({
   		url: 'http://freegeoip.net/json/',
   		dataType: 'jsonp'
-  
+
   	}).done(function(response) {
 		//console.log(response);
 
@@ -183,20 +191,16 @@ function geolocation () {
 
 				if(unique){
 
-					if(response.country_name == valueObject.org_country){				
+					if(response.country_name == valueObject.org_country){
 						content += "<h1>"+valueObject.org_name+"</h1>"+
 	    				"<p>"+valueObject.org_address+"</p>"+
 	    				"<p>"+valueObject.org_description+"</p>";
 	    			}
 				}
-
 			});//end each
 
 			$("#organizationsDiv").html(content);
 
 		});
-
-
 	});//end ajax
-	
 }//end function geolocation
