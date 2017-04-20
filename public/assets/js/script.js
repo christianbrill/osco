@@ -63,11 +63,9 @@ $(document).ready(function(){
 	* Delete account on button push
 	*
 	*/
-	// $('#deletebutton').click(function(e) {
-	// 	e.preventDefault;
-	//
-	// 	deleteAccount();
-	// });
+	$('#confirmLink').click(function(){
+		userConfirm();
+	});
 
 
 
@@ -225,3 +223,18 @@ function geolocation() {
 		});
 	});//end ajax
 }//end function geolocation
+
+
+
+/**
+* Confirm Function to redirect to deleteAccount in UserController
+*
+*/
+function userConfirm() {
+
+	var userConfirm = confirm('Are you sure you want to delete your account?');
+
+	if (userConfirm) {
+		document.getElementById('confirmLink').href="<?= $this->url('user_deleteaccount'); ?>";
+	}
+}
