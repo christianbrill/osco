@@ -13,7 +13,7 @@ class ContentController extends Controller {
 
     protected $res;
 
-  
+    
     /**
     * about/contactform function
     *
@@ -60,7 +60,7 @@ class ContentController extends Controller {
         // If CAPTCHA is successfully completed...
 
         // Paste mail function or whatever else you want to happen here!
-               if (empty($errorList)) {
+             if (empty($errorList)) {
                 $isSent=\Helper\Tools::sendEmail('osco.contact@gmail.com', 'The user with email address: '. $email. ' & First name: '. $fname. ' & Last name: '. $lname.' has sent the following message:', $message, $message );
 
 
@@ -75,10 +75,10 @@ class ContentController extends Controller {
             }
 
         } else {
-           $errorList[] = '<p>Please go back and make sure you check the security CAPTCHA box.</p><br>';
-       }
+         $errorList[] = '<p>Please go back and make sure you check the security CAPTCHA box.</p><br>';
+     }
 
-       if (!empty($errorList)) {
+     if (!empty($errorList)) {
         $this->flash(join('<br>', $errorList), 'danger');
 
     }   
@@ -185,7 +185,7 @@ class ContentController extends Controller {
           'searchResults' => $searchResults,
           'nbResults' => $nbResults,
           'page' => $page
-        ]);
+          ]);
     }
 
 
