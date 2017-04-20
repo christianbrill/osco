@@ -158,8 +158,7 @@ ul {
 	flex-direction:column;
 	align-items: center;
 
-	//margin:auto;
-	width:70vw;
+	width:100%;
 
 	article {
 		display:inline-block;
@@ -368,9 +367,11 @@ footer {
 
 	}
 
+	#ajaxHomeStories{
+	flex-direction:row;
+	align-items: center;
 
-	#ajaxHomeStories {
-		width:70vw;
+	width:70vw;
 
 		article {
 			display:inline-block;
@@ -386,8 +387,8 @@ footer {
 		}
 
 		div {
-			width:350px;
-			height:200px;
+			width:250px;
+			height:250px;
 			box-shadow:none;
 			transition:0.5s;
 			padding:5px;
