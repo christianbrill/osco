@@ -80,7 +80,7 @@ $(document).ready(function(){
 		//
 		// }
 
-		
+
 	});
 
 
@@ -104,6 +104,15 @@ $(document).ready(function(){
 
 		changeUsername();
 	});
+
+
+
+	/**
+	* FAQ Toggle Section
+	*
+	*/
+	
+
 
 });//jQuery END
 
