@@ -239,6 +239,7 @@ class UserController extends Controller {
 	 } // public function forgot end
 
 
+
 	 /** ***********************************************************************
  	 * Reset Password with token
  	 *
@@ -337,23 +338,69 @@ class UserController extends Controller {
  	 ************************************************************************ */
 	 public function profile() {
 
-		 // If POST is not empty, then do the following:
-		 if (!empty($_GET)) {
-			 debug($_GET);
-
-			 // We assign the username value to the newUsername variable if it is set
-			 $newUsername = isset($_GET['username']) ? trim($_GET['username']) : '';
-		     $email = isset($_GET['email']) ? trim(strip_tags($_GET['username'])) : '';
-
-			 $model->update(array(
-				 'usr_username' => $newUsername
-			 ), $email);
-
-			 // If the change was successful, we display a success message
-			 $this->flash('Your username has been changed successfully.', 'success');
-		 }
-
 		 $this->show('user/profile');
+	 }
 
+
+
+	 /** ***********************************************************************
+ 	 * Delete Account
+	 *
+ 	 ************************************************************************ */
+	 public function deleteAccount() {
+
+		 $this->allowTo('user');
+
+		 $email = isset($_POST['email']) ? trim(strip_tags($_POST['email'])) : '';
+
+		 $deleteModel = new \Model\UsersModel();
+		 $deleteUser = $deleteModel->deleteUserAccount($email);
+	 }
+
+
+
+	 /** ***********************************************************************
+ 	 * Change your password
+	 *
+ 	 ************************************************************************ */
+	 public function changePassword() {
+
+		 if (!empty($_POST)) {
+
+			 $passwordOne = isset($_POST['passwordOne']) ? trim($_POST['passwordOne']) : '';
+			 $passwordTwo = isset($_POST['passwordTwo']) ? trim($_POST['passwordTwo']) : '';
+			 $email = $_POST['email'];
+
+			 $errorList = array();
+
+			 // Password must be 8 characters long
+			 if (strlen($passwordOne) < 8) {
+ 				$errorList[] = 'Your password needs to be at least 8 characters long.';
+ 			}
+
+ 			// Password One and Password Two need to be the same
+ 			if ($passwordOne != $passwordTwo) {
+ 				$errorList[] = 'Your passwords do not match.';
+ 			}
+
+			if (empty($errorList)) {
+
+				// We have to encrypt the new password again before we put it in the database
+				$authentificationModel = new \W\Security\AuthentificationModel();
+				$hashedPassword = $authentificationModel->hashPassword($passwordOne);
+
+				$model = new \Model\UsersModel();
+
+				$model->update(array(
+					'usr_password' => $hashedPassword
+				), $email);
+
+				$this->flash('Your password was changed successfully.', 'success');
+
+			} else {
+				$this->flash(join('<br>', $errorList), 'danger');
+			}
+
+		 }
 	 }
 }

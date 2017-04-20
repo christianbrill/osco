@@ -33,9 +33,6 @@
 					<a href="<?= $this->url("content_stories") ?>">Stories</a>
 				</li>
 
-				<li <?php if($currentPage == 'needhelp'): ?> class="active"<?php endif; ?> role="presentation" id="needHelpNav">
-					<a href="<?v?>">Need Help?</a>
-
 				<li<?php if($currentPage == 'needhelp'): ?> class="active"<?php endif; ?> role="presentation">
 					<a href="<?= $this->url("content_needhelp") ?>">Need Help?</a>
 				</li>
@@ -44,7 +41,7 @@
 					<a href="<?= $this->url("content_contactform") ?>">About OSCo</a>
 				</li>
 
-				<!-- If the user is logged in, the Profile and Logout button will show up. -->
+				<!-- If the user is logged in, the Profile and Logout button will show up, as well as the "Add Story" option. -->
 				<?php if (!empty($w_user)) : ?>
 					<li<?php if($currentPage == 'profile'): ?> class="active"<?php endif; ?> role="presentation">
 						<a href="<?= $this->url("user_profile") ?>">Profile</a>
@@ -52,6 +49,10 @@
 
 					<li role="presentation">
 						<a href="<?= $this->url("user_logout") ?>">Logout</a>
+					</li>
+
+					<li role="presentation">
+						<a href="<?= $this->url("content_addstory") ?>"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add a Story</a>
 					</li>
 
 				<!-- If the user isn't logged in, the Signup and Login links will show up. -->
@@ -102,6 +103,10 @@
 
 					<li role="presentation">
 						<a href="<?= $this->url("user_logout") ?>">Logout</a>
+					</li>
+
+					<li role="presentation">
+						<a href="<?= $this->url("content_addstory") ?>"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add a Story</a>
 					</li>
 
 				<!-- If the user isn't logged in, the Signup and Login links will show up. -->

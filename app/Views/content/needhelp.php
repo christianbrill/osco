@@ -24,10 +24,10 @@
 	    	
 	    	<label for="orginfo">More Information</label><br>
 	    	<textarea class="form-control" name="orginfo"></textarea><br>
-   		</form>
+   		</form>	
     <?php endif ?>
 
-    <script type="text/javascript">
+    <script type="text/javascript" >
     	var needGeoloc = true;
     </script>
 
