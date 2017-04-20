@@ -351,10 +351,14 @@ class UserController extends Controller {
 
 		 $this->allowTo('user');
 
-		 $email = isset($_POST['email']) ? trim(strip_tags($_POST['email'])) : '';
+		 // We access the id of the currently logged in user
+		 $userId = $_SESSION['user']['id'];
+		 //debug($userId);
 
-		 $deleteModel = new \Model\UsersModel();
-		 $deleteUser = $deleteModel->deleteUserAccount($email);
+		 $usersModel = new \Model\UsersModel();
+		 $deleteUser = $usersModel->deleteUserAccount($userId);
+
+		 $this->redirectToRoute('content_home');
 	 }
 
 
