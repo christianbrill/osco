@@ -12,7 +12,12 @@
 	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 	<link rel="stylesheet" href="<?= $this->assetUrl('css/naomi.min.css') ?>">
 	<script src='https://www.google.com/recaptcha/api.js'></script>
-
+<?php
+ 
+// grab recaptcha library
+//require_once "../app/Helper/recaptchalib.php";
+ 
+?>
 </head>
 <body>
 	<header>
