@@ -22,6 +22,9 @@
 		// osco.dev/needhelp/
 		['GET', '/needhelp/', 'Content#needhelp', 'content_needhelp'],
 
+		// osco.dev/addstory/
+		['GET|POST', '/addstory/', 'Content#addstory', 'content_addstory'],
+		
 		/**
 		* Signup/Login Routes
 		*/

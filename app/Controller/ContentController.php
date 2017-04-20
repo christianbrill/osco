@@ -253,4 +253,19 @@ class ContentController extends Controller {
 		$this->showJson($showOrganizations);
 	}
 
+	/**
+	* Add a Story method
+	*
+	*/
+	public function addStory () {
+		$this->allowTo("user");
+
+		$stoTitle = isset($_POST['storyTitle']) ? trim(strip_tags($_POST['storyTitle']	)) : '';
+
+		$addStoryModel = new \Model\ContentModel();
+		$addStory = $addStoryModel->insertStory($stoTitle);
+
+		$this->show('content/addstory', ['addStory' => $addStory]);
+	}
+
 }
