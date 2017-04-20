@@ -5,20 +5,21 @@ namespace Controller;
 use \W\Controller\Controller;
 use \Model\ContentModel;
 
+// comment comment 
 
 
 class ContentController extends Controller {
 
+
+    protected $res;
+
+  
     /**
     * about/contactform function
     *
     */
-    public function contactform(){
-        unset($_SESSION['flash']);
-
-        foreach ($_POST as $key => $value) {
-        echo '<p><strong>' . $key.':</strong> '.$value.'</p>';
-      }
+    public function contactform() 
+    {
 
         if(!empty($_POST)) {
             $email = isset($_POST['contactEmail']) ? trim(strip_tags($_POST['contactEmail'])) : '';
@@ -28,11 +29,6 @@ class ContentController extends Controller {
             $lname = isset($_POST['contactLname']) ? trim(strip_tags($_POST['contactLname'])) : '';
 
             $message = isset($_POST['contactMessage']) ? trim(strip_tags($_POST['contactMessage'])) : '';
-
-          /*  $email=$_POST['contactEmail'];
-            $fname=$_POST['contactFname'];
-            $lname=$_POST['contactmessage'];
-            $message=$_POST['contactMessage'];*/
 
             $errorList = array();
             // Je valide les données
@@ -49,8 +45,22 @@ class ContentController extends Controller {
                 $errorList[] = 'Your message is too short, it must contain at least 10 characters!';
             }
 
-            // Si tout est ok
-            if (empty($errorList)) {
+            $captcha = $_POST['g-recaptcha-response'];
+
+            $googleURL = "https://www.google.com/recaptcha/api/siteverify";
+
+            $secret = "6Le43B0UAAAAAFKWLgoG-SdxGTUqIU-N_SbbSGi1";
+            
+            $url = "". $googleURL ."?secret=".$secret."&response=".$captcha."";
+
+            $this->res[] = file_get_contents($url);
+
+            if (!empty($captcha) && json_decode($this->res[0])->success == "1") {
+
+        // If CAPTCHA is successfully completed...
+
+        // Paste mail function or whatever else you want to happen here!
+               if (empty($errorList)) {
                 $isSent=\Helper\Tools::sendEmail('osco.contact@gmail.com', 'The user with email address: '. $email. ' & First name: '. $fname. ' & Last name: '. $lname.' has sent the following message:', $message, $message );
 
 
@@ -63,13 +73,21 @@ class ContentController extends Controller {
             else {
                 $this->flash(join('<br>', $errorList), 'danger');
             }
+
+        } else {
+           $errorList[] = '<p>Please go back and make sure you check the security CAPTCHA box.</p><br>';
+       }
+
+       if (!empty($errorList)) {
+        $this->flash(join('<br>', $errorList), 'danger');
+
+    }   
             /*if ($isSent){
                 $this->redirectToRoute('content_contactform');
             }*/
         }
         $this->show('content/about');
     }
-
 
 
 	/**
@@ -224,8 +242,8 @@ class ContentController extends Controller {
         //debug($getEachTag);
 
         $this->show('content/story', [
-                'storyInfos' => $storyInfos,
-                'getEachTag' => $getEachTag
+            'storyInfos' => $storyInfos,
+            'getEachTag' => $getEachTag
             ]);
     }
 

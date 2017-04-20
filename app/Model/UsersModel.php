@@ -44,20 +44,18 @@ class UsersModel extends \W\Model\UsersModel {
 
 
 
-    public function deleteUserAccount() {
+    public function deleteUserAccount($userId) {
 
-        if (!empty($_GET)) {
+        $sqlRequest = '
+            DELETE FROM users
+            WHERE id = :id
+        ';
 
-            $email = isset($_GET['userEmail']) ? isset($_GET['userEmail']) : '';
+        $stmt = $this->dbh->prepare($sqlRequest);
+        $stmt->bindValue(':id', $userId);
 
-            $sqlRequest = '
-                DELETE FROM users
-                WHERE usr_email = :email
-            ';
-
-            $stmt = $this->dbh->prepare($sqlRequest);
-            $stmt->bindValue(':email', $email);
-            $stmt->execute();
+        if ($stmt->execute() === false) {
+            $stmt->errorInfo();
         }
     }
 

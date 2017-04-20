@@ -333,30 +333,32 @@ class UserController extends Controller {
 
 
 	 /** ***********************************************************************
- 	 * Profile - Change username
+ 	 * Profile
 	 *
  	 ************************************************************************ */
 	 public function profile() {
 
-		 // If POST is not empty, then do the following:
-		 if (!empty($_POST)) {
-			 debug($_POST);
-
-			 // We assign the username value to the newUsername variable if it is set
-			 $newUsername = isset($_POST['username']) ? trim($_POST['username']) : '';
-			 $email = $_POST['email'];
-
-			 $model = new \Model\UsersModel();
-
-			 $model->update(array(
-				 'usr_username' => $newUsername
-			 ), $email);
-
-			 // If the change was successful, we display a success message
-			 $this->flash('Your username has been changed successfully.', 'success');
-		 }
-
 		 $this->show('user/profile');
+	 }
+
+
+
+	 /** ***********************************************************************
+ 	 * Delete Account
+	 *
+ 	 ************************************************************************ */
+	 public function deleteAccount() {
+
+		 $this->allowTo('user');
+
+		 // We access the id of the currently logged in user
+		 $userId = $_SESSION['user']['id'];
+		 //debug($userId);
+
+		 $usersModel = new \Model\UsersModel();
+		 $deleteUser = $usersModel->deleteUserAccount($userId);
+
+		 $this->redirectToRoute('content_home');
 	 }
 
 

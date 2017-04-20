@@ -40,6 +40,7 @@ $(document).ready(function(){
 		//console.log("Show menu or hide menu");
 		$("#mobileMenu").toggle();
 	});
+
 	window.addEventListener("resize", function(){
 
 		if($(window).width() > 1000){
@@ -62,10 +63,9 @@ $(document).ready(function(){
 	* Delete account on button push
 	*
 	*/
-	$('#deletebutton').click(function(e) {
-		e.preventDefault;
+	$('#confirmLink').click(function(){
 
-		deleteAccount();
+		userConfirm();
 	});
 
 
@@ -137,25 +137,25 @@ function refreshStories() {
 * Delete Account Function
 *
 */
-function deleteAccount() {
-
-	var deleteUser = confirm("Do you really want to delete your account?");
-
-	if (deleteUser === true) {
-
-		var userEmail = $('#email').val();
-
-		$.ajax({
-			type: 'GET',
-			url: '/osco/app/Model/UsersModel.php',
-			data: {
-				'userEmail' : userEmail
-			}
-		}).done(function(response) {
-			console.log(response);
-		});
-	}
-}
+// function deleteAccount() {
+//
+// 	var deleteUser = confirm("Do you really want to delete your account?");
+//
+// 	if (deleteUser === true) {
+//
+// 		var userEmail = $('#email').val();
+//
+// 		$.ajax({
+// 			type: 'GET',
+// 			url: '/osco/app/Model/UsersModel.php',
+// 			data: {
+// 				'userEmail' : userEmail
+// 			}
+// 		}).done(function(response) {
+// 			console.log(response);
+// 		});
+// 	}
+// }
 
 
 
@@ -224,3 +224,18 @@ function geolocation() {
 		});
 	});//end ajax
 }//end function geolocation
+
+
+
+/**
+* Confirm Function to redirect to deleteAccount in UserController
+*
+*/
+function userConfirm() {
+
+	var userConfirm = confirm('Are you sure you want to delete your account?');
+
+	if (userConfirm) {
+		document.getElementById('confirmLink').href="<?= $this->url('user_deleteaccount'); ?>";
+	}
+}
