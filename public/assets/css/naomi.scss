@@ -1,4 +1,4 @@
-*{
+* {
 	box-sizing: border-box;
 
 	font-family: 'Roboto', sans-serif;
@@ -16,21 +16,21 @@ $white: #FFFFFF;
 
 
 // TITLES AND PARAGRAPH STYLES
-h1{
+h1 {
 	color: $turquoise;
 	margin:0px;
 }
 
 // HEADER AND MENU/NAVIGATION
-header{
+header {
 	z-index:3000;
 }
 
-#desktopNavigation{
+#desktopNavigation {
 	display:none;
 }
 
-#mobileNavigation{
+#mobileNavigation {
 	display: flex;
 	justify-content:space-between;
 
@@ -48,10 +48,10 @@ header{
 		margin:0.1em;
 	}
 
-	form{
+	form {
 		margin:0.6em;
 
-		input{
+		input {
 			height:30px;
 			padding: 10px;
 
@@ -59,26 +59,26 @@ header{
 			border-bottom: 3px solid $turquoise;
 		}
 
-		.searchButton{
+		.searchButton {
 			background-color: $turquoise;
 			border:0px;
 		}
 	}
 
-	.menuIcon{
+	.menuIcon {
 		margin:1em;
 	}
 }
 
 
-ul{
+ul {
 	display:flex;
 	justify-content: space-around;
 	flex-direction:column;
 
 	list-style:none;
 
-	a{
+	a {
 		margin:0px 8px;
 		padding: 14px 7px;
 
@@ -88,14 +88,14 @@ ul{
 		height:45px;
 	}
 
-	a:hover{
+	a:hover {
 		color:$turquoise;
 		background-color:$lightgrey;
 		border-bottom: 3px solid $turquoise;
 	}
 }
 
-#mobileMenu{
+#mobileMenu {
 	display:none;
 
 	position: absolute;
@@ -107,53 +107,53 @@ ul{
 }
 
 // MAIN, MAIN-CONTENT, FOOTER
-#main{
+#main {
 	margin-top:5em;
 
 }
 
-.pagination{
+.pagination {
 	margin: 2em 0;
-	a{
+	a {
 		color:$darkblue;
 		border-bottom: 3px solid $darkblue;
 		text-transform: uppercase;
 	}
 
-	a:hover{
+	a:hover {
 		text-decoration: none;
 		color:$turquoise;
 		border-bottom: 3px solid $turquoise;
 	}
 }
 
-.tags{
+.tags {
 	margin: 2em 0;
 }
 
-.tag{
+.tag {
 	margin:2px;
 	background-color:$turquoise;
 	border:1.5px solid $turquoise;
 	color:$white;
 }
 
-.tag:hover{
+.tag:hover {
 	background-color:$lightgrey;
 	border:1.5px solid $lightgrey;
 	color:$turquoise;
 }
 
-.storiesList{
+.storiesList {
 
-	article{
+	article {
 		margin:2em 0;
 	}
 }
 
 
 //VIEW: content/home
-#ajaxHomeStories{
+#ajaxHomeStories {
 	display: flex;
 	flex-direction:column;
 	align-items: center;
@@ -161,20 +161,20 @@ ul{
 	//margin:auto;
 	width:70vw;
 
-	article{
+	article {
 		display:inline-block;
 		overflow-wrap: break-word;
 	}
 
-	h1{
+	h1 {
 		font-size:1.6em;
 	}
 
-	a{
+	a {
 		text-decoration: none;
 	}
 
-	div{
+	div {
 		width:250px;
 		height:250px;
 		box-shadow:none;
@@ -182,7 +182,7 @@ ul{
 		padding:5px;
 		background-image:url("");
 
-		&:hover{
+		&:hover {
 			box-shadow:0 0 10px #e2e2e2;
 			transition: 0.5s;
 			transform: scale(1.02);
@@ -191,63 +191,59 @@ ul{
 	}
 }
 
-#needHelpBox{
+#needHelpBox {
 	padding:3em;
 	width:100%;
 	margin-right:5vw;
 	background-color:$darkblue;
 	text-align:center;
-	p{
+	p {
 		color:white;
 	}
 }
 
-footer{
+footer {
 	padding:3em 6em;
 
 	width:100%;
 	background-color: $darkblue;
 
-	#footerContent{
+	#footerContent {
 		display:flex;
 		flex-direction: column;
 		justify-content: space-around;
 		width:60%;
 
-		a{
+		a {
 			text-decoration: none;
 			color:$lightgrey;
 		}
 
-		a:hover{
+		a:hover {
 			color:$turquoise;
 		}
 
-		h4{
+		h4 {
 			color:$lightgrey;
 		}
 	}
 }
 
 /* TABLET ------------------------------------------------------ */
-@media screen and (max-width: 1000px) and (min-width: 700px){
+@media screen and (max-width: 1000px) and (min-width: 700px) {
 	// HEADER, NAVIGATION, MENU
 
 	//MAIN, MAIN-CONTENT, FOOTER
 
-	#main{
+	#ajaxHomeStories {
+		width:70vw;
 
-	}
-
-	#ajaxHomeStories{
-	width:70vw;
-
-		article{
+		article {
 			display:inline-block;
 			overflow-wrap: break-word;
 		}
 
-		h1{
+		h1 {
 			font-size:1.6em;
 		}
 
@@ -255,7 +251,7 @@ footer{
 			text-decoration: none;
 		}
 
-		div{
+		div {
 			width:250px;
 			height:250px;
 			box-shadow:none;
@@ -263,17 +259,16 @@ footer{
 			padding:5px;
 			background-image:url("");
 
-			&:hover{
+			&:hover {
 				box-shadow:0 0 10px #e2e2e2;
 				transition: 0.5s;
 				transform: scale(1.02);
-
 			}
 		}
 
 	}
 
-	#needHelpBox{
+	#needHelpBox {
 		position:absolute;
 		right:0;
 		top:100px;
@@ -282,19 +277,20 @@ footer{
 		margin-right:5vw;
 		background-color:#2c3e50;
 		text-align:center;
-		p{
+
+		p {
 			color:white;
 		}
 	}
 }
 /* DESKTOP ----------------------------------------------------- */
-@media screen and (min-width: 1000px){
-	header{
-		#mobileNavigation{
+@media screen and (min-width: 1000px) {
+	header {
+		#mobileNavigation {
 			display:none;
 		}
 
-		#desktopNavigation{
+		#desktopNavigation {
 			display: flex;
 			justify-content:space-between;
 
@@ -309,24 +305,24 @@ footer{
 			box-shadow: 0px -3px 59px -8px rgba(0,0,0,0.38);
 		}
 
-		#desktopMenu{
+		#desktopMenu {
 			display:flex;
 			flex-direction: row;
 		}
 
-		h1{
+		h1 {
 			margin:0.1em;
 			color:$turquoise;
 		}
 
-		h1:hover{
+		h1:hover {
 			text-decoration: none;
 		}
 
-		form{
+		form {
 			margin: 7px;
 
-			input{
+			input {
 				height:30px;
 				padding: 10px;
 
@@ -335,13 +331,13 @@ footer{
 			}
 		}
 
-		ul{
+		ul {
 			display:flex;
 			justify-content: space-around;
 
 			list-style:none;
 
-			a{
+			a {
 				margin:0px 8px;
 				padding: 14px 7px;
 
@@ -351,7 +347,7 @@ footer{
 				height:45px;
 			}
 
-			a:hover{
+			a:hover {
 				color:#00C3B6;
 				background-color:#EEEEEE;
 				border-bottom: 3px solid #00C3B6;
@@ -360,12 +356,12 @@ footer{
 	}
 
 
-	#main{
+	#main {
 		display:flex;
 		flex-direction: column;
 		align-items: center;
 
-		section{
+		section {
 			margin:2em 0;
 			width:70%;
 		}
@@ -373,23 +369,23 @@ footer{
 	}
 
 
-	#ajaxHomeStories{
-	width:70vw;
+	#ajaxHomeStories {
+		width:70vw;
 
-		article{
+		article {
 			display:inline-block;
 			overflow-wrap: break-word;
 		}
 
-		h1{
+		h1 {
 			font-size:1.6em;
 		}
 
-		a{
+		a {
 			text-decoration: none;
 		}
 
-		div{
+		div {
 			width:350px;
 			height:200px;
 			box-shadow:none;
@@ -407,7 +403,7 @@ footer{
 
 	}
 
-	#needHelpBox{
+	#needHelpBox {
 		position:absolute;
 		right:0;
 		top:100px;
@@ -421,4 +417,7 @@ footer{
 		}
 	}
 
+	#formToDeleteAccount {
+		display: none;
+	}
 }

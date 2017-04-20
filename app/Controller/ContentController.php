@@ -5,7 +5,7 @@ namespace Controller;
 use \W\Controller\Controller;
 use \Model\ContentModel;
 
-// comment comment 
+// comment comment
 
 
 class ContentController extends Controller {
@@ -13,12 +13,12 @@ class ContentController extends Controller {
 
     protected $res;
 
-  
+
     /**
     * about/contactform function
     *
     */
-    public function contactform() 
+    public function contactform()
     {
 
         if(!empty($_POST)) {
@@ -50,7 +50,7 @@ class ContentController extends Controller {
             $googleURL = "https://www.google.com/recaptcha/api/siteverify";
 
             $secret = "6Le43B0UAAAAAFKWLgoG-SdxGTUqIU-N_SbbSGi1";
-            
+
             $url = "". $googleURL ."?secret=".$secret."&response=".$captcha."";
 
             $this->res[] = file_get_contents($url);
@@ -81,7 +81,7 @@ class ContentController extends Controller {
        if (!empty($errorList)) {
         $this->flash(join('<br>', $errorList), 'danger');
 
-    }   
+    }
             /*if ($isSent){
                 $this->redirectToRoute('content_contactform');
             }*/
@@ -270,6 +270,7 @@ class ContentController extends Controller {
 		$showOrganizations = $storiesModel->getOrganization();
 		$this->showJson($showOrganizations);
 	}
+
 
 	/**
 	* Add a Story method

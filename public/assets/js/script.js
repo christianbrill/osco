@@ -228,7 +228,7 @@ function geolocation() {
 
 
 /**
-* Confirm Function to redirect to deleteAccount in UserController
+* Confirm Function to redirect to "deleteAccount" in UserController
 *
 */
 function userConfirm() {
