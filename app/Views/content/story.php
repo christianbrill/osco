@@ -2,6 +2,7 @@
 
 <?php $this->start('main_content') ?>
 	<section id="story">
+	<button id="goBack" class="tag btn btn-xs">Go Back</button>
 	<?php foreach($storyInfos as $currentStory) : ?>
 		<h1><?= $currentStory['sto_title']; ?></h1>
 		<p><?= $currentStory['usr_username']; ?> <?= $currentStory['sto_inserted']; ?></p>

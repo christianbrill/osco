@@ -1,22 +1,45 @@
 $(document).ready(function(){
 	console.log('Loaded');
 
+	/**
+	* Stories on homepage are refreshed on button push
+	*
+	*/
 	$("#refreshStories").click(function(e){
 		 e.preventDefault();
 
 		refreshStories();
 	});
 
+
+
+	/**
+	* Clicking the menu icon will make the nav menu appear
+	*
+	*/
 	$(".menuIcon").click(function(e){
 		console.log("Show menu");
 		$("#mobileMenu").toggle();
 	});
 
 
+
+
+	function goBack() {
+	    window.history.back();
+	}
+
+
+
+
 	/**
 	* Event Listener for burger menu
 	*
 	*/
+	$(".menuIcon").click(function(e){
+		//console.log("Show menu or hide menu");
+		$("#mobileMenu").toggle();
+	});
 	window.addEventListener("resize", function(){
 
 		if($(window).width() > 1000){
@@ -34,6 +57,7 @@ $(document).ready(function(){
 	});
 
 
+
 	/**
 	* Delete account on button push
 	*
@@ -44,10 +68,16 @@ $(document).ready(function(){
 		deleteAccount();
 	});
 
-//This executes when the page "Need Help" is loaded
+
+
+	/**
+	* /This executes when the page "Need Help" is loaded
+	*
+	*/
 	if (needGeoloc) {
 		geolocation();
 	}
+
 
 
 	/**
@@ -58,16 +88,6 @@ $(document).ready(function(){
 		e.preventDefault();
 
 		changeUsername();
-	});
-
-
-
-	/**
-	* Show change password form on button push
-	*
-	*/
-	$('#changePassword').click(function(){
-		$('.hiddenForm').show();
 	});
 
 });//jQuery END
@@ -112,6 +132,7 @@ function refreshStories() {
 }//refreshStories function end
 
 
+
 /**
 * Delete Account Function
 *
@@ -137,6 +158,7 @@ function deleteAccount() {
 }
 
 
+
 /**
 * Change Username Function
 *
@@ -147,7 +169,7 @@ function changeUsername() {
 	var email = $('#email').val();
 
 	$.ajax({
-		type: 'GET',
+		type: 'post',
 		url: '/osco/app/Controller/UserController.php',
 		data: {
 			'username' : newUsername,
@@ -158,12 +180,18 @@ function changeUsername() {
 	});
 }
 
-function geolocation () {
+
+
+/**
+* Geolocation Function
+*
+*/
+function geolocation() {
 
 	$.ajax({
   		url: 'http://freegeoip.net/json/',
   		dataType: 'jsonp'
-  
+
   	}).done(function(response) {
 		//console.log(response);
 
@@ -183,20 +211,16 @@ function geolocation () {
 
 				if(unique){
 
-					if(response.country_name == valueObject.org_country){				
+					if(response.country_name == valueObject.org_country){
 						content += "<h1>"+valueObject.org_name+"</h1>"+
 	    				"<p>"+valueObject.org_address+"</p>"+
 	    				"<p>"+valueObject.org_description+"</p>";
 	    			}
 				}
-
 			});//end each
 
 			$("#organizationsDiv").html(content);
 
 		});
-
-
 	});//end ajax
-	
 }//end function geolocation

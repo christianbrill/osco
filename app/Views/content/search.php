@@ -2,7 +2,7 @@
 
 <?php $this->start('main_content') ?>
 <section id="search">
-	<div>
+	<div class="filterBox">
 	<?php if ($searchInput != '') : ?>
 		<span><?= $nbResults ?> Result(s) for "<?= $searchInput ?>"</span>
 	<?php else : ?>
@@ -23,24 +23,30 @@
   	<?php endif; ?>
 	</div>
 
-	<div class="filterBox">
+	<div class="orderBox">
 		Sort by 
 		<a href="?searchInput=<?= $searchInput ?>&order=DESC">
-			<button name="order">Recent</button>
+			<button name="order" class="tag btn btn-xs">Recent</button>
 		</a>
 		<a href="?searchInput=<?= $searchInput ?>&order=ASC">
-			<button name="order">Oldest</button>
+			<button name="order" class="tag btn btn-xs">Oldest</button>
 		</a>
 	</div>
+
+	<div class="storiesList">
 	<?php foreach ($searchResults as $currentResult) : ?>
-	<div class="searchResults">
-		<p><?= $currentResult['usr_username']; ?></p>
-		<p><?= $currentResult['sto_title']; ?></p>
-		<p><?= $currentResult['sto_inserted']; ?></p>
-		<p><?= \Controller\ContentController::getShortDescription($currentResult['sto_content']); ?></p>
-		<p><?= $currentResult['sto_tags']; ?></p>
-	</div>
+		<article>
+				<div>
+					<h1><?= $currentResult['sto_title']; ?></h1>
+					<p><?= $currentResult['usr_username']; ?></p>
+					<p><?= $currentResult['sto_inserted']; ?></p>
+					<p><?= \Controller\ContentController::getShortDescription($currentResult['sto_content']); ?></p>
+					<a href="<?= $this->url('content_story',['id' => $currentResult['sto_id']]); ?>">Read More</a>
+				</div>
+				</a>
+			</article>
 	<?php endforeach; ?>
+	</div>
 
 </section>
 <?php $this->stop('main_content') ?>
