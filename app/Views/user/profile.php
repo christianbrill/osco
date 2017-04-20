@@ -41,7 +41,7 @@
         </section>
 
         <section>
-            <a href="#" id="deletebutton">Delete your account</a>
+            <a href="<?= $this->url('user_deleteaccount'); ?>" id="deletebutton">Delete your account</a>
         </section>
     </article>
 

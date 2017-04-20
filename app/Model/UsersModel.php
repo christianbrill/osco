@@ -44,11 +44,9 @@ class UsersModel extends \W\Model\UsersModel {
 
 
 
-    public function deleteUserAccount() {
+    public function deleteUserAccount($email) {
 
         if (!empty($_GET)) {
-
-            $email = isset($_GET['userEmail']) ? isset($_GET['userEmail']) : '';
 
             $sqlRequest = '
                 DELETE FROM users
@@ -57,7 +55,14 @@ class UsersModel extends \W\Model\UsersModel {
 
             $stmt = $this->dbh->prepare($sqlRequest);
             $stmt->bindValue(':email', $email);
-            $stmt->execute();
+
+            if ($stmt->execute() === false) {
+                $stmt->errorInfo();
+            } else {
+                $this->redirectToRoute('content_home');
+
+                $this->flash('Your account has been deleted successfully.', 'success');
+            }
         }
     }
 

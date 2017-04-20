@@ -43,7 +43,10 @@
 		['GET', '/logout/', 'User#logout', 'user_logout'],
 
 		// osco.dev/changePassword/
-		['GET', '/changePassword/', 'User#changePassword', 'user_changepassword	'],
+		//['GET', '/changepassword/', 'User#changePassword', 'user_changepassword'],
+
+		// osco.dev/deleteaccount/
+		['GET|POST', '/deleteaccount/', 'User#deleteAccount', 'user_deleteaccount'],
 
 		/**
 		* Ajax Routes
