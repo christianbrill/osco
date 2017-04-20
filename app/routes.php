@@ -4,13 +4,6 @@
 		// osco.dev/home/
 		['GET', '/', 'Content#home', 'content_home'],
 
-		// osco.dev/signup/
-		['GET|POST', '/signup/', 'User#signup', 'user_signup'],
-
-		// osco.dev/login/
-		['GET', '/login/', 'User#login', 'user_login'],
-		['POST', '/login/', 'User#loginPost', 'user_loginpost'],
-
 		// osco.dev/stories/
 		['GET', '/stories/', 'Content#stories', 'content_stories'],
 
@@ -19,6 +12,26 @@
 
 		// osco.dev/search/
 		['GET', '/search/', 'Content#search', 'content_search'],
+
+		// osco.dev/about
+		['GET|POST', '/about/', 'content#contactform', 'content_contactform'],
+
+		// osco.dev/profile/
+		['GET', '/profile/', 'User#profile', 'user_profile'],
+
+		// osco.dev/needhelp/
+		['GET', '/needhelp/', 'Content#needhelp', 'content_needhelp'],
+
+		/**
+		* Signup/Login Routes
+		*/
+
+		// osco.dev/signup/
+		['GET|POST', '/signup/', 'User#signup', 'user_signup'],
+
+		// osco.dev/login/
+		['GET', '/login/', 'User#login', 'user_login'],
+		['POST', '/login/', 'User#loginPost', 'user_loginpost'],
 
 		// osco.dev/forgot_password/
 		['GET|POST', '/forgot/', 'User#forgot', 'user_forgot'],
@@ -29,18 +42,16 @@
 		// osco.dev/logout/
 		['GET', '/logout/', 'User#logout', 'user_logout'],
 
-		// ajax home route
-		['GET', '/ajax/home/', 'Content#ajaxRefresh', 'content_ajaxRefresh'],
+		// osco.dev/changePassword/
+		['GET', '/changePassword/', 'User#changePassword', 'user_changepassword'],
 
-		// osco.dev/about
-		['GET|POST', '/about/', 'content#contactform', 'content_contactform'],
-
-		// osco.dev/profile/
-		['GET', '/profile/', 'User#profile', 'user_profile'],
-
- 		// osco.dev/needhelp/
-		['GET', '/needhelp/', 'Content#needhelp', 'content_needhelp'],
+		/**
+		* Ajax Routes
+		*/
 
 		// ajax needhelp route
 		['POST', '/ajax/needhelp/', 'Content#ajaxNeedHelp', 'content_ajaxNeedHelp'],
+
+		// ajax home route
+		['GET', '/ajax/home/', 'Content#ajaxRefresh', 'content_ajaxRefresh'],
 	);

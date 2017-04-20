@@ -1,16 +1,27 @@
 $(document).ready(function(){
 	console.log('Loaded');
 
+	/**
+	* Stories on homepage are refreshed on button push
+	*
+	*/
 	$("#refreshStories").click(function(e){
 		 e.preventDefault();
 
 		refreshStories();
 	});
 
+
+
+	/**
+	* Clicking the menu icon will make the nav menu appear
+	*
+	*/
 	$(".menuIcon").click(function(e){
 		console.log("Show menu");
 		$("#mobileMenu").toggle();
 	});
+
 
 
 	/**
@@ -34,6 +45,7 @@ $(document).ready(function(){
 	});
 
 
+
 	/**
 	* Delete account on button push
 	*
@@ -44,10 +56,16 @@ $(document).ready(function(){
 		deleteAccount();
 	});
 
-//This executes when the page "Need Help" is loaded
+
+
+	/**
+	* /This executes when the page "Need Help" is loaded
+	*
+	*/
 	if (needGeoloc) {
 		geolocation();
 	}
+
 
 
 	/**
@@ -58,16 +76,6 @@ $(document).ready(function(){
 		e.preventDefault();
 
 		changeUsername();
-	});
-
-
-
-	/**
-	* Show change password form on button push
-	*
-	*/
-	$('#changePassword').click(function(){
-		$('.hiddenForm').show();
 	});
 
 });//jQuery END
@@ -149,7 +157,7 @@ function changeUsername() {
 	var email = $('#email').val();
 
 	$.ajax({
-		type: 'GET',
+		type: 'post',
 		url: '/osco/app/Controller/UserController.php',
 		data: {
 			'username' : newUsername,
@@ -166,7 +174,7 @@ function changeUsername() {
 * Geolocation Function
 *
 */
-function geolocation () {
+function geolocation() {
 
 	$.ajax({
   		url: 'http://freegeoip.net/json/',

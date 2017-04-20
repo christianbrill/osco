@@ -28,9 +28,6 @@
 					<a href="<?= $this->url("content_stories") ?>">Stories</a>
 				</li>
 
-				<li <?php if($currentPage == 'needhelp'): ?> class="active"<?php endif; ?> role="presentation" id="needHelpNav">
-					<a href="<?v?>">Need Help?</a>
-
 				<li<?php if($currentPage == 'needhelp'): ?> class="active"<?php endif; ?> role="presentation">
 					<a href="<?= $this->url("content_needhelp") ?>">Need Help?</a>
 				</li>
