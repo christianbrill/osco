@@ -43,4 +43,7 @@
 
 		// ajax needhelp route
 		['POST', '/ajax/needhelp/', 'Content#ajaxNeedHelp', 'content_ajaxNeedHelp'],
+
+		// osco.dev/addstory/ÎÎ
+		['GET|POST', '/addstory/', 'Content#addstory', 'content_addstory'],
 	);

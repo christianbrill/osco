@@ -13,7 +13,7 @@ class ContentModel extends \W\Model\Model {
 			SELECT *
 			FROM stories
 			ORDER BY RAND()
-			LIMIT 3
+			LIMIT 9
 		';
 
 		$sth = $this->dbh->prepare($sql);
@@ -140,7 +140,27 @@ class ContentModel extends \W\Model\Model {
 		}
 	}
 
-	
+	public function insertStory ($stoTitle){
+			
+			//INNER JOIN users_id ON users.id
+    		//sth->bind(':currentUser', $currentUser);  $stoContent='', $stoTags='' , :stoContent, :stoTag , sto_content, sto_tags
+		$sql = '
+			INSERT INTO stories (sto_title)
+			VALUES  (:stoTitle)
+		';
+
+		$sth = $this->dbh->prepare($sql);
+		$sth->bindParam(':stoTitle', $stoTitle);
+
+    	//$sth->bind(':stoContent', $stoContent);
+    	//sth->bind(':stoTags', $stoTags);
+
+		if ($sth->execute() === false){
+			return $sth->errorInfo();
+		}else{
+			return 'It works';
+		}	
+	}
 
 	//END FUNCTIONS FOR stories && story details
 }
