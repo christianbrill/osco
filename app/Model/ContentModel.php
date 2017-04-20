@@ -140,25 +140,26 @@ class ContentModel extends \W\Model\Model {
 		}
 	}
 
-	public function insertStory ($stoTitle){
+	public function insertStory (/*$currentUser*/$stoTitle, $stoContent, $stoTags){
 			
-			//INNER JOIN users_id ON users.id
-    		//sth->bind(':currentUser', $currentUser);  $stoContent='', $stoTags='' , :stoContent, :stoTag , sto_content, sto_tags
 		$sql = '
-			INSERT INTO stories (sto_title)
-			VALUES  (:stoTitle)
+			INSERT INTO stories (sto_title, sto_content, sto_tags)
+			VALUES  (:stoTitle, :stoContent, :stoTags)
 		';
 
 		$sth = $this->dbh->prepare($sql);
-		$sth->bindParam(':stoTitle', $stoTitle);
 
-    	//$sth->bind(':stoContent', $stoContent);
-    	//sth->bind(':stoTags', $stoTags);
+    	//$sth->bindParam(':currentUser', $currentUser);
+		$sth->bindParam(':stoTitle', $stoTitle);
+    	$sth->bindParam(':stoContent', $stoContent);
+    	$sth->bindParam(':stoTags', $stoTags);
 
 		if ($sth->execute() === false){
 			return $sth->errorInfo();
 		}else{
-			return 'It works';
+			echo '<script language="javascript">';
+			echo 'alert("message successfully sent")';
+			echo '</script>';
 		}	
 	}
 

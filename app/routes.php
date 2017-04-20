@@ -24,6 +24,7 @@
 
 		// osco.dev/addstory/
 		['GET|POST', '/addstory/', 'Content#addstory', 'content_addstory'],
+		//['POST', '/addstory/sendstorytodb/', 'Content#sendStoryToDB', 'content_sendStoryToDB'],
 		
 		/**
 		* Signup/Login Routes

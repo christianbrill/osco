@@ -58,5 +58,4 @@ class UsersModel extends \W\Model\UsersModel {
             $stmt->errorInfo();
         }
     }
-
 }
