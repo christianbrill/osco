@@ -14,29 +14,19 @@ $(document).ready(function(){
 
 
 	/**
-	* Clicking the menu icon will make the nav menu appear
+	*
+	Browse to previous page function
 	*
 	*/
-	$(".menuIcon").click(function(e){
-		console.log("Show menu");
-		$("#mobileMenu").toggle();
+
+	$(".goBack").click(function(e){
+		window.history.back();
 	});
-
-
-
-	/**
-	*
-	*
-	*/
-	function goBack() {
-	    window.history.back();
-	}
-
 
 
 	/**
 	* Event Listener for burger menu
-	*
+	*  Clicking the menu icon will make the nav menu appear
 	*/
 	$(".menuIcon").click(function(e){
 		//console.log("Show menu or hide menu");
@@ -73,14 +63,6 @@ $(document).ready(function(){
 		// This will make the form appear which has the option
 		// to delete the user's account from the database
 		$('#formToDeleteAccount').show(500);
-
-		// active = true;
-		//
-		// if (active) {
-		//
-		// }
-
-		
 	});
 
 
@@ -89,8 +71,10 @@ $(document).ready(function(){
 	* This executes when the page "Need Help" is loaded
 	*
 	*/
-	if (needGeoloc) {
-		geolocation();
+	if (typeof needGeoloc != 'undefined'){
+		if (needGeoloc) {
+			geolocation();
+		}
 	}
 
 
@@ -104,6 +88,9 @@ $(document).ready(function(){
 
 		changeUsername();
 	});
+
+
+	$(".accordion").accordion();
 
 });//jQuery END
 
@@ -196,16 +183,11 @@ function geolocation() {
 
 			$.each(response2, function(object, valueObject){
 
-				var unique = valueObject.org_id > 0 && valueObject.org_id < 2;
-
-				if(unique){
-
-					if(response.country_name == valueObject.org_country){
-						content += "<h1>"+valueObject.org_name+"</h1>"+
-	    				"<p>"+valueObject.org_address+"</p>"+
-	    				"<p>"+valueObject.org_description+"</p>";
-	    			}
-				}
+				if(response.country_name == valueObject.org_country){
+					content += "<h1>"+valueObject.org_name+"</h1>"+
+	    			"<p>"+valueObject.org_address+"</p>"+
+	    			"<p>"+valueObject.org_description+"</p>";
+	    		}
 			});//end each
 
 			$("#organizationsDiv").html(content);

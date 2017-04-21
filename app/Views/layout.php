@@ -79,7 +79,7 @@
 						DESKTOP NAVIGATION
 		============================================================== -->
 		<nav id="desktopNavigation">
-			
+
 			<h1>
 				<a href="<?= $this->url("content_home") ?>">
 					<h1>OSCo</h1>
@@ -173,6 +173,7 @@
 
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 	<script type="text/javascript" src="<?= $this->assetUrl('js/script.js') ?>"></script>
 
 </body>

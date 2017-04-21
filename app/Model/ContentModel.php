@@ -59,7 +59,7 @@ class ContentModel extends \W\Model\Model {
 	// START FUNCTIONS FOR all stories viewing and filtering
 	public function getStoriesList($pageOffset, $nbStoriesPerPage){
 		$sql = '
-			SELECT sto_id, sto_title, sto_content, sto_tags, sto_thumbnail, sto_inserted, users_id
+			SELECT sto_id, sto_title, sto_content, sto_tags, sto_thumbnail, sto_inserted, users_id, usr_username
 			FROM stories
 			LEFT OUTER JOIN users ON stories.users_id = users.id
 			ORDER BY sto_id DESC
@@ -73,7 +73,7 @@ class ContentModel extends \W\Model\Model {
 
 	public function getOneStory($id){
 		$sql = '
-			SELECT sto_title, sto_content, sto_tags, sto_thumbnail, sto_inserted, users_id
+			SELECT sto_title, sto_content, sto_tags, sto_thumbnail, sto_inserted, users_id, usr_username
 			FROM stories
 			LEFT OUTER JOIN users ON stories.users_id = users.id
 			WHERE sto_id = :id
@@ -91,6 +91,7 @@ class ContentModel extends \W\Model\Model {
 		$sql = '
 			SELECT sto_tags
 			FROM stories
+			ORDER BY RAND()
 		';
 
 		$sth = $this->dbh->prepare($sql);
@@ -100,9 +101,10 @@ class ContentModel extends \W\Model\Model {
 			$str = '';
 			foreach($getAllTagResults as $tagLine) {
 				$str .= $tagLine['sto_tags'].',';
+
 			}
 
-			return $str;
+			return substr($str, 0, -1);
 		}
 	}
 
@@ -124,7 +126,7 @@ class ContentModel extends \W\Model\Model {
 				$str .= $tagLine['sto_tags'].',';
 			}
 
-			return $str;
+			return substr($str, 0, -1);
 		}
 	}
 
@@ -140,25 +142,25 @@ class ContentModel extends \W\Model\Model {
 		}
 	}
 
-	public function insertStory ($stoTitle){
+	public function insertStory ($currentUser, $stoTitle, $stoContent, $stoTags){
 			
 			//INNER JOIN users_id ON users.id
-    		//sth->bind(':currentUser', $currentUser);  $stoContent='', $stoTags='' , :stoContent, :stoTag , sto_content, sto_tags
+    		// :stoContent, :stoTag , sto_content, sto_tags
 		$sql = '
-			INSERT INTO stories (sto_title)
-			VALUES  (:stoTitle)
+			INSERT INTO stories (users_id, sto_title, sto_content, sto_tags)
+			VALUES  (:currentUser, :stoTitle, :stoContent, :stoTags)
 		';
 
 		$sth = $this->dbh->prepare($sql);
+		$sth->bindParam(':currentUser', $currentUser);
 		$sth->bindParam(':stoTitle', $stoTitle);
-
-    	//$sth->bind(':stoContent', $stoContent);
-    	//sth->bind(':stoTags', $stoTags);
+    	$sth->bindParam(':stoContent', $stoContent);
+    	$sth->bindParam(':stoTags', $stoTags);
 
 		if ($sth->execute() === false){
 			return $sth->errorInfo();
 		}else{
-			return 'It works';
+			return debug($stoTitle);
 		}	
 	}
 

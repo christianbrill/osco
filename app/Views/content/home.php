@@ -2,6 +2,7 @@
 
 <?php $this->start('main_content') ?>
 	<!--Here starts the "Need Help" box -->
+<div>
 	
 	<section id="rightColumn">
 		<a href="<?= $this->url("content_needhelp")?>">		
@@ -13,8 +14,7 @@
 		</a>
 	</section>
 
-	<button id="refreshStories">Refresh Stories</button>
-	<!--<span id="refreshStories" class="glyphicon glyphicon-refresh" aria-hidden="true"></span>-->
+	<a href=""><span id="refreshStories" class="glyphicon glyphicon-refresh" aria-hidden="true"><br> Refresh</span></a>
 
 	<section id="ajaxHomeStories">
 	<?php foreach($randomStories as $story) : ?>
@@ -28,5 +28,6 @@
 		</article>
 	<?php endforeach; ?>
 	</section>
+</div>	
 
 <?php $this->stop('main_content') ?>
