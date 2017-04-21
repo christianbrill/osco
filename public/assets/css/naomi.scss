@@ -28,6 +28,26 @@ header {
 	z-index:1000;
 }
 
+// Accordion jquery UI
+.accordion {
+	width: 800px;
+    margin: auto;
+    margin-top: 200px;
+	margin-bottom: 10px;
+    padding: 20px;
+    background-color: white;
+
+	h2 {
+    	margin: 0;
+    	padding: 20px;
+    	text-align: center;
+    	font-size: 30px;
+    	background-color: #ecf0f1;
+    	border-radius: 5px;
+		margin-bottom: 10px;
+    }
+}
+
 #desktopNavigation {
 	display:none;
 }
@@ -193,6 +213,10 @@ ul {
 
 		}
 	}
+	#refreshStories{
+		background-color:black;
+		text-align:center;
+	}
 }
 
 #needHelpBox {
@@ -287,6 +311,7 @@ footer {
 		}
 	}
 }
+
 /* DESKTOP ----------------------------------------------------- */
 @media screen and (min-width: 1000px) {
 	header {
@@ -360,23 +385,23 @@ footer {
 	}
 
 
-	#main {
+	/*#main {
 		display:flex;
 		flex-direction: column;
 		align-items: center;
 
 		section {
 			margin:2em 0;
-			width:70%;
+			width:70vw;
 		}
 
-	}
+	}*/
 
 	#ajaxHomeStories{
 		flex-flow: row wrap;
 		justify-content: space-around;
-		width:100%;
-
+		width:70vw;
+		background-color:red;
 		article {
 			display:inline-block;
 			overflow-wrap: break-word;
@@ -431,6 +456,8 @@ footer {
 		width: 300px;
 		margin: auto;
 	}
+
+
 
 
 } // media screen end
