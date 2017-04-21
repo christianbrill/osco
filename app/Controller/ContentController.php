@@ -5,7 +5,7 @@ namespace Controller;
 use \W\Controller\Controller;
 use \Model\ContentModel;
 
-// comment comment
+// comment comment 
 
 
 class ContentController extends Controller {
@@ -18,9 +18,9 @@ class ContentController extends Controller {
     * about/contactform function
     *
     */
-    public function contactform()
+    public function contactform() 
     {
-
+//trim and strip tags from form data
         if(!empty($_POST)) {
             $email = isset($_POST['contactEmail']) ? trim(strip_tags($_POST['contactEmail'])) : '';
 
@@ -29,9 +29,9 @@ class ContentController extends Controller {
             $lname = isset($_POST['contactLname']) ? trim(strip_tags($_POST['contactLname'])) : '';
 
             $message = isset($_POST['contactMessage']) ? trim(strip_tags($_POST['contactMessage'])) : '';
-
+//validating form data
             $errorList = array();
-            // Je valide les données
+           
             if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
                 $errorList[] = 'Please enter a valid email address!';
             }
@@ -44,23 +44,21 @@ class ContentController extends Controller {
             if (strlen($message) <= 10)  {
                 $errorList[] = 'Your message is too short, it must contain at least 10 characters!';
             }
-
+//setting vriables and urls for captcha
             $captcha = $_POST['g-recaptcha-response'];
 
             $googleURL = "https://www.google.com/recaptcha/api/siteverify";
 
             $secret = "6Le43B0UAAAAAFKWLgoG-SdxGTUqIU-N_SbbSGi1";
-
+            
             $url = "". $googleURL ."?secret=".$secret."&response=".$captcha."";
 
             $this->res[] = file_get_contents($url);
 
             if (!empty($captcha) && json_decode($this->res[0])->success == "1") {
 
-        // If CAPTCHA is successfully completed...
-
-        // Paste mail function or whatever else you want to happen here!
-               if (empty($errorList)) {
+ // If CAPTCHA is successfully completed...
+             if (empty($errorList)) {
                 $isSent=\Helper\Tools::sendEmail('osco.contact@gmail.com', 'The user with email address: '. $email. ' & First name: '. $fname. ' & Last name: '. $lname.' has sent the following message:', $message, $message );
 
 
@@ -75,16 +73,14 @@ class ContentController extends Controller {
             }
 
         } else {
-           $errorList[] = '<p>Please go back and make sure you check the security CAPTCHA box.</p><br>';
-       }
+         $errorList[] = '<p>Please go back and make sure you check the security CAPTCHA box.</p><br>';
+     }
 
-       if (!empty($errorList)) {
+     if (!empty($errorList)) {
         $this->flash(join('<br>', $errorList), 'danger');
 
-    }
-            /*if ($isSent){
-                $this->redirectToRoute('content_contactform');
-            }*/
+    }   
+            
         }
         $this->show('content/about');
     }
@@ -185,7 +181,7 @@ class ContentController extends Controller {
           'searchResults' => $searchResults,
           'nbResults' => $nbResults,
           'page' => $page
-        ]);
+          ]);
     }
 
 
@@ -215,7 +211,12 @@ class ContentController extends Controller {
         // POUR BENJAMIN: LE PROBLÈME EST ICI
         $tagsLine = $storiesModel->getTagString();
         $getEachTag = explode(",", $tagsLine);
-        //debug($getEachTag);
+        debug($getEachTag);
+
+        /*public function search(array $getEachTag, $operator = 'OR', $stripTags = true){
+
+        }*/
+
 
         $this->show('content/stories', [
             'storiesList' => $storiesList,
@@ -272,7 +273,6 @@ class ContentController extends Controller {
 		$showOrganizations = $storiesModel->getOrganization();
 		$this->showJson($showOrganizations);
 	}
-
 
 	/**
 	* Add a Story method
