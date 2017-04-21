@@ -13,8 +13,7 @@
 		</a>
 	</section>
 
-	<button id="refreshStories">Refresh Stories</button>
-	<!--<span id="refreshStories" class="glyphicon glyphicon-refresh" aria-hidden="true"></span>-->
+	<a href=""><span id="refreshStories" class="glyphicon glyphicon-refresh" aria-hidden="true"><br> Refresh</span></a>
 
 	<section id="ajaxHomeStories">
 	<?php foreach($randomStories as $story) : ?>

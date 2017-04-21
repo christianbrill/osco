@@ -256,6 +256,8 @@ class ContentController extends Controller {
 	*/
 	public function needhelp(){
 
+
+
 		$this->show('content/needhelp');
 	}
 
@@ -279,10 +281,14 @@ class ContentController extends Controller {
 	public function addStory () {
 		$this->allowTo("user");
 
-		$stoTitle = isset($_POST['storyTitle']) ? trim(strip_tags($_POST['storyTitle']	)) : '';
+		$stoTitle = isset($_POST['storyTitle']) ? trim(strip_tags($_POST['storyTitle'])) : '';
+		$stoContent = isset($_POST['storyContent']) ? trim(strip_tags($_POST['storyContent'])) : '';
+		$stoTags = isset($_POST['storyTags']) ? trim(strip_tags($_POST['storyTags'])) : '';
+		$currentUser = $_SESSION['user']['id'];
+
 
 		$addStoryModel = new \Model\ContentModel();
-		$addStory = $addStoryModel->insertStory($stoTitle);
+		$addStory = $addStoryModel->insertStory($currentUser, $stoTitle, $stoContent, $stoTags);
 
 		$this->show('content/addstory', ['addStory' => $addStory]);
 	}
