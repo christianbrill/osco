@@ -25,8 +25,11 @@
 		// osco.dev/addstory/
 		['GET|POST', '/addstory/', 'Content#addstory', 'content_addstory'],
 
+		// osco.dev/blog
+		['GET|POST', '/articles/', 'Content#articles', 'content_articles'],
+
 		/**
-		* Signup/Login Routes
+		* Signup/Login
 		*/
 
 		// osco.dev/signup/

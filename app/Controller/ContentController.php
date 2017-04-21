@@ -31,7 +31,7 @@ class ContentController extends Controller {
             $message = isset($_POST['contactMessage']) ? trim(strip_tags($_POST['contactMessage'])) : '';
 //validating form data
             $errorList = array();
-           
+
             if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
                 $errorList[] = 'Please enter a valid email address!';
             }
@@ -58,13 +58,12 @@ class ContentController extends Controller {
             if (!empty($captcha) && json_decode($this->res[0])->success == "1") {
 
  // If CAPTCHA is successfully completed...
-             if (empty($errorList)) {
+               if (empty($errorList)) {
                 $isSent=\Helper\Tools::sendEmail('osco.contact@gmail.com', 'The user with email address: '. $email. ' & First name: '. $fname. ' & Last name: '. $lname.' has sent the following message:', $message, $message );
 
 
                 if ($isSent){
                     $this->flash('We have received your email, and we will get back to you as soon as possible', 'success');
-
                 }
 
             }
@@ -73,17 +72,17 @@ class ContentController extends Controller {
             }
 
         } else {
-         $errorList[] = '<p>Please go back and make sure you check the security CAPTCHA box.</p><br>';
-     }
+           $errorList[] = '<p>Please go back and make sure you check the security CAPTCHA box.</p><br>';
+       }
 
-     if (!empty($errorList)) {
+       if (!empty($errorList)) {
         $this->flash(join('<br>', $errorList), 'danger');
 
     }   
-            
-        }
-        $this->show('content/about');
-    }
+
+}
+$this->show('content/about');
+}
 
 
 	/**
@@ -282,4 +281,81 @@ class ContentController extends Controller {
 		$this->show('content/addstory', ['addStory' => $addStory]);
 	}
 
+/*-----------------------------------------------------------------------------------*/
+
+/**
+    * Add a blogpost method
+    *
+    */
+    public function addArticle () {
+        $this->allowTo("user");
+
+        $artTitle = isset($_POST['articleTitle']) ? trim(strip_tags($_POST['articleTitle']  )) : '';
+
+        $addArtModel = new \Model\ContentModel();
+        $addArticle = $addArtModel->insertArticle($artTitle);
+
+        $this->show('content/addarticle', ['addArticle' => $addArt]);
+    }
+
+
+
+    /**
+    * All articles
+    *
+    */
+    public function articles(){
+
+        // !!!!!!! NOT WORKING YET
+        //PAGINATION START
+        $page = 1;
+        $nbArticlesPerPage = 4;
+        $pageOffset = 0;
+
+        if(isset($_GET['page'])){
+            $page = intval($_GET['page']);
+            $pageOffset = ($page-1)*$nbArticlesPerPage;
+        }
+        //PAGINATION END
+
+        $articlesModel = new \Model\ContentModel();
+        $articlesList = $articlesModel->getArticlesList($pageOffset, $nbArticlesPerPage);
+        $nbArticles = count($articlesList);
+
+        // POUR BENJAMIN: LE PROBLÈME EST ICI
+       /* $tagsLine = $ArticlesModel->getTagString();
+        $getEachTag = explode(",", $tagsLine);*/
+        //debug($getEachTag);
+
+        $this->show('content/articles', [
+            'articlesList' => $articlesList,
+            'nbArticles' => $nbArticles,
+            'page' => $page,
+            ]);
+    }
+
+
+
+    /**
+    * article Detail
+    *
+    */
+    public function article($id){
+
+        $articleModel = new \Model\ArticleModel();
+        $articleInfos = $articleModel->getOneArticle($id);
+        //debug($storyInfos);
+
+       /* $tagsLine = $storyModel->getTagStringForStory($id);
+        $getEachTag = explode(",", $tagsLine);
+        //debug($getEachTag);*/
+
+        $this->show('content/story', [
+            'storyInfos' => $storyInfos,
+           // 'getEachTag' => $getEachTag
+            ]);
+    }
 }
+
+
+

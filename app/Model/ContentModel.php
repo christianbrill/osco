@@ -162,5 +162,18 @@ class ContentModel extends \W\Model\Model {
 		}	
 	}
 
+	public function getArticlesList(){
+		$sql = '
+			SELECT *
+			FROM articles
+			ORDER BY art_inserted DESC
+			
+		';
+
+		$sth = $this->dbh->prepare($sql);
+		$sth->execute();
+		return $sth->fetchAll();
+	}
+
 	//END FUNCTIONS FOR stories && story details
 }
