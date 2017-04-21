@@ -211,7 +211,12 @@ class ContentController extends Controller {
         // POUR BENJAMIN: LE PROBLÈME EST ICI
         $tagsLine = $storiesModel->getTagString();
         $getEachTag = explode(",", $tagsLine);
-        //debug($getEachTag);
+        debug($getEachTag);
+
+        /*public function search(array $getEachTag, $operator = 'OR', $stripTags = true){
+
+        }*/
+
 
         $this->show('content/stories', [
             'storiesList' => $storiesList,

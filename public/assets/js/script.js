@@ -14,29 +14,19 @@ $(document).ready(function(){
 
 
 	/**
-	* Clicking the menu icon will make the nav menu appear
+	*
+	Browse to previous page function
 	*
 	*/
-	$(".menuIcon").click(function(e){
-		console.log("Show menu");
-		$("#mobileMenu").toggle();
+
+	$(".goBack").click(function(e){
+		window.history.back();
 	});
-
-
-
-	/**
-	*
-	*
-	*/
-	function goBack() {
-	    window.history.back();
-	}
-
 
 
 	/**
 	* Event Listener for burger menu
-	*
+	*  Clicking the menu icon will make the nav menu appear
 	*/
 	$(".menuIcon").click(function(e){
 		//console.log("Show menu or hide menu");
@@ -89,8 +79,10 @@ $(document).ready(function(){
 	* This executes when the page "Need Help" is loaded
 	*
 	*/
-	if (needGeoloc) {
-		geolocation();
+	if (typeof needGeoloc != 'undefined'){
+		if (needGeoloc) {
+			geolocation();
+		}
 	}
 
 
