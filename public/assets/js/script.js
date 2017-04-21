@@ -90,9 +90,7 @@ $(document).ready(function(){
 	});
 
 
-	$(".slide-toggle").click(function(){
-            $(".box").slideToggle();
-        });
+	$(".accordion").accordion();
 
 });//jQuery END
 
