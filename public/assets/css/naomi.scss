@@ -28,9 +28,24 @@ header {
 	z-index:1000;
 }
 
-// This creates the accordion effect by initially hiding the div
-div.panel {
-    display: none;
+// Accordion jquery UI
+.accordion {
+	width: 800px;
+    margin: auto;
+    margin-top: 200px;
+	margin-bottom: 10px;
+    padding: 20px;
+    background-color: white;
+
+	h2 {
+    	margin: 0;
+    	padding: 20px;
+    	text-align: center;
+    	font-size: 30px;
+    	background-color: #ecf0f1;
+    	border-radius: 5px;
+		margin-bottom: 10px;
+    }
 }
 
 #desktopNavigation {
