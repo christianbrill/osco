@@ -3,8 +3,10 @@
 <?php $this->start('main_content') ?>
 
     <form method="POST">
-        <input type="text" name="storyTitle">
-        <input type="submit" name="storySubmit">
+        <input type="text" name="storyTitle"><br><br>
+        <textarea name="storyContent"></textarea><br><br>
+        <input type="text" name="storyTags"><br><br>
+        <input type="submit" name="storySubimt" value="Post Story">
     </form>
 
    

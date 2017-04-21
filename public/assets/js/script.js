@@ -196,16 +196,11 @@ function geolocation() {
 
 			$.each(response2, function(object, valueObject){
 
-				var unique = valueObject.org_id > 0 && valueObject.org_id < 2;
-
-				if(unique){
-
-					if(response.country_name == valueObject.org_country){
-						content += "<h1>"+valueObject.org_name+"</h1>"+
-	    				"<p>"+valueObject.org_address+"</p>"+
-	    				"<p>"+valueObject.org_description+"</p>";
-	    			}
-				}
+				if(response.country_name == valueObject.org_country){
+					content += "<h1>"+valueObject.org_name+"</h1>"+
+	    			"<p>"+valueObject.org_address+"</p>"+
+	    			"<p>"+valueObject.org_description+"</p>";
+	    		}
 			});//end each
 
 			$("#organizationsDiv").html(content);
