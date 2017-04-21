@@ -278,7 +278,7 @@ class ContentController extends Controller {
 	* Add a Story method
 	*
 	*/
-	public function addStory () {
+	public function addStoryPage () {
 		$this->allowTo("user");
 
 		$stoTitle = isset($_POST['storyTitle']) ? trim(strip_tags($_POST['storyTitle'])) : '';

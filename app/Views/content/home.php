@@ -2,6 +2,7 @@
 
 <?php $this->start('main_content') ?>
 	<!--Here starts the "Need Help" box -->
+<div>
 	
 	<section id="rightColumn">
 		<a href="<?= $this->url("content_needhelp")?>">		
@@ -27,5 +28,6 @@
 		</article>
 	<?php endforeach; ?>
 	</section>
+</div>	
 
 <?php $this->stop('main_content') ?>
