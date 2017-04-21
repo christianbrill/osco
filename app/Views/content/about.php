@@ -10,13 +10,13 @@
             <h1>General</h1>
 
             <div>
-                <h2>What does OSCo stand for?</h2>
-                <p>Online Support Community</p>
+                <h2 class="accordion"><a href="#">What does OSCo stand for?</a></h2>
+                <div class="panel">Online Support Community</div>
             </div>
 
             <div>
-                <h2>What are we all about?</h2>
-                <p>Just as our name suggests, we stand up for supporting women all over the planet. This platform can be used to share your stories of success, advice, or defeat. However, no matter what your story is, the most important thing is to tell it. This platform is to be reminded of the fact that you are not alone and there is always help to be found, no matter where you are.</p>
+                <h2 class="accordion"><a href="#">What are we all about?</a></h2>
+                <div class="panel">Just as our name suggests, we stand up for supporting women all over the planet. This platform can be used to share your stories of success, advice, or defeat. However, no matter what your story is, the most important thing is to tell it. This platform is to be reminded of the fact that you are not alone and there is always help to be found, no matter where you are.</div>
             </div>
         </section>
 

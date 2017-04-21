@@ -89,6 +89,11 @@ $(document).ready(function(){
 		changeUsername();
 	});
 
+
+	$(".slide-toggle").click(function(){
+            $(".box").slideToggle();
+        });
+
 });//jQuery END
 
 

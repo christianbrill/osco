@@ -28,6 +28,11 @@ header {
 	z-index:1000;
 }
 
+// This creates the accordion effect by initially hiding the div
+div.panel {
+    display: none;
+}
+
 #desktopNavigation {
 	display:none;
 }
@@ -287,6 +292,7 @@ footer {
 		}
 	}
 }
+
 /* DESKTOP ----------------------------------------------------- */
 @media screen and (min-width: 1000px) {
 	header {
@@ -431,6 +437,8 @@ footer {
 		width: 300px;
 		margin: auto;
 	}
+
+
 
 
 } // media screen end
