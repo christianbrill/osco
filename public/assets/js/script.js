@@ -63,14 +63,6 @@ $(document).ready(function(){
 		// This will make the form appear which has the option
 		// to delete the user's account from the database
 		$('#formToDeleteAccount').show(500);
-
-		// active = true;
-		//
-		// if (active) {
-		//
-		// }
-
-
 	});
 
 
@@ -96,15 +88,6 @@ $(document).ready(function(){
 
 		changeUsername();
 	});
-
-
-
-	/**
-	* FAQ Toggle Section
-	*
-	*/
-	
-
 
 });//jQuery END
 
