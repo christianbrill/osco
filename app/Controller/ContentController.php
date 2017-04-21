@@ -213,9 +213,7 @@ class ContentController extends Controller {
         $getEachTag = explode(",", $tagsLine);
         debug($getEachTag);
 
-        /*public function search(array $getEachTag, $operator = 'OR', $stripTags = true){
-
-        }*/
+        /*$getTagLink = $storiesModel->search($getEachTag);*/
 
 
         $this->show('content/stories', [
