@@ -344,33 +344,26 @@ class UserController extends Controller {
 
 
 	 /** ***********************************************************************
- 	 * Delete Username
+ 	 * Change Username
 	 *
  	 ************************************************************************ */
 	 public function changeUsername() {
 
 		 $this->allowTo('user');
 
-		 if (!empty($_POST)) {
+		 $newUsername = isset($_POST['username']) ? trim($_POST['username']) : '';
+		 $userId = $_SESSION['user']['id'];
 
-			 $newUsername = isset($_POST['username']) ? trim($_POST['username']) : '';
-			 $userId = $_SESSION['user']['id'];
+		 $updateUsername = new \Model\UsersModel();
+		 $updateUsername->update(array(
+			 'usr_username' => $newUsername,
+		 ), $userId);
 
-			 $updateUsername = new \Model\UsersModel();
-			 $updateUsername->update(array(
-				 'usr_username' => $newUsername,
-			 ), $userId);
-
-			 $this->flash('Your username was changed successfully.', 'success');
-
-		 } else {
-			 $this->flash('There was an error changing your username. Please try again.', 'danger');
-		 }
+		 $this->flash('Your username was changed successfully.', 'success');
 
 		 $this->redirectToRoute('user_profile');
 
 	 }
-
 
 
 

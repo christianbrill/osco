@@ -90,6 +90,7 @@ $(document).ready(function(){
 	});
 
 
+	// This creates the accordion on the about page
 	$(".accordion").accordion();
 
 });//jQuery END

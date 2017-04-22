@@ -7,6 +7,9 @@
         This section accesses the logged-in user and displays their username.
         The user can then change it at will.
         -->
+
+        <?= debug($w_user); ?>
+
         <section>
             <form class="form-group" action="<?= $this->url("user_changeusername"); ?>" method="post" id="changeUsername">
                 <h2>Username: </h2>
@@ -23,7 +26,6 @@
 
             <h2>Country: </h2>
             <p><?= $w_user['usr_country']; ?></p>
-
         </section>
 
         <!-- The following two are links to change your password and to delete your row (account) from the database -->
