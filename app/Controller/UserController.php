@@ -379,32 +379,32 @@ class UserController extends Controller {
 
 			 // We access the id to find the user in the database later
 			 $userId = $_SESSION['user']['id'];
-			 // The email is accessed so we can compare passwords in the database later
-			 $userEmail = $_SESSION['user']['email'];
 			 // We also grab the password the user typed in to see if it's the same as the one in the database
 			 $passwordToDeleteAccount = isset($_POST['passwordToDeleteAccount']) ? trim(strip_tags($_POST['passwordToDeleteAccount'])) : '';
 
-			 // Instantiation of the authModel to validate user info
+			 // We have to encrypt the new password again before we can use the method to see if password is correct
 			 $authentificationModel = new \W\Security\AuthentificationModel();
-			 // Now we hash the typed in password
 			 $hashedPassword = $authentificationModel->hashPassword($passwordToDeleteAccount);
 
-			 $isPasswordCorrect = $authentificationModel->isValidLoginInfo($userEmail, $hashedPassword);
+			 // Now we can use the method which checks if passwords match
+			 $userModel = new \Model\UsersModel();
+			 $passwordCheckUser = $userModel->isPasswordCorrect($userId, $hashedPassword);
 
-			 if ($isPasswordCorrect === $userId) {
-				 $usersModel = new \Model\UsersModel();
-				 $deleteUser = $usersModel->delete($userId);
+			 // If the above method returns true, delete the user
+			 if ($passwordCheckUser) {
+				 $userModel = new \Model\UsersModel();
+				 $passwordCheckUser = $userModel->deleteUserAccount($userId);
 
-				 $this->flash('Your account has been deleted successfully.', 'success');
+				 if ($passwordCheckUser) {
+					 $this->flash('Your account has been deleted successfully.', 'success');
+				 }
 
 			 } else {
 				 $this->flash('Your password is incorrect.', 'danger');
 			 }
 		 }
 
-		 $this->redirectToRoute('content_home');
 	 }
-
 
 
 	 /** ***********************************************************************

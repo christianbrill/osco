@@ -8,8 +8,6 @@
         The user can then change it at will.
         -->
 
-        <?= debug($w_user); ?>
-
         <section>
             <form class="form-group" action="<?= $this->url("user_changeusername"); ?>" method="post" id="changeUsername">
                 <h2>Username: </h2>
@@ -51,7 +49,8 @@
         <section>
             <h2 id="confirmLink"><a href="#">Delete your account</a></h2>
 
-            <form class="form-group" id="formToDeleteAccount" action="" method="post">
+            <!-- This form is initially hidden and only shows up if you hit the above link. -->
+            <form class="form-group" id="formToDeleteAccount" action="<?= $this->url('user_deleteaccount'); ?>" method="post">
                 <label for="passwordToDeleteAccount">Please enter your password to delete your account</label>
                 <input class="form-control" type="password" name="passwordToDeleteAccount" value=""><br>
 
