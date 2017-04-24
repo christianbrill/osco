@@ -159,9 +159,6 @@ class ContentModel extends \W\Model\Model {
 
 		if ($sth->execute() === false){
 			return $sth->errorInfo();
-		}else{
-			
-			return debug($stoTitle);
 		}	
 	}
 
