@@ -30,9 +30,6 @@
 		['POST|GET', '/addstory/', 'Content#addStoryPage', 'content_addStoryPage'],
 		//['POST', '/addstory/', 'Content#addstory', 'content_addstory'],
 
-		// osco.dev/blog
-		['GET|POST', '/articles/', 'Content#articles', 'content_articles'],
-
 		/**
 		* Signup/Login
 		*/
@@ -85,8 +82,6 @@
 
 		// osco.dev/addarticle/
 		['GET|POST', '/addarticle/', 'Content#addArticlePage', 'content_addArticlePage'],
-
-		//['POST', '/addarticle/', 'Content#addArticlePage', 'content_addArticlePage'],
 
 		// ajax profile route
 		['GET', '/ajax/profile/', 'User#ajaxLoadMore', 'user_ajaxLoadMore'],
