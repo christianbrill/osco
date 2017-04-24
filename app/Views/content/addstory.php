@@ -1,4 +1,4 @@
-<?php $this->layout('layout', ['title' => 'Add a Story', 'currentPage' => 'addstory']) ?>
+<?php $this->layout('layout', ['title' => 'Add a Story', 'currentPage' => 'addStoryPage']) ?>
 
 <?php $this->start('main_content') ?>
 

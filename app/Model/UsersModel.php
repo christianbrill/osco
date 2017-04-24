@@ -43,7 +43,6 @@ class UsersModel extends \W\Model\UsersModel {
     }
 
 
-
     public function deleteUserAccount($userId) {
 
         $sqlRequest = '

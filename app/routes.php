@@ -23,11 +23,14 @@
 		['GET', '/needhelp/', 'Content#needhelp', 'content_needhelp'],
 
 		// osco.dev/addstory/
-		['GET|POST', '/addstory/', 'Content#addstory', 'content_addstory'],
+		['GET|POST', '/addstory/', 'Content#addStoryPage', 'content_addStoryPage'],
 		//['POST', '/addstory/sendstorytodb/', 'Content#sendStoryToDB', 'content_sendStoryToDB'],
-		
+
+		// osco.dev/blog
+		['GET|POST', '/articles/', 'Content#articles', 'content_articles'],
+
 		/**
-		* Signup/Login Routes
+		* Signup/Login
 		*/
 
 		// osco.dev/signup/
@@ -47,10 +50,13 @@
 		['GET', '/logout/', 'User#logout', 'user_logout'],
 
 		// osco.dev/changePassword/
-		//['GET', '/changepassword/', 'User#changePassword', 'user_changepassword'],
+		['GET|POST', '/changepassword/', 'User#changePassword', 'user_changepassword'],
 
 		// osco.dev/deleteaccount/
 		['GET|POST', '/deleteaccount/', 'User#deleteAccount', 'user_deleteaccount'],
+
+		// osco.dev/changeusername/
+		['GET|POST', '/changeusername/', 'User#changeUsername', 'user_changeusername'],
 
 		/**
 		* Ajax Routes

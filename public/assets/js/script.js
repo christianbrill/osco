@@ -14,27 +14,19 @@ $(document).ready(function(){
 
 
 	/**
-	* Clicking the menu icon will make the nav menu appear
+	*
+	Browse to previous page function
 	*
 	*/
-	$(".menuIcon").click(function(e){
-		console.log("Show menu");
-		$("#mobileMenu").toggle();
+
+	$(".goBack").click(function(e){
+		window.history.back();
 	});
-
-
-
-
-	function goBack() {
-	    window.history.back();
-	}
-
-
 
 
 	/**
 	* Event Listener for burger menu
-	*
+	*  Clicking the menu icon will make the nav menu appear
 	*/
 	$(".menuIcon").click(function(e){
 		//console.log("Show menu or hide menu");
@@ -63,19 +55,26 @@ $(document).ready(function(){
 	* Delete account on button push
 	*
 	*/
-	$('#confirmLink').click(function(){
+	var active = false;
 
-		userConfirm();
+	$('#confirmLink').click(function(e){
+		e.preventDefault();
+
+		// This will make the form appear which has the option
+		// to delete the user's account from the database
+		$('#formToDeleteAccount').show(500);
 	});
 
 
 
 	/**
-	* /This executes when the page "Need Help" is loaded
+	* This executes when the page "Need Help" is loaded
 	*
 	*/
-	if (needGeoloc) {
-		geolocation();
+	if (typeof needGeoloc != 'undefined'){
+		if (needGeoloc) {
+			geolocation();
+		}
 	}
 
 
@@ -89,6 +88,10 @@ $(document).ready(function(){
 
 		changeUsername();
 	});
+
+
+	// This creates the accordion on the about page
+	$(".accordion").accordion();
 
 });//jQuery END
 
@@ -130,32 +133,6 @@ function refreshStories() {
 	});//end ajaxHomeStories
 
 }//refreshStories function end
-
-
-
-/**
-* Delete Account Function
-*
-*/
-// function deleteAccount() {
-//
-// 	var deleteUser = confirm("Do you really want to delete your account?");
-//
-// 	if (deleteUser === true) {
-//
-// 		var userEmail = $('#email').val();
-//
-// 		$.ajax({
-// 			type: 'GET',
-// 			url: '/osco/app/Model/UsersModel.php',
-// 			data: {
-// 				'userEmail' : userEmail
-// 			}
-// 		}).done(function(response) {
-// 			console.log(response);
-// 		});
-// 	}
-// }
 
 
 
@@ -207,28 +184,23 @@ function geolocation() {
 
 			$.each(response2, function(object, valueObject){
 
-				var unique = valueObject.org_id > 0 && valueObject.org_id < 2;
-
-				if(unique){
-
-					if(response.country_name == valueObject.org_country){
-						content += "<h1>"+valueObject.org_name+"</h1>"+
-	    				"<p>"+valueObject.org_address+"</p>"+
-	    				"<p>"+valueObject.org_description+"</p>";
-	    			}
-				}
+				if(response.country_name == valueObject.org_country){
+					content += "<h1>"+valueObject.org_name+"</h1>"+
+	    			"<p>"+valueObject.org_address+"</p>"+
+	    			"<p>"+valueObject.org_description+"</p>";
+	    		}
 			});//end each
 
 			$("#organizationsDiv").html(content);
 
 		});
-	});//end ajax
-}//end function geolocation
+	});
+}
 
 
 
 /**
-* Confirm Function to redirect to deleteAccount in UserController
+* Confirm Function to redirect to "deleteAccount" in UserController
 *
 */
 function userConfirm() {
@@ -236,6 +208,6 @@ function userConfirm() {
 	var userConfirm = confirm('Are you sure you want to delete your account?');
 
 	if (userConfirm) {
-		document.getElementById('confirmLink').href="<?= $this->url('user_deleteaccount'); ?>";
+		document.getElementById('confirmAnchor').href="<?= $this->url('user_deleteaccount'); ?>";
 	}
 }

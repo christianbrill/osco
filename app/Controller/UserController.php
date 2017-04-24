@@ -344,6 +344,48 @@ class UserController extends Controller {
 
 
 	 /** ***********************************************************************
+ 	 * Change Username
+	 *
+ 	 ************************************************************************ */
+	 public function changeUsername() {
+
+		 $this->allowTo('user');
+
+		 if (!empty($_POST)) {
+			 // We get the new username that the user types in
+			 $newUsername = isset($_POST['username']) ? trim($_POST['username']) : '';
+			 // ID of the current user
+			 $userId = $_SESSION['user']['id'];
+
+			 // Then we can update the user's username by finding the ID
+			 $updateUsername = new \Model\UsersModel();
+			 $updateUsername->update(array(
+				 'usr_username' => $newUsername,
+			 ), $userId);
+
+			 // Instantiation of AuthentificationModel to log user out
+			 $authentificationModel = new \W\Security\AuthentificationModel();
+			 $authentificationModel->logUserOut();
+
+			 // Instantiation of UsersModel to log user back in
+			 $userModel = new \W\Model\UsersModel();
+			 $userInfos = $userModel->find($userId);
+
+			 // Then we add the user to the session
+			 $authentificationModel->logUserIn($userInfos);
+
+			 $this->flash('Your username was changed successfully.', 'success');
+
+			 $this->redirectToRoute('user_profile');
+		 } else {
+			 $this->flash('There was an error changing your username. Please try again.', 'danger');
+		 }
+
+	 }
+
+
+
+	 /** ***********************************************************************
  	 * Delete Account
 	 *
  	 ************************************************************************ */
@@ -351,16 +393,45 @@ class UserController extends Controller {
 
 		 $this->allowTo('user');
 
-		 // We access the id of the currently logged in user
-		 $userId = $_SESSION['user']['id'];
-		 //debug($userId);
+		 if (!empty($_POST)) {
 
-		 $usersModel = new \Model\UsersModel();
-		 $deleteUser = $usersModel->deleteUserAccount($userId);
+			 // We access the ID to find the user in the database later
+			 $userId = $_SESSION['user']['id'];
+			 // We also grab the password the user typed in to see if it's the same as the one in the database
+			 $passwordToDeleteAccount = isset($_POST['passwordToDeleteAccount']) ? trim(strip_tags($_POST['passwordToDeleteAccount'])) : '';
 
-		 $this->redirectToRoute('content_home');
+			 debug($userId);
+			 debug($passwordToDeleteAccount);
+
+			 // We have to encrypt the new password again before we can use the method to see if password is correct
+			 $authentificationModel = new \W\Security\AuthentificationModel();
+			 $hashedPassword = $authentificationModel->hashPassword($passwordToDeleteAccount);
+
+			 // Now we can use the method which checks if passwords match
+			 $userModel = new \Model\UsersModel();
+			 $passwordCheckUser = $userModel->isPasswordCorrect($userId, $hashedPassword);
+
+			 // If the above method returns true, delete the user
+			 if ($passwordCheckUser) {
+				 $userModel = new \Model\UsersModel();
+				 $passwordCheckUser = $userModel->deleteUserAccount($userId);
+
+				 if ($passwordCheckUser) {
+					 $this->flash('Your account has been deleted successfully.', 'success');
+
+
+					 $authentificationModel = new \W\Security\AuthentificationModel();
+					 $authentificationModel->logUserOut();
+				 }
+
+			 } else {
+				 $this->flash('Your password is incorrect.', 'danger');
+			 }
+		 }
+
+		 //$this->redirectToRoute('content_home');
+
 	 }
-
 
 
 	 /** ***********************************************************************
@@ -371,39 +442,43 @@ class UserController extends Controller {
 
 		 if (!empty($_POST)) {
 
-			 $passwordOne = isset($_POST['passwordOne']) ? trim($_POST['passwordOne']) : '';
-			 $passwordTwo = isset($_POST['passwordTwo']) ? trim($_POST['passwordTwo']) : '';
-			 $email = $_POST['email'];
+			 $newPasswordOne = isset($_POST['newPasswordOne']) ? trim($_POST['newPasswordOne']) : '';
+			 $newPasswordTwo = isset($_POST['newPasswordTwo']) ? trim($_POST['newPasswordTwo']) : '';
+			 $userId = $_SESSION['user']['id'];
 
 			 $errorList = array();
 
 			 // Password must be 8 characters long
-			 if (strlen($passwordOne) < 8) {
+			 if (strlen($newPasswordOne) < 8) {
  				$errorList[] = 'Your password needs to be at least 8 characters long.';
  			}
 
  			// Password One and Password Two need to be the same
- 			if ($passwordOne != $passwordTwo) {
+ 			if ($newPasswordOne != $newPasswordTwo) {
  				$errorList[] = 'Your passwords do not match.';
  			}
 
+			// If there are no errors
 			if (empty($errorList)) {
 
 				// We have to encrypt the new password again before we put it in the database
 				$authentificationModel = new \W\Security\AuthentificationModel();
-				$hashedPassword = $authentificationModel->hashPassword($passwordOne);
+				$hashedPassword = $authentificationModel->hashPassword($newPasswordOne);
 
+				// We have to instantiate another model to update the password
 				$model = new \Model\UsersModel();
 
 				$model->update(array(
 					'usr_password' => $hashedPassword
-				), $email);
+				), $userId);
 
 				$this->flash('Your password was changed successfully.', 'success');
 
 			} else {
 				$this->flash(join('<br>', $errorList), 'danger');
 			}
+
+			$this->redirectToRoute('user_profile');
 
 		 }
 	 }

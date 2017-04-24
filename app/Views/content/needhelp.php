@@ -24,6 +24,8 @@
 	    	
 	    	<label for="orginfo">More Information</label><br>
 	    	<textarea class="form-control" name="orginfo"></textarea><br>
+
+            <input type="submit" name="orgsubmit" class="btn btn-success">
    		</form>	
     <?php endif ?>
 
