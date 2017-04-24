@@ -107,7 +107,7 @@ class UserController extends Controller {
 			'countryList' => $countryList
 		));
 
-	} // public function signup() end
+	}
 
 
 
@@ -235,11 +235,11 @@ class UserController extends Controller {
 			 } else {
 				 $this->flash(join('<br>', $errorList), 'danger');
 			 }
-		 } // if (!empty($_POST)) end
+		 }
 
 		 $this->show('user/forgot');
 
-	 } // public function forgot end
+	 }
 
 
 
@@ -380,6 +380,7 @@ class UserController extends Controller {
 			 $this->flash('Your username was changed successfully.', 'success');
 
 			 $this->redirectToRoute('user_profile');
+
 		 } else {
 			 $this->flash('There was an error changing your username. Please try again.', 'danger');
 		 }
@@ -426,9 +427,7 @@ class UserController extends Controller {
 		$authentificationModel->logUserOut();
 
 		$this->redirectToRoute('content_home');
-
-
-
+		
 	 }
 
 
@@ -440,10 +439,12 @@ class UserController extends Controller {
 
 		 if (!empty($_POST)) {
 
+			 // We get the user's data
 			 $newPasswordOne = isset($_POST['newPasswordOne']) ? trim($_POST['newPasswordOne']) : '';
 			 $newPasswordTwo = isset($_POST['newPasswordTwo']) ? trim($_POST['newPasswordTwo']) : '';
 			 $userId = $_SESSION['user']['id'];
 
+			 // We create the errorList to display possible errors later
 			 $errorList = array();
 
 			 // Password must be 8 characters long
@@ -463,14 +464,25 @@ class UserController extends Controller {
 				$authentificationModel = new \W\Security\AuthentificationModel();
 				$hashedPassword = $authentificationModel->hashPassword($newPasswordOne);
 
-				// We have to instantiate another model to update the password
-				$model = new \Model\UsersModel();
+				// Instantiation of the user model to see if the password already exists
+				$userModel = new \W\Model\UsersModel();
+				$doesUserExist = $userModel->usernameExists($hashedPassword);
 
-				$model->update(array(
-					'usr_password' => $hashedPassword
-				), $userId);
+				// If the username does not already exist, update it in the databse
+				if ($doesUserExist === false) {
 
-				$this->flash('Your password was changed successfully.', 'success');
+					// We have to instantiate another model to update the password
+					$model = new \Model\UsersModel();
+
+					$model->update(array(
+						'usr_password' => $hashedPassword
+					), $userId);
+
+					$this->flash('Your password was changed successfully.', 'success');
+				} else {
+
+					$this->flash('This username already exists.', 'danger');
+				}
 
 			} else {
 				$this->flash(join('<br>', $errorList), 'danger');

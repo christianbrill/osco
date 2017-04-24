@@ -17,8 +17,6 @@
     </div>
 
     <div class="form-group">
-        <!-- <input type="text" class="form-control" name="country" value="<= isset($_POST['country']) ? htmlentities($_POST['country']) : ''; ?>" placeholder="Please enter you country"> -->
-
         <select name="selectedCountry" class="form-control">
             <option value="">Please select your country</option>
             <? foreach($countryList as $countries) : ?>
