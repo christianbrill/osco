@@ -106,7 +106,7 @@ class UsersModel extends Model
 	 * Function to see if password matches password in database
 	 *
 	 */
-	 public function isPasswordCorrect($userId=0, $hashedPassword='') {
+	 public function isPasswordCorrect($userId, $hashedPassword) {
 		 $sqlRequest = '
 		 	SELECT usr_password
 			FROM users
@@ -125,7 +125,7 @@ class UsersModel extends Model
 	 }
 
 
-	 public function deleteUserAccount($userId=0) {
+	 public function deleteUserAccount($userId) {
 		 $sqlRequest = '
 		 	DELETE FROM users
 			WHERE id = :userId

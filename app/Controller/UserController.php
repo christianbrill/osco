@@ -351,28 +351,35 @@ class UserController extends Controller {
 
 		 $this->allowTo('user');
 
-		 $newUsername = isset($_POST['username']) ? trim($_POST['username']) : '';
-		 $userId = $_SESSION['user']['id'];
+		 if (!empty($_POST)) {
+			 // We get the new username that the user types in
+			 $newUsername = isset($_POST['username']) ? trim($_POST['username']) : '';
+			 // ID of the current user
+			 $userId = $_SESSION['user']['id'];
 
-		 $updateUsername = new \Model\UsersModel();
-		 $updateUsername->update(array(
-			 'usr_username' => $newUsername,
-		 ), $userId);
+			 // Then we can update the user's username by finding the ID
+			 $updateUsername = new \Model\UsersModel();
+			 $updateUsername->update(array(
+				 'usr_username' => $newUsername,
+			 ), $userId);
 
-		 // Instantiation of AuthentificationModel to log user out
-		 $authentificationModel = new \W\Security\AuthentificationModel();
-		 $authentificationModel->logUserOut();
+			 // Instantiation of AuthentificationModel to log user out
+			 $authentificationModel = new \W\Security\AuthentificationModel();
+			 $authentificationModel->logUserOut();
 
-		 // Instantiation of UsersModel to log user back in
-		 $userModel = new \W\Model\UsersModel();
-		 $userInfos = $userModel->find($userId);
+			 // Instantiation of UsersModel to log user back in
+			 $userModel = new \W\Model\UsersModel();
+			 $userInfos = $userModel->find($userId);
 
-		 // Then we add the user to the session
-		 $authentificationModel->logUserIn($userInfos);
+			 // Then we add the user to the session
+			 $authentificationModel->logUserIn($userInfos);
 
-		 $this->flash('Your username was changed successfully.', 'success');
+			 $this->flash('Your username was changed successfully.', 'success');
 
-		 $this->redirectToRoute('user_profile');
+			 $this->redirectToRoute('user_profile');
+		 } else {
+			 $this->flash('There was an error changing your username. Please try again.', 'danger');
+		 }
 
 	 }
 
@@ -388,10 +395,13 @@ class UserController extends Controller {
 
 		 if (!empty($_POST)) {
 
-			 // We access the id to find the user in the database later
+			 // We access the ID to find the user in the database later
 			 $userId = $_SESSION['user']['id'];
 			 // We also grab the password the user typed in to see if it's the same as the one in the database
 			 $passwordToDeleteAccount = isset($_POST['passwordToDeleteAccount']) ? trim(strip_tags($_POST['passwordToDeleteAccount'])) : '';
+
+			 debug($userId);
+			 debug($passwordToDeleteAccount);
 
 			 // We have to encrypt the new password again before we can use the method to see if password is correct
 			 $authentificationModel = new \W\Security\AuthentificationModel();
@@ -408,12 +418,18 @@ class UserController extends Controller {
 
 				 if ($passwordCheckUser) {
 					 $this->flash('Your account has been deleted successfully.', 'success');
+
+
+					 $authentificationModel = new \W\Security\AuthentificationModel();
+					 $authentificationModel->logUserOut();
 				 }
 
 			 } else {
 				 $this->flash('Your password is incorrect.', 'danger');
 			 }
 		 }
+
+		 //$this->redirectToRoute('content_home');
 
 	 }
 
