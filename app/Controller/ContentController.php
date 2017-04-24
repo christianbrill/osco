@@ -237,7 +237,9 @@ $this->show('content/about');
 
         $tagsLine = $storyModel->getTagStringForStory($id);
         $getEachTag = explode(",", $tagsLine);
-        //debug($getEachTag);
+        //implode($storyInfos);
+        //nl2br($storyInfos);
+        //debug($storyInfos);
 
         $this->show('content/story', [
             'storyInfos' => $storyInfos,
@@ -397,7 +399,6 @@ $this->show('content/about');
 
         $this->show('content/addArticle', ['addArticle' => $addArticle]);
     }
-
 
 }
 

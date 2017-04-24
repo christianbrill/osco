@@ -65,4 +65,18 @@
         </section>
     </article>
 
+    <section id="y">
+    <?php foreach($allStories as $story) : ?>
+        <article id="profileStoryBox">
+            <a href="<?= $this->url('content_story',['id' => $story['sto_id']]); ?>">
+                <div>
+                    <h1 id="ProfileStoryTitle"><?= \Controller\ContentController::getShortTitle($story['sto_title']) ?></h1>
+                </div>
+            </a>
+        </article>
+    <?php endforeach; ?>
+
+    </section>
+    <a href=""><span id="moreStories" class="glyphicon glyphicon-option-horizontal" aria-hidden="true"><br> More</span></a>
+
 <?php $this->stop('main_content') ?>
