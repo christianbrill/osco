@@ -42,4 +42,19 @@ class UsersModel extends \W\Model\UsersModel {
         return false;
     }
 
+
+    public function deleteUserAccount($userId) {
+
+        $sqlRequest = '
+            DELETE FROM users
+            WHERE id = :id
+        ';
+
+        $stmt = $this->dbh->prepare($sqlRequest);
+        $stmt->bindValue(':id', $userId);
+
+        if ($stmt->execute() === false) {
+            $stmt->errorInfo();
+        }
+    }
 }

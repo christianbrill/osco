@@ -100,9 +100,11 @@ class UserController extends Controller {
 		} // if (!empty($_POST)) end
 
 		// List of countries which are displayed in the select in the signup
-		// $countryList = ["Afghanistan", "Albania", "Algeria", "American Samoa", "Andorra", "Angola", "Anguilla", "Antarctica", "Antigua and Barbuda", "Argentina", "Armenia", "Aruba", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bermuda", "Bhutan", "Bolivia", "Bosnia and Herzegowina", "Botswana", "Bouvet Island", "Brazil", "British Indian Ocean Territory", "Brunei Darussalam", "Bulgaria", "Burkina Faso", "Burundi", "Cambodia", "Cameroon", "Canada", "Cape Verde", "Cayman Islands", "Central African Republic", "Chad", "Chile", "China", "Christmas Island", "Cocos (Keeling) Islands", "Colombia", "Comoros", "Congo", "Congo, the Democratic Republic of the", "Cook Islands", "Costa Rica", "Cote d'Ivoire", "Croatia (Hrvatska)", "Cuba", "Cyprus", "Czech Republic", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "East Timor", "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Ethiopia", "Falkland Islands (Malvinas)", "Faroe Islands", "Fiji", "Finland", "France", "France Metropolitan", "French Guiana", "French Polynesia", "French Southern Territories", "Gabon", "Gambia", "Georgia", "Germany", "Ghana", "Gibraltar", "Greece", "Greenland", "Grenada", "Guadeloupe", "Guam", "Guatemala", "Guinea", "Guinea-Bissau", "Guyana", "Haiti", "Heard and Mc Donald Islands", "Holy See (Vatican City State)", "Honduras", "Hong Kong", "Hungary", "Iceland", "India", "Indonesia", "Iran (Islamic Republic of)", "Iraq", "Ireland", "Israel", "Italy", "Jamaica", "Japan", "Jordan", "Kazakhstan", "Kenya", "Kiribati", "Korea, Democratic People's Republic of", "Korea, Republic of", "Kuwait", "Kyrgyzstan", "Lao, People's Democratic Republic", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libyan Arab Jamahiriya", "Liechtenstein", "Lithuania", "Luxembourg", "Macau", "Macedonia, The Former Yugoslav Republic of", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands", "Martinique", "Mauritania", "Mauritius", "Mayotte", "Mexico", "Micronesia, Federated States of", "Moldova, Republic of", "Monaco", "Mongolia", "Montserrat", "Morocco", "Mozambique", "Myanmar", "Namibia", "Nauru", "Nepal", "Netherlands", "Netherlands Antilles", "New Caledonia", "New Zealand", "Nicaragua", "Niger", "Nigeria", "Niue", "Norfolk Island", "Northern Mariana Islands", "Norway", "Oman", "Pakistan", "Palau", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Pitcairn", "Poland", "Portugal", "Puerto Rico", "Qatar", "Reunion", "Romania", "Russian Federation", "Rwanda", "Saint Kitts and Nevis", "Saint Lucia", "Saint Vincent and the Grenadines", "Samoa", "San Marino", "Sao Tome and Principe", "Saudi Arabia", "Senegal", "Seychelles", "Sierra Leone", "Singapore", "Slovakia (Slovak Republic)", "Slovenia", "Solomon Islands", "Somalia", "South Africa", "South Georgia and the South Sandwich Islands", "Spain", "Sri Lanka", "St. Helena", "St. Pierre and Miquelon", "Sudan", "Suriname", "Svalbard and Jan Mayen Islands", "Swaziland", "Sweden", "Switzerland", "Syrian Arab Republic", "Taiwan, Province of China", "Tajikistan", "Tanzania, United Republic of", "Thailand", "Togo", "Tokelau", "Tonga", "Trinidad and Tobago", "Tunisia", "Turkey", "Turkmenistan", "Turks and Caicos Islands", "Tuvalu", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "United States", "United States Minor Outlying Islands", "Uruguay", "Uzbekistan", "Vanuatu", "Venezuela", "Vietnam", "Virgin Islands (British)", "Virgin Islands (U.S.)", "Wallis and Futuna Islands", "Western Sahara", "Yemen", "Yugoslavia", "Zambia", "Zimbabwe"];
+		$countryList = ["Afghanistan", "Albania", "Algeria", "American Samoa", "Andorra", "Angola", "Anguilla", "Antarctica", "Antigua and Barbuda", "Argentina", "Armenia", "Aruba", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bermuda", "Bhutan", "Bolivia", "Bosnia and Herzegowina", "Botswana", "Bouvet Island", "Brazil", "British Indian Ocean Territory", "Brunei Darussalam", "Bulgaria", "Burkina Faso", "Burundi", "Cambodia", "Cameroon", "Canada", "Cape Verde", "Cayman Islands", "Central African Republic", "Chad", "Chile", "China", "Christmas Island", "Cocos (Keeling) Islands", "Colombia", "Comoros", "Congo", "Congo, the Democratic Republic of the", "Cook Islands", "Costa Rica", "Cote d'Ivoire", "Croatia (Hrvatska)", "Cuba", "Cyprus", "Czech Republic", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "East Timor", "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Ethiopia", "Falkland Islands (Malvinas)", "Faroe Islands", "Fiji", "Finland", "France", "France Metropolitan", "French Guiana", "French Polynesia", "French Southern Territories", "Gabon", "Gambia", "Georgia", "Germany", "Ghana", "Gibraltar", "Greece", "Greenland", "Grenada", "Guadeloupe", "Guam", "Guatemala", "Guinea", "Guinea-Bissau", "Guyana", "Haiti", "Heard and Mc Donald Islands", "Holy See (Vatican City State)", "Honduras", "Hong Kong", "Hungary", "Iceland", "India", "Indonesia", "Iran (Islamic Republic of)", "Iraq", "Ireland", "Israel", "Italy", "Jamaica", "Japan", "Jordan", "Kazakhstan", "Kenya", "Kiribati", "Korea, Democratic People's Republic of", "Korea, Republic of", "Kuwait", "Kyrgyzstan", "Lao, People's Democratic Republic", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libyan Arab Jamahiriya", "Liechtenstein", "Lithuania", "Luxembourg", "Macau", "Macedonia, The Former Yugoslav Republic of", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands", "Martinique", "Mauritania", "Mauritius", "Mayotte", "Mexico", "Micronesia, Federated States of", "Moldova, Republic of", "Monaco", "Mongolia", "Montserrat", "Morocco", "Mozambique", "Myanmar", "Namibia", "Nauru", "Nepal", "Netherlands", "Netherlands Antilles", "New Caledonia", "New Zealand", "Nicaragua", "Niger", "Nigeria", "Niue", "Norfolk Island", "Northern Mariana Islands", "Norway", "Oman", "Pakistan", "Palau", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Pitcairn", "Poland", "Portugal", "Puerto Rico", "Qatar", "Reunion", "Romania", "Russian Federation", "Rwanda", "Saint Kitts and Nevis", "Saint Lucia", "Saint Vincent and the Grenadines", "Samoa", "San Marino", "Sao Tome and Principe", "Saudi Arabia", "Senegal", "Seychelles", "Sierra Leone", "Singapore", "Slovakia (Slovak Republic)", "Slovenia", "Solomon Islands", "Somalia", "South Africa", "South Georgia and the South Sandwich Islands", "Spain", "Sri Lanka", "St. Helena", "St. Pierre and Miquelon", "Sudan", "Suriname", "Svalbard and Jan Mayen Islands", "Swaziland", "Sweden", "Switzerland", "Syrian Arab Republic", "Taiwan, Province of China", "Tajikistan", "Tanzania, United Republic of", "Thailand", "Togo", "Tokelau", "Tonga", "Trinidad and Tobago", "Tunisia", "Turkey", "Turkmenistan", "Turks and Caicos Islands", "Tuvalu", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "United States", "United States Minor Outlying Islands", "Uruguay", "Uzbekistan", "Vanuatu", "Venezuela", "Vietnam", "Virgin Islands (British)", "Virgin Islands (U.S.)", "Wallis and Futuna Islands", "Western Sahara", "Yemen", "Yugoslavia", "Zambia", "Zimbabwe"];
 
-		$this->show('user/signup');
+		$this->show('user/signup', array(
+			'countryList' => $countryList
+		));
 
 	} // public function signup() end
 
@@ -344,7 +346,7 @@ class UserController extends Controller {
 
 
 	 /** ***********************************************************************
- 	 * Delete Username
+ 	 * Change Username
 	 *
  	 ************************************************************************ */
 	 public function changeUsername() {
@@ -352,25 +354,36 @@ class UserController extends Controller {
 		 $this->allowTo('user');
 
 		 if (!empty($_POST)) {
-
+			 // We get the new username that the user types in
 			 $newUsername = isset($_POST['username']) ? trim($_POST['username']) : '';
+			 // ID of the current user
 			 $userId = $_SESSION['user']['id'];
 
+			 // Then we can update the user's username by finding the ID
 			 $updateUsername = new \Model\UsersModel();
 			 $updateUsername->update(array(
 				 'usr_username' => $newUsername,
 			 ), $userId);
 
+			 // Instantiation of AuthentificationModel to log user out
+			 $authentificationModel = new \W\Security\AuthentificationModel();
+			 $authentificationModel->logUserOut();
+
+			 // Instantiation of UsersModel to log user back in
+			 $userModel = new \W\Model\UsersModel();
+			 $userInfos = $userModel->find($userId);
+
+			 // Then we add the user to the session
+			 $authentificationModel->logUserIn($userInfos);
+
 			 $this->flash('Your username was changed successfully.', 'success');
 
+			 $this->redirectToRoute('user_profile');
 		 } else {
 			 $this->flash('There was an error changing your username. Please try again.', 'danger');
 		 }
 
-		 $this->redirectToRoute('user_profile');
-
 	 }
-
 
 
 
@@ -382,36 +395,40 @@ class UserController extends Controller {
 
 		 $this->allowTo('user');
 
-		 if (!empty($_POST)) {
+		 // We access the ID to find the user in the database later
+		 $userId = $_SESSION['user']['id'];
+		 // We also grab the password the user typed in to see if it's the same as the one in the database
+		 $passwordToDeleteAccount = isset($_POST['passwordToDeleteAccount']) ? trim(strip_tags($_POST['passwordToDeleteAccount'])) : '';
 
-			 // We access the id to find the user in the database later
-			 $userId = $_SESSION['user']['id'];
-			 // The email is accessed so we can compare passwords in the database later
-			 $userEmail = $_SESSION['user']['email'];
-			 // We also grab the password the user typed in to see if it's the same as the one in the database
-			 $passwordToDeleteAccount = isset($_POST['passwordToDeleteAccount']) ? trim(strip_tags($_POST['passwordToDeleteAccount'])) : '';
+		 debug($userId);
+		 debug($passwordToDeleteAccount);
 
-			 // Instantiation of the authModel to validate user info
-			 $authentificationModel = new \W\Security\AuthentificationModel();
-			 // Now we hash the typed in password
-			 $hashedPassword = $authentificationModel->hashPassword($passwordToDeleteAccount);
+		 // We have to encrypt the new password again before we can use the method to see if password is correct
+		 $authentificationModel = new \W\Security\AuthentificationModel();
+		 $hashedPassword = $authentificationModel->hashPassword($passwordToDeleteAccount);
 
-			 $isPasswordCorrect = $authentificationModel->isValidLoginInfo($userEmail, $hashedPassword);
+		 // Now we can use the method which checks if passwords match
+		 $userModel = new \Model\UsersModel();
+		 $passwordCheckUser = $userModel->isPasswordCorrect($userId, $hashedPassword);
 
-			 if ($isPasswordCorrect === $userId) {
-				 $usersModel = new \Model\UsersModel();
-				 $deleteUser = $usersModel->delete($userId);
-
-				 $this->flash('Your account has been deleted successfully.', 'success');
-
-			 } else {
-				 $this->flash('Your password is incorrect.', 'danger');
-			 }
+		 // If the above method returns true, delete the user
+		 if ($passwordCheckUser) {
+			 $userModel = new \Model\UsersModel();
+			 $passwordCheckUser = $userModel->deleteUserAccount($userId);
+	 	 } else {
+			 $this->flash('Your password is incorrect.', 'danger');
 		 }
 
-		 $this->redirectToRoute('content_home');
-	 }
+		$this->flash('Your account has been deleted successfully.', 'success');
 
+		$authentificationModel = new \W\Security\AuthentificationModel();
+		$authentificationModel->logUserOut();
+
+		$this->redirectToRoute('content_home');
+
+
+
+	 }
 
 
 	 /** ***********************************************************************

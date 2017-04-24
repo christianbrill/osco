@@ -142,10 +142,9 @@ class ContentModel extends \W\Model\Model {
 		}
 	}
 
+
 	public function insertStory ($currentUser, $stoTitle, $stoContent, $stoTags){
 
-			//INNER JOIN users_id ON users.id
-    		// :stoContent, :stoTag , sto_content, sto_tags
 		$sql = '
 		INSERT INTO stories (users_id, sto_title, sto_content, sto_tags)
 		VALUES  (:currentUser, :stoTitle, :stoContent, :stoTags)
@@ -153,6 +152,7 @@ class ContentModel extends \W\Model\Model {
 
 		$sth = $this->dbh->prepare($sql);
 		$sth->bindParam(':currentUser', $currentUser);
+
 		$sth->bindParam(':stoTitle', $stoTitle);
 		$sth->bindParam(':stoContent', $stoContent);
 		$sth->bindParam(':stoTags', $stoTags);
@@ -160,6 +160,9 @@ class ContentModel extends \W\Model\Model {
 		if ($sth->execute() === false){
 			return $sth->errorInfo();
 		}else{
+			echo '<script language="javascript">';
+			echo 'alert("message successfully sent")';
+			echo '</script>';
 			return debug($stoTitle);
 		}	
 	}

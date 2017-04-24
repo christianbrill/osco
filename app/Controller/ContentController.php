@@ -162,7 +162,7 @@ $this->show('content/about');
         if (isset($_GET['page'])) {
             $page = intval($_GET['page']);
             $pageOffset = ($page-1)*$nbStoriesPerPage;
-        }
+        }	
         //PAGINATION END
 
         // Creating a new Model in ContentModel
@@ -278,17 +278,34 @@ $this->show('content/about');
 	public function addStoryPage () {
 		$this->allowTo("user");
 
+
 		$stoTitle = isset($_POST['storyTitle']) ? trim(strip_tags($_POST['storyTitle'])) : '';
 		$stoContent = isset($_POST['storyContent']) ? trim(strip_tags($_POST['storyContent'])) : '';
 		$stoTags = isset($_POST['storyTags']) ? trim(strip_tags($_POST['storyTags'])) : '';
 		$currentUser = $_SESSION['user']['id'];
 
+		$addStoryModel = new \Model\ContentModel();
+		$addStoryPage = $addStoryModel->insertStory($currentUser, $stoTitle, $stoContent, $stoTags);
+
+		$this->show('content/addstory', ['addStoryPage' => $addStoryPage]);
+	}
+
+
+/*	public function sendStoryToDB () {
+
+		$this->allowTo("user");
+
+		//$currentUser = $_SESSION['user']['id'];
+
+		$stoTitle = isset($_POST['storyTitle']) ? trim(strip_tags($_POST['storyTitle']	)) : '';
+		$stoContent = isset($_POST['storyContent']) ? strip_tags($_POST['storyContent']	) : '';
+		$stoTags = isset($_POST['storyTags']) ? trim(strip_tags($_POST['storyTags']	)) : '';
 
 		$addStoryModel = new \Model\ContentModel();
 		$addStory = $addStoryModel->insertStory($currentUser, $stoTitle, $stoContent, $stoTags);
 
-		$this->show('content/addstory', ['addStory' => $addStory]);
-	}
+	}*/
+
 
 /*-----------------------------------------------------------------------------------*/
 

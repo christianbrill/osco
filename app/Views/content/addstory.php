@@ -1,13 +1,12 @@
-<?php $this->layout('layout', ['title' => 'Add a Story', 'currentPage' => 'addstory']) ?>
+<?php $this->layout('layout', ['title' => 'Add a Story', 'currentPage' => 'addStoryPage']) ?>
 
 <?php $this->start('main_content') ?>
 
-    <form method="POST">
-        <input type="text" name="storyTitle"><br><br>
-        <textarea name="storyContent"></textarea><br><br>
-        <input type="text" name="storyTags"><br><br>
-        <input type="submit" name="storySubimt" value="Post Story">
+    <form method="POST" class="form">
+        <input type="text" name="storyTitle" class="form-control"><br>
+        <textarea name="storyContent" class="form-control"></textarea><br>
+        <input type="text" name="storyTags" class="form-control"><br>
+        <a href="<?= $this->url("content_addStoryToDB")?>"><input type="submit" name="storySubmit" class="form-control" value="Post Story"></a><br>
     </form>
-
    
 <?php $this->stop('main_content') ?>
