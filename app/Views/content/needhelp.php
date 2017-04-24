@@ -11,22 +11,25 @@
     </div>
 
     <?php if (!empty($w_user)): ?>
-    	<h1>Do you know an organization which helps women in your country? Let us know by filling the form below.</h1>
-    	<form class="form-group">
-	    	<label for="orgname">Organization's Name</label><br>
-	    	<input class="form-control" type="text" name="orgname"><br>
+	<h1>Do you know an organization which helps women in your country? Let us know by filling the form below.</h1>
+	<form method="post" action="" class="form-group">
+    	<label for="orgname">Organization's Name</label><br>
+    	<input class="form-control" type="text" name="orgname"><br>
 
-	    	<label for="orgemail">Organization's Email</label><br>
-	    	<input class="form-control" type="email" name="orgemail"><br>
+    	<label for="orgemail">Organization's Email</label><br>
+    	<input class="form-control" type="email" name="orgemail"><br>
 
-	    	<label for="orgphone">Organization's Phone Number</label><br>
-	    	<input class="form-control" type="orgphone" name=""><br>
-	    	
-	    	<label for="orginfo">More Information</label><br>
-	    	<textarea class="form-control" name="orginfo"></textarea><br>
+    	<label for="orgphone">Organization's Phone Number</label><br>
+    	<input class="form-control" type="text" name="orgphone"><br>
+    	
+    	<label for="orginfo">More Information</label><br>
+    	<textarea class="form-control" name="orginfo"></textarea><br>
 
-            <input type="submit" name="orgsubmit" class="btn btn-success">
-   		</form>	
+        <div class="g-recaptcha" data-sitekey="6Le43B0UAAAAAGVZa4bsR-HliOSWg04KU9J6O5-1"></div><br>
+
+        <input type="submit" name="orgsubmit" class="btn btn-success">
+
+   	</form>	
     <?php endif ?>
 
     <script type="text/javascript" >
