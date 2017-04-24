@@ -19,11 +19,7 @@
 		?>
 		</div>
 
-		<!--<div class="tags">
-		<?php foreach($getEachTag as $currentTag) : ?>
-			<a href="#" class="tag btn btn-xs"><?= $currentTag; ?></a>
-		<?php endforeach; ?>
-		</div>-->
+		
 
 		<div class="articlesList">
 		<?php foreach($articlesList as $currentArticle) : ?>

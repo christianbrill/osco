@@ -92,7 +92,7 @@
 				</li>
 
 				<li<?php if($currentPage == 'blog'): ?> class="active"<?php endif; ?> role="presentation">
-					<a href="<?/*= $this->url("content_blog")*/ ?>">Blog</a>
+					<a href="<?= $this->url("content_articles") ?>">Blog</a>
 				</li>
 
 				<li<?php if($currentPage == 'needhelp'): ?> class="active"<?php endif; ?> role="presentation">

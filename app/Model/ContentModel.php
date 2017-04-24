@@ -10,10 +10,10 @@ class ContentModel extends \W\Model\Model {
 
 	public function getLimitedStories(){
 		$sql = '
-			SELECT *
-			FROM stories
-			ORDER BY RAND()
-			LIMIT 9
+		SELECT *
+		FROM stories
+		ORDER BY RAND()
+		LIMIT 9
 		';
 
 		$sth = $this->dbh->prepare($sql);
@@ -25,16 +25,16 @@ class ContentModel extends \W\Model\Model {
 	// START FUNCTIONS FOR search
 	public function getSearchMatch($searchWord, $sortingMethod='DESC', $pageOffset, $nbResultsPerPage){
 		$sql = '
-			SELECT *
-			FROM stories
-			INNER JOIN users ON stories.users_id = users.id
-			WHERE sto_title LIKE :search
-				OR sto_content LIKE :search
-				OR sto_tags LIKE :search
-				OR usr_username LIKE :search
+		SELECT *
+		FROM stories
+		INNER JOIN users ON stories.users_id = users.id
+		WHERE sto_title LIKE :search
+		OR sto_content LIKE :search
+		OR sto_tags LIKE :search
+		OR usr_username LIKE :search
 
-			ORDER BY sto_inserted '.$sortingMethod.'
-			LIMIT '.$pageOffset.','.$nbResultsPerPage.'
+		ORDER BY sto_inserted '.$sortingMethod.'
+		LIMIT '.$pageOffset.','.$nbResultsPerPage.'
 		';
 
 		
@@ -59,11 +59,11 @@ class ContentModel extends \W\Model\Model {
 	// START FUNCTIONS FOR all stories viewing and filtering
 	public function getStoriesList($pageOffset, $nbStoriesPerPage){
 		$sql = '
-			SELECT sto_id, sto_title, sto_content, sto_tags, sto_thumbnail, sto_inserted, users_id, usr_username
-			FROM stories
-			LEFT OUTER JOIN users ON stories.users_id = users.id
-			ORDER BY sto_id DESC
-			LIMIT '.$pageOffset.','.$nbStoriesPerPage.'
+		SELECT sto_id, sto_title, sto_content, sto_tags, sto_thumbnail, sto_inserted, users_id, usr_username
+		FROM stories
+		LEFT OUTER JOIN users ON stories.users_id = users.id
+		ORDER BY sto_id DESC
+		LIMIT '.$pageOffset.','.$nbStoriesPerPage.'
 		';
 
 		$sth = $this->dbh->prepare($sql);
@@ -73,10 +73,10 @@ class ContentModel extends \W\Model\Model {
 
 	public function getOneStory($id){
 		$sql = '
-			SELECT sto_title, sto_content, sto_tags, sto_thumbnail, sto_inserted, users_id, usr_username
-			FROM stories
-			LEFT OUTER JOIN users ON stories.users_id = users.id
-			WHERE sto_id = :id
+		SELECT sto_title, sto_content, sto_tags, sto_thumbnail, sto_inserted, users_id, usr_username
+		FROM stories
+		LEFT OUTER JOIN users ON stories.users_id = users.id
+		WHERE sto_id = :id
 		';
 
 		$sth = $this->dbh->prepare($sql);
@@ -89,9 +89,9 @@ class ContentModel extends \W\Model\Model {
 
 	public function getTagString(){
 		$sql = '
-			SELECT sto_tags
-			FROM stories
-			ORDER BY RAND()
+		SELECT sto_tags
+		FROM stories
+		ORDER BY RAND()
 		';
 
 		$sth = $this->dbh->prepare($sql);
@@ -110,9 +110,9 @@ class ContentModel extends \W\Model\Model {
 
 	public function getTagStringForStory($id){
 		$sql = '
-			SELECT sto_tags
-			FROM stories
-			WHERE sto_id = :id
+		SELECT sto_tags
+		FROM stories
+		WHERE sto_id = :id
 		';
 
 		$sth = $this->dbh->prepare($sql);
@@ -132,8 +132,8 @@ class ContentModel extends \W\Model\Model {
 
 	public function getOrganization(){
 		$sql = '
-			SELECT *
-			FROM organizations
+		SELECT *
+		FROM organizations
 		';
 
 		$sth = $this->dbh->prepare($sql);
@@ -144,18 +144,18 @@ class ContentModel extends \W\Model\Model {
 
 
 	public function insertStory ($currentUser, $stoTitle, $stoContent, $stoTags){
-			
+
 		$sql = '
-			INSERT INTO stories (users_id, sto_title, sto_content, sto_tags)
-			VALUES  (:currentUser, :stoTitle, :stoContent, :stoTags)
+		INSERT INTO stories (users_id, sto_title, sto_content, sto_tags)
+		VALUES  (:currentUser, :stoTitle, :stoContent, :stoTags)
 		';
 
 		$sth = $this->dbh->prepare($sql);
 		$sth->bindParam(':currentUser', $currentUser);
 
 		$sth->bindParam(':stoTitle', $stoTitle);
-    	$sth->bindParam(':stoContent', $stoContent);
-    	$sth->bindParam(':stoTags', $stoTags);
+		$sth->bindParam(':stoContent', $stoContent);
+		$sth->bindParam(':stoTags', $stoTags);
 
 		if ($sth->execute() === false){
 			return $sth->errorInfo();
@@ -167,12 +167,18 @@ class ContentModel extends \W\Model\Model {
 		}	
 	}
 
+	
+	//END FUNCTIONS FOR stories && story details
+
+
+	//START fUNCTIONS for articles & article details
+
 	public function getArticlesList(){
 		$sql = '
-			SELECT *
-			FROM articles
-			ORDER BY art_inserted DESC
-			
+		SELECT *
+		FROM articles
+		ORDER BY art_inserted DESC
+
 		';
 
 		$sth = $this->dbh->prepare($sql);
@@ -180,5 +186,45 @@ class ContentModel extends \W\Model\Model {
 		return $sth->fetchAll();
 	}
 
-	//END FUNCTIONS FOR stories && story details
+
+	public function getOneArticle($id){
+		$sql = '
+		SELECT art_title, art_content, art_tags, art_thumbnail, art_inserted, users_id, usr_username
+		FROM articles
+		LEFT OUTER JOIN users ON articles.users_id = users.id
+		WHERE art_id = :id
+		';
+
+		$sth = $this->dbh->prepare($sql);
+		$sth->bindValue(':id', $id, \PDO::PARAM_INT);
+
+		if ($sth->execute()){
+			return $sth->fetchAll();
+		}
+	}
+
+	public function InsertArticle ($currentUser, $artTitle, $artContent, $artTags){
+
+			//INNER JOIN users_id ON users.id
+    		// :stoContent, :stoTag , sto_content, sto_tags
+		$sql = '
+		INSERT INTO articles (users_id, art_title, art_content, art_tags)
+		VALUES  (:currentUser, :artTitle, :artContent, :artTags)
+		';
+
+		$sth = $this->dbh->prepare($sql);
+		$sth->bindParam(':currentUser', $currentUser);
+		$sth->bindParam(':artTitle', $artTitle);
+		$sth->bindParam(':artContent', $artContent);
+		$sth->bindParam(':artTags', $artTags);
+
+		if ($sth->execute() === false){
+			return $sth->errorInfo();
+		}else{
+			return debug($artTitle);
+
+		}
+
+
+	}
 }

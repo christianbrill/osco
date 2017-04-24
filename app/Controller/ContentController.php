@@ -310,7 +310,7 @@ $this->show('content/about');
 /*-----------------------------------------------------------------------------------*/
 
 /**
-    * Add a blogpost method
+    * Add an article method
     *
     */
     public function addArticle () {
@@ -324,11 +324,8 @@ $this->show('content/about');
         $this->show('content/addarticle', ['addArticle' => $addArt]);
     }
 
-
-
     /**
     * All articles
-    *
     */
     public function articles(){
 
@@ -349,9 +346,9 @@ $this->show('content/about');
         $nbArticles = count($articlesList);
 
         // POUR BENJAMIN: LE PROBLÈME EST ICI
-       /* $tagsLine = $ArticlesModel->getTagString();
-        $getEachTag = explode(",", $tagsLine);*/
-        //debug($getEachTag);
+       /*$tagsLine = $storiesModel->getTagString();
+        $getEachTag = explode(",", $tagsLine);
+        debug($getEachTag);*/
 
         $this->show('content/articles', [
             'articlesList' => $articlesList,
@@ -376,11 +373,32 @@ $this->show('content/about');
         $getEachTag = explode(",", $tagsLine);
         //debug($getEachTag);*/
 
-        $this->show('content/story', [
-            'storyInfos' => $storyInfos,
+        $this->show('content/article', [
+            'articleInfos' => $articleInfos,
            // 'getEachTag' => $getEachTag
             ]);
     }
+
+    /**
+    * Add a Story method
+    *
+    */
+    public function addArticlePage () {
+        $this->allowTo("user");
+
+        $artTitle = isset($_POST['articleTitle']) ? trim(strip_tags($_POST['storyTitle'])) : '';
+        $artContent = isset($_POST['articleContent']) ? trim(strip_tags($_POST['storyContent'])) : '';
+        $artTags = isset($_POST['articleTags']) ? trim(strip_tags($_POST['storyTags'])) : '';
+        $currentUser = $_SESSION['user']['id'];
+
+
+        $addArticleModel = new \Model\ContentModel();
+        $addArticle = $addArticleModel->insertArticle($currentUser, $artTitle, $artContent, $artTags);
+
+        $this->show('content/addArticle', ['addArticle' => $addArticle]);
+    }
+
+
 }
 
 
