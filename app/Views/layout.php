@@ -57,7 +57,7 @@
 					</li>
 
 					<li role="presentation">
-						<a href="<?= $this->url("content_addstory") ?>"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add a Story</a>
+						<a href="<?= $this->url("content_addStoryPage") ?>"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add a Story</a>
 					</li>
 
 				<!-- If the user isn't logged in, the Signup and Login links will show up. -->
@@ -114,7 +114,7 @@
 					</li>
 
 					<li role="presentation">
-						<a href="<?= $this->url("content_addstory") ?>"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add a Story</a>
+						<a href="<?= $this->url("content_addStoryPage") ?>"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add a Story</a>
 					</li>
 
 				<!-- If the user isn't logged in, the Signup and Login links will show up. -->

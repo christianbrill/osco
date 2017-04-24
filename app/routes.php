@@ -23,8 +23,10 @@
 		['GET', '/needhelp/', 'Content#needhelp', 'content_needhelp'],
 
 		// osco.dev/addstory/
-		['GET|POST', '/addstory/', 'Content#addStoryPage', 'content_addStoryPage'],
-		//['POST', '/addstory/sendstorytodb/', 'Content#sendStoryToDB', 'content_sendStoryToDB'],
+		['POST|GET', '/addstory/', 'Content#addStoryPage', 'content_addStoryPage'],
+
+		// osco.dev/addstory/sendstorytodb/
+		['POST', '/addstory/sendstorytodb/', 'Content#sendStoryToDB', 'content_sendStoryToDB'],
 
 		/**
 		* Signup/Login
@@ -66,9 +68,8 @@
 		['GET', '/ajax/home/', 'Content#ajaxRefresh', 'content_ajaxRefresh'],
 
 
-
 		/**
-		*article routes
+		* Article routes
 		*/
 
 		// osco.dev/articles/
@@ -80,6 +81,7 @@
 		// osco.dev/addarticle/
 		['GET|POST', '/addarticle/', 'Content#addArticlePage', 'content_addArticlePage'],
 
-		//['POST', '/addarticle/', 'Content#addArticlePage', 'content_addArticlePage'],
+		// ajax profile route
+		['GET', '/ajax/profile/', 'User#ajaxLoadMore', 'user_ajaxLoadMore'],
 
 	);

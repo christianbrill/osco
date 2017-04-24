@@ -210,7 +210,7 @@ $this->show('content/about');
         // POUR BENJAMIN: LE PROBLÈME EST ICI
         $tagsLine = $storiesModel->getTagString();
         $getEachTag = explode(",", $tagsLine);
-        debug($getEachTag);
+        //debug($getEachTag);
 
         /*$getTagLink = $storiesModel->search($getEachTag);*/
 
@@ -237,7 +237,9 @@ $this->show('content/about');
 
         $tagsLine = $storyModel->getTagStringForStory($id);
         $getEachTag = explode(",", $tagsLine);
-        //debug($getEachTag);
+        //implode($storyInfos);
+        //nl2br($storyInfos);
+        //debug($storyInfos);
 
         $this->show('content/story', [
             'storyInfos' => $storyInfos,
@@ -276,45 +278,46 @@ $this->show('content/about');
 	*
 	*/
 	public function addStoryPage () {
-		$this->allowTo("user");
+		//$this->allowTo("user");
 
-
-		$stoTitle = isset($_POST['storyTitle']) ? trim(strip_tags($_POST['storyTitle'])) : '';
-		$stoContent = isset($_POST['storyContent']) ? trim(strip_tags($_POST['storyContent'])) : '';
-		$stoTags = isset($_POST['storyTags']) ? trim(strip_tags($_POST['storyTags'])) : '';
-		$currentUser = $_SESSION['user']['id'];
-
-		$addStoryModel = new \Model\ContentModel();
-		$addStoryPage = $addStoryModel->insertStory($currentUser, $stoTitle, $stoContent, $stoTags);
-
-		$this->show('content/addstory', ['addStoryPage' => $addStoryPage]);
+		$this->show('content/addstory');
 	}
 
 
-/*	public function sendStoryToDB () {
+	public function sendStoryToDB () {
 
 		$this->allowTo("user");
 
-		//$currentUser = $_SESSION['user']['id'];
+		$currentUser = $_SESSION['user']['id'];
 
-		$stoTitle = isset($_POST['storyTitle']) ? trim(strip_tags($_POST['storyTitle']	)) : '';
-		$stoContent = isset($_POST['storyContent']) ? strip_tags($_POST['storyContent']	) : '';
-		$stoTags = isset($_POST['storyTags']) ? trim(strip_tags($_POST['storyTags']	)) : '';
+        if (!empty($_POST)) {
 
-		$addStoryModel = new \Model\ContentModel();
-		$addStory = $addStoryModel->insertStory($currentUser, $stoTitle, $stoContent, $stoTags);
+    		$stoTitle = isset($_POST['storyTitle']) ? trim(strip_tags($_POST['storyTitle']	)) : '';
+    		$stoContent = isset($_POST['storyContent']) ? strip_tags($_POST['storyContent']	) : '';
+    		$stoTags = isset($_POST['storyTags']) ? trim(strip_tags($_POST['storyTags']	)) : '';
 
-	}*/
+            // Instantiation of story model
+    		$addStoryModel = new \Model\ContentModel();
+    		$addStory = $addStoryModel->insertStory($currentUser, $stoTitle, $stoContent, $stoTags);
+
+            $this->flash('Your story has been posted successfully. Thank you.', 'success');
+            $this->redirectToRoute('content_addStoryPage');
+        }
+
+
+	}
 
 
     /*-----------------------------------------------------------------------------------*/
 
-/**
+    /**
     * Add an article method
     *
     */
-public function addArticle () {
-    $this->allowTo("user");
+
+    public function addArticle () {
+        //$this->allowTo("user");
+
 
     $artTitle = isset($_POST['articleTitle']) ? trim(strip_tags($_POST['articleTitle']  )) : '';
 
@@ -374,7 +377,7 @@ public function addArticle () {
     *
     */
     public function addArticlePage () {
-        $this->allowTo("user");
+        //$this->allowTo("user");
 
         $artTitle = isset($_POST['articleTitle']) ? trim(strip_tags($_POST['articleTitle'])) : '';
         $artContent = isset($_POST['articleContent']) ? trim(strip_tags($_POST['articleContent'])) : '';
@@ -385,8 +388,4 @@ public function addArticle () {
         $this->show('content/addArticle', ['addArticle' => $addArticle]);
     }
 
-
 }
-
-
-

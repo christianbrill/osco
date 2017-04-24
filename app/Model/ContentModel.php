@@ -159,11 +159,6 @@ class ContentModel extends \W\Model\Model {
 
 		if ($sth->execute() === false){
 			return $sth->errorInfo();
-		}else{
-			echo '<script language="javascript">';
-			echo 'alert("message successfully sent")';
-			echo '</script>';
-			return debug($stoTitle);
 		}	
 	}
 

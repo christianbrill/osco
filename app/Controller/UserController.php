@@ -335,14 +335,35 @@ class UserController extends Controller {
 
 
 
-	 /** ***********************************************************************
+	/** ***********************************************************************
  	 * Profile
 	 *
- 	 ************************************************************************ */
-	 public function profile() {
+ 	************************************************************************ */
+	public function profile() {
+		$this->allowTo("user");
 
-		 $this->show('user/profile');
-	 }
+		$oneUser = $_SESSION['user']['id'];		
+
+		$userStoryModel = new \Model\UsersModel();
+		$allStories = $userStoryModel->getLimitedStories($oneUser);
+
+		$this->show('user/profile', ['allStories' => $allStories]);
+	}
+
+	/**
+	* ajaxLoadMore
+	*
+	*/
+
+	public function ajaxLoadMore() {
+
+		$oneUser = $_SESSION['user']['id'];
+
+		$userStoryModel = new \Model\UsersModel();
+		$moreStories = $userStoryModel->getLimitedStories($oneUser);
+
+		$this->showJson($moreStories);
+	}
 
 
 

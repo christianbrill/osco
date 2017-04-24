@@ -86,4 +86,19 @@ class UsersModel extends \W\Model\UsersModel {
 			 return true;
 		 }
 	 }
+
+    public function getLimitedStories($oneUser){
+        $sql = '
+            SELECT *
+            FROM stories
+            WHERE users_id = :oneUser
+            ORDER BY sto_inserted DESC
+        ';
+
+        $sth = $this->dbh->prepare($sql);
+        $sth->bindParam(':oneUser', $oneUser);
+        $sth->execute();
+        return $sth->fetchAll();
+    }
+
 }
