@@ -29,6 +29,7 @@
 		// osco.dev/addstory/sendstorytodb/
 		['POST', '/addstory/sendstorytodb/', 'Content#sendStoryToDB', 'content_sendStoryToDB'],
 
+
 		/**
 		* Signup/Login
 		*/
@@ -57,6 +58,7 @@
 
 		// osco.dev/changeusername/
 		['GET|POST', '/changeusername/', 'User#changeUsername', 'user_changeusername'],
+
 
 		/**
 		* Ajax Routes

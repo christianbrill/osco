@@ -461,9 +461,9 @@ $this->show('content/about');
     public function addArticlePage () {
         //$this->allowTo("user");
 
-        $artTitle = isset($_POST['articleTitle']) ? trim(strip_tags($_POST['storyTitle'])) : '';
-        $artContent = isset($_POST['articleContent']) ? trim(strip_tags($_POST['storyContent'])) : '';
-        $artTags = isset($_POST['articleTags']) ? trim(strip_tags($_POST['storyTags'])) : '';
+        $artTitle = isset($_POST['articleTitle']) ? trim(strip_tags($_POST['articleTitle'])) : '';
+        $artContent = isset($_POST['articleContent']) ? trim(strip_tags($_POST['articleContent'])) : '';
+        $artTags = isset($_POST['articleTags']) ? trim(strip_tags($_POST['articleTags'])) : '';
         $addArticleModel = new \Model\ContentModel();
         $addArticle = $addArticleModel->insertArticle($artTitle, $artContent, $artTags);
 
