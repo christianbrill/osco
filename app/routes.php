@@ -27,9 +27,6 @@
 		['POST', '/addstory/', 'Content#addstory', 'content_addstory'],
 
 
-		// osco.dev/blog
-		['GET|POST', '/articles/', 'Content#articles', 'content_articles'],
-
 		/**
 		* Signup/Login
 		*/
@@ -68,4 +65,20 @@
 
 		// ajax home route
 		['GET', '/ajax/home/', 'Content#ajaxRefresh', 'content_ajaxRefresh'],
+
+
+
+		//article routes
+
+		// osco.dev/articles/
+		['GET', '/articles/', 'Content#articles', 'content_articles'],
+
+		// osco.dev/story/
+		['GET', '/article/', 'Content#article', 'content_article'],
+
+		// osco.dev/addstory/
+		['GET', '/addarticle/', 'Content#addArticlePage', 'content_addArticle'],
+
+		['POST', '/addarticle/', 'Content#addarticle', 'content_addarticle'],
+
 	);
