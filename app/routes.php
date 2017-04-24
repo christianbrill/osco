@@ -72,20 +72,21 @@
 		// ajax home route
 		['GET', '/ajax/home/', 'Content#ajaxRefresh', 'content_ajaxRefresh'],
 
+
 		/**
-		* article routes
+		* Article routes
 		*/
 
 		// osco.dev/articles/
 		['GET', '/articles/', 'Content#articles', 'content_articles'],
 
-		// osco.dev/story/
-		['GET', '/article/', 'Content#article', 'content_article'],
+		// osco.dev/article/1
+		['GET', '/article/[i:id]', 'Content#article', 'content_article'],
 
-		// osco.dev/addstory/
-		['GET', '/addarticle/', 'Content#addArticlePage', 'content_addArticle'],
+		// osco.dev/addarticle/
+		['GET|POST', '/addarticle/', 'Content#addArticlePage', 'content_addArticlePage'],
 
-		['POST', '/addarticle/', 'Content#addarticle', 'content_addarticle'],
+		//['POST', '/addarticle/', 'Content#addArticlePage', 'content_addArticlePage'],
 
 		// ajax profile route
 		['GET', '/ajax/profile/', 'User#ajaxLoadMore', 'user_ajaxLoadMore'],

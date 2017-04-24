@@ -171,11 +171,12 @@ class ContentModel extends \W\Model\Model {
 
 	//START fUNCTIONS for articles & article details
 
-	public function getArticlesList(){
+	public function getArticlesList($pageOffset, $nbArticlesPerPage){
 		$sql = '
 		SELECT *
 		FROM articles
 		ORDER BY art_inserted DESC
+		LIMIT '.$pageOffset.','.$nbArticlesPerPage.'
 
 		';
 
@@ -187,31 +188,26 @@ class ContentModel extends \W\Model\Model {
 
 	public function getOneArticle($id){
 		$sql = '
-		SELECT art_title, art_content, art_tags, art_thumbnail, art_inserted, users_id, usr_username
+		SELECT art_title, art_content, art_tags, art_thumbnail, art_inserted
 		FROM articles
-		LEFT OUTER JOIN users ON articles.users_id = users.id
 		WHERE art_id = :id
 		';
 
 		$sth = $this->dbh->prepare($sql);
-		$sth->bindValue(':id', $id, \PDO::PARAM_INT);
+		$sth->bindParam(':id', $id, \PDO::PARAM_INT);
 
 		if ($sth->execute()){
 			return $sth->fetchAll();
 		}
 	}
 
-	public function InsertArticle ($currentUser, $artTitle, $artContent, $artTags){
-
-			//INNER JOIN users_id ON users.id
-    		// :stoContent, :stoTag , sto_content, sto_tags
+	public function InsertArticle ($artTitle, $artContent, $artTags){
 		$sql = '
-		INSERT INTO articles (users_id, art_title, art_content, art_tags)
-		VALUES  (:currentUser, :artTitle, :artContent, :artTags)
+		INSERT INTO articles (art_title, art_content, art_tags)
+		VALUES  (:artTitle, :artContent, :artTags)
 		';
 
 		$sth = $this->dbh->prepare($sql);
-		$sth->bindParam(':currentUser', $currentUser);
 		$sth->bindParam(':artTitle', $artTitle);
 		$sth->bindParam(':artContent', $artContent);
 		$sth->bindParam(':artTags', $artTags);
