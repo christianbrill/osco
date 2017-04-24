@@ -144,8 +144,7 @@ class ContentModel extends \W\Model\Model {
 
 	public function insertStory ($currentUser, $stoTitle, $stoContent, $stoTags){
 			
-			//INNER JOIN users_id ON users.id
-    		// :stoContent, :stoTag , sto_content, sto_tags
+		//INNER JOIN users_id ON users.id
 		$sql = '
 			INSERT INTO stories (users_id, sto_title, sto_content, sto_tags)
 			VALUES  (:currentUser, :stoTitle, :stoContent, :stoTags)

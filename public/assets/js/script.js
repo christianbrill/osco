@@ -11,7 +11,11 @@ $(document).ready(function(){
 		refreshStories();
 	});
 
+	$("#moreStories").click(function(e){
+		 e.preventDefault();
 
+		moreStories().fadein(500);
+	});
 
 	/**
 	*
@@ -121,7 +125,7 @@ function refreshStories() {
 				"<a href=''>" +
 					"<div>"+
 						"<h1 id='title'>"+ value.sto_title +"</h1>"+
-						"<p>"+ value.sto_title +"</p>"+
+						"<p>"+ value.sto_description +"</p>"+
 					"</div>"+
 				"</a>"+
 			"</article>";
@@ -210,3 +214,35 @@ function userConfirm() {
 		document.getElementById('confirmAnchor').href="<?= $this->url('user_deleteaccount'); ?>";
 	}
 }
+
+/**
+* Load More Stories Function
+*
+*/
+function moreStories() {
+
+	$.ajax({
+		url: '/osco/public/ajax/profile/'
+
+	}).done(function(response) {
+		console.log(response);
+
+		var content = "";
+
+		$.each(response, function(key, value){
+			content += "<article id='profileStoryBox'>" +
+				"<a href=''>" +
+					"<div>"+
+						"<h1 id='title'>"+ value.sto_title +"</h1>"+
+					"</div>"+
+				"</a>"+
+			"</article>";
+
+		});//end each
+
+	$("#ajaxProfileStories").html(content);
+
+	});//end ajaxHomeStories
+
+}//refreshStories function end
+
