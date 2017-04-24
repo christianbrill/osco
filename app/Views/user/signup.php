@@ -19,9 +19,9 @@
     <div class="form-group">
         <select name="selectedCountry" class="form-control">
             <option value="">Please select your country</option>
-            <? foreach($countryList as $countries) : ?>
+            <?php foreach($countryList as $countries) : ?>
                 <option value="<?= $countries ?>" name="country"><?= $countries ?></option>
-            <? endforeach; ?>
+            <?php endforeach; ?>
         </select>
     </div>
 
