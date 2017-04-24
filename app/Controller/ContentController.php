@@ -280,16 +280,7 @@ $this->show('content/about');
 	public function addStoryPage () {
 		//$this->allowTo("user");
 
-
-		$stoTitle = isset($_POST['storyTitle']) ? trim(strip_tags($_POST['storyTitle'])) : '';
-		$stoContent = isset($_POST['storyContent']) ? trim(strip_tags($_POST['storyContent'])) : '';
-		$stoTags = isset($_POST['storyTags']) ? trim(strip_tags($_POST['storyTags'])) : '';
-		$currentUser = $_SESSION['user']['id'];
-
-		$addStoryModel = new \Model\ContentModel();
-		$addStoryPage = $addStoryModel->insertStory($currentUser, $stoTitle, $stoContent, $stoTags);
-
-		$this->show('content/addstory', ['addStoryPage' => $addStoryPage]);
+		$this->show('content/addstory');
 	}
 
 
@@ -297,14 +288,22 @@ $this->show('content/about');
 
 		$this->allowTo("user");
 
-		//$currentUser = $_SESSION['user']['id'];
+		$currentUser = $_SESSION['user']['id'];
 
-		$stoTitle = isset($_POST['storyTitle']) ? trim(strip_tags($_POST['storyTitle']	)) : '';
-		$stoContent = isset($_POST['storyContent']) ? strip_tags($_POST['storyContent']	) : '';
-		$stoTags = isset($_POST['storyTags']) ? trim(strip_tags($_POST['storyTags']	)) : '';
+        if (!empty($_POST)) {
 
-		$addStoryModel = new \Model\ContentModel();
-		$addStory = $addStoryModel->insertStory($currentUser, $stoTitle, $stoContent, $stoTags);
+    		$stoTitle = isset($_POST['storyTitle']) ? trim(strip_tags($_POST['storyTitle']	)) : '';
+    		$stoContent = isset($_POST['storyContent']) ? strip_tags($_POST['storyContent']	) : '';
+    		$stoTags = isset($_POST['storyTags']) ? trim(strip_tags($_POST['storyTags']	)) : '';
+
+            // Instantiation of story model
+    		$addStoryModel = new \Model\ContentModel();
+    		$addStory = $addStoryModel->insertStory($currentUser, $stoTitle, $stoContent, $stoTags);
+
+            $this->flash('Your story has been posted successfully. Thank you.', 'success');
+            $this->redirectToRoute('content_addStoryPage');
+        }
+
 
 	}
 
@@ -380,9 +379,9 @@ $this->show('content/about');
     public function addArticlePage () {
         //$this->allowTo("user");
 
-        $artTitle = isset($_POST['articleTitle']) ? trim(strip_tags($_POST['storyTitle'])) : '';
-        $artContent = isset($_POST['articleContent']) ? trim(strip_tags($_POST['storyContent'])) : '';
-        $artTags = isset($_POST['articleTags']) ? trim(strip_tags($_POST['storyTags'])) : '';
+        $artTitle = isset($_POST['articleTitle']) ? trim(strip_tags($_POST['articleTitle'])) : '';
+        $artContent = isset($_POST['articleContent']) ? trim(strip_tags($_POST['articleContent'])) : '';
+        $artTags = isset($_POST['articleTags']) ? trim(strip_tags($_POST['articleTags'])) : '';
         $addArticleModel = new \Model\ContentModel();
         $addArticle = $addArticleModel->insertArticle($artTitle, $artContent, $artTags);
 
