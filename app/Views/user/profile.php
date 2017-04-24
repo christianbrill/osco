@@ -3,27 +3,31 @@
 <?php $this->start('main_content') ?>
 
     <article>
-        <!--
-        This section accesses the logged-in user and displays their username.
-        The user can then change it at will.
-        -->
 
         <section>
-            <form class="form-group" action="<?= $this->url("user_changeusername"); ?>" method="post">
-                <h2>Username: </h2>
-                <input type="text" class="form-control" name='username'value="<?= $w_user['usr_username']; ?>"><br>
-                <input class="btn btn-success btn-block" type="submit" name="" value="Save"><br>
+            <h2>Username: </h2>
+            <p><?= $w_user['usr_username']; ?></p>
 
-                <p>To change your username, simply enter a new one and hit "Save"</p>
-            </form>
-        </section>
-
-        <section>
             <h2>Email: </h2>
             <p><?= $w_user['usr_email']; ?></p>
 
             <h2>Country: </h2>
             <p><?= $w_user['usr_country']; ?></p>
+        </section>
+
+        <hr>
+
+        <h1>Change your user information</h1> <br>
+
+        <!-- This section lets the user change their password at will. -->
+        <section>
+            <form class="form-group" action="<?= $this->url("user_changeusername"); ?>" method="post">
+                <h2>Change Your Username</h2>
+                <input type="text" class="form-control" name='username'value="<?= $w_user['usr_username']; ?>"><br>
+                <input class="btn btn-success btn-block" type="submit" name="" value="Save"><br>
+
+                <p>To change your username, simply enter a new one and hit "Save"</p>
+            </form>
         </section>
 
         <!-- The following two are links to change your password and to delete your row (account) from the database -->
@@ -43,14 +47,14 @@
                     <input type="submit" class="btn btn-success btn-block" value="Change it!" />
                 </div>
             </form>
-
         </section>
 
+        <!-- This section will allow the user to delete their account entirely. -->
         <section>
-            <h2 id="confirmLink"><a href="#">Delete your account</a></h2>
+            <h3 id="confirmLink"><a href="#">Delete your account</a></h3>
 
             <!-- This form is initially hidden and only shows up if you hit the above link. -->
-            <form class="form-group" style="display:none" action="" method="post">
+            <form class="form-group" id="formToDeleteAccount" style="display:none" action="" method="post">
                 <label for="passwordToDeleteAccount">Please enter your password to delete your account</label>
                 <input class="form-control" type="password" name="passwordToDeleteAccount" value=""><br>
 
