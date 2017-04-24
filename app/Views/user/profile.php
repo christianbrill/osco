@@ -2,6 +2,8 @@
 
 <?php $this->start('main_content') ?>
 
+    <?= debug($w_user); ?>
+
     <article>
         <!--
         This section accesses the logged-in user and displays their username.
@@ -9,9 +11,9 @@
         -->
 
         <section>
-            <form class="form-group" action="<?= $this->url("user_changeusername"); ?>" method="post" id="changeUsername">
+            <form class="form-group" action="<?= $this->url("user_changeusername"); ?>" method="post">
                 <h2>Username: </h2>
-                <input type="text" class="form-control" name='username' id='username' value="<?= $w_user['usr_username']; ?>"><br>
+                <input type="text" class="form-control" name='username'value="<?= $w_user['usr_username']; ?>"><br>
                 <input class="btn btn-success btn-block" type="submit" name="" value="Save"><br>
 
                 <p>To change your username, simply enter a new one and hit "Save"</p>

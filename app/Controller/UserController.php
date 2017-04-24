@@ -359,6 +359,17 @@ class UserController extends Controller {
 			 'usr_username' => $newUsername,
 		 ), $userId);
 
+		 // Instantiation of AuthentificationModel to log user out
+		 $authentificationModel = new \W\Security\AuthentificationModel();
+		 $authentificationModel->logUserOut();
+
+		 // Instantiation of UsersModel to log user back in
+		 $userModel = new \W\Model\UsersModel();
+		 $userInfos = $userModel->find($userId);
+
+		 // Then we add the user to the session
+		 $authentificationModel->logUserIn($userInfos);
+
 		 $this->flash('Your username was changed successfully.', 'success');
 
 		 $this->redirectToRoute('user_profile');
