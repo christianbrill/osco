@@ -99,46 +99,4 @@ class UsersModel extends Model
 
 	    return false;
 	}
-
-
-
-	/**
-	 * Function to see if password matches password in database
-	 *
-	 */
-	 public function isPasswordCorrect($userId, $hashedPassword) {
-		 $sqlRequest = '
-		 	SELECT usr_password
-			FROM users
-			WHERE id = :userId
-		 ';
-
-		 $stmt = $this->dbh->prepare($sqlRequest);
-		 $stmt->bindValue(':userId', $userId, \PDO::PARAM_INT);
-
-		 if ($stmt->execute() === false) {
-			 $stmt->errorInfo();
-			 return false;
-		 } else {
-			 return true;
-		 }
-	 }
-
-
-	 public function deleteUserAccount($userId) {
-		 $sqlRequest = '
-		 	DELETE FROM users
-			WHERE id = :userId
-		 ';
-
-		 $stmt = $this->dbh->prepare($sqlRequest);
-		 $stmt->bindValue(':userId', $userId, \PDO::PARAM_INT);
-
-		 if ($stmt->execute() === false) {
-			 $stmt->errorInfo();
-			 return false;
-		 } else {
-			 return true;
-		 }
-	 }
 }

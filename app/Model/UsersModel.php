@@ -43,18 +43,47 @@ class UsersModel extends \W\Model\UsersModel {
     }
 
 
-    public function deleteUserAccount($userId) {
+    /**
+	 * Function to see if password matches password in database
+	 *
+	 */
+	 public function isPasswordCorrect($userId, $hashedPassword) {
+		 $sqlRequest = '
+		 	SELECT usr_password
+			FROM users
+			WHERE id = :userId
+		 ';
 
-        $sqlRequest = '
-            DELETE FROM users
-            WHERE id = :id
-        ';
+		 $stmt = $this->dbh->prepare($sqlRequest);
+		 $stmt->bindValue(':userId', $userId, \PDO::PARAM_INT);
 
-        $stmt = $this->dbh->prepare($sqlRequest);
-        $stmt->bindValue(':id', $userId);
+		 if ($stmt->execute() === false) {
+			 $stmt->errorInfo();
+			 return false;
+		 } else {
+			 return true;
+		 }
+	 }
 
-        if ($stmt->execute() === false) {
-            $stmt->errorInfo();
-        }
-    }
+
+     /**
+ 	 * Delete the user's account
+ 	 *
+ 	 */
+	 public function deleteUserAccount($userId) {
+		 $sqlRequest = '
+		 	DELETE FROM users
+			WHERE id = :userId
+		 ';
+
+		 $stmt = $this->dbh->prepare($sqlRequest);
+		 $stmt->bindValue(':userId', $userId, \PDO::PARAM_INT);
+
+		 if ($stmt->execute() === false) {
+			 $stmt->errorInfo();
+			 return false;
+		 } else {
+			 return true;
+		 }
+	 }
 }
