@@ -58,7 +58,7 @@ class ContentController extends Controller {
             if (!empty($captcha) && json_decode($this->res[0])->success == "1") {
 
  // If CAPTCHA is successfully completed...
-               if (empty($errorList)) {
+             if (empty($errorList)) {
                 $isSent=\Helper\Tools::sendEmail('osco.contact@gmail.com', 'The user with email address: '. $email. ' & First name: '. $fname. ' & Last name: '. $lname.' has sent the following message:', $message, $message );
 
 
@@ -72,10 +72,10 @@ class ContentController extends Controller {
             }
 
         } else {
-           $errorList[] = '<p>Please go back and make sure you check the security CAPTCHA box.</p><br>';
-       }
+         $errorList[] = '<p>Please go back and make sure you check the security CAPTCHA box.</p><br>';
+     }
 
-       if (!empty($errorList)) {
+     if (!empty($errorList)) {
         $this->flash(join('<br>', $errorList), 'danger');
 
     }   
@@ -307,29 +307,28 @@ $this->show('content/about');
 	}*/
 
 
-/*-----------------------------------------------------------------------------------*/
+    /*-----------------------------------------------------------------------------------*/
 
 /**
     * Add an article method
     *
     */
-    public function addArticle () {
-        $this->allowTo("user");
+public function addArticle () {
+    $this->allowTo("user");
 
-        $artTitle = isset($_POST['articleTitle']) ? trim(strip_tags($_POST['articleTitle']  )) : '';
+    $artTitle = isset($_POST['articleTitle']) ? trim(strip_tags($_POST['articleTitle']  )) : '';
 
-        $addArtModel = new \Model\ContentModel();
-        $addArticle = $addArtModel->insertArticle($artTitle);
+    $addArtModel = new \Model\ContentModel();
+    $addArticle = $addArtModel->insertArticle($artTitle);
 
-        $this->show('content/addarticle', ['addArticle' => $addArt]);
-    }
+    $this->show('content/addarticle', ['addArticle' => $addArticle]);
+}
 
     /**
     * All articles
     */
     public function articles(){
 
-        // !!!!!!! NOT WORKING YET
         //PAGINATION START
         $page = 1;
         $nbArticlesPerPage = 4;
@@ -345,15 +344,10 @@ $this->show('content/about');
         $articlesList = $articlesModel->getArticlesList($pageOffset, $nbArticlesPerPage);
         $nbArticles = count($articlesList);
 
-        // POUR BENJAMIN: LE PROBLÈME EST ICI
-       /*$tagsLine = $storiesModel->getTagString();
-        $getEachTag = explode(",", $tagsLine);
-        debug($getEachTag);*/
-
         $this->show('content/articles', [
             'articlesList' => $articlesList,
             'nbArticles' => $nbArticles,
-            'page' => $page,
+            'page' => $page
             ]);
     }
 
@@ -363,19 +357,15 @@ $this->show('content/about');
     * article Detail
     *
     */
+
     public function article($id){
-
-        $articleModel = new \Model\ArticleModel();
+        
+        $articleModel = new \Model\ContentModel();
         $articleInfos = $articleModel->getOneArticle($id);
-        //debug($storyInfos);
-
-       /* $tagsLine = $storyModel->getTagStringForStory($id);
-        $getEachTag = explode(",", $tagsLine);
-        //debug($getEachTag);*/
+        //debug($articleInfos);
 
         $this->show('content/article', [
-            'articleInfos' => $articleInfos,
-           // 'getEachTag' => $getEachTag
+            'articleInfos' => $articleInfos
             ]);
     }
 
@@ -389,11 +379,8 @@ $this->show('content/about');
         $artTitle = isset($_POST['articleTitle']) ? trim(strip_tags($_POST['storyTitle'])) : '';
         $artContent = isset($_POST['articleContent']) ? trim(strip_tags($_POST['storyContent'])) : '';
         $artTags = isset($_POST['articleTags']) ? trim(strip_tags($_POST['storyTags'])) : '';
-        $currentUser = $_SESSION['user']['id'];
-
-
         $addArticleModel = new \Model\ContentModel();
-        $addArticle = $addArticleModel->insertArticle($currentUser, $artTitle, $artContent, $artTags);
+        $addArticle = $addArticleModel->insertArticle($artTitle, $artContent, $artTags);
 
         $this->show('content/addArticle', ['addArticle' => $addArticle]);
     }
