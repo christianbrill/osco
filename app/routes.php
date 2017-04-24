@@ -28,7 +28,7 @@
 		//['POST', '/addstory/sendstorytodb/', 'Content#sendStoryToDB', 'content_sendStoryToDB'],
 
 		['POST|GET', '/addstory/', 'Content#addStoryPage', 'content_addStoryPage'],
-		//['POST', '/addstory/', 'Content#addstory', 'content_addstory'],
+		['POST', '/addstory/', 'Content#addstory', 'content_addstory'],
 
 		/**
 		* Signup/Login
