@@ -22,7 +22,8 @@ class UserController extends Controller {
 			$email = isset($_POST['email']) ? trim(strip_tags($_POST['email'])) : '';
 			$passwordOne = isset($_POST['passwordOne']) ? trim(strip_tags($_POST['passwordOne'])) : '';
 			$passwordTwo = isset($_POST['passwordTwo']) ? trim(strip_tags($_POST['passwordTwo'])) : '';
-			$country = isset($_POST['country']) ? trim(strip_tags($_POST['country'])) : '';
+			$country = isset($_POST['selectedCountry']) ? trim(strip_tags($_POST['selectedCountry'])) : '';
+
 
 			// Now we create an "errorList" variable, which will contain potential errors during the signup process and show them to us
 			$errorList = array();
