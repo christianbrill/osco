@@ -210,7 +210,7 @@ $this->show('content/about');
         // POUR BENJAMIN: LE PROBLÈME EST ICI
         $tagsLine = $storiesModel->getTagString();
         $getEachTag = explode(",", $tagsLine);
-        debug($getEachTag);
+        //debug($getEachTag);
 
         /*$getTagLink = $storiesModel->search($getEachTag);*/
 
@@ -278,7 +278,7 @@ $this->show('content/about');
 	*
 	*/
 	public function addStoryPage () {
-		$this->allowTo("user");
+		//$this->allowTo("user");
 
 
 		$stoTitle = isset($_POST['storyTitle']) ? trim(strip_tags($_POST['storyTitle'])) : '';
@@ -293,7 +293,7 @@ $this->show('content/about');
 	}
 
 
-/*	public function sendStoryToDB () {
+	public function sendStoryToDB () {
 
 		$this->allowTo("user");
 
@@ -306,7 +306,7 @@ $this->show('content/about');
 		$addStoryModel = new \Model\ContentModel();
 		$addStory = $addStoryModel->insertStory($currentUser, $stoTitle, $stoContent, $stoTags);
 
-	}*/
+	}
 
 
 /*-----------------------------------------------------------------------------------*/
@@ -316,7 +316,7 @@ $this->show('content/about');
     *
     */
     public function addArticle () {
-        $this->allowTo("user");
+        //$this->allowTo("user");
 
         $artTitle = isset($_POST['articleTitle']) ? trim(strip_tags($_POST['articleTitle']  )) : '';
 
@@ -386,7 +386,7 @@ $this->show('content/about');
     *
     */
     public function addArticlePage () {
-        $this->allowTo("user");
+        //$this->allowTo("user");
 
         $artTitle = isset($_POST['articleTitle']) ? trim(strip_tags($_POST['storyTitle'])) : '';
         $artContent = isset($_POST['articleContent']) ? trim(strip_tags($_POST['storyContent'])) : '';
