@@ -34,8 +34,8 @@
 					<a href="<?= $this->url("content_stories") ?>">Stories</a>
 				</li>
 
-				<li<?php if($currentPage == 'blog'): ?> class="active"<?php endif; ?> role="presentation">
-					<a href="">Blog</a>
+				<li<?php if($currentPage == 'articles'): ?> class="active"<?php endif; ?> role="presentation">
+					<a href="<?= $this->url("content_articles") ?>">Blog</a>
 				</li>
 
 				<li<?php if($currentPage == 'needhelp'): ?> class="active"<?php endif; ?> role="presentation">
@@ -91,7 +91,7 @@
 					<a href="<?= $this->url("content_stories") ?>">Stories</a>
 				</li>
 
-				<li<?php if($currentPage == 'blog'): ?> class="active"<?php endif; ?> role="presentation">
+				<li<?php if($currentPage == 'articles'): ?> class="active"<?php endif; ?> role="presentation">
 					<a href="<?= $this->url("content_articles") ?>">Blog</a>
 				</li>
 

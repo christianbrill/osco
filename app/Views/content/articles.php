@@ -27,7 +27,7 @@
 				<div>
 					<h1><?= $currentArticle['art_title']; ?></h1>
 					<p><?= \Controller\ContentController::getShortDescription($currentArticle['art_content']); ?></p>
-					<a href="<?= $this->url('art_content',['id' => $currentArticle['art_id']]); ?>">Read More</a>
+					<a href="<?= $this->url('content_article',['id' => $currentArticle['art_id']]); ?>">Read More</a>
 				</div>
 				</a>
 			</article>
