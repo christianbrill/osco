@@ -127,7 +127,7 @@ function refreshStories() {
 				"<a href=''>" +
 					"<div>"+
 						"<h1 id='title'>"+ value.sto_title +"</h1>"+
-						"<p>"+ value.sto_description +"</p>"+
+						"<p>"+ value.sto_content +"</p>"+
 					"</div>"+
 				"</a>"+
 			"</article>";
