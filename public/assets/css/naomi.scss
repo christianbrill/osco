@@ -17,14 +17,7 @@ $sunflower: #f1c40f;
 }
 
 body {
-	margin: 0;
-
-	//background-color: lighten($graffiti, 10%);
-	background: #3a7bd1; /* Old browsers */
-background: -webkit-linear-gradient(left, #3a7bd1 0%, #fba6e1 57%, #fba6e1 57%, #fd89d7 77%, #ff6dd3 100%);
-background: -o-linear-gradient(left, #3a7bd1 0%, #fba6e1 57%, #fba6e1 57%, #fd89d7 77%, #ff6dd3 100%);
-background: linear-gradient(to right, #3a7bd1 0%, #fba6e1 57%, #fba6e1 57%, #fd89d7 77%, #ff6dd3 100%); /* FF3.6-15 */ /* Chrome10-25,Safari5.1-6 */ /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3a7bd1', endColorstr='#ff6dd3',GradientType=1 ); /* IE6-9 */
+	background-image:url("http://res.cloudinary.com/dp8xddisq/image/upload/v1491567196/pink_dust_pmajkm.png");
 }
 
 // Titles and paragraph styles
@@ -73,6 +66,9 @@ a {
 
 .storyBox {
 	margin: 2px 0;
+	padding: 15px;
+	height: 230px;
+	background-color: $graffiti;
 }
 
 #desktopNavigation {
@@ -178,7 +174,7 @@ ul {
 }
 
 #needHelpBox {
-	background-color: black;
+	background-color:	$graffiti;
 	margin-top: 45px;
 	margin-bottom: 2px;
 	padding: 2em;
