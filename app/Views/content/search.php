@@ -9,13 +9,13 @@
 		<div class="pagination">
 		<?php if ($page >= 2){
 		?>
-			<a href="?searchInput=<?= $searchInput ?>&page=<?= $page-1 ?>&order=DESC" name="page" class="before">Précédant</a>
+			<a href="?searchInput=<?= $searchInput ?>&page=<?= $page-1 ?>&order=DESC" name="page" class="before">Previous</a>
 		<?php
 		}
 			
 		if ($nbResults >= 4){
 		?>
-			<a href="?searchInput=<?= $searchInput ?>&page=<?= $page+1 ?>&order=DESC" name="page" class="after">Suivant</a>
+			<a href="?searchInput=<?= $searchInput ?>&page=<?= $page+1 ?>&order=DESC" name="page" class="after">Next</a>
 		<?php
 		}
 		?>
@@ -26,7 +26,7 @@
 	<div class="orderBox">
 		Sort by 
 		<a href="?searchInput=<?= $searchInput ?>&order=DESC">
-			<button name="order" class="tag btn btn-xs">Recent</button>
+			<button name="order" class="tag btn btn-xs">Newest</button>
 		</a>
 		<a href="?searchInput=<?= $searchInput ?>&order=ASC">
 			<button name="order" class="tag btn btn-xs">Oldest</button>
@@ -37,9 +37,9 @@
 	<?php foreach ($searchResults as $currentResult) : ?>
 		<article>
 				<div>
-					<h1><?= $currentResult['sto_title']; ?></h1>
-					<p><?= $currentResult['usr_username']; ?></p>
-					<p><?= $currentResult['sto_inserted']; ?></p>
+					<h1><a href="<?= $this->url('content_story',['id' => $currentResult['sto_id']]); ?>"><?= $currentResult['sto_title']; ?></a></h1>
+					<p>Written by <?= $currentResult['usr_username']; ?></p>
+					<p>Posted on <?= $currentResult['sto_inserted']; ?></p>
 					<p><?= \Controller\ContentController::getShortDescription($currentResult['sto_content']); ?></p>
 					<a href="<?= $this->url('content_story',['id' => $currentResult['sto_id']]); ?>">Read More</a>
 				</div>

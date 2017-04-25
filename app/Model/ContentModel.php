@@ -62,7 +62,7 @@ class ContentModel extends \W\Model\Model {
 		SELECT sto_id, sto_title, sto_content, sto_tags, sto_thumbnail, sto_inserted, users_id, usr_username
 		FROM stories
 		LEFT OUTER JOIN users ON stories.users_id = users.id
-		ORDER BY sto_id DESC
+		ORDER BY RAND()
 		LIMIT '.$pageOffset.','.$nbStoriesPerPage.'
 		';
 
@@ -92,6 +92,7 @@ class ContentModel extends \W\Model\Model {
 		SELECT sto_tags
 		FROM stories
 		ORDER BY RAND()
+		LIMIT 5
 		';
 
 		$sth = $this->dbh->prepare($sql);
@@ -168,11 +169,11 @@ class ContentModel extends \W\Model\Model {
 
 	//START fUNCTIONS for articles & article details
 
-	public function getArticlesList($pageOffset, $nbArticlesPerPage){
+	public function getArticlesList($pageOffset, $nbArticlesPerPage, $sortingMethod='DESC'){
 		$sql = '
 		SELECT *
 		FROM articles
-		ORDER BY art_inserted DESC
+		ORDER BY art_inserted '.$sortingMethod.'
 		LIMIT '.$pageOffset.','.$nbArticlesPerPage.'
 
 		';

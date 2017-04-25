@@ -276,7 +276,7 @@ $this->show('content/about');
         // !!!!!!! NOT WORKING YET
         //PAGINATION START
         $page = 1;
-        $nbStoriesPerPage = 4;
+        $nbStoriesPerPage = 10;
         $pageOffset = 0;
 
         if(isset($_GET['page'])){
@@ -293,8 +293,6 @@ $this->show('content/about');
         $tagsLine = $storiesModel->getTagString();
         $getEachTag = explode(",", $tagsLine);
         //debug($getEachTag);
-
-        /*$getTagLink = $storiesModel->search($getEachTag);*/
 
 
         $this->show('content/stories', [
@@ -315,13 +313,9 @@ $this->show('content/about');
 
         $storyModel = new \Model\ContentModel();
         $storyInfos = $storyModel->getOneStory($id);
-        //debug($storyInfos);
 
         $tagsLine = $storyModel->getTagStringForStory($id);
         $getEachTag = explode(",", $tagsLine);
-        //implode($storyInfos);
-        //nl2br($storyInfos);
-        //debug($storyInfos);
 
         $this->show('content/story', [
             'storyInfos' => $storyInfos,
@@ -414,6 +408,8 @@ $this->show('content/about');
     */
     public function articles(){
 
+        $sortingOption = isset($_GET['order']) ? trim(strip_tags($_GET['order'])) : '';
+
         //PAGINATION START
         $page = 1;
         $nbArticlesPerPage = 4;
@@ -426,7 +422,7 @@ $this->show('content/about');
         //PAGINATION END
 
         $articlesModel = new \Model\ContentModel();
-        $articlesList = $articlesModel->getArticlesList($pageOffset, $nbArticlesPerPage);
+        $articlesList = $articlesModel->getArticlesList($pageOffset, $nbArticlesPerPage, $sortingOption);
         $nbArticles = count($articlesList);
 
         $this->show('content/articles', [
