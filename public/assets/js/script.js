@@ -183,7 +183,6 @@ function geolocation() {
 			data: {'country_name': response.country_name},
 			dataType: 'json'
 		}).done(function(response2){
-			//console.log(response2);
 
 			var content = "";
 
