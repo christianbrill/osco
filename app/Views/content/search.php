@@ -42,9 +42,9 @@
 		</div>
 
 		<!-- search results -->
-		<div class="storiesList">
+		<div class="storiesList row">
 		<?php foreach ($searchResults as $currentResult) : ?>
-			<article>
+			<article class="col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-2">
 					<div>
 						<h1><a href="<?= $this->url('content_story',['id' => $currentResult['sto_id']]); ?>"><?= $currentResult['sto_title']; ?></a></h1>
 						<p>Written by <?= $currentResult['usr_username']; ?></p>

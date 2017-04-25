@@ -13,8 +13,6 @@
 		</div>
 	</div>
 
-
-
 	<div id="ajaxHomeStories">
 	<?php foreach($randomStories as $story) : ?>
 		<article class="storyBox">
@@ -27,8 +25,6 @@
 		</article>
 	<?php endforeach; ?>
 	</div>		
-
-
 
 	<div class="text-center">
 		<a href="">
