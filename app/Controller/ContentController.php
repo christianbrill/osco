@@ -5,8 +5,6 @@ namespace Controller;
 use \W\Controller\Controller;
 use \Model\ContentModel;
 
-// comment comment 
-
 
 class ContentController extends Controller {
 
@@ -30,7 +28,7 @@ class ContentController extends Controller {
             $userEmail = $_SESSION['user']['usr_email'];
             $userUsername = $_SESSION['user']['usr_username'];
 
-        //validating form data
+            //validating form data
             $errorList = array();
 
             if (empty($organizationName))  {
@@ -64,7 +62,7 @@ class ContentController extends Controller {
             $googleURL = "https://www.google.com/recaptcha/api/siteverify";
 
             $secret = "6Le43B0UAAAAAFKWLgoG-SdxGTUqIU-N_SbbSGi1";
-            
+
             $url = "". $googleURL ."?secret=".$secret."&response=".$captcha."";
 
             $this->res[] = file_get_contents($url);
@@ -90,7 +88,7 @@ class ContentController extends Controller {
             if (!empty($errorList)) {
                 $this->flash(join('<br>', $errorList), 'danger');
 
-            }   
+            }
         }
 
         $this->show('content/needhelp');
@@ -102,7 +100,7 @@ class ContentController extends Controller {
     */
 
     public function contactform() {
-//trim and strip tags from form data
+        //trim and strip tags from form data
         if(!empty($_POST)) {
             $email = isset($_POST['contactEmail']) ? trim(strip_tags($_POST['contactEmail'])) : '';
 
@@ -111,7 +109,8 @@ class ContentController extends Controller {
             $lname = isset($_POST['contactLname']) ? trim(strip_tags($_POST['contactLname'])) : '';
 
             $message = isset($_POST['contactMessage']) ? trim(strip_tags($_POST['contactMessage'])) : '';
-//validating form data
+
+            //validating form data
             $errorList = array();
 
             if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
@@ -126,21 +125,22 @@ class ContentController extends Controller {
             if (strlen($message) <= 10)  {
                 $errorList[] = 'Your message is too short, it must contain at least 10 characters!';
             }
-//setting vriables and urls for captcha
+
+            //setting variables and urls for captcha
             $captcha = $_POST['g-recaptcha-response'];
 
             $googleURL = "https://www.google.com/recaptcha/api/siteverify";
 
             $secret = "6Le43B0UAAAAAFKWLgoG-SdxGTUqIU-N_SbbSGi1";
-            
+
             $url = "". $googleURL ."?secret=".$secret."&response=".$captcha."";
 
             $this->res[] = file_get_contents($url);
 
             if (!empty($captcha) && json_decode($this->res[0])->success == "1") {
 
- // If CAPTCHA is successfully completed...
-             if (empty($errorList)) {
+            // If CAPTCHA is successfully completed...
+            if (empty($errorList)) {
                 $isSent=\Helper\Tools::sendEmail('osco.contact@gmail.com', 'The user with email address: '. $email. ' & First name: '. $fname. ' & Last name: '. $lname.' has sent the following message:', $message, $message );
 
 
@@ -148,23 +148,21 @@ class ContentController extends Controller {
                     $this->flash('We have received your email, and we will get back to you as soon as possible', 'success');
                 }
 
-            }
-            else {
+            } else {
                 $this->flash(join('<br>', $errorList), 'danger');
             }
 
         } else {
-         $errorList[] = '<p>Please go back and make sure you check the security CAPTCHA box.</p><br>';
-     }
+            $errorList[] = '<p>Please go back and make sure you check the security CAPTCHA box.</p><br>';
+        }
 
-     if (!empty($errorList)) {
-        $this->flash(join('<br>', $errorList), 'danger');
+        if (!empty($errorList)) {
+            $this->flash(join('<br>', $errorList), 'danger');
+        }
 
-    }   
-
-}
-$this->show('content/about');
-}
+    }
+        $this->show('content/about');
+    }
 
 
 	/**
@@ -244,7 +242,7 @@ $this->show('content/about');
         if (isset($_GET['page'])) {
             $page = intval($_GET['page']);
             $pageOffset = ($page-1)*$nbStoriesPerPage;
-        }	
+        }
         //PAGINATION END
 
         // Creating a new Model in ContentModel
@@ -444,7 +442,7 @@ $this->show('content/about');
     */
 
     public function article($id){
-        
+
         $articleModel = new \Model\ContentModel();
         $articleInfos = $articleModel->getOneArticle($id);
         //debug($articleInfos);

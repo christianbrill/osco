@@ -20,7 +20,7 @@ class ContentModel extends \W\Model\Model {
 		$sth->execute();
 		return $sth->fetchAll();
 	}
-	
+
 	// VIEW: search
 	// START FUNCTIONS FOR search
 	public function getSearchMatch($searchWord, $sortingMethod='DESC', $pageOffset, $nbResultsPerPage){
@@ -37,7 +37,7 @@ class ContentModel extends \W\Model\Model {
 		LIMIT '.$pageOffset.','.$nbResultsPerPage.'
 		';
 
-		
+
 		$sth = $this->dbh->prepare($sql);
 		if($searchWord != ''){
 			$sth->bindValue(':search', '%'.$searchWord.'%');
@@ -117,7 +117,7 @@ class ContentModel extends \W\Model\Model {
 
 		$sth = $this->dbh->prepare($sql);
 		$sth->bindValue(':id', $id, \PDO::PARAM_INT);
-		
+
 		if ($sth->execute()){
 			$getAllTagResults = $sth->fetchAll();
 
@@ -159,10 +159,10 @@ class ContentModel extends \W\Model\Model {
 
 		if ($sth->execute() === false){
 			return $sth->errorInfo();
-		}	
+		}
 	}
 
-	
+
 	//END FUNCTIONS FOR stories && story details
 
 
