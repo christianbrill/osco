@@ -1,13 +1,13 @@
 <?php $this->layout('layout', ['title' => 'About', 'currentPage' => 'about']) ?>
 
 <?php $this->start('main_content') ?>
-    <!-- 
+    <!--
     *
     *FAQ section
     *
     -->
-    <h1>Frequently Asked Questions</h1>
-    
+    <h1 id="faqHeadline">Frequently Asked Questions</h1>
+
     <section class="accordion">
         <h2>What does OSCo stand for?</h2>
         <div>

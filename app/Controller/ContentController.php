@@ -16,11 +16,8 @@ class ContentController extends Controller {
         if(!empty($_POST)) {
 
             $organizationName = isset($_POST['orgname']) ? trim(strip_tags($_POST['orgname'])) : '';
-
             $organizationEmail = isset($_POST['orgemail']) ? trim(strip_tags($_POST['orgemail'])) : '';
-
             $organizationPhone = isset($_POST['orgphone']) ? trim(strip_tags($_POST['orgphone'])) : '';
-
             $organizationInfo = isset($_POST['orginfo']) ? trim(strip_tags($_POST['orginfo'])) : '';
 
             $userEmail = $_SESSION['user']['usr_email'];
@@ -56,11 +53,8 @@ class ContentController extends Controller {
 
             //setting vriables and urls for captcha
             $captcha = $_POST['g-recaptcha-response'];
-
             $googleURL = "https://www.google.com/recaptcha/api/siteverify";
-
             $secret = "6Le43B0UAAAAAFKWLgoG-SdxGTUqIU-N_SbbSGi1";
-
             $url = "". $googleURL ."?secret=".$secret."&response=".$captcha."";
 
             $this->res[] = file_get_contents($url);
@@ -101,11 +95,8 @@ class ContentController extends Controller {
         //trim and strip tags from form data
         if(!empty($_POST)) {
             $email = isset($_POST['contactEmail']) ? trim(strip_tags($_POST['contactEmail'])) : '';
-
             $fname = isset($_POST['contactFname']) ? trim(strip_tags($_POST['contactFname'])) : '';
-
             $lname = isset($_POST['contactLname']) ? trim(strip_tags($_POST['contactLname'])) : '';
-
             $message = isset($_POST['contactMessage']) ? trim(strip_tags($_POST['contactMessage'])) : '';
 
             //validating form data
@@ -114,23 +105,23 @@ class ContentController extends Controller {
             if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
                 $errorList[] = 'Please enter a valid email address!';
             }
+
             if (strlen($fname) <= 1)  {
                 $errorList[] = 'The first name must contain at least 2 characters!';
             }
+
             if (strlen($lname) <= 1)  {
                 $errorList[] = 'The last name must contain at least 2 characters!';
             }
+
             if (strlen($message) <= 10)  {
                 $errorList[] = 'Your message is too short, it must contain at least 10 characters!';
             }
 
             //setting variables and urls for captcha
             $captcha = $_POST['g-recaptcha-response'];
-
             $googleURL = "https://www.google.com/recaptcha/api/siteverify";
-
             $secret = "6Le43B0UAAAAAFKWLgoG-SdxGTUqIU-N_SbbSGi1";
-
             $url = "". $googleURL ."?secret=".$secret."&response=".$captcha."";
 
             $this->res[] = file_get_contents($url);

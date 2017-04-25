@@ -8,7 +8,7 @@
 			<a href="?page=<?= $page-1 ?>" class="before">Previous</a>
 		<?php
 		}
-			
+
 		if ($nbStories >= 10){
 		?>
 			<a href="?page=<?= $page+1 ?>" class="after">Next</a>
@@ -21,17 +21,21 @@
 		FILTERING BY TAGS
 		<div class="tags">
 		<php foreach($getEachTag as $currentTag) : ?>
-			<a href="#" class="tag btn btn-xs"><?= $currentTag; ?></a>
+			<a href="#" class="tag btn btn-xs"><= $currentTag; ?></a>
 		<php endforeach; ?>
 		</div>
 		-->
 
 		<div class="storiesList">
 		<?php foreach($storiesList as $currentStory) : ?>
-			<article>
+			<article id="allStories">
 				<div>
-					<h1><a href="<?= $this->url('content_story',['id' => $currentStory['sto_id']]); ?>"><?= $currentStory['sto_title']; ?></a></h1>
+					<h1>
+						<a href="<?= $this->url('content_story',['id' => $currentStory['sto_id']]); ?>"><?= $currentStory['sto_title']; ?></a>
+					</h1>
+
 					<p><?= \Controller\ContentController::getShortDescription($currentStory['sto_content']); ?></p>
+
 					<a href="<?= $this->url('content_story',['id' => $currentStory['sto_id']]); ?>">Read More</a>
 				</div>
 				</a>

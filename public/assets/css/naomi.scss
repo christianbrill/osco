@@ -7,7 +7,7 @@ $graffiti: #232323;
 $wisteria: #8e44ad;
 $brightred: #e74c3c;
 $sunflower: #f1c40f;
-$lightblack: #141414;
+$lightblack: #232323;
 
 // General
 * {
@@ -27,6 +27,11 @@ h1, h2 {
 	margin:0;
 }
 
+// Background color of stories/articles
+#allStories, .articlesList {
+	background-color: $lightblack;
+}
+
 // Headlines and list item
 h1, li, li a {
 	font-family: 'Alfa Slab One', sans-serif;
@@ -38,8 +43,12 @@ header {
 }
 
 a {
+	text-decoration: none;
+	color: $sunflower;
+
 	&:hover {
 		text-decoration: none;
+		color: $wisteria;
 	}
 }
 
@@ -66,6 +75,7 @@ a {
 #desktopNavigation {
 	display:none;
 }
+
 
 #mobileNavigation {
 	display: flex;
@@ -141,15 +151,15 @@ ul {
 .pagination {
 
 	a {
-		color:$darkblue;
-		border-bottom: 3px solid $darkblue;
+		color:$brightred;
+		border-bottom: 3px solid $brightred;
 		text-transform: uppercase;
 	}
 
 	a:hover {
 		text-decoration: none;
-		color:$turquoise;
-		border-bottom: 3px solid $turquoise;
+		color: white;
+		border-bottom: 3px solid white;
 	}
 }
 
@@ -165,9 +175,17 @@ ul {
 	color:$sunflower;
 }
 
+.orderBox {
+	margin-bottom: 20px;
+}
+
+// This centers the FAQ headline
+#faqHeadline {
+	text-align: center;
+}
+
 #needHelpBox {
-	background-color:#141414;
-	margin-top: 45px;
+	margin-top: -20px;
 	margin-bottom: 2px;
 	padding: 2em;
 	text-align: center;
@@ -194,6 +212,7 @@ ul {
 
 	h1 {
 		font-size:1.5em;
+		font-weight: light;
 	}
 
 	a {
@@ -225,22 +244,29 @@ ul {
 	width: 100%;
 }
 
-
 textarea{
 	white-space: pre-wrap;
 }
 
 footer {
-	padding:3em 6em;
-	margin-top: 1em;
-	width:100%;
 	background-color:#141414;
+	margin-top: 1em;
+	padding: 20px;
+	width: 100%;
+
+	section, #footerContent section {
+		text-align: center;
+	}
 
 	#footerContent {
 		display:flex;
-		flex-direction: row;
+		flex-direction: row nowrap;
 		justify-content: space-around;
-		width:60%;
+		width: 90%;
+
+		section {
+			width: 45%;
+		}
 
 		a {
 			text-decoration: none;
@@ -259,6 +285,7 @@ footer {
 
 // Captcha in about page
 .g-recaptcha {
+	margin: auto;
 	width: 300px;
 }
 
@@ -269,13 +296,16 @@ footer {
 
 
 /* TABLET ------------------------------------------------------ */
-@media screen and (max-width: 1000px) and (min-width: 600px) {
+@media screen and (min-width: 576px) {
 
+	.storyBox {
+		width: 50%;
+	}
 
 }
 
 /* DESKTOP ----------------------------------------------------- */
-@media screen and (min-width: 1000px) {
+@media screen and (min-width: 992px) {
 	header {
 		#mobileNavigation {
 			display:none;
@@ -303,8 +333,8 @@ footer {
 		}
 
 		h1 {
-			margin:0.1em;
-			color:$sunflower;
+			margin: 0.1em;
+			color: $sunflower;
 		}
 
 		h1:hover {
@@ -316,9 +346,8 @@ footer {
 			input {
 				height:30px;
 				padding: 10px;
-
 				border: 0px;
-				border-bottom: 3px solid $turquoise;
+				border-bottom: 3px solid $sunflower;
 			}
 		}
 
@@ -340,5 +369,9 @@ footer {
 				border-bottom: 3px solid #00C3B6;
 			}
 		}
-	} // media screen end
-}
+	} // header end
+
+	.storyBox {
+		width: 33.3333%;
+	}
+} // media screen (992px) end

@@ -162,12 +162,12 @@
 				<p>Facebook</p>
 				<p>Twitter</p>
 			</section>
+		</div>
 
 			<section class="copyright">
-				<h4>&copy; Copyright 2017 <?php if (date('Y') > 2017) {echo '- '.date('Y');} ?></h4>
+				<h4>&copy; 2017 <?php if (date('Y') > 2017) {echo '- '.date('Y');} ?></h4>
 				<p>Disclaimer</p>
 			</section>
-		</div>
 	</footer>
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
