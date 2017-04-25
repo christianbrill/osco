@@ -64,10 +64,11 @@ a {
 }
 
 .storyBox {
-	margin: 2px 0;
-	padding: 15px;
+	//margin: 2px 0;
+	padding: 12px;
 	height: 230px;
 	background-color: $graffiti;
+	border:2px solid darken(white, 50%);
 }
 
 #desktopNavigation {
@@ -173,7 +174,7 @@ ul {
 }
 
 #needHelpBox {
-	background-color:	$graffiti;
+	background-color:#141414;
 	margin-top: 45px;
 	margin-bottom: 2px;
 	padding: 2em;
@@ -234,11 +235,11 @@ footer {
 	padding:3em 6em;
 	margin-top: 1em;
 	width:100%;
-	background-color: black;
+	background-color:#141414;
 
 	#footerContent {
 		display:flex;
-		flex-direction: column;
+		flex-direction: row;
 		justify-content: space-around;
 		width:60%;
 
