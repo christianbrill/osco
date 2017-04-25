@@ -17,11 +17,14 @@
 		?>
 		</div>
 
-		<!--<div class="tags">
+		<!--
+		FILTERING BY TAGS
+		<div class="tags">
 		<php foreach($getEachTag as $currentTag) : ?>
 			<a href="#" class="tag btn btn-xs"><?= $currentTag; ?></a>
 		<php endforeach; ?>
-		</div>-->
+		</div>
+		-->
 
 		<div class="storiesList">
 		<?php foreach($storiesList as $currentStory) : ?>

@@ -4,7 +4,7 @@
 
 	<div class="row">
 		<!--Here starts the "Need Help" box -->
-		<div class="col-xs-10 col-sm-6 col-md-4 col-lg-6" id="needHelpBox">
+		<div class="col-xs-12 col-sm-6 col-md-4 col-lg-6" id="needHelpBox">
 			<a href="<?= $this->url("content_needhelp")?>">
 				<h1>Need Help?</h1>
 				<p>OSCo has the contact information you need to get help. If you prefer, we also provide a form for you to get anonymous help-we handle the contact for you.
@@ -13,13 +13,9 @@
 		</div>
 	</div>
 
-	<a href="">
-		<span id="refreshStories" class="glyphicon glyphicon-refresh" aria-hidden="true"><br> Refresh</span>
-	</a>
-
 	<div id="ajaxHomeStories" class="row">
 	<?php foreach($randomStories as $story) : ?>
-		<article class="storyBox col-xs-12">
+		<article class="col-xs-12 storyBox">
 			<a href="<?= $this->url('content_story',['id' => $story['sto_id']]); ?>">
 				<div>
 					<h1 id="title"><?= \Controller\ContentController::getShortTitle($story['sto_title']) ?></h1>
@@ -28,6 +24,12 @@
 			</a>
 		</article>
 	<?php endforeach; ?>
+	</div>
+
+	<div class="text-center">
+		<a href="">
+			<span id="refreshStories" class="glyphicon glyphicon-refresh btn" aria-hidden="true"><br> Refresh</span>
+		</a>
 	</div>
 
 <?php $this->stop('main_content') ?>
