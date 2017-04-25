@@ -7,38 +7,40 @@
     *
     -->
     <h1>Frequently Asked Questions</h1>
-    
-    <section class="accordion">
-        <h2>What does OSCo stand for?</h2>
-        <div>
-            <p>Online Support Community</p>
-        </div>
+   
+    <div class="row">    
+        <section class="accordion text-center col-xs-12 col-sm-12 col-md-8 offset-md-2">
+            <h2>What does OSCo stand for?</h2>
+            <div>
+                <p>Online Support Community</p>
+            </div>
 
-        <h2>What are we all about?</h2>
-        <div>
-            <p>Just as our name suggests, we stand up for supporting women all over the planet. This platform can be used to share your stories of success, advice, or defeat. However, no matter what your story is, the most important thing is to tell it. This platform is to be reminded of the fact that you are not alone and there is always help to be found, no matter where you are.</p>
-        </div>
+            <h2>What are we all about?</h2>
+            <div>
+                <p>Just as our name suggests, we stand up for supporting women all over the planet. This platform can be used to share your stories of success, advice, or defeat. However, no matter what your story is, the most important thing is to tell it. This platform is to be reminded of the fact that you are not alone and there is always help to be found, no matter where you are.</p>
+            </div>
 
-        <h2>Will we have access to your personal information?</h2>
-        <div>
-            <p>We will have only as much information as you give us.</p>
-        </div>
+            <h2>Will we have access to your personal information?</h2>
+            <div>
+                <p>We will have only as much information as you give us.</p>
+            </div>
 
-        <h2>What information must I provide during the signup?</h2>
-        <div>
-            <p>When you sign up, we merely ask you for your email, a password, and the country you live in. Your password will never be shown to us or anyone else.</p>
-        </div>
+            <h2>What information must I provide during the signup?</h2>
+            <div>
+                <p>When you sign up, we merely ask you for your email, a password, and the country you live in. Your password will never be shown to us or anyone else.</p>
+            </div>
 
-        <h2>Do I leave behind any tracks of myself when my account is deleted?</h2>
-        <div>
-            <p>No, all your information will be deleted and cannot be retrieved by you or us.</p>
-        </div>
+            <h2>Do I leave behind any tracks of myself when my account is deleted?</h2>
+            <div>
+                <p>No, all your information will be deleted and cannot be retrieved by you or us.</p>
+            </div>
 
-        <h2>How can I change my password?</h2>
-        <div>
-            <p>If you’d like to change your password, simply log in and go to your profile. Once there, click on “Change your password”.</p>
-        </div>
-    </section>
+            <h2>How can I change my password?</h2>
+            <div>
+                <p>If you’d like to change your password, simply log in and go to your profile. Once there, click on “Change your password”.</p>
+            </div>
+        </section>
+    </div> 
 
     <!-- Form which sends user's message to osco.contact@gmail.com -->
     <form name='contactform' action="" method="post">
