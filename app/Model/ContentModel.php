@@ -20,7 +20,7 @@ class ContentModel extends \W\Model\Model {
 		$sth->execute();
 		return $sth->fetchAll();
 	}
-	
+
 	// VIEW: search
 	// START FUNCTIONS FOR search
 	public function getSearchMatch($searchWord, $sortingMethod='DESC', $pageOffset, $nbResultsPerPage){
@@ -37,7 +37,7 @@ class ContentModel extends \W\Model\Model {
 		LIMIT '.$pageOffset.','.$nbResultsPerPage.'
 		';
 
-		
+
 		$sth = $this->dbh->prepare($sql);
 		if($searchWord != ''){
 			$sth->bindValue(':search', '%'.$searchWord.'%');
@@ -62,7 +62,7 @@ class ContentModel extends \W\Model\Model {
 		SELECT sto_id, sto_title, sto_content, sto_tags, sto_thumbnail, sto_inserted, users_id, usr_username
 		FROM stories
 		LEFT OUTER JOIN users ON stories.users_id = users.id
-		ORDER BY sto_id DESC
+		ORDER BY RAND()
 		LIMIT '.$pageOffset.','.$nbStoriesPerPage.'
 		';
 
@@ -93,6 +93,7 @@ class ContentModel extends \W\Model\Model {
 		SELECT sto_tags
 		FROM stories
 		ORDER BY RAND()
+		LIMIT 5
 		';
 
 		$sth = $this->dbh->prepare($sql);
@@ -118,7 +119,7 @@ class ContentModel extends \W\Model\Model {
 
 		$sth = $this->dbh->prepare($sql);
 		$sth->bindValue(':id', $id, \PDO::PARAM_INT);
-		
+
 		if ($sth->execute()){
 			$getAllTagResults = $sth->fetchAll();
 
@@ -160,20 +161,20 @@ class ContentModel extends \W\Model\Model {
 
 		if ($sth->execute() === false){
 			return $sth->errorInfo();
-		}	
+		}
 	}
 
-	
+
 	//END FUNCTIONS FOR stories && story details
 
 
 	//START fUNCTIONS for articles & article details
 
-	public function getArticlesList($pageOffset, $nbArticlesPerPage){
+	public function getArticlesList($pageOffset, $nbArticlesPerPage, $sortingMethod='DESC'){
 		$sql = '
 		SELECT *
 		FROM articles
-		ORDER BY art_inserted DESC
+		ORDER BY art_inserted '.$sortingMethod.'
 		LIMIT '.$pageOffset.','.$nbArticlesPerPage.'
 
 		';
