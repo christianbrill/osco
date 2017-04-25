@@ -116,23 +116,15 @@ class ContentController extends Controller {
             if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
                 $errorList[] = 'Please enter a valid email address!';
             }
-           //f (strlen($fname) <= 0) {
-               //errorList[] = 'The first name must contain at least 2 characters!';
-           //
-           //f (strlen($lname) <= 0 ){
-                //rrorList[] = 'The last name must contain at least 2 characters!';
-           //
+
             if (strlen($message) <= 10)  {
                 $errorList[] = 'Your message is too short, it must contain at least 10 characters!';
             }
 
             //setting variables and urls for captcha
             $captcha = $_POST['g-recaptcha-response'];
-
             $googleURL = "https://www.google.com/recaptcha/api/siteverify";
-
             $secret = "6Le43B0UAAAAAFKWLgoG-SdxGTUqIU-N_SbbSGi1";
-
             $url = "". $googleURL ."?secret=".$secret."&response=".$captcha."";
 
             $this->res[] = file_get_contents($url);
@@ -141,8 +133,8 @@ class ContentController extends Controller {
 
             // If CAPTCHA is successfully completed...
             if (empty($errorList)) {
-                $isSent=\Helper\Tools::sendEmail('osco.contact@gmail.com', 'The user with email address: '. $email. ' & First name: '. $fname. ' & Last name: '. $lname.' has sent the following message:', $message, $message );
 
+                $isSent=\Helper\Tools::sendEmail('osco.contact@gmail.com', 'The user with email address: '. $email. ' & First name: '. $fname. ' & Last name: '. $lname.' has sent the following message:', $message, $message );
 
                 if ($isSent){
                     $this->flash('We have received your email, and we will get back to you as soon as possible', 'success');
@@ -153,8 +145,11 @@ class ContentController extends Controller {
             }
 
         } else {
-            $errorList[] = '<p>Please go back and make sure you check the security CAPTCHA box.</p><br>';
+           $errorList[] = '<p>Please go back and make sure you check the security CAPTCHA box.</p><br>';
         }
+
+        if (!empty($errorList)) {
+            $this->flash(join('<br>', $errorList), 'danger');
 
         if (!empty($errorList)) {
             $this->flash(join('<br>', $errorList), 'danger');
@@ -179,7 +174,6 @@ class ContentController extends Controller {
 	}
 
 
-
 	/**
 	* ajaxRefresh
 	*
@@ -198,9 +192,7 @@ class ContentController extends Controller {
         }
 
 		$this->showJson($refreshStories);
-
 	}
-
 
 
 	/**
@@ -216,7 +208,6 @@ class ContentController extends Controller {
     }
 
 
-
 	/**
 	* Get only the first 30 characters of the story's title
 	*
@@ -228,7 +219,6 @@ class ContentController extends Controller {
         }
         return $title;
     }
-
 
 
 	/**
@@ -273,14 +263,12 @@ class ContentController extends Controller {
     }
 
 
-
 	/**
 	* All Stories
 	*
 	*/
     public function stories(){
 
-        // !!!!!!! NOT WORKING YET
         //PAGINATION START
         $page = 1;
         $nbStoriesPerPage = 10;
@@ -311,7 +299,6 @@ class ContentController extends Controller {
     }
 
 
-
 	/**
 	* Story Detail
 	*
@@ -332,20 +319,6 @@ class ContentController extends Controller {
     }
 
 
-
-	/**
-	* Need Help Function
-	*
-	*/
-	/*public function needhelp(){
-
-
-
-		$this->show('content/needhelp');
-	}*/
-
-
-
     /**
 	* ajaxNeedHelp Function
 	*
@@ -356,6 +329,7 @@ class ContentController extends Controller {
 		$showOrganizations = $storiesModel->getOrganization();
 		$this->showJson($showOrganizations);
 	}
+
 
 	/**
 	* Add a Story method
@@ -376,47 +350,42 @@ class ContentController extends Controller {
 
         if (!empty($_POST)) {
 
-    		$stoTitle = isset($_POST['storyTitle']) ? trim(strip_tags($_POST['storyTitle']	)) : '';
-    		$stoContent = isset($_POST['storyContent']) ? strip_tags($_POST['storyContent']	) : '';
-    		$stoTags = isset($_POST['storyTags']) ? trim(strip_tags($_POST['storyTags']	)) : '';
+          $stoTitle = isset($_POST['storyTitle']) ? trim(strip_tags($_POST['storyTitle']	)) : '';
+          $stoContent = isset($_POST['storyContent']) ? strip_tags($_POST['storyContent']	) : '';
+          $stoTags = isset($_POST['storyTags']) ? trim(strip_tags($_POST['storyTags']	)) : '';
 
             $stoContentFormat = nl2br(htmlentities($stoContent, ENT_QUOTES, 'UTF-8'));
 
             // Instantiation of story model
-    		$addStoryModel = new \Model\ContentModel();
-    		$addStory = $addStoryModel->insertStory($currentUser, $stoTitle, $stoContentFormat, $stoTags);
+            $addStoryModel = new \Model\ContentModel();
+            $addStory = $addStoryModel->insertStory($currentUser, $stoTitle, $stoContent, $stoTags);
 
-            $this->flash('Your story has been posted successfully. Thank you.', 'success');
-            $this->redirectToRoute('content_addStoryPage');
+          $this->flash('Your story has been posted successfully. Thank you.', 'success');
+          $this->redirectToRoute('content_addStoryPage');
         }
+    }
 
-
-	}
-
-
-    /*-----------------------------------------------------------------------------------*/
 
     /**
     * Add an article method
     *
     */
-
     public function addArticle () {
         //$this->allowTo("user");
 
 
-    $artTitle = isset($_POST['articleTitle']) ? trim(strip_tags($_POST['articleTitle']  )) : '';
+        $artTitle = isset($_POST['articleTitle']) ? trim(strip_tags($_POST['articleTitle']  )) : '';
 
-    $addArtModel = new \Model\ContentModel();
-    $addArticle = $addArtModel->insertArticle($artTitle);
+        $addArtModel = new \Model\ContentModel();
+        $addArticle = $addArtModel->insertArticle($artTitle);
 
-    $this->show('content/addarticle', ['addArticle' => $addArticle]);
-}
+        $this->show('content/addarticle', ['addArticle' => $addArticle]);
+    }
+
 
     /**
     * All articles
     */
-    
     public function articles(){
 
         $sortingOption = isset($_GET['order']) ? trim(strip_tags($_GET['order'])) : '';
@@ -444,12 +413,10 @@ class ContentController extends Controller {
     }
 
 
-
     /**
     * article Detail
     *
     */
-
     public function article($id){
 
         $articleModel = new \Model\ContentModel();
@@ -459,6 +426,7 @@ class ContentController extends Controller {
             'articleInfos' => $articleInfos
             ]);
     }
+
 
     /**
     * Add a Story method
@@ -480,7 +448,5 @@ class ContentController extends Controller {
             $addArticleModel = new \Model\ContentModel();
             $addArticle = $addArticleModel->insertArticle($artTitle, $artContentFormat, $artTags);
         }
-
     }*/
-
 }
