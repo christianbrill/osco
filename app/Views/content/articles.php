@@ -2,8 +2,7 @@
 
 <?php $this->start('main_content') ?>
 
-
-<section id="articles">
+	<section id="articles">
 		<div class="pagination">
 		<?php if ($page >= 2){
 		?>
@@ -42,4 +41,5 @@
 		<?php endforeach; ?>
 		</div>
 	</section>
+	
 <?php $this->stop('main_content') ?>
