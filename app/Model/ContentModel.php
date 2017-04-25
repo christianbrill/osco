@@ -13,7 +13,7 @@ class ContentModel extends \W\Model\Model {
 		SELECT *
 		FROM stories
 		ORDER BY RAND()
-		LIMIT 8
+		LIMIT 12
 		';
 
 		$sth = $this->dbh->prepare($sql);

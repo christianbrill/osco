@@ -16,7 +16,7 @@
 
 	<div id="ajaxHomeStories row">
 	<?php foreach($randomStories as $story) : ?>
-		<article class="storyBox col-xs-12 col-sm-12 col-md-6 col-lg-4">
+		<article class="storyBox col-xs-12 col-sm-6 col-md-6 col-lg-4">
 			<a href="<?= $this->url('content_story',['id' => $story['sto_id']]); ?>">
 				<div>
 					<h1 id="title"><?= \Controller\ContentController::getShortTitle($story['sto_title']) ?></h1>
