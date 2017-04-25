@@ -25,6 +25,9 @@
         </select>
     </div>
 
+    <!-- Captcha for more secure signup -->
+    <div class="g-recaptcha" data-sitekey="6Le43B0UAAAAAGVZa4bsR-HliOSWg04KU9J6O5-1"></div><br>
+
     <div class="form-group">
         <input type="submit" class="btn btn-success btn-block" value="Sign up" />
     </div>
