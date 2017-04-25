@@ -11,7 +11,7 @@
 		<p><?= $currentStory['sto_content']; ?></p>
 		<p>
 		<?php foreach($getEachTag as $currentTag) : ?>
-			<button class="tag btn btn-xs"><?= $currentTag ?></button>
+			<p class="tag btn btn-xs"><?= $currentTag ?></p>
 		<?php endforeach; ?>
 		</p>
 		<?php endforeach; ?>
