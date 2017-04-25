@@ -64,14 +64,6 @@ a {
     }
 }
 
-.storyBox {
-	//margin: 2px 0;
-	padding: 12px;
-	height: 230px;
-	background-color: $graffiti;
-	border:2px solid darken(white, 50%);
-}
-
 #desktopNavigation {
 	display:none;
 }
@@ -196,11 +188,10 @@ ul {
 }
 
 #ajaxHomeStories {
-	height: 280px;
-	width: 280px;
+	width:100%;
 
 	display: flex;
-	flex-direction:row;
+	flex-flow:row wrap;
 	align-items: center;
 
 	h1 {
@@ -225,6 +216,14 @@ ul {
 			}
 		}
 	}
+}
+
+.storyBox {
+	width: 25%;
+	padding: 12px;
+	height: 230px;
+	background-color: $graffiti;
+	border:2px solid darken(white, 50%);
 }
 
 

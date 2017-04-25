@@ -123,7 +123,7 @@ function refreshStories() {
 		var content = "";
 
 		$.each(response, function(key, value){
-			content +="\n<article class='storyBox col-xs-12 col-sm-6 col-md-6 col-lg-4'>" +
+			content +="\n<article class='storyBox'>" +
 				"<a href=''>" +
 					"<div>"+
 						"<h1>"+ value.sto_title +"</h1>"+
