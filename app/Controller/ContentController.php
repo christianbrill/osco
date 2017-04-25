@@ -8,9 +8,7 @@ use \Model\ContentModel;
 
 class ContentController extends Controller {
 
-
     protected $res;
-
 
     public function needhelp() {
 
@@ -209,8 +207,8 @@ class ContentController extends Controller {
 	*/
 	public function getShortDescription($content) {
 
-        if (strlen($content) > 120) {
-            return substr($content, 0, 120).'...';
+        if (strlen($content) > 80) {
+            return substr($content, 0, 80).'...';
         }
         return $content;
     }
@@ -416,7 +414,7 @@ class ContentController extends Controller {
     /**
     * All articles
     */
-    
+
     public function articles(){
 
         $sortingOption = isset($_GET['order']) ? trim(strip_tags($_GET['order'])) : '';

@@ -12,7 +12,7 @@ $(document).ready(function(){
 	});
 
 	// This function call executes moreStories, to be implemented in a later version of the project
-	
+
 	/*$("#moreStories").click(function(e){
 		 e.preventDefault();
 
@@ -123,10 +123,10 @@ function refreshStories() {
 		var content = "";
 
 		$.each(response, function(key, value){
-			content += "<article id='storyBox'>" +
+			content +="\n<article class='storyBox'>" +
 				"<a href=''>" +
 					"<div>"+
-						"<h1 id='title'>"+ value.sto_title +"</h1>"+
+						"<h1>"+ value.sto_title +"</h1>"+
 						"<p>"+ value.sto_content +"</p>"+
 					"</div>"+
 				"</a>"+
@@ -247,4 +247,3 @@ function moreStories() {
 	});//end ajaxHomeStories
 
 }*///refreshStories function end
-

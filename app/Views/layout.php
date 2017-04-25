@@ -138,7 +138,7 @@
 	</header>
 
 	<!-- This section will make the flash alert messages show up on the home page. -->
-	<section id="main" class="container">
+	<section id="main">
 		<?php if (isset($w_flash_message) && !empty($w_flash_message->message)): ?>
 			<div class="alert alert-<?= $w_flash_message->level ?>" role="alert">
 				<?= $w_flash_message->message ?>

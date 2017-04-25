@@ -13,7 +13,7 @@ class ContentModel extends \W\Model\Model {
 		SELECT *
 		FROM stories
 		ORDER BY RAND()
-		LIMIT 9
+		LIMIT 8
 		';
 
 		$sth = $this->dbh->prepare($sql);
@@ -81,7 +81,7 @@ class ContentModel extends \W\Model\Model {
 
 		$sth = $this->dbh->prepare($sql);
 		$sth->bindValue(':id', $id, \PDO::PARAM_INT);
-		
+
 
 		if ($sth->execute()){
 			return $sth->fetchAll();
