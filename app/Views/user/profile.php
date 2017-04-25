@@ -65,7 +65,7 @@
         </section>
     </article>
 
-    <section id="y">
+    <section id="ajaxProfileStories">
     <?php foreach($allStories as $story) : ?>
         <article id="profileStoryBox">
             <a href="<?= $this->url('content_story',['id' => $story['sto_id']]); ?>">
@@ -77,6 +77,8 @@
     <?php endforeach; ?>
 
     </section>
-    <a href=""><span id="moreStories" class="glyphicon glyphicon-option-horizontal" aria-hidden="true"><br> More</span></a>
+    
+    <!-- This button is intended for later. It runs the ajax request which load more stories on the user profile -->
+    <!--a href=""><span id="moreStories" class="glyphicon glyphicon-option-horizontal" aria-hidden="true"><br> More</span></a-->
 
 <?php $this->stop('main_content') ?>

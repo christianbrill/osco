@@ -315,12 +315,11 @@ $this->show('content/about');
 
         $storyModel = new \Model\ContentModel();
         $storyInfos = $storyModel->getOneStory($id);
-        //debug($storyInfos);
 
         $tagsLine = $storyModel->getTagStringForStory($id);
         $getEachTag = explode(",", $tagsLine);
         //implode($storyInfos);
-        //nl2br($storyInfos);
+        nl2br($storyInfos);
         //debug($storyInfos);
 
         $this->show('content/story', [
@@ -412,6 +411,7 @@ $this->show('content/about');
     /**
     * All articles
     */
+    
     public function articles(){
 
         //PAGINATION START
