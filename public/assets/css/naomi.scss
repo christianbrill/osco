@@ -38,7 +38,9 @@ header {
 }
 
 a {
-	text-decoration: none;
+	&:hover {
+		text-decoration: none;
+	}
 }
 
 #main {
@@ -47,8 +49,6 @@ a {
 
 // Accordion jquery UI
 .accordion {
-	width: 90%;
-    margin: auto;
 	margin-bottom: 10px;
     padding: 20px;
 
@@ -187,11 +187,10 @@ ul {
 }
 
 #ajaxHomeStories {
-	width:100%;
-
+	align-items: center;
 	display: flex;
 	flex-flow:row wrap;
-	align-items: center;
+	width:100%;
 
 	h1 {
 		font-size:1.5em;
@@ -206,6 +205,7 @@ ul {
 		box-shadow: none;
 		padding: 20px;
 		transition: 0.5s;
+
 		&:focus {
 			box-shadow:0 0 15px white;
 			transition: 0.5s;
@@ -218,11 +218,11 @@ ul {
 }
 
 .storyBox {
-	width: 25%;
-	padding: 12px;
-	height: 230px;
 	background-color: $graffiti;
 	border:2px solid darken(white, 50%);
+	height: 230px;
+	padding: 12px;
+	width: 100%;
 }
 
 
