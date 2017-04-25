@@ -9,5 +9,4 @@
         <input type="submit" name="articleSubmit" value="articleContent">
     </form>
 
-   
-<?php $this->stop('main_content') ?>
+ <?php $this->stop('main_content') ?>

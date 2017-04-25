@@ -44,7 +44,7 @@ class ContentController extends Controller {
             if (strlen($message) <= 10)  {
                 $errorList[] = 'Your message is too short, it must contain at least 10 characters!';
             }
-//setting vriables and urls for captcha
+//setting variables and urls for captcha
             $captcha = $_POST['g-recaptcha-response'];
 
             $googleURL = "https://www.google.com/recaptcha/api/siteverify";
@@ -58,7 +58,7 @@ class ContentController extends Controller {
             if (!empty($captcha) && json_decode($this->res[0])->success == "1") {
 
  // If CAPTCHA is successfully completed...
-             if (empty($errorList)) {
+               if (empty($errorList)) {
                 $isSent=\Helper\Tools::sendEmail('osco.contact@gmail.com', 'The user with email address: '. $email. ' & First name: '. $fname. ' & Last name: '. $lname.' has sent the following message:', $message, $message );
 
 
@@ -72,10 +72,10 @@ class ContentController extends Controller {
             }
 
         } else {
-         $errorList[] = '<p>Please go back and make sure you check the security CAPTCHA box.</p><br>';
-     }
+           $errorList[] = '<p>Please go back and make sure you check the security CAPTCHA box.</p><br>';
+       }
 
-     if (!empty($errorList)) {
+       if (!empty($errorList)) {
         $this->flash(join('<br>', $errorList), 'danger');
 
     }   
@@ -292,23 +292,23 @@ $this->show('content/about');
 
         if (!empty($_POST)) {
 
-    		$stoTitle = isset($_POST['storyTitle']) ? trim(strip_tags($_POST['storyTitle']	)) : '';
-    		$stoContent = isset($_POST['storyContent']) ? strip_tags($_POST['storyContent']	) : '';
-    		$stoTags = isset($_POST['storyTags']) ? trim(strip_tags($_POST['storyTags']	)) : '';
+          $stoTitle = isset($_POST['storyTitle']) ? trim(strip_tags($_POST['storyTitle']	)) : '';
+          $stoContent = isset($_POST['storyContent']) ? strip_tags($_POST['storyContent']	) : '';
+          $stoTags = isset($_POST['storyTags']) ? trim(strip_tags($_POST['storyTags']	)) : '';
 
             // Instantiation of story model
-    		$addStoryModel = new \Model\ContentModel();
-    		$addStory = $addStoryModel->insertStory($currentUser, $stoTitle, $stoContent, $stoTags);
+          $addStoryModel = new \Model\ContentModel();
+          $addStory = $addStoryModel->insertStory($currentUser, $stoTitle, $stoContent, $stoTags);
 
-            $this->flash('Your story has been posted successfully. Thank you.', 'success');
-            $this->redirectToRoute('content_addStoryPage');
-        }
-
-
-	}
+          $this->flash('Your story has been posted successfully. Thank you.', 'success');
+          $this->redirectToRoute('content_addStoryPage');
+      }
 
 
-    /*-----------------------------------------------------------------------------------*/
+  }
+
+
+  /*-----------------------------------------------------------------------------------*/
 
     /**
     * Add an article method
@@ -319,13 +319,13 @@ $this->show('content/about');
         //$this->allowTo("user");
 
 
-    $artTitle = isset($_POST['articleTitle']) ? trim(strip_tags($_POST['articleTitle']  )) : '';
+        $artTitle = isset($_POST['articleTitle']) ? trim(strip_tags($_POST['articleTitle']  )) : '';
 
-    $addArtModel = new \Model\ContentModel();
-    $addArticle = $addArtModel->insertArticle($artTitle);
+        $addArtModel = new \Model\ContentModel();
+        $addArticle = $addArtModel->insertArticle($artTitle);
 
-    $this->show('content/addarticle', ['addArticle' => $addArticle]);
-}
+        $this->show('content/addarticle', ['addArticle' => $addArticle]);
+    }
 
     /**
     * All articles

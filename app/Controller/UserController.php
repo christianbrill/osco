@@ -24,7 +24,6 @@ class UserController extends Controller {
 			$passwordTwo = isset($_POST['passwordTwo']) ? trim(strip_tags($_POST['passwordTwo'])) : '';
 			$country = isset($_POST['selectedCountry']) ? trim(strip_tags($_POST['selectedCountry'])) : '';
 
-
 			// Now we create an "errorList" variable, which will contain potential errors during the signup process and show them to us
 			$errorList = array();
 
@@ -68,12 +67,12 @@ class UserController extends Controller {
 					// The following function will create a random 10-character string, which
 					// is assigned to be the user's initial username (can be changed later)
 					function random_str($length, $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ') {
-					    $str = '';
-					    $max = mb_strlen($characters, '8bit') - 1;
-					    for ($i = 0; $i < $length; ++$i) {
-					        $str .= $characters[random_int(0, $max)];
-					    }
-					    return $str;
+						$str = '';
+						$max = mb_strlen($characters, '8bit') - 1;
+						for ($i = 0; $i < $length; ++$i) {
+							$str .= $characters[random_int(0, $max)];
+						}
+						return $str;
 					}
 
 					// Then we can insert the user data in the database
@@ -83,7 +82,7 @@ class UserController extends Controller {
 						'usr_role' => 'user',
 						'usr_country' => $country,
 						'usr_username' => random_str(10)
-					));
+						));
 
 					// If the signup was successful, we will redirect the user to the login page
 					if (!empty($insertUserData)) {
@@ -105,11 +104,8 @@ class UserController extends Controller {
 
 		$this->show('user/signup', array(
 			'countryList' => $countryList
-		));
-
+			));
 	}
-
-
 
 	/** ***********************************************************************
 	 * Login
@@ -121,13 +117,11 @@ class UserController extends Controller {
 		$this->show('user/login');
 	}
 
-
-
 	/** ***********************************************************************
 	 * Login Post Page
 	 *
 	 *********************************************************************** */
-	 public function loginPost() {
+	public function loginPost() {
 
 		// We first retrieve the data from POST again
 		$email = isset($_POST['email']) ? trim(strip_tags($_POST['email'])) : '';
@@ -145,7 +139,7 @@ class UserController extends Controller {
 
 		// Is password at least 8 characters?
 		if (strlen($password) < 8) {
-		 	$errorList[] = "Your password needs to be at least 8 characters long.";
+			$errorList[] = "Your password needs to be at least 8 characters long.";
 		}
 
 		// If everything is OK, do this:
@@ -167,77 +161,75 @@ class UserController extends Controller {
 				// Then the user is redirected to the home page
 				$this->redirectToRoute('content_home');
 			} else {
-				 $this->flash('Your email or password are incorrect.', 'danger');
-		 	}
+				$this->flash('Your email or password are incorrect.', 'danger');
+			}
 		} else {
-			 $this->flash(join('<br>', $errorList), 'danger');
-	 	}
+			$this->flash(join('<br>', $errorList), 'danger');
+		}
 
 		$this->show('user/login');
 	}
 
-
-
-	 /** ***********************************************************************
+	/** ***********************************************************************
  	 * Forgot Password
  	 *
  	 ************************************************************************ */
 	 public function forgot() {
 
 		 // When the form has been sent
-		 if (!empty($_POST)) {
+	 	if (!empty($_POST)) {
 
 			 // We need to retrieve the information in POST
-			 $email = isset($_POST['email']) ? trim(strip_tags($_POST['email'])) : '';
+	 		$email = isset($_POST['email']) ? trim(strip_tags($_POST['email'])) : '';
 
 			 // Now we again create the familiar errorList variable containing an empty array
-			 $errorList = array();
+	 		$errorList = array();
 
 			 // User Data Validation
 			 // ===================================================
 			 // Is email valid?
-			 if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
-				 $errorList[] = 'Your email address is incorrect.';
-			 }
+	 		if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
+	 			$errorList[] = 'Your email address is incorrect.';
+	 		}
 
 			 // If the email is valid, do the following:
-			 if (empty($errorList)) {
+	 		if (empty($errorList)) {
 				 // We first instantiate a new model
-				 $model = new \W\Model\UsersModel();
+	 			$model = new \W\Model\UsersModel();
 
 				 // Then we call the method which returns the user data for a given email
-				 $userData = $model->getUserByUsernameOrEmail($email);
+	 			$userData = $model->getUserByUsernameOrEmail($email);
 
 				 // If no account exists
-				 if ($userData === false) {
-					 $this->flash('Email not valid.', 'danger');
-				 } else {
+	 			if ($userData === false) {
+	 				$this->flash('Email not valid.', 'danger');
+	 			} else {
 					 // Now we generate the token of 32 characters
-					 $token = md5(\W\Security\StringUtils::randomString(128));
+	 				$token = md5(\W\Security\StringUtils::randomString(128));
 
 					 // Then the token is added to the database
-					 $model->update(array(
-						'usr_token' => $token,
-						'usr_token_created' => date('Y-m-d H:i:s')), $userData['id']);
+	 				$model->update(array(
+	 					'usr_token' => $token,
+	 					'usr_token_created' => date('Y-m-d H:i:s')), $userData['id']);
 
 					 // Now we can create the email which will contain the link to reset the password
-					 $htmlContent = 'You have requested to reset your password. Please follow the link below to change your password: <a href="' . $this->generateUrl('user_reset', array('token' => $token), true) . '">' . $this->generateUrl('user_reset', array('token' => $token), true) . '</a>';
+	 				$htmlContent = 'You have requested to reset your password. Please follow the link below to change your password: <a href="' . $this->generateUrl('user_reset', array('token' => $token), true) . '">' . $this->generateUrl('user_reset', array('token' => $token), true) . '</a>';
 
 					 // After this, we can send the email
-					 $isSent = \Helper\Tools::sendEmail($userData['usr_email'], 'Change your password', nl2br($htmlContent));
+	 				$isSent = \Helper\Tools::sendEmail($userData['usr_email'], 'Change your password', nl2br($htmlContent));
 
-					 if ($isSent) {
-						 $this->flash('An email with a link to reset your password has been sent.', 'success');
-					 } else {
-						 $this->flash('Unfortunately, an error occurred while sending the email.', 'danger');
-					 }
-				 }
-			 } else {
-				 $this->flash(join('<br>', $errorList), 'danger');
-			 }
-		 }
+	 				if ($isSent) {
+	 					$this->flash('An email with a link to reset your password has been sent.', 'success');
+	 				} else {
+	 					$this->flash('Unfortunately, an error occurred while sending the email.', 'danger');
+	 				}
+	 			}
+	 		} else {
+	 			$this->flash(join('<br>', $errorList), 'danger');
+	 		}
+	 	}
 
-		 $this->show('user/forgot');
+	 	$this->show('user/forgot');
 
 	 }
 
@@ -251,72 +243,70 @@ class UserController extends Controller {
 
 
 		 // First off, we will have to instantiate the model we created
-		 $model = new \Model\UsersModel();
-		 $userId = $model->getIdByToken($token);
+	 	$model = new \Model\UsersModel();
+	 	$userId = $model->getIdByToken($token);
 
 		 // This variable will be used in "reset.php" to display a form or not
-		 $displayForm = false;
+	 	$displayForm = false;
 
 		 // If the token does not exist or has expired, do this:
-		 if ($userId === false) {
-			 $this->flash('Your token is invalid.', 'danger');
-		 } else {
-			 $displayForm = true;
-		 }
+	 	if ($userId === false) {
+	 		$this->flash('Your token is invalid.', 'danger');
+	 	} else {
+	 		$displayForm = true;
+	 	}
 
 		 // Now let's look at the sent form
-		 if (!empty($_POST)) {
+	 	if (!empty($_POST)) {
 			 // Again, we will have to retrieve the data
-			 $passwordOne = isset($_POST['passwordOne']) ? trim($_POST['passwordOne']) : '';
-			 $passwordTwo = isset($_POST['passwordTwo']) ? trim($_POST['passwordTwo']) : '';
+	 		$passwordOne = isset($_POST['passwordOne']) ? trim($_POST['passwordOne']) : '';
+	 		$passwordTwo = isset($_POST['passwordTwo']) ? trim($_POST['passwordTwo']) : '';
 
 			 // We create our beloved errorList variable to test for errors
-			 $errorList = array();
+	 		$errorList = array();
 
 			 // User Data Validation
 			 // ===================================================
 
 			 // Password needs to be at least 8 characters long
-			 if (strlen($passwordOne) < 8) {
-				 $errorList[] = 'Your password has to be at least 8 characters long.';
-			 }
+	 		if (strlen($passwordOne) < 8) {
+	 			$errorList[] = 'Your password has to be at least 8 characters long.';
+	 		}
 
 			 // Passwords must match
-			 if ($passwordOne != $passwordTwo) {
-				 $errorList[] = 'Your passwords do not match.';
-			 }
+	 		if ($passwordOne != $passwordTwo) {
+	 			$errorList[] = 'Your passwords do not match.';
+	 		}
 
 			 // If all data is OK, do this:
-			 if (empty($errorList)) {
+	 		if (empty($errorList)) {
 
 				 // We have to hash the new password one more time
-				 $authentificationModel = new \W\Security\AuthentificationModel();
-				 $hashedPassword = $authentificationModel->hashPassword($passwordOne);
+	 			$authentificationModel = new \W\Security\AuthentificationModel();
+	 			$hashedPassword = $authentificationModel->hashPassword($passwordOne);
 
 				 // Once the password has been hashed, we can update it in the database
-				 $model->update(array(
-					 'usr_password' => $hashedPassword,
-					 'usr_token' => '',
-					 'usr_token_created' => ''
-				 ), $userId);
+	 			$model->update(array(
+	 				'usr_password' => $hashedPassword,
+	 				'usr_token' => '',
+	 				'usr_token_created' => ''
+	 				), $userId);
 
 				 // When all this has been successful, display a success message
-				 $this->flash('Your password has been changed.', 'success');
+	 			$this->flash('Your password has been changed.', 'success');
 
 				 // Then we redirect the person back to the home page
-				 $this->redirectToRoute('content_home');
-			 } else {
+	 			$this->redirectToRoute('content_home');
+	 		} else {
 				 // If the errorList array is not empty, display the error(s)
-				 $this->flash(join('<br>', $errorList), 'danger');
-			 }
+	 			$this->flash(join('<br>', $errorList), 'danger');
+	 		}
 		 } // if (!empty($_POST)) end
 
 		 $this->show('user/reset', array(
-			 'displayForm' => $displayForm
-		 ));
-	 }
-
-
+		 	'displayForm' => $displayForm
+		 	));
+		}
 
 	 /** ***********************************************************************
  	 * Logout
@@ -331,14 +321,12 @@ class UserController extends Controller {
 
 		 // Then we redirect the user back to home
 		 $this->redirectToRoute('content_home');
-	 }
-
-
+		}
 
 	/** ***********************************************************************
  	 * Profile
 	 *
- 	************************************************************************ */
+	************************************************************************ */
 	public function profile() {
 		$this->allowTo("user");
 
@@ -365,92 +353,87 @@ class UserController extends Controller {
 		$this->showJson($moreStories);
 	}
 
-
-
-	 /** ***********************************************************************
+	/** ***********************************************************************
  	 * Change Username
 	 *
  	 ************************************************************************ */
 	 public function changeUsername() {
 
-		 $this->allowTo('user');
+	 	$this->allowTo('user');
 
-		 if (!empty($_POST)) {
+	 	if (!empty($_POST)) {
 			 // We get the new username that the user types in
-			 $newUsername = isset($_POST['username']) ? trim($_POST['username']) : '';
+	 		$newUsername = isset($_POST['username']) ? trim($_POST['username']) : '';
 			 // ID of the current user
-			 $userId = $_SESSION['user']['id'];
+	 		$userId = $_SESSION['user']['id'];
 
 			 // Then we can update the user's username by finding the ID
-			 $updateUsername = new \Model\UsersModel();
-			 $updateUsername->update(array(
-				 'usr_username' => $newUsername,
-			 ), $userId);
+	 		$updateUsername = new \Model\UsersModel();
+	 		$updateUsername->update(array(
+	 			'usr_username' => $newUsername,
+	 			), $userId);
 
 			 // Instantiation of AuthentificationModel to log user out
-			 $authentificationModel = new \W\Security\AuthentificationModel();
-			 $authentificationModel->logUserOut();
+	 		$authentificationModel = new \W\Security\AuthentificationModel();
+	 		$authentificationModel->logUserOut();
 
 			 // Instantiation of UsersModel to log user back in
-			 $userModel = new \W\Model\UsersModel();
-			 $userInfos = $userModel->find($userId);
+	 		$userModel = new \W\Model\UsersModel();
+	 		$userInfos = $userModel->find($userId);
 
 			 // Then we add the user to the session
-			 $authentificationModel->logUserIn($userInfos);
+	 		$authentificationModel->logUserIn($userInfos);
 
-			 $this->flash('Your username was changed successfully.', 'success');
+	 		$this->flash('Your username was changed successfully.', 'success');
 
-			 $this->redirectToRoute('user_profile');
+	 		$this->redirectToRoute('user_profile');
 
-		 } else {
-			 $this->flash('There was an error changing your username. Please try again.', 'danger');
-		 }
+	 	} else {
+	 		$this->flash('There was an error changing your username. Please try again.', 'danger');
+	 	}
 
 	 }
 
-
-
-	 /** ***********************************************************************
+	/** ***********************************************************************
  	 * Delete Account
 	 *
  	 ************************************************************************ */
 	 public function deleteAccount() {
 
-		 $this->allowTo('user');
+	 	$this->allowTo('user');
 
 		 // We access the ID to find the user in the database later
-		 $userId = $_SESSION['user']['id'];
+	 	$userId = $_SESSION['user']['id'];
 		 // We also grab the password the user typed in to see if it's the same as the one in the database
-		 $passwordToDeleteAccount = isset($_POST['passwordToDeleteAccount']) ? trim(strip_tags($_POST['passwordToDeleteAccount'])) : '';
+	 	$passwordToDeleteAccount = isset($_POST['passwordToDeleteAccount']) ? trim(strip_tags($_POST['passwordToDeleteAccount'])) : '';
 
-		 debug($userId);
-		 debug($passwordToDeleteAccount);
+	 	debug($userId);
+	 	debug($passwordToDeleteAccount);
 
 		 // We have to encrypt the new password again before we can use the method to see if password is correct
-		 $authentificationModel = new \W\Security\AuthentificationModel();
-		 $hashedPassword = $authentificationModel->hashPassword($passwordToDeleteAccount);
+	 	$authentificationModel = new \W\Security\AuthentificationModel();
+	 	$hashedPassword = $authentificationModel->hashPassword($passwordToDeleteAccount);
 
 		 // Now we can use the method which checks if passwords match
-		 $userModel = new \Model\UsersModel();
-		 $passwordCheckUser = $userModel->isPasswordCorrect($userId, $hashedPassword);
+	 	$userModel = new \Model\UsersModel();
+	 	$passwordCheckUser = $userModel->isPasswordCorrect($userId, $hashedPassword);
 
 		 // If the above method returns true, delete the user
-		 if ($passwordCheckUser) {
-			 $userModel = new \Model\UsersModel();
-			 $passwordCheckUser = $userModel->deleteUserAccount($userId);
-	 	 } else {
-			 $this->flash('Your password is incorrect.', 'danger');
-		 }
+	 	if ($passwordCheckUser) {
+	 		$userModel = new \Model\UsersModel();
+	 		$passwordCheckUser = $userModel->deleteUserAccount($userId);
+	 	} else {
+	 		$this->flash('Your password is incorrect.', 'danger');
+	 	}
 
-		$this->flash('Your account has been deleted successfully.', 'success');
+	 	$this->flash('Your account has been deleted successfully.', 'success');
 
-		$authentificationModel = new \W\Security\AuthentificationModel();
-		$authentificationModel->logUserOut();
+	 	$authentificationModel = new \W\Security\AuthentificationModel();
+	 	$authentificationModel->logUserOut();
 
-		$this->redirectToRoute('content_home');
-		
+	 	$this->redirectToRoute('content_home');
+
 	 }
-
 
 	 /** ***********************************************************************
  	 * Change your password
@@ -458,59 +441,59 @@ class UserController extends Controller {
  	 ************************************************************************ */
 	 public function changePassword() {
 
-		 if (!empty($_POST)) {
+	 	if (!empty($_POST)) {
 
 			 // We get the user's data
-			 $newPasswordOne = isset($_POST['newPasswordOne']) ? trim($_POST['newPasswordOne']) : '';
-			 $newPasswordTwo = isset($_POST['newPasswordTwo']) ? trim($_POST['newPasswordTwo']) : '';
-			 $userId = $_SESSION['user']['id'];
+	 		$newPasswordOne = isset($_POST['newPasswordOne']) ? trim($_POST['newPasswordOne']) : '';
+	 		$newPasswordTwo = isset($_POST['newPasswordTwo']) ? trim($_POST['newPasswordTwo']) : '';
+	 		$userId = $_SESSION['user']['id'];
 
 			 // We create the errorList to display possible errors later
-			 $errorList = array();
+	 		$errorList = array();
 
 			 // Password must be 8 characters long
-			 if (strlen($newPasswordOne) < 8) {
- 				$errorList[] = 'Your password needs to be at least 8 characters long.';
- 			}
+	 		if (strlen($newPasswordOne) < 8) {
+	 			$errorList[] = 'Your password needs to be at least 8 characters long.';
+	 		}
 
  			// Password One and Password Two need to be the same
- 			if ($newPasswordOne != $newPasswordTwo) {
- 				$errorList[] = 'Your passwords do not match.';
- 			}
+	 		if ($newPasswordOne != $newPasswordTwo) {
+	 			$errorList[] = 'Your passwords do not match.';
+	 		}
 
 			// If there are no errors
-			if (empty($errorList)) {
+	 		if (empty($errorList)) {
 
 				// We have to encrypt the new password again before we put it in the database
-				$authentificationModel = new \W\Security\AuthentificationModel();
-				$hashedPassword = $authentificationModel->hashPassword($newPasswordOne);
+	 			$authentificationModel = new \W\Security\AuthentificationModel();
+	 			$hashedPassword = $authentificationModel->hashPassword($newPasswordOne);
 
 				// Instantiation of the user model to see if the password already exists
-				$userModel = new \W\Model\UsersModel();
-				$doesUserExist = $userModel->usernameExists($hashedPassword);
+	 			$userModel = new \W\Model\UsersModel();
+	 			$doesUserExist = $userModel->usernameExists($hashedPassword);
 
 				// If the username does not already exist, update it in the databse
-				if ($doesUserExist === false) {
+	 			if ($doesUserExist === false) {
 
 					// We have to instantiate another model to update the password
-					$model = new \Model\UsersModel();
+	 				$model = new \Model\UsersModel();
 
-					$model->update(array(
-						'usr_password' => $hashedPassword
-					), $userId);
+	 				$model->update(array(
+	 					'usr_password' => $hashedPassword
+	 					), $userId);
 
-					$this->flash('Your password was changed successfully.', 'success');
-				} else {
+	 				$this->flash('Your password was changed successfully.', 'success');
+	 			} else {
 
-					$this->flash('This username already exists.', 'danger');
-				}
+	 				$this->flash('This username already exists.', 'danger');
+	 			}
 
-			} else {
-				$this->flash(join('<br>', $errorList), 'danger');
-			}
+	 		} else {
+	 			$this->flash(join('<br>', $errorList), 'danger');
+	 		}
 
-			$this->redirectToRoute('user_profile');
+	 		$this->redirectToRoute('user_profile');
 
-		 }
+	 	}
 	 }
 }
