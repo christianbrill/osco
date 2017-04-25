@@ -414,7 +414,7 @@ class ContentController extends Controller {
 
         //PAGINATION START
         $page = 1;
-        $nbArticlesPerPage = 4;
+        $nbArticlesPerPage = 10;
         $pageOffset = 0;
 
         if(isset($_GET['page'])){

@@ -10,8 +10,8 @@
 			<a href="?page=<?= $page-1 ?>" class="before">Précédant</a>
 		<?php
 		}
-			
-		if ($nbArticles >= 4){
+
+		if ($nbArticles >= 10){
 		?>
 			<a href="?page=<?= $page+1 ?>" class="after">Suivant</a>
 		<?php
@@ -19,7 +19,7 @@
 		?>
 		</div>
 
-		
+
 
 		<div class="articlesList">
 		<?php foreach($articlesList as $currentArticle) : ?>
