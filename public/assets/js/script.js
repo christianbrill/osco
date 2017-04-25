@@ -11,11 +11,13 @@ $(document).ready(function(){
 		refreshStories();
 	});
 
-	$("#moreStories").click(function(e){
+	// This function call executes moreStories, to be implemented in a later version of the project
+	
+	/*$("#moreStories").click(function(e){
 		 e.preventDefault();
 
-		moreStories().fadein(500);
-	});
+		moreStories();
+	});*/
 
 	/**
 	*
@@ -26,7 +28,6 @@ $(document).ready(function(){
 	$(".goBack").click(function(e){
 		window.history.back();
 	});
-
 
 	/**
 	* Event Listener for burger menu
@@ -126,7 +127,7 @@ function refreshStories() {
 				"<a href=''>" +
 					"<div>"+
 						"<h1 id='title'>"+ value.sto_title +"</h1>"+
-						"<p>"+ value.sto_description +"</p>"+
+						"<p>"+ value.sto_content +"</p>"+
 					"</div>"+
 				"</a>"+
 			"</article>";
@@ -218,8 +219,9 @@ function userConfirm() {
 
 /**
 * Load More Stories Function
+* This function will be used with a later version of the page
 *
-*/
+
 function moreStories() {
 
 	$.ajax({
@@ -241,9 +243,9 @@ function moreStories() {
 
 		});//end each
 
-	$("#ajaxProfileStories").html(content);
+	$("#ajaxProfileStories").append(content);
 
 	});//end ajaxHomeStories
 
-}//refreshStories function end
+}*///refreshStories function end
 

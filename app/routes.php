@@ -20,7 +20,8 @@
 		['GET', '/profile/', 'User#profile', 'user_profile'],
 
 		// osco.dev/needhelp/
-		['GET', '/needhelp/', 'Content#needhelp', 'content_needhelp'],
+		//['GET', '/needhelp/', 'Content#needhelp', 'content_needhelp'],
+		['POST|GET', '/needhelp/', 'Content#needhelp', 'content_needhelp'],
 
 		// osco.dev/addstory/
 		['POST|GET', '/addstory/', 'Content#addStoryPage', 'content_addStoryPage'],
@@ -69,6 +70,8 @@
 		// ajax home route
 		['GET', '/ajax/home/', 'Content#ajaxRefresh', 'content_ajaxRefresh'],
 
+		// ajax profile route
+		['GET', '/ajax/profile/', 'User#ajaxLoadMore', 'user_ajaxLoadMore'],
 
 		/**
 		* Article routes
@@ -83,7 +86,6 @@
 		// osco.dev/addarticle/
 		['GET|POST', '/addarticle/', 'Content#addArticlePage', 'content_addArticlePage'],
 
-		// ajax profile route
-		['GET', '/ajax/profile/', 'User#ajaxLoadMore', 'user_ajaxLoadMore'],
+
 
 	);

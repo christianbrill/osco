@@ -3,19 +3,33 @@ $turquoise: #00C3B6;
 $darkblue: #113A52;
 $lightgrey: #eeeeee;
 $white: #FFFFFF;
+$graffiti: #232323;
+$wisteria: #8e44ad;
+$brightred: #e74c3c;
+$sunflower: #f1c40f;
 
 // General
 * {
 	box-sizing: border-box;
-	color: #7F7E7A;
+	color: white;
 	font-family: 'Roboto', sans-serif;
 	list-style: none;
 }
 
+body, html {
+	//background-color: lighten($graffiti, 10%);
+	background: #3a7bd1; /* Old browsers */
+background: -webkit-linear-gradient(left, #3a7bd1 0%, #fba6e1 57%, #fba6e1 57%, #fd89d7 77%, #ff6dd3 100%);
+background: -o-linear-gradient(left, #3a7bd1 0%, #fba6e1 57%, #fba6e1 57%, #fd89d7 77%, #ff6dd3 100%);
+background: linear-gradient(to right, #3a7bd1 0%, #fba6e1 57%, #fba6e1 57%, #fd89d7 77%, #ff6dd3 100%); /* FF3.6-15 */ /* Chrome10-25,Safari5.1-6 */ /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3a7bd1', endColorstr='#ff6dd3',GradientType=1 ); /* IE6-9 */
+}
+
+
 // Titles and paragraph styles
 h1, h2 {
-	color: $turquoise;
-	margin:0px;
+	color: $sunflower;
+	margin:0;
 }
 
 // Headlines and list item
@@ -30,7 +44,7 @@ header {
 
 // Accordion jquery UI
 .accordion {
-	width: 800px;
+	width: 750px;
     margin: auto;
     margin-top: 200px;
 	margin-bottom: 10px;
@@ -57,10 +71,13 @@ header {
 	justify-content:space-between;
 
 	position: fixed;
-	top: 0px;
+	top: 0;
+	background-color: $graffiti;
 
 	width: 100%;
 	height: 45px;
+
+	z-index: 5000;
 
 	-webkit-box-shadow: 0px -3px 59px -8px rgba(0,0,0,0.38);
 	-moz-box-shadow: 0px -3px 59px -8px rgba(0,0,0,0.38);
@@ -68,6 +85,10 @@ header {
 
 	h1{
 		margin:0.1em;
+
+		a {
+			color: $sunflower;
+		}
 	}
 
 	form {
@@ -78,19 +99,13 @@ header {
 			padding: 10px;
 
 			border: 0px;
-			border-bottom: 3px solid $turquoise;
-		}
-
-		.searchButton {
-			background-color: $turquoise;
-			border:0px;
+			border-bottom: 3px solid $sunflower;
 		}
 	}
 
 	.menuIcon {
 		margin:1em;
 	}
-
 } // mobile navigation end
 
 
@@ -105,7 +120,7 @@ ul {
 		margin:0px 8px;
 		padding: 14px 7px;
 
-		color:#7F7E7A;
+		color:black;
 		text-transform: uppercase;
 
 		height:45px;
@@ -116,21 +131,17 @@ ul {
 		background-color:$lightgrey;
 		border-bottom: 3px solid $turquoise;
 	}
-} // ul end
-
-
-#mobileMenu {
-	display:none;
-
-	position: absolute;
-	top:45px;
-
-	padding: 4em;
-	background-color: #FFFFFF;
 }
 
+#mobileMenu {
+	background-color: $sunflower;
+	display:none;
+	padding: 4em;
+	position: absolute;
+	top:45px;
+	z-index: 5000;
+}
 
-// Main, main content, footer
 #main {
 	margin: auto;
 	margin-top:5em;
@@ -138,6 +149,7 @@ ul {
 
 .pagination {
 	margin: 2em 0;
+
 	a {
 		color:$darkblue;
 		border-bottom: 3px solid $darkblue;
@@ -157,19 +169,18 @@ ul {
 
 .tag {
 	margin:2px;
-	background-color:$turquoise;
-	border:1.5px solid $turquoise;
-	color:$white;
+	background-color:$sunflower;
+	border:1.5px solid $sunflower;
+	color:black;
 }
 
 .tag:hover {
-	background-color:$lightgrey;
-	border:1.5px solid $lightgrey;
-	color:$turquoise;
+	background-color:black;
+	border:1.5px solid $sunflower;
+	color:$sunflower;
 }
 
 .storiesList {
-
 	article {
 		margin:2em 0;
 	}
@@ -178,19 +189,9 @@ ul {
 
 //VIEW: content/home
 #ajaxHomeStories {
-	display: flex;
-	flex-direction:column;
-	align-items: center;
-
-	width:80%;
-
-	article {
-		display:inline-block;
-		overflow-wrap: break-word;
-	}
 
 	h1 {
-		font-size:1.6em;
+		font-size:1.5em;
 	}
 
 	a {
@@ -198,32 +199,32 @@ ul {
 	}
 
 	div {
-		width:250px;
-		height:250px;
+		background-color: $graffiti;
 		box-shadow:none;
+		//height:270px;
+		margin-bottom: 15px;
+		padding:20px;
 		transition:0.5s;
-		padding:5px;
-		background-image:url("");
+		//width:400px;
 
 		&:hover {
 			box-shadow:0 0 10px #e2e2e2;
 			transition: 0.5s;
 			transform: scale(1.02);
 
+			h1 {
+				color: $wisteria;
+			}
+
 		}
-	}
-	#refreshStories{
-		background-color:black;
-		text-align:center;
 	}
 }
 
 #needHelpBox {
-	padding:3em;
-	width:80%;
-	margin-right:5vw;
-	background-color:$darkblue;
+	background-color: $darkblue;
+	padding:2em;
 	text-align:center;
+
 	p {
 		color:white;
 	}
@@ -237,7 +238,7 @@ footer {
 	padding:3em 6em;
 	margin-top: 3em;
 	width:100%;
-	background-color: $darkblue;
+	background-color: #34495e;
 
 	#footerContent {
 		display:flex;
@@ -260,59 +261,24 @@ footer {
 	}
 }
 
+// Captcha in about page
+.g-recaptcha {
+	width: 300px;
+	margin: auto;
+}
+
+
+/* =========================================
+			MEDIA SCREENS
+======================================== */
+
+
 /* TABLET ------------------------------------------------------ */
 @media screen and (max-width: 1000px) and (min-width: 700px) {
 	// HEADER, NAVIGATION, MENU
 
 	//MAIN, MAIN-CONTENT, FOOTER
 
-	#ajaxHomeStories {
-		width:70vw;
-
-		article {
-			display:inline-block;
-			overflow-wrap: break-word;
-		}
-
-		h1 {
-			font-size:1.6em;
-		}
-
-		a{
-			text-decoration: none;
-		}
-
-		div {
-			width:250px;
-			height:250px;
-			box-shadow:none;
-			transition:0.5s;
-			padding:5px;
-			background-image:url("");
-
-			&:hover {
-				box-shadow:0 0 10px #e2e2e2;
-				transition: 0.5s;
-				transform: scale(1.02);
-			}
-		}
-
-	}
-
-	#needHelpBox {
-		position:absolute;
-		right:0;
-		top:100px;
-
-		width:250px;
-		margin-right:5vw;
-		background-color:#2c3e50;
-		text-align:center;
-
-		p {
-			color:white;
-		}
-	}
 }
 
 /* DESKTOP ----------------------------------------------------- */
@@ -366,7 +332,6 @@ footer {
 		ul {
 			display:flex;
 			justify-content: space-around;
-
 			list-style:none;
 
 			a {
@@ -385,63 +350,5 @@ footer {
 				border-bottom: 3px solid #00C3B6;
 			}
 		}
-	}
-
-	#ajaxHomeStories {
-		flex-flow: row wrap;
-		justify-content: space-around;
-		width:70vw;
-		margin-left:0;
-
-		article {
-			display:inline-block;
-			overflow-wrap: break-word;
-		}
-
-		h1 {
-			font-size:1.6em;
-		}
-
-		a {
-			text-decoration: none;
-		}
-
-		div {
-			width:250px;
-			height:250px;
-			box-shadow:none;
-			transition:0.5s;
-			padding:5px;
-			background-image:url("");
-
-			&:hover{
-				box-shadow:0 0 10px #e2e2e2;
-				transition: 0.5s;
-				transform: scale(1.02);
-
-			}
-		}
-
-	}
-
-	#needHelpBox {
-		position:absolute;
-		right:0;
-		top:100px;
-
-		width:250px;
-		margin-right:5vw;
-		background-color:#2c3e50;
-		text-align:center;
-
-		p {
-			color:white;
-		}
-	}
-
-	// Captcha in about page
-	.g-recaptcha {
-		width: 300px;
-		margin: auto;
-	}
-} // media screen end
+	} // media screen end
+}

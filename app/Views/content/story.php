@@ -6,7 +6,8 @@
 	<?php foreach($storyInfos as $currentStory) : ?>
 				
 			<h1><?= $currentStory['sto_title']; ?></h1>
-			<p><?= $currentStory['usr_username']; ?> <?= $currentStory['sto_inserted']; ?></p>
+			<p>Written by <?= $currentStory['usr_username']; ?></p>
+			<p>Posted on <?= $currentStory['sto_inserted']; ?></p>
 			<p><?= $currentStory['sto_content']; ?></p>
 			<p>
 			<?php foreach($getEachTag as $currentTag) : ?>
