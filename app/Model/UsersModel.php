@@ -66,28 +66,33 @@ class UsersModel extends \W\Model\UsersModel {
 	 }
 
 
-     /**
- 	 * Delete the user's account
- 	 *
- 	 */
-	 public function deleteUserAccount($userId) {
-		 $sqlRequest = '
-		 	DELETE FROM users
-			WHERE id = :userId
-		 ';
+    /**
+ 	* Delete the user's account
+ 	*
+ 	*/
+	public function deleteUserAccount($userId) {
+		$sqlRequest = '
+           DELETE FROM users
+           WHERE id = :userId
+		';
 
-		 $stmt = $this->dbh->prepare($sqlRequest);
-		 $stmt->bindValue(':userId', $userId, \PDO::PARAM_INT);
+		$stmt = $this->dbh->prepare($sqlRequest);
+		$stmt->bindValue(':userId', $userId, \PDO::PARAM_INT);
 
-		 if ($stmt->execute() === false) {
-			 $stmt->errorInfo();
-			 return false;
-		 } else {
-			 return true;
-		 }
-	 }
+		if ($stmt->execute() === false) {
+			$stmt->errorInfo();
+			return false;
+		} else {
+			return true;
+		}
+	}
 
-    public function getLimitedStories($oneUser){
+
+    /**
+    * The following function displays all stories that a certain user wrote
+    *
+    */
+    public function getLimitedStories($oneUser) {
         $sql = '
             SELECT *
             FROM stories

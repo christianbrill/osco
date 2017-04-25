@@ -11,17 +11,18 @@ class ContentController extends Controller {
 
     protected $res;
 
-    /**
-    * content/needhelp function
-    *
-    */
+
     public function needhelp() {
+
         //trim and strip tags from form data
         if(!empty($_POST)) {
 
             $organizationName = isset($_POST['orgname']) ? trim(strip_tags($_POST['orgname'])) : '';
+
             $organizationEmail = isset($_POST['orgemail']) ? trim(strip_tags($_POST['orgemail'])) : '';
+
             $organizationPhone = isset($_POST['orgphone']) ? trim(strip_tags($_POST['orgphone'])) : '';
+
             $organizationInfo = isset($_POST['orginfo']) ? trim(strip_tags($_POST['orginfo'])) : '';
 
             $userEmail = $_SESSION['user']['usr_email'];
@@ -30,19 +31,19 @@ class ContentController extends Controller {
             //validating form data
             $errorList = array();
 
-            if (empty($organizationName)) {
+            if (empty($organizationName))  {
                 $errorList[] = 'Please fill in the Organization Name.';
             }
 
-            if (empty($organizationEmail)) {
+            if (empty($organizationEmail))  {
                 $errorList[] = 'Please fill in the Organization Email.';
             }
 
-            if (empty($organizationPhone)) {
+            if (empty($organizationPhone))  {
                 $errorList[] = 'Please fill in the Organization Phone.';
             }
 
-            if (empty($organizationInfo)) {
+            if (empty($organizationInfo))  {
                 $errorList[] = 'Please fill in the Organization Info.';
             }
 
@@ -50,15 +51,18 @@ class ContentController extends Controller {
                 $errorList[] = 'Please enter a valid email address!';
             }
 
-            if (strlen($organizationInfo) <= 10) {
+            if (strlen($organizationInfo) <= 10)  {
                 $errorList[] = 'Your message is too short, it must contain at least 10 characters!';
             }
 
 
             //setting vriables and urls for captcha
             $captcha = $_POST['g-recaptcha-response'];
+
             $googleURL = "https://www.google.com/recaptcha/api/siteverify";
+
             $secret = "6Le43B0UAAAAAFKWLgoG-SdxGTUqIU-N_SbbSGi1";
+
             $url = "". $googleURL ."?secret=".$secret."&response=".$captcha."";
 
             $this->res[] = file_get_contents($url);
@@ -94,12 +98,16 @@ class ContentController extends Controller {
     * about/contactform function
     *
     */
+
     public function contactform() {
         //trim and strip tags from form data
         if(!empty($_POST)) {
             $email = isset($_POST['contactEmail']) ? trim(strip_tags($_POST['contactEmail'])) : '';
+
             $fname = isset($_POST['contactFname']) ? trim(strip_tags($_POST['contactFname'])) : '';
+
             $lname = isset($_POST['contactLname']) ? trim(strip_tags($_POST['contactLname'])) : '';
+
             $message = isset($_POST['contactMessage']) ? trim(strip_tags($_POST['contactMessage'])) : '';
 
             //validating form data
@@ -108,47 +116,54 @@ class ContentController extends Controller {
             if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
                 $errorList[] = 'Please enter a valid email address!';
             }
-
+            if (strlen($fname) <= 1)  {
+                $errorList[] = 'The first name must contain at least 2 characters!';
+            }
+            if (strlen($lname) <= 1)  {
+                $errorList[] = 'The last name must contain at least 2 characters!';
+            }
             if (strlen($message) <= 10)  {
                 $errorList[] = 'Your message is too short, it must contain at least 10 characters!';
             }
 
             //setting variables and urls for captcha
             $captcha = $_POST['g-recaptcha-response'];
+
             $googleURL = "https://www.google.com/recaptcha/api/siteverify";
+
             $secret = "6Le43B0UAAAAAFKWLgoG-SdxGTUqIU-N_SbbSGi1";
+
             $url = "". $googleURL ."?secret=".$secret."&response=".$captcha."";
 
             $this->res[] = file_get_contents($url);
 
             if (!empty($captcha) && json_decode($this->res[0])->success == "1") {
-                // If CAPTCHA is successfully completed...
-                if (empty($errorList)) {
-                    $isSent=\Helper\Tools::sendEmail('osco.contact@gmail.com', 'The user with email address: '. $email. ' & First name: '. $fname. ' & Last name: '. $lname.' has sent the following message:', $message, $message );
 
             // If CAPTCHA is successfully completed...
             if (empty($errorList)) {
-
                 $isSent=\Helper\Tools::sendEmail('osco.contact@gmail.com', 'The user with email address: '. $email. ' & First name: '. $fname. ' & Last name: '. $lname.' has sent the following message:', $message, $message );
 
-                    if ($isSent) {
-                        $this->flash('We have received your email, and we will get back to you as soon as possible', 'success');
-                    }
+
+                if ($isSent){
+                    $this->flash('We have received your email, and we will get back to you as soon as possible', 'success');
+                }
 
             } else {
                 $this->flash(join('<br>', $errorList), 'danger');
             }
 
         } else {
-           $errorList[] = '<p>Please go back and make sure you check the security CAPTCHA box.</p><br>';
+            $errorList[] = '<p>Please go back and make sure you check the security CAPTCHA box.</p><br>';
         }
 
         if (!empty($errorList)) {
             $this->flash(join('<br>', $errorList), 'danger');
         }
 
+    }
         $this->show('content/about');
     }
+
 
 	/**
 	* Home Function
@@ -164,6 +179,7 @@ class ContentController extends Controller {
 	}
 
 
+
 	/**
 	* ajaxRefresh
 	*
@@ -173,16 +189,18 @@ class ContentController extends Controller {
 		$storyModel = new \Model\ContentModel();
 		$refreshStories = $storyModel->getLimitedStories();
 
-        foreach($refreshStories as $key => $value) {
+        foreach($refreshStories as $key => $value){
             $refreshStories[$key]['sto_content']=$this->getShortDescription($value['sto_content']);
         }
 
-        foreach($refreshStories as $key => $value) {
+        foreach($refreshStories as $key => $value){
             $refreshStories[$key]['sto_title']=$this->getShortTitle($value['sto_title']);
         }
 
 		$this->showJson($refreshStories);
+
 	}
+
 
 
 	/**
@@ -194,9 +212,9 @@ class ContentController extends Controller {
         if (strlen($content) > 120) {
             return substr($content, 0, 120).'...';
         }
-
         return $content;
     }
+
 
 
 	/**
@@ -208,9 +226,9 @@ class ContentController extends Controller {
         if (strlen($title) > 50) {
             return substr($title, 0, 50).'...';
         }
-
         return $title;
     }
+
 
 
 	/**
@@ -220,25 +238,28 @@ class ContentController extends Controller {
     public function search() {
 		// Getting the information that was put in the <input> called 'searchInput' in layout.php
         $searchInput = isset($_GET['searchInput']) ? trim(strip_tags($_GET['searchInput'])) : '';
+
         // Getting the order information ASC or DESC(Default)
         $sortingOption = isset($_GET['order']) ? trim(strip_tags($_GET['order'])) : '';
 
+        // !!!!!!! NOT WORKING YET
         //PAGINATION START
         $page = 1;
-        $nbResultsPerPage = 10;
+        $nb2nl2ResultsPerPage = 4;
         $pageOffset = 0;
 
         if (isset($_GET['page'])) {
             $page = intval($_GET['page']);
             $pageOffset = ($page-1)*$nbStoriesPerPage;
         }
-
         //PAGINATION END
 
         // Creating a new Model in ContentModel
         $searchModel = new \Model\ContentModel();
+
         // Gets all the search' results with two parameters the word input and the option chosen to sort (which is by default DESC)
         $searchResults = $searchModel->getSearchMatch($searchInput, $sortingOption, $pageOffset, $nbResultsPerPage);
+
         //Gets the number of results with a count function
         $nbResults = count($searchResults);
 
@@ -252,18 +273,20 @@ class ContentController extends Controller {
     }
 
 
+
 	/**
 	* All Stories
 	*
 	*/
-    public function stories() {
+    public function stories(){
 
+        // !!!!!!! NOT WORKING YET
         //PAGINATION START
         $page = 1;
         $nbStoriesPerPage = 10;
         $pageOffset = 0;
 
-        if(isset($_GET['page'])) {
+        if(isset($_GET['page'])){
             $page = intval($_GET['page']);
             $pageOffset = ($page-1)*$nbStoriesPerPage;
         }
@@ -273,8 +296,10 @@ class ContentController extends Controller {
         $storiesList = $storiesModel->getStoriesList($pageOffset, $nbStoriesPerPage);
         $nbStories = count($storiesList);
 
+        // POUR BENJAMIN: LE PROBLÈME EST ICI
         $tagsLine = $storiesModel->getTagString();
         $getEachTag = explode(",", $tagsLine);
+        //debug($getEachTag);
 
 
         $this->show('content/stories', [
@@ -286,13 +311,15 @@ class ContentController extends Controller {
     }
 
 
+
 	/**
 	* Story Detail
 	*
 	*/
-    public function story($id) {
+    public function story($id){
 
         $storyModel = new \Model\ContentModel();
+        //$stoDate = date("d/m/Y");
         $storyInfos = $storyModel->getOneStory($id);
 
         $tagsLine = $storyModel->getTagStringForStory($id);
@@ -305,79 +332,93 @@ class ContentController extends Controller {
     }
 
 
+
+	/**
+	* Need Help Function
+	*
+	*/
+	/*public function needhelp(){
+
+
+
+		$this->show('content/needhelp');
+	}*/
+
+
+
     /**
 	* ajaxNeedHelp Function
 	*
 	*/
-	public function ajaxNeedHelp() {
+	public function ajaxNeedHelp(){
 
 		$storiesModel = new \Model\ContentModel();
 		$showOrganizations = $storiesModel->getOrganization();
 		$this->showJson($showOrganizations);
 	}
 
-
 	/**
 	* Add a Story method
 	*
 	*/
-	public function addStoryPage() {
+	public function addStoryPage () {
 		//$this->allowTo("user");
+
 		$this->show('content/addstory');
 	}
 
 
-    /**
-    * Send story to database
-    *
-    */
-	public function sendStoryToDB() {
+	public function sendStoryToDB () {
+
 		$this->allowTo("user");
 
 		$currentUser = $_SESSION['user']['id'];
 
         if (!empty($_POST)) {
 
-            $stoTitle = isset($_POST['storyTitle']) ? trim(strip_tags($_POST['storyTitle']	)) : '';
-            $stoContent = isset($_POST['storyContent']) ? strip_tags($_POST['storyContent']	) : '';
-            $stoTags = isset($_POST['storyTags']) ? trim(strip_tags($_POST['storyTags']	)) : '';
+    		$stoTitle = isset($_POST['storyTitle']) ? trim(strip_tags($_POST['storyTitle']	)) : '';
+    		$stoContent = isset($_POST['storyContent']) ? strip_tags($_POST['storyContent']	) : '';
+    		$stoTags = isset($_POST['storyTags']) ? trim(strip_tags($_POST['storyTags']	)) : '';
+
             $stoContentFormat = nl2br(htmlentities($stoContent, ENT_QUOTES, 'UTF-8'));
 
             // Instantiation of story model
-            $addStoryModel = new \Model\ContentModel();
-            $addStory = $addStoryModel->insertStory($currentUser, $stoTitle, $stoContent, $stoTags);
+    		$addStoryModel = new \Model\ContentModel();
+    		$addStory = $addStoryModel->insertStory($currentUser, $stoTitle, $stoContentFormat, $stoTags);
 
-          $this->flash('Your story has been posted successfully. Thank you.', 'success');
-          $this->redirectToRoute('content_addStoryPage');
+            $this->flash('Your story has been posted successfully. Thank you.', 'success');
+            $this->redirectToRoute('content_addStoryPage');
         }
+
+
 	}
 
+
+    /*-----------------------------------------------------------------------------------*/
 
     /**
     * Add an article method
     *
     */
-    public function addArticle() {
+
+    public function addArticle () {
         //$this->allowTo("user");
-        $artTitle = isset($_POST['articleTitle']) ? trim(strip_tags($_POST['articleTitle']  )) : '';
 
-        $addArtModel = new \Model\ContentModel();
-        $addArticle = $addArtModel->insertArticle($artTitle);
 
-        $artTitle = isset($_POST['articleTitle']) ? trim(strip_tags($_POST['articleTitle']  )) : '';
+    $artTitle = isset($_POST['articleTitle']) ? trim(strip_tags($_POST['articleTitle']  )) : '';
 
-        $addArtModel = new \Model\ContentModel();
-        $addArticle = $addArtModel->insertArticle($artTitle);
+    $addArtModel = new \Model\ContentModel();
+    $addArticle = $addArtModel->insertArticle($artTitle);
 
-        $this->show('content/addarticle', ['addArticle' => $addArticle]);
-    }
-
+    $this->show('content/addarticle', ['addArticle' => $addArticle]);
+}
 
     /**
     * All articles
-    *
     */
-    public function articles() {
+    
+    public function articles(){
+
         $sortingOption = isset($_GET['order']) ? trim(strip_tags($_GET['order'])) : '';
 
         //PAGINATION START
@@ -403,11 +444,14 @@ class ContentController extends Controller {
     }
 
 
+
     /**
     * article Detail
     *
     */
-    public function article($id) {
+
+    public function article($id){
+
         $articleModel = new \Model\ContentModel();
         $articleInfos = $articleModel->getOneArticle($id);
 
@@ -416,12 +460,11 @@ class ContentController extends Controller {
             ]);
     }
 
-
     /**
-    * Add a Article method
+    * Add a Story method
     *
     */
-    /*public function addArticlePage() {
+    /*public function addArticlePage () {
         //$this->allowTo("user");
 
         $this->show('content/addArticle', ['addArticle' => $addArticle]);
@@ -437,5 +480,7 @@ class ContentController extends Controller {
             $addArticleModel = new \Model\ContentModel();
             $addArticle = $addArticleModel->insertArticle($artTitle, $artContentFormat, $artTags);
         }
+
     }*/
+
 }
