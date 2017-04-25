@@ -70,6 +70,8 @@
 		// ajax home route
 		['GET', '/ajax/home/', 'Content#ajaxRefresh', 'content_ajaxRefresh'],
 
+		// ajax profile route
+		['GET', '/ajax/profile/', 'User#ajaxLoadMore', 'user_ajaxLoadMore'],
 
 		/**
 		* Article routes
@@ -84,7 +86,6 @@
 		// osco.dev/addarticle/
 		['GET|POST', '/addarticle/', 'Content#addArticlePage', 'content_addArticlePage'],
 
-		// ajax profile route
-		['GET', '/ajax/profile/', 'User#ajaxLoadMore', 'user_ajaxLoadMore'],
+
 
 	);
