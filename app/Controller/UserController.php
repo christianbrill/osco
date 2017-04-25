@@ -1,4 +1,4 @@
-nb2<?php
+<?php
 
 namespace Controller;
 

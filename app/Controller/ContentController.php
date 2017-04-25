@@ -189,7 +189,16 @@ class ContentController extends Controller {
 		$storyModel = new \Model\ContentModel();
 		$refreshStories = $storyModel->getLimitedStories();
 
+        foreach($refreshStories as $key => $value){
+            $refreshStories[$key]['sto_content']=$this->getShortDescription($value['sto_content']);
+        }
+
+        foreach($refreshStories as $key => $value){
+            $refreshStories[$key]['sto_title']=$this->getShortTitle($value['sto_title']);
+        }
+
 		$this->showJson($refreshStories);
+
 	}
 
 
@@ -445,7 +454,6 @@ class ContentController extends Controller {
 
         $articleModel = new \Model\ContentModel();
         $articleInfos = $articleModel->getOneArticle($id);
-        //debug($articleInfos);
 
         $this->show('content/article', [
             'articleInfos' => $articleInfos
@@ -456,16 +464,23 @@ class ContentController extends Controller {
     * Add a Story method
     *
     */
-    public function addArticlePage () {
+    /*public function addArticlePage () {
         //$this->allowTo("user");
 
-        $artTitle = isset($_POST['articleTitle']) ? trim(strip_tags($_POST['articleTitle'])) : '';
-        $artContent = isset($_POST['articleContent']) ? trim(strip_tags($_POST['articleContent'])) : '';
-        $artTags = isset($_POST['articleTags']) ? trim(strip_tags($_POST['articleTags'])) : '';
-        $addArticleModel = new \Model\ContentModel();
-        $addArticle = $addArticleModel->insertArticle($artTitle, $artContent, $artTags);
-
         $this->show('content/addArticle', ['addArticle' => $addArticle]);
-    }
+
+        if(!empty($_POST)){
+
+            $artTitle = isset($_POST['articleTitle']) ? trim(strip_tags($_POST['articleTitle'])) : '';
+            $artContent = isset($_POST['articleContent']) ? trim(strip_tags($_POST['articleContent'])) : '';
+            $artTags = isset($_POST['articleTags']) ? trim(strip_tags($_POST['articleTags'])) : '';
+
+            $artContentFormat = nl2br(htmlentities($artContent, ENT_QUOTES, 'UTF-8'));
+
+            $addArticleModel = new \Model\ContentModel();
+            $addArticle = $addArticleModel->insertArticle($artTitle, $artContentFormat, $artTags);
+        }
+
+    }*/
 
 }
