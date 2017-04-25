@@ -81,6 +81,7 @@ class ContentModel extends \W\Model\Model {
 
 		$sth = $this->dbh->prepare($sql);
 		$sth->bindValue(':id', $id, \PDO::PARAM_INT);
+		
 
 		if ($sth->execute()){
 			return $sth->fetchAll();

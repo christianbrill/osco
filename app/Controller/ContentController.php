@@ -238,7 +238,7 @@ $this->show('content/about');
         // !!!!!!! NOT WORKING YET
         //PAGINATION START
         $page = 1;
-        $nbResultsPerPage = 4;
+        $nb2nl2ResultsPerPage = 4;
         $pageOffset = 0;
 
         if (isset($_GET['page'])) {
@@ -314,13 +314,15 @@ $this->show('content/about');
     public function story($id){
 
         $storyModel = new \Model\ContentModel();
+        //$stoDate = date("d/m/Y");
         $storyInfos = $storyModel->getOneStory($id);
 
         $tagsLine = $storyModel->getTagStringForStory($id);
         $getEachTag = explode(",", $tagsLine);
         //implode($storyInfos);
-        nl2br($storyInfos);
         //debug($storyInfos);
+
+        
 
         $this->show('content/story', [
             'storyInfos' => $storyInfos,
@@ -377,9 +379,11 @@ $this->show('content/about');
     		$stoContent = isset($_POST['storyContent']) ? strip_tags($_POST['storyContent']	) : '';
     		$stoTags = isset($_POST['storyTags']) ? trim(strip_tags($_POST['storyTags']	)) : '';
 
+            $stoContentFormat = nl2br(htmlentities($stoContent, ENT_QUOTES, 'UTF-8'));
+
             // Instantiation of story model
     		$addStoryModel = new \Model\ContentModel();
-    		$addStory = $addStoryModel->insertStory($currentUser, $stoTitle, $stoContent, $stoTags);
+    		$addStory = $addStoryModel->insertStory($currentUser, $stoTitle, $stoContentFormat, $stoTags);
 
             $this->flash('Your story has been posted successfully. Thank you.', 'success');
             $this->redirectToRoute('content_addStoryPage');
