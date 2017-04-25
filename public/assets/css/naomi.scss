@@ -16,7 +16,9 @@ $sunflower: #f1c40f;
 	list-style: none;
 }
 
-body, html {
+body, html{
+	margin: 0;
+
 	//background-color: lighten($graffiti, 10%);
 	background: #3a7bd1; /* Old browsers */
 background: -webkit-linear-gradient(left, #3a7bd1 0%, #fba6e1 57%, #fba6e1 57%, #fd89d7 77%, #ff6dd3 100%);
@@ -24,7 +26,6 @@ background: -o-linear-gradient(left, #3a7bd1 0%, #fba6e1 57%, #fba6e1 57%, #fd89
 background: linear-gradient(to right, #3a7bd1 0%, #fba6e1 57%, #fba6e1 57%, #fd89d7 77%, #ff6dd3 100%); /* FF3.6-15 */ /* Chrome10-25,Safari5.1-6 */ /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3a7bd1', endColorstr='#ff6dd3',GradientType=1 ); /* IE6-9 */
 }
-
 
 // Titles and paragraph styles
 h1, h2 {
@@ -40,6 +41,10 @@ h1, li, li a {
 // Header and navigation
 header {
 	z-index:1000;
+}
+
+a {
+	text-decoration: none;
 }
 
 // Accordion jquery UI
@@ -62,6 +67,10 @@ header {
     }
 }
 
+.storyBox {
+	margin: 1px 2px;
+}
+
 #desktopNavigation {
 	display:none;
 }
@@ -69,14 +78,11 @@ header {
 #mobileNavigation {
 	display: flex;
 	justify-content:space-between;
-
 	position: fixed;
 	top: 0;
 	background-color: $graffiti;
-
-	width: 100%;
 	height: 45px;
-
+	width: 100%;
 	z-index: 5000;
 
 	-webkit-box-shadow: 0px -3px 59px -8px rgba(0,0,0,0.38);
@@ -117,17 +123,15 @@ ul {
 	list-style:none;
 
 	a {
+		color:black;
+		height:45px;
 		margin:0px 8px;
 		padding: 14px 7px;
-
-		color:black;
 		text-transform: uppercase;
-
-		height:45px;
 	}
 
 	a:hover {
-		color:$turquoise;
+		color:$wisteria;
 		background-color:$lightgrey;
 		border-bottom: 3px solid $turquoise;
 	}
@@ -142,13 +146,7 @@ ul {
 	z-index: 5000;
 }
 
-#main {
-	margin: auto;
-	margin-top:5em;
-}
-
 .pagination {
-	margin: 2em 0;
 
 	a {
 		color:$darkblue;
@@ -163,12 +161,7 @@ ul {
 	}
 }
 
-.tags {
-	margin: 2em 0;
-}
-
 .tag {
-	margin:2px;
 	background-color:$sunflower;
 	border:1.5px solid $sunflower;
 	color:black;
@@ -180,14 +173,27 @@ ul {
 	color:$sunflower;
 }
 
-.storiesList {
-	article {
-		margin:2em 0;
+#needHelpBox {
+	background-color: black;
+	margin-top: 45px;
+	margin-bottom: 2px;
+	padding: 2em;
+	text-align: center;
+
+	h1 {
+		color: $brightred;
+	}
+
+	p {
+		color:white;
 	}
 }
 
+#refreshStories {
+	background-color: black;
+	margin: 5px 0;
+}
 
-//VIEW: content/home
 #ajaxHomeStories {
 
 	h1 {
@@ -201,34 +207,20 @@ ul {
 	div {
 		background-color: $graffiti;
 		box-shadow:none;
-		//height:270px;
-		margin-bottom: 15px;
 		padding:20px;
 		transition:0.5s;
-		//width:400px;
 
-		&:hover {
-			box-shadow:0 0 10px #e2e2e2;
+		&:focus {
+			box-shadow:0 0 15px white;
 			transition: 0.5s;
-			transform: scale(1.02);
 
 			h1 {
 				color: $wisteria;
 			}
-
 		}
 	}
 }
 
-#needHelpBox {
-	background-color: $darkblue;
-	padding:2em;
-	text-align:center;
-
-	p {
-		color:white;
-	}
-}
 
 textarea{
 	white-space: pre-wrap;
@@ -238,7 +230,7 @@ footer {
 	padding:3em 6em;
 	margin-top: 3em;
 	width:100%;
-	background-color: #34495e;
+	background-color: black;
 
 	#footerContent {
 		display:flex;
@@ -248,15 +240,15 @@ footer {
 
 		a {
 			text-decoration: none;
-			color:$lightgrey;
+			color:$sunflower;
 		}
 
 		a:hover {
-			color:$turquoise;
+			color:$wisteria;
 		}
 
 		h4 {
-			color:$lightgrey;
+			color:$sunflower;
 		}
 	}
 }
@@ -264,7 +256,6 @@ footer {
 // Captcha in about page
 .g-recaptcha {
 	width: 300px;
-	margin: auto;
 }
 
 
@@ -275,9 +266,6 @@ footer {
 
 /* TABLET ------------------------------------------------------ */
 @media screen and (max-width: 1000px) and (min-width: 700px) {
-	// HEADER, NAVIGATION, MENU
-
-	//MAIN, MAIN-CONTENT, FOOTER
 
 }
 
@@ -310,7 +298,7 @@ footer {
 
 		h1 {
 			margin:0.1em;
-			color:$turquoise;
+			color:$sunflower;
 		}
 
 		h1:hover {
@@ -318,7 +306,6 @@ footer {
 		}
 
 		form {
-			margin: 7px;
 
 			input {
 				height:30px;
@@ -335,13 +322,10 @@ footer {
 			list-style:none;
 
 			a {
-				margin:0px 8px;
-				padding: 14px 7px;
-
 				color:#7F7E7A;
-				text-transform: uppercase;
-
 				height:45px;
+				padding: 14px 7px;
+				text-transform: uppercase;
 			}
 
 			a:hover {
