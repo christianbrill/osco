@@ -4,19 +4,20 @@ namespace Helper;
 
 use \PHPMailer;
 
+// The PHPMailer allows us to send emails to the user, and for the user to send emails to us. 
+// It is ignored on github because of sensitive information.
+
 class Tools {
     /**
      * This is a static method, which will allow us to send an email
-     * @param type $to: email address destination
-     * @param type $subject: subject of the email
-     * @param type $htmlContent: email's content
-     * @param type $textContent: optional text content of the email
-     * @return true boolean if the email has been sent successfully, and false if otherwise
+     * $to: email address destination
+     * $subject: subject of the email
+     * $htmlContent: email's content
+     * $textContent: optional text content of the email
+     * @return boolean "true" if the email has been sent successfully, and "false" if otherwise
      */
     public static function sendEmail($to, $subject, $htmlContent, $textContent='') {
         $mail = new PHPMailer();
-
-        //$mail->SMTPDebug = 3;                             // Enable verbose debug output
 
         $mail->isSMTP();                                    // Set mailer to use SMTP
         $mail->Host = 'smtp.gmail.com';                     // Specify main and backup SMTP servers
@@ -31,15 +32,14 @@ class Tools {
 
         $mail->isHTML(true);                                // Set email format to HTML
 
-       $mail->Subject = $subject;
+        $mail->Subject = $subject;
         $mail->Body    = $htmlContent;
         $mail->AltBody = $textContent;
 
         if(!$mail->send()) {
             echo 'Mailer Error: ' . $mail->ErrorInfo;
             return false;
-        }
-        else {
+        } else {
             return true;
         }
     }

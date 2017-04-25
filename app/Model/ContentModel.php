@@ -8,14 +8,12 @@ class ContentModel extends \W\Model\Model {
 		parent::__construct();
 	}
 
-	// VIEW: home
-	// START FUNCTIONS FOR getLimitedStories
-	public function getLimitedStories() {
+	public function getLimitedStories(){
 		$sql = '
 		SELECT *
 		FROM stories
 		ORDER BY RAND()
-		LIMIT 9
+		LIMIT 8
 		';
 
 		$sth = $this->dbh->prepare($sql);
@@ -25,7 +23,7 @@ class ContentModel extends \W\Model\Model {
 
 	// VIEW: search
 	// START FUNCTIONS FOR search
-	public function getSearchMatch($searchWord, $sortingMethod='DESC', $pageOffset, $nbResultsPerPage) {
+	public function getSearchMatch($searchWord, $sortingMethod='DESC', $pageOffset, $nbResultsPerPage){
 		$sql = '
 		SELECT *
 		FROM stories
@@ -39,28 +37,27 @@ class ContentModel extends \W\Model\Model {
 		LIMIT '.$pageOffset.','.$nbResultsPerPage.'
 		';
 
-		$sth = $this->dbh->prepare($sql);
 
-		if($searchWord != '') {
+		$sth = $this->dbh->prepare($sql);
+		if($searchWord != ''){
 			$sth->bindValue(':search', '%'.$searchWord.'%');
 		}
-
 		if ($sth->execute() === false) {
 			print_r($sth->errorInfo());
-		} else {
+		}
+		else {
 			$searchResults = $sth->fetchAll(\PDO::FETCH_ASSOC);
 			$nbResults = $sth->rowCount();
 
 			return $searchResults;
 		}
-
 	}
 
 	//END FUNCTIONS FOR searchResults
 
 	//VIEW: stories && storydetails
 	// START FUNCTIONS FOR all stories viewing and filtering
-	public function getStoriesList($pageOffset, $nbStoriesPerPage) {
+	public function getStoriesList($pageOffset, $nbStoriesPerPage){
 		$sql = '
 		SELECT sto_id, sto_title, sto_content, sto_tags, sto_thumbnail, sto_inserted, users_id, usr_username
 		FROM stories
@@ -74,7 +71,7 @@ class ContentModel extends \W\Model\Model {
 		return $sth->fetchAll();
 	}
 
-	public function getOneStory($id) {
+	public function getOneStory($id){
 		$sql = '
 		SELECT sto_title, sto_content, sto_tags, sto_thumbnail, sto_inserted, users_id, usr_username
 		FROM stories
@@ -84,14 +81,14 @@ class ContentModel extends \W\Model\Model {
 
 		$sth = $this->dbh->prepare($sql);
 		$sth->bindValue(':id', $id, \PDO::PARAM_INT);
-		
 
-		if ($sth->execute()) {
+
+		if ($sth->execute()){
 			return $sth->fetchAll();
 		}
 	}
 
-	public function getTagString() {
+	public function getTagString(){
 		$sql = '
 		SELECT sto_tags
 		FROM stories
@@ -113,7 +110,7 @@ class ContentModel extends \W\Model\Model {
 		}
 	}
 
-	public function getTagStringForStory($id) {
+	public function getTagStringForStory($id){
 		$sql = '
 		SELECT sto_tags
 		FROM stories
@@ -123,7 +120,7 @@ class ContentModel extends \W\Model\Model {
 		$sth = $this->dbh->prepare($sql);
 		$sth->bindValue(':id', $id, \PDO::PARAM_INT);
 
-		if ($sth->execute()) {
+		if ($sth->execute()){
 			$getAllTagResults = $sth->fetchAll();
 
 			$str = '';
@@ -133,10 +130,23 @@ class ContentModel extends \W\Model\Model {
 
 			return substr($str, 0, -1);
 		}
-
 	}
 
-	public function insertStory ($currentUser, $stoTitle, $stoContent, $stoTags) {
+	public function getOrganization(){
+		$sql = '
+		SELECT *
+		FROM organizations
+		';
+
+		$sth = $this->dbh->prepare($sql);
+		if ($sth->execute()){
+			return $sth->fetchAll();
+		}
+	}
+
+
+	public function insertStory ($currentUser, $stoTitle, $stoContent, $stoTags){
+
 		$sql = '
 		INSERT INTO stories (users_id, sto_title, sto_content, sto_tags)
 		VALUES  (:currentUser, :stoTitle, :stoContent, :stoTags)
@@ -149,20 +159,24 @@ class ContentModel extends \W\Model\Model {
 		$sth->bindParam(':stoContent', $stoContent);
 		$sth->bindParam(':stoTags', $stoTags);
 
-		if ($sth->execute() === false) {
+		if ($sth->execute() === false){
 			return $sth->errorInfo();
 		}
-
 	}
+
+
 	//END FUNCTIONS FOR stories && story details
 
+
 	//START fUNCTIONS for articles & article details
-	public function getArticlesList($pageOffset, $nbArticlesPerPage, $sortingMethod='DESC') {
+
+	public function getArticlesList($pageOffset, $nbArticlesPerPage, $sortingMethod='DESC'){
 		$sql = '
 		SELECT *
 		FROM articles
 		ORDER BY art_inserted '.$sortingMethod.'
 		LIMIT '.$pageOffset.','.$nbArticlesPerPage.'
+
 		';
 
 		$sth = $this->dbh->prepare($sql);
@@ -171,7 +185,7 @@ class ContentModel extends \W\Model\Model {
 	}
 
 
-	public function getOneArticle($id) {
+	public function getOneArticle($id){
 		$sql = '
 		SELECT art_title, art_content, art_tags, art_thumbnail, art_inserted
 		FROM articles
@@ -181,12 +195,12 @@ class ContentModel extends \W\Model\Model {
 		$sth = $this->dbh->prepare($sql);
 		$sth->bindParam(':id', $id, \PDO::PARAM_INT);
 
-		if ($sth->execute()) {
+		if ($sth->execute()){
 			return $sth->fetchAll();
 		}
 	}
 
-	public function InsertArticle ($artTitle, $artContent, $artTags) {
+	public function InsertArticle ($artTitle, $artContent, $artTags){
 		$sql = '
 		INSERT INTO articles (art_title, art_content, art_tags)
 		VALUES  (:artTitle, :artContent, :artTags)
@@ -197,25 +211,13 @@ class ContentModel extends \W\Model\Model {
 		$sth->bindParam(':artContent', $artContent);
 		$sth->bindParam(':artTags', $artTags);
 
-		if ($sth->execute() === false) {
+		if ($sth->execute() === false){
 			return $sth->errorInfo();
-		} else {
+		}else{
 			return debug($artTitle);
 
 		}
-	}
 
-	public function getOrganization() {
-		$sql = '
-		SELECT *
-		FROM organizations
-		';
 
-		$sth = $this->dbh->prepare($sql);
-		if ($sth->execute()){
-			return $sth->fetchAll();
-		}
 	}
-	//END fUNCTIONS for articles & article details
 }
-// END ContentModel

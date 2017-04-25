@@ -16,7 +16,7 @@ $sunflower: #f1c40f;
 	list-style: none;
 }
 
-body, html{
+body {
 	margin: 0;
 
 	//background-color: lighten($graffiti, 10%);
@@ -68,8 +68,12 @@ a {
 }
 
 .storyBox {
-	margin: 1px 2px;
+	margin: 2px 0;
 }
+
+/*#flex {
+
+}*/
 
 #desktopNavigation {
 	display:none;
@@ -80,9 +84,9 @@ a {
 	justify-content:space-between;
 	position: fixed;
 	top: 0;
-	background-color: $graffiti;
 	height: 45px;
 	width: 100%;
+	background-color: $graffiti;
 	z-index: 5000;
 
 	-webkit-box-shadow: 0px -3px 59px -8px rgba(0,0,0,0.38);
@@ -195,6 +199,12 @@ ul {
 }
 
 #ajaxHomeStories {
+	height: 280px;
+	width: 280px;
+
+	display: flex;
+	flex-direction:row;
+	align-items: center;
 
 	h1 {
 		font-size:1.5em;
@@ -206,10 +216,9 @@ ul {
 
 	div {
 		background-color: $graffiti;
-		box-shadow:none;
-		padding:20px;
-		transition:0.5s;
-
+		box-shadow: none;
+		padding: 20px;
+		transition: 0.5s;
 		&:focus {
 			box-shadow:0 0 15px white;
 			transition: 0.5s;
@@ -228,7 +237,7 @@ textarea{
 
 footer {
 	padding:3em 6em;
-	margin-top: 3em;
+	margin-top: 1em;
 	width:100%;
 	background-color: black;
 
@@ -265,7 +274,8 @@ footer {
 
 
 /* TABLET ------------------------------------------------------ */
-@media screen and (max-width: 1000px) and (min-width: 700px) {
+@media screen and (max-width: 1000px) and (min-width: 600px) {
+
 
 }
 
@@ -279,11 +289,12 @@ footer {
 		#desktopNavigation {
 			display: flex;
 			justify-content:space-between;
+			background-color: $graffiti;
+			z-index: 5000;
 
 			position: fixed;
 			top: 0px;
-
-			width: 80px;
+			width: 100%;
 			height: 45px;
 
 			-webkit-box-shadow: 0px -3px 59px -8px rgba(0,0,0,0.38);
