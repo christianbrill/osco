@@ -27,6 +27,16 @@ $(document).ready(function(){
 		window.history.back();
 	});
 
+	/**
+	*
+	Browse to page before log in
+	*
+	*/
+
+	$(".goBack").click(function(e){
+		window.history.back();
+	});
+
 
 	/**
 	* Event Listener for burger menu

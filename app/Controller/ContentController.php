@@ -14,12 +14,94 @@ class ContentController extends Controller {
     protected $res;
 
 
+    public function needhelp() {
+
+        //trim and strip tags from form data
+        if(!empty($_POST)) {
+
+            $organizationName = isset($_POST['orgname']) ? trim(strip_tags($_POST['orgname'])) : '';
+
+            $organizationEmail = isset($_POST['orgemail']) ? trim(strip_tags($_POST['orgemail'])) : '';
+
+            $organizationPhone = isset($_POST['orgphone']) ? trim(strip_tags($_POST['orgphone'])) : '';
+
+            $organizationInfo = isset($_POST['orginfo']) ? trim(strip_tags($_POST['orginfo'])) : '';
+
+            $userEmail = $_SESSION['user']['usr_email'];
+            $userUsername = $_SESSION['user']['usr_username'];
+
+        //validating form data
+            $errorList = array();
+
+            if (empty($organizationName))  {
+                $errorList[] = 'Please fill in the Organization Name.';
+            }
+
+            if (empty($organizationEmail))  {
+                $errorList[] = 'Please fill in the Organization Email.';
+            }
+
+            if (empty($organizationPhone))  {
+                $errorList[] = 'Please fill in the Organization Phone.';
+            }
+
+            if (empty($organizationInfo))  {
+                $errorList[] = 'Please fill in the Organization Info.';
+            }
+
+            if (filter_var($organizationEmail, FILTER_VALIDATE_EMAIL) === false) {
+                $errorList[] = 'Please enter a valid email address!';
+            }
+
+            if (strlen($organizationInfo) <= 10)  {
+                $errorList[] = 'Your message is too short, it must contain at least 10 characters!';
+            }
+
+
+            //setting vriables and urls for captcha
+            $captcha = $_POST['g-recaptcha-response'];
+
+            $googleURL = "https://www.google.com/recaptcha/api/siteverify";
+
+            $secret = "6Le43B0UAAAAAFKWLgoG-SdxGTUqIU-N_SbbSGi1";
+            
+            $url = "". $googleURL ."?secret=".$secret."&response=".$captcha."";
+
+            $this->res[] = file_get_contents($url);
+
+            if (!empty($captcha) && json_decode($this->res[0])->success == "1") {
+
+                // If CAPTCHA is successfully completed...
+                if (empty($errorList)) {
+                    $isSent=\Helper\Tools::sendEmail('osco.contact@gmail.com', 'Suggested organization: '.$organizationName, 'The user with email address: '. $userEmail. ' & Username: '. $userUsername. ' has suggested an organization:<br><br>Organization Name: '.$organizationName.'<br><br>Organization Email: '.$organizationEmail.'<br><br>Organization Phone: '.$organizationPhone.'<br><br>Organization Info: '.$organizationInfo);
+
+                    if ($isSent){
+                        $this->flash('Thank you for your suggestion, we will review it and contact '.$organizationName.'.', 'success');
+                    }
+
+                } else {
+                    $this->flash(join('<br>', $errorList), 'danger');
+                }
+
+            } else {
+                $errorList[] = '<p>Please go back and make sure you check the security CAPTCHA box.</p><br>';
+            }
+
+            if (!empty($errorList)) {
+                $this->flash(join('<br>', $errorList), 'danger');
+
+            }   
+        }
+
+        $this->show('content/needhelp');
+    }
+
     /**
     * about/contactform function
     *
     */
-    public function contactform() 
-    {
+
+    public function contactform() {
 //trim and strip tags from form data
         if(!empty($_POST)) {
             $email = isset($_POST['contactEmail']) ? trim(strip_tags($_POST['contactEmail'])) : '';
@@ -253,12 +335,12 @@ $this->show('content/about');
 	* Need Help Function
 	*
 	*/
-	public function needhelp(){
+	/*public function needhelp(){
 
 
 
 		$this->show('content/needhelp');
-	}
+	}*/
 
 
 

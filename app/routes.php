@@ -20,7 +20,8 @@
 		['GET', '/profile/', 'User#profile', 'user_profile'],
 
 		// osco.dev/needhelp/
-		['GET', '/needhelp/', 'Content#needhelp', 'content_needhelp'],
+		//['GET', '/needhelp/', 'Content#needhelp', 'content_needhelp'],
+		['POST|GET', '/needhelp/', 'Content#needhelp', 'content_needhelp'],
 
 		// osco.dev/addstory/
 		['POST|GET', '/addstory/', 'Content#addStoryPage', 'content_addStoryPage'],
