@@ -116,12 +116,12 @@ class ContentController extends Controller {
             if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
                 $errorList[] = 'Please enter a valid email address!';
             }
-            if (strlen($fname) <= 1)  {
-                $errorList[] = 'The first name must contain at least 2 characters!';
-            }
-            if (strlen($lname) <= 1)  {
-                $errorList[] = 'The last name must contain at least 2 characters!';
-            }
+           //f (strlen($fname) <= 0) {
+               //errorList[] = 'The first name must contain at least 2 characters!';
+           //
+           //f (strlen($lname) <= 0 ){
+                //rrorList[] = 'The last name must contain at least 2 characters!';
+           //
             if (strlen($message) <= 10)  {
                 $errorList[] = 'Your message is too short, it must contain at least 10 characters!';
             }
