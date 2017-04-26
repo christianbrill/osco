@@ -199,12 +199,12 @@ class ContentController extends Controller {
         // !!!!!!! NOT WORKING YET
         //PAGINATION START
         $page = 1;
-        $nb2nl2ResultsPerPage = 4;
+        $nbResultsPerPage = 4;
         $pageOffset = 0;
 
         if (isset($_GET['page'])) {
             $page = intval($_GET['page']);
-            $pageOffset = ($page-1)*$nbStoriesPerPage;
+            $pageOffset = ($page-1)*$nbResultsPerPage;
         }
         //PAGINATION END
 
