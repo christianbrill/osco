@@ -7,6 +7,7 @@
     <div class="row">
         <div id="organizationsDiv" class="col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3">
         	<p></p>
+            <p></p>
         	<p></p>
         </div>
     </div>

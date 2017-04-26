@@ -169,16 +169,17 @@ ul {
 }
 
 .tag {
+	padding:2px;
 	background-color:$sunflower;
 	border:1.5px solid $sunflower;
 	color:black;
 }
 
-.tag:hover {
+/*.tag:hover {
 	background-color:black;
 	border:1.5px solid $sunflower;
 	color:$sunflower;
-}
+}*/
 
 .orderBox {
 	margin-bottom: 20px;

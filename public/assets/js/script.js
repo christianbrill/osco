@@ -191,6 +191,7 @@ function geolocation() {
 				if(response.country_name == valueObject.org_country){
 					content += "<h1>"+valueObject.org_name+"</h1>"+
 	    			"<p>"+valueObject.org_address+"</p>"+
+	    			"<p>Phone: "+valueObject.org_phone+"</p>"+
 	    			"<p>"+valueObject.org_description+"</p>";
 	    		}
 			});//end each
