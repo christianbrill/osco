@@ -15,66 +15,31 @@ class ContentController extends Controller {
         //trim and strip tags from form data
         if(!empty($_POST)) {
 
-            $organizationName = isset($_POST['orgname']) ? trim(strip_tags($_POST['orgname'])) : '';
-            $organizationEmail = isset($_POST['orgemail']) ? trim(strip_tags($_POST['orgemail'])) : '';
-            $organizationPhone = isset($_POST['orgphone']) ? trim(strip_tags($_POST['orgphone'])) : '';
-            $organizationInfo = isset($_POST['orginfo']) ? trim(strip_tags($_POST['orginfo'])) : '';
-
-            $userEmail = $_SESSION['user']['usr_email'];
-            $userUsername = $_SESSION['user']['usr_username'];
+            $userContact = isset($_POST['userContact']) ? trim(strip_tags($_POST['userContact'])) : '';
+            $userMessage = isset($_POST['userMessage']) ? trim(strip_tags($_POST['userMessage'])) : '';
 
             //validating form data
             $errorList = array();
 
-            if (empty($organizationName))  {
-                $errorList[] = 'Please fill in the Organization Name.';
+            if (empty($userContact))  {
+                $errorList[] = 'Please tell us how we can contact you.';
             }
 
-            if (empty($organizationEmail))  {
-                $errorList[] = 'Please fill in the Organization Email.';
+            if (empty($userMessage))  {
+                $errorList[] = 'Please tell us what you need help with.';
             }
 
-            if (empty($organizationPhone))  {
-                $errorList[] = 'Please fill in the Organization Phone.';
-            }
+            if (empty($errorList)) {
+                $isSent=\Helper\Tools::sendEmail('osco.contact@gmail.com', 'Someone asked for help', 'Contact information:'.$userContact.':<br><br>Messagee: '.$userMessage);
 
-            if (empty($organizationInfo))  {
-                $errorList[] = 'Please fill in the Organization Info.';
-            }
+                if ($isSent){
+                    $this->flash('An organiztion from your country will contact you soon', 'success');
+                    $this->redirectToRoute('content_needhelp');
 
-            if (filter_var($organizationEmail, FILTER_VALIDATE_EMAIL) === false) {
-                $errorList[] = 'Please enter a valid email address!';
-            }
-
-            if (strlen($organizationInfo) <= 10)  {
-                $errorList[] = 'Your message is too short, it must contain at least 10 characters!';
-            }
-
-
-            //setting vriables and urls for captcha
-            $captcha = $_POST['g-recaptcha-response'];
-            $googleURL = "https://www.google.com/recaptcha/api/siteverify";
-            $secret = "6Le43B0UAAAAAFKWLgoG-SdxGTUqIU-N_SbbSGi1";
-            $url = "". $googleURL ."?secret=".$secret."&response=".$captcha."";
-
-            $this->res[] = file_get_contents($url);
-
-            if (!empty($captcha) && json_decode($this->res[0])->success == "1") {
-
-                // If CAPTCHA is successfully completed...
-                if (empty($errorList)) {
-                    $isSent=\Helper\Tools::sendEmail('osco.contact@gmail.com', 'Suggested organization: '.$organizationName, 'The user with email address: '. $userEmail. ' & Username: '. $userUsername. ' has suggested an organization:<br><br>Organization Name: '.$organizationName.'<br><br>Organization Email: '.$organizationEmail.'<br><br>Organization Phone: '.$organizationPhone.'<br><br>Organization Info: '.$organizationInfo);
-
-                    if ($isSent){
-                        $this->flash('Thank you for your suggestion, we will review it and contact '.$organizationName.'.', 'success');
-                    }
-
-                } else {
-                    $this->flash(join('<br>', $errorList), 'danger');
                 }
 
             } else {
-                $errorList[] = '<p>Please go back and make sure you check the security CAPTCHA box.</p><br>';
+                $this->flash(join('<br>', $errorList), 'danger');
             }
 
             if (!empty($errorList)) {
@@ -82,7 +47,7 @@ class ContentController extends Controller {
 
             }
         }
-
+        
         $this->show('content/needhelp');
     }
 

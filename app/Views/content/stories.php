@@ -26,9 +26,9 @@
 		</div>
 		-->
 
-		<div class="storiesList">
+		<div class="storiesList row">
 		<?php foreach($storiesList as $currentStory) : ?>
-			<article id="allStories">
+			<article id="allStories" class="col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-2">
 				<div>
 					<h1>
 						<a href="<?= $this->url('content_story',['id' => $currentStory['sto_id']]); ?>"><?= $currentStory['sto_title']; ?></a>
