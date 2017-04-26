@@ -102,8 +102,12 @@ class UsersModel extends \W\Model\UsersModel {
 
         $sth = $this->dbh->prepare($sql);
         $sth->bindParam(':oneUser', $oneUser);
-        $sth->execute();
-        return $sth->fetchAll();
+
+        if ($sth->execute() === false) {
+            print_r($sth->errorInfo());
+        } else {
+            return $sth->fetchAll();
+        }
     }
 
 }
