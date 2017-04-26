@@ -152,20 +152,20 @@
 		<div id="footerContent">
 			<section class="faq">
 				<h4><a href="">FAQs</a></h4>
-				<p>Who we are</p>
-				<p>User Information</p>
+				<p><a class="whiteFont" href="<?= $this->url("content_contactform")?>">Who we are</a></p>
+				<p><a class="whiteFont" href="<?= $this->url("content_contactform")?>">User Information</a></p>
 			</section>
 
 			<section class="links">
 				<h4><a href="">Contact</a></h4>
-				<p>osco@contact.lu</p>
+				<p><a href="mailto:osco.contact@gmail.com?subject=Contact">osco.contact@gmail.com</a></p>
 				<p>Facebook</p>
 				<p>Twitter</p>
 			</section>
 		</div>
 
 			<section class="copyright">
-				<h4>&copy; 2017 <?php if (date('Y') > 2017) {echo '- '.date('Y');} ?></h4>
+				<h4>&copy; Copyright 2017 <?php if (date('Y') > 2017) {echo '- '.date('Y');} ?></h4>
 				<p>Disclaimer</p>
 			</section>
 	</footer>

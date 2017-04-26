@@ -8,6 +8,11 @@ class ContentModel extends \W\Model\Model {
 		parent::__construct();
 	}
 
+
+	/**
+	* Function to retrieve a limit of 12 stories on the homepage
+	*
+	*/
 	public function getLimitedStories(){
 		$sql = '
 		SELECT *
@@ -17,12 +22,22 @@ class ContentModel extends \W\Model\Model {
 		';
 
 		$sth = $this->dbh->prepare($sql);
-		$sth->execute();
-		return $sth->fetchAll();
+
+		if ($sth->execute() === false) {
+			print_r($sth->errorInfo());
+		} else {
+			return $sth->fetchAll();
+		}
 	}
 
-	// VIEW: search
-	// START FUNCTIONS FOR search
+
+	/**
+	* This function allows the user to search for articles on the page based on
+	* - title
+	* - tags
+	* - username
+	*
+	*/
 	public function getSearchMatch($searchWord, $sortingMethod='DESC', $pageOffset, $nbResultsPerPage){
 		$sql = '
 		SELECT *
@@ -53,10 +68,11 @@ class ContentModel extends \W\Model\Model {
 		}
 	}
 
-	//END FUNCTIONS FOR searchResults
 
-	//VIEW: stories && storydetails
-	// START FUNCTIONS FOR all stories viewing and filtering
+	/**
+	* This function gets a list of stories that can be filtered
+	*
+	*/
 	public function getStoriesList($pageOffset, $nbStoriesPerPage){
 		$sql = '
 		SELECT sto_id, sto_title, sto_content, sto_tags, sto_thumbnail, sto_inserted, users_id, usr_username
@@ -67,10 +83,19 @@ class ContentModel extends \W\Model\Model {
 		';
 
 		$sth = $this->dbh->prepare($sql);
-		$sth->execute();
-		return $sth->fetchAll();
+
+		if ($sth->execute() === false) {
+			print_r($sth->errorInfo());
+		} else {
+			return $sth->fetchAll();
+		}
 	}
 
+
+	/**
+	* Function to retrieve on single story
+	*
+	*/
 	public function getOneStory($id){
 		$sql = '
 		SELECT sto_title, sto_content, sto_tags, sto_thumbnail, sto_inserted, users_id, usr_username
@@ -83,11 +108,18 @@ class ContentModel extends \W\Model\Model {
 		$sth->bindValue(':id', $id, \PDO::PARAM_INT);
 
 
-		if ($sth->execute()){
+		if ($sth->execute() === false) {
+			print_r($sth->errorInfo());
+		} else {
 			return $sth->fetchAll();
 		}
 	}
 
+
+	/**
+	* Function to get the stories' tags
+	*
+	*/
 	public function getTagString(){
 		$sql = '
 		SELECT sto_tags
@@ -97,7 +129,10 @@ class ContentModel extends \W\Model\Model {
 		';
 
 		$sth = $this->dbh->prepare($sql);
-		if ($sth->execute()){
+
+		if ($sth->execute() === false) {
+			print_r($sth->errorInfo());
+		} else {
 			$getAllTagResults = $sth->fetchAll();
 
 			$str = '';
@@ -105,11 +140,15 @@ class ContentModel extends \W\Model\Model {
 				$str .= $tagLine['sto_tags'].',';
 
 			}
-
 			return substr($str, 0, -1);
 		}
 	}
 
+
+	/**
+	* Function to retrieve tag string for stories
+	*
+	*/
 	public function getTagStringForStory($id){
 		$sql = '
 		SELECT sto_tags
@@ -120,7 +159,9 @@ class ContentModel extends \W\Model\Model {
 		$sth = $this->dbh->prepare($sql);
 		$sth->bindValue(':id', $id, \PDO::PARAM_INT);
 
-		if ($sth->execute()){
+		if ($sth->execute() === false) {
+			print_r($sth->errorInfo());
+		} else {
 			$getAllTagResults = $sth->fetchAll();
 
 			$str = '';
@@ -132,6 +173,11 @@ class ContentModel extends \W\Model\Model {
 		}
 	}
 
+
+	/**
+	*
+	*
+	*/
 	public function getOrganization(){
 		$sql = '
 		SELECT *
@@ -139,12 +185,19 @@ class ContentModel extends \W\Model\Model {
 		';
 
 		$sth = $this->dbh->prepare($sql);
-		if ($sth->execute()){
+
+		if ($sth->execute() === false) {
+			print_r($sth->errorInfo());
+		} else {
 			return $sth->fetchAll();
 		}
 	}
 
 
+	/**
+	* Function to retrieve a limit of 12 stories on the homepage
+	*
+	*/
 	public function insertStory ($currentUser, $stoTitle, $stoContent, $stoTags){
 
 		$sql = '
@@ -165,11 +218,11 @@ class ContentModel extends \W\Model\Model {
 	}
 
 
-	//END FUNCTIONS FOR stories && story details
 
-
-	//START fUNCTIONS for articles & article details
-
+	/**
+	* Function to retrieve list of blog articles
+	*
+	*/
 	public function getArticlesList($pageOffset, $nbArticlesPerPage, $sortingMethod='DESC'){
 		$sql = '
 		SELECT *
@@ -180,11 +233,19 @@ class ContentModel extends \W\Model\Model {
 		';
 
 		$sth = $this->dbh->prepare($sql);
-		$sth->execute();
-		return $sth->fetchAll();
+
+		if ($sth->execute() === false) {
+			print_r($sth->errorInfo());
+		} else {
+			return $sth->fetchAll();
+		}
 	}
 
 
+	/**
+	* Function to retrieve one single blog article
+	*
+	*/
 	public function getOneArticle($id){
 		$sql = '
 		SELECT art_title, art_content, art_tags, art_thumbnail, art_inserted
@@ -200,6 +261,11 @@ class ContentModel extends \W\Model\Model {
 		}
 	}
 
+
+	/**
+	* Function to add an article to database
+	*
+	*/
 	public function InsertArticle ($artTitle, $artContent, $artTags){
 		$sql = '
 		INSERT INTO articles (art_title, art_content, art_tags)
@@ -212,10 +278,9 @@ class ContentModel extends \W\Model\Model {
 		$sth->bindParam(':artTags', $artTags);
 
 		if ($sth->execute() === false){
-			return $sth->errorInfo();
-		}else{
+			print_r($sth->errorInfo());
+		} else{
 			return debug($artTitle);
-
 		}
 
 
