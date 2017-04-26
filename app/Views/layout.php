@@ -30,44 +30,44 @@
 			</form>
 
 			<ul id="mobileMenu" class="nav nav-pills">
-				<li<?php if($currentPage == 'stories'): ?> class="active"<?php endif; ?> role="presentation">
+				<li<?php if($currentPage == 'stories'): ?> class="active"<?php endif; ?>>
 					<a href="<?= $this->url("content_stories") ?>">Stories</a>
 				</li>
 
-				<li<?php if($currentPage == 'articles'): ?> class="active"<?php endif; ?> role="presentation">
+				<li<?php if($currentPage == 'articles'): ?> class="active"<?php endif; ?>>
 					<a href="<?= $this->url("content_articles") ?>">Blog</a>
 				</li>
 
-				<li<?php if($currentPage == 'needhelp'): ?> class="active"<?php endif; ?> role="presentation">
+				<li<?php if($currentPage == 'needhelp'): ?> class="active"<?php endif; ?>>
 					<a href="<?= $this->url("content_needhelp") ?>">Need Help?</a>
 				</li>
 
-				<li<?php if($currentPage == 'about'): ?> class="active"<?php endif; ?> role="presentation">
+				<li<?php if($currentPage == 'about'): ?> class="active"<?php endif; ?>>
 					<a href="<?= $this->url("content_contactform") ?>">About</a>
 				</li>
 
 				<!-- If the user is logged in, the Profile and Logout button will show up, as well as the "Add Story" option. -->
 				<?php if (!empty($w_user)) : ?>
-					<li<?php if($currentPage == 'profile'): ?> class="active"<?php endif; ?> role="presentation">
+					<li<?php if($currentPage == 'profile'): ?> class="active"<?php endif; ?>>
 						<a href="<?= $this->url("user_profile") ?>">Profile</a>
 					</li>
 
-					<li role="presentation">
+					<li>
 						<a href="<?= $this->url("user_logout") ?>">Logout</a>
 					</li>
 
-					<li role="presentation">
+					<li>
 						<a href="<?= $this->url("content_addStoryPage") ?>"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add a Story</a>
 					</li>
 
 				<!-- If the user isn't logged in, the Signup and Login links will show up. -->
 				<?php else : ?>
 
-					<li<?php if($currentPage == 'signup'): ?> class="active"<?php endif; ?> role="presentation">
+					<li<?php if($currentPage == 'signup'): ?> class="active"<?php endif; ?>>
 						<a href="<?= $this->url("user_signup") ?>">Sign Up</a>
 					</li>
 
-					<li<?php if($currentPage == 'login'): ?> class="active"<?php endif; ?> role="presentation">
+					<li<?php if($currentPage == 'login'): ?> class="active"<?php endif; ?>>
 						<a href="<?= $this->url("user_login") ?>">Log In</a>
 					</li>
 				<?php endif; ?>
@@ -87,44 +87,44 @@
 			</h1>
 
 			<ul id="desktopMenu" class="nav nav-pills">
-				<li<?php if($currentPage == 'stories'): ?> class="active"<?php endif; ?> role="presentation">
+				<li<?php if($currentPage == 'stories'): ?> class="active"<?php endif; ?>>
 					<a href="<?= $this->url("content_stories") ?>">Stories</a>
 				</li>
 
-				<li<?php if($currentPage == 'articles'): ?> class="active"<?php endif; ?> role="presentation">
+				<li<?php if($currentPage == 'articles'): ?> class="active"<?php endif; ?>>
 					<a href="<?= $this->url("content_articles") ?>">Blog</a>
 				</li>
 
-				<li<?php if($currentPage == 'needhelp'): ?> class="active"<?php endif; ?> role="presentation">
+				<li<?php if($currentPage == 'needhelp'): ?> class="active"<?php endif; ?>>
 					<a href="<?= $this->url("content_needhelp") ?>">Need Help?</a>
 				</li>
 
-				<li<?php if($currentPage == 'about'): ?> class="active"<?php endif; ?> role="presentation">
+				<li<?php if($currentPage == 'about'): ?> class="active"<?php endif; ?>>
 					<a href="<?= $this->url("content_contactform") ?>">About</a>
 				</li>
 
 				<!-- If the user is logged in, the Profile and Logout button will show up. -->
 				<?php if (!empty($w_user)) : ?>
-					<li<?php if($currentPage == 'profile'): ?> class="active"<?php endif; ?> role="presentation">
+					<li<?php if($currentPage == 'profile'): ?> class="active"<?php endif; ?>>
 						<a href="<?= $this->url("user_profile") ?>">Profile</a>
 					</li>
 
-					<li role="presentation">
+					<li>
 						<a href="<?= $this->url("user_logout") ?>">Logout</a>
 					</li>
 
-					<li role="presentation">
+					<li>
 						<a href="<?= $this->url("content_addStoryPage") ?>"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add a Story</a>
 					</li>
 
 				<!-- If the user isn't logged in, the Signup and Login links will show up. -->
 				<?php else : ?>
 
-					<li<?php if($currentPage == 'signup'): ?> class="active"<?php endif; ?> role="presentation">
+					<li<?php if($currentPage == 'signup'): ?> class="active"<?php endif; ?>>
 						<a href="<?= $this->url("user_signup") ?>">Sign Up</a>
 					</li>
 
-					<li<?php if($currentPage == 'login'): ?> class="active"<?php endif; ?> role="presentation">
+					<li<?php if($currentPage == 'login'): ?> class="active"<?php endif; ?>>
 						<a href="<?= $this->url("user_login") ?>">Log In</a>
 					</li>
 				<?php endif; ?>
