@@ -1,5 +1,4 @@
 // Color Variables
-$turquoise: #00C3B6;
 $darkblue: #113A52;
 $lightgrey: #eeeeee;
 $white: #FFFFFF;
@@ -27,9 +26,14 @@ h1, h2 {
 	margin:0;
 }
 
+h3 {
+	width: 70%;
+	margin: 50px auto;
+}
+
 // Background color of stories/articles
-#allStories, .articlesList {
-	background-color: $lightblack;
+.articlesList {
+	background-color: transparentize($lightblack, 0.5);
 }
 
 // Headlines and list item
@@ -72,6 +76,8 @@ a {
     }
 }
 
+// This hides the nav bar of the desktop when showing the page
+// on the smartphone or tablet
 #desktopNavigation {
 	display:none;
 }
@@ -114,7 +120,7 @@ a {
 	.menuIcon {
 		margin:1em;
 	}
-} // mobile navigation end
+}
 
 
 ul {
@@ -135,7 +141,6 @@ ul {
 	a:hover {
 		color:$wisteria;
 		background-color:$lightgrey;
-		border-bottom: 3px solid $turquoise;
 	}
 }
 
@@ -234,6 +239,13 @@ ul {
 			}
 		}
 	}
+}
+
+#allStories {
+	background-color: $graffiti;
+	border:2px solid darken(white, 50%);
+	height: 230px;
+	padding: 12px;
 }
 
 .storyBox {
@@ -344,6 +356,7 @@ footer {
 		form {
 
 			input {
+				color: black;
 				height:30px;
 				padding: 10px;
 				border: 0px;
