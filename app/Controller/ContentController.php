@@ -30,7 +30,7 @@ class ContentController extends Controller {
             }
 
             if (empty($errorList)) {
-                $isSent=\Helper\Tools::sendEmail('osco.contact@gmail.com', 'Someone asked for help', 'Contact information:'.$userContact.':<br><br>Messagee: '.$userMessage);
+                $isSent=\Helper\Tools::sendEmail('osco.contact@gmail.com', 'Someone asked for help', 'Contact information: '.$userContact.':<br><br>Messagee: '.$userMessage);
 
                 if ($isSent){
                     $this->flash('An organiztion from your country will contact you soon', 'success');
